@@ -6,7 +6,9 @@
     ".vscode",
     "megalinter",
     "package-lock.json",
-    "report"
+    "report",
+    ".config",
+    "*.meta"
   ],
   "language": "en",
   "noConfigSearch": true,
