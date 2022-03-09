@@ -4,62 +4,62 @@ using UnityEngine.InputSystem;
 
 namespace ShooterProject.Scripts.Teleport
 {
-    public class TeleportationToggler : MonoBehaviour
-    {
-        #region Fields
+	public class TeleportationToggler : MonoBehaviour
+	{
+		#region Fields
 
-        [SerializeField]
-        private InputActionProperty activateAction;
+		[SerializeField]
+		   private InputActionProperty activateAction;
 
-        [SerializeField]
-        private GameObject teleportInteractor;
+		[SerializeField]
+		private GameObject teleportInteractor;
 
-        #endregion
+		#endregion
 
-        #region LifeCycle
+		#region LifeCycle
 
-        private void Awake()
-        {
-            StartCoroutine(DisableInteractor());
-        }
+		private void Awake()
+		{
+			StartCoroutine(DisableInteractor());
+		}
 
-        private void OnEnable()
-        {
-            activateAction.action.performed += OnActivateActionPerformed;
-            activateAction.action.canceled += OnActivateActionCanceled;
-        }
+		private void OnEnable()
+		{
+			activateAction.action.performed += OnActivateActionPerformed;
+			activateAction.action.canceled += OnActivateActionCanceled;
+		}
 
-        private void OnDisable()
-        {
-            activateAction.action.performed -= OnActivateActionPerformed;
-            activateAction.action.canceled -= OnActivateActionCanceled;
-        }
+		private void OnDisable()
+		{
+			activateAction.action.performed -= OnActivateActionPerformed;
+			activateAction.action.canceled -= OnActivateActionCanceled;
+		}
 
-        #endregion
+		#endregion
 
-        #region Private Methods
+		#region Private Methods
 
-        private void EnableInteractor()
-        {
-            teleportInteractor.SetActive(true);
-        }
+		private void EnableInteractor()
+		{
+			teleportInteractor.SetActive(true);
+		}
 
-        private IEnumerator DisableInteractor()
-        {
-            yield return new WaitForEndOfFrame();
-            teleportInteractor.SetActive(false);
-        }
+		private IEnumerator DisableInteractor()
+		{
+			yield return new WaitForEndOfFrame();
+			teleportInteractor.SetActive(false);
+		}
 
-        private void OnActivateActionPerformed(InputAction.CallbackContext callbackContext)
-        {
-            EnableInteractor();
-        }
+		private void OnActivateActionPerformed(InputAction.CallbackContext callbackContext)
+		{
+			EnableInteractor();
+		}
 
-        private void OnActivateActionCanceled(InputAction.CallbackContext callbackContext)
-        {
-            StartCoroutine(DisableInteractor());
-        }
+		private void OnActivateActionCanceled(InputAction.CallbackContext callbackContext)
+		{
+			StartCoroutine(DisableInteractor());
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

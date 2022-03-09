@@ -2,28 +2,28 @@ using UnityEngine;
 
 namespace ShooterProject.Scripts.Hand
 {
-    public class GameHand : MonoBehaviour
-    {
-        #region Fields
+	public class GameHand : MonoBehaviour
+	{
+		#region Fields
 
-        [SerializeField]
-        private HandSide side;
+		[SerializeField]
+		private HandSide side;
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        public HandSide Side => side;
+		public HandSide Side => side;
 
-        #endregion
+		#endregion
 
-        #region LifeCycle
+		#region LifeCycle
 
-        private void OnValidate()
-        {
-            side = name.Contains("Left") ? HandSide.Left : HandSide.Right;
-        }
+		private void OnValidate()
+		{
+			side = name.Contains("Left") ? HandSide.Left : HandSide.Right;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

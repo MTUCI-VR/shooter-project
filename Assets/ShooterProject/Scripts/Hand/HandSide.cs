@@ -1,8 +1,8 @@
-﻿namespace ShooterProject.Scripts.Hand
+namespace ShooterProject.Scripts.Hand
 {
-    public enum HandSide
-    {
-        Left,
-        Right
-    }
+	public enum HandSide
+	{
+		Left,
+		Right
+	}
 }
