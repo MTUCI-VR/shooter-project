@@ -11,9 +11,11 @@ namespace Shared.Scripts.Editor
     {
         #region Fields
 
-        private static readonly string ScriptPath = $"{Application.dataPath}/Plugins/PersistentSceneLoader/Scripts/Editor/SceneMenuList.cs";
+        private static readonly string ScriptPath =
+            $"{Application.dataPath}/Plugins/PersistentSceneLoader/Scripts/Editor/SceneMenuList.cs";
 
-        private const string PersistentScenePath = "Assets/ShooterProject/Scenes/PersistentScene/PersistentScene.unity";
+        private const string PersistentScenePath =
+            "Assets/ShooterProject/Scenes/PersistentScene/PersistentScene.unity";
 
         #endregion
 
@@ -59,9 +61,11 @@ namespace Shared.Scripts.Editor
                 scriptContent.AppendLine($"    [MenuItem(\"Scenes/{sceneName}\")]");
                 scriptContent.AppendLine($"    private static void Open{sceneName}() {{");
                 scriptContent.AppendLine(
-                    $"        EditorSceneManager.OpenScene(\"{PersistentScenePath}\", OpenSceneMode.Single);");
+                    $"        EditorSceneManager.OpenScene(\"{PersistentScenePath}\", OpenSceneMode.Single);"
+                );
                 scriptContent.AppendLine(
-                    $"        EditorSceneManager.OpenScene(\"{scenePath}\", OpenSceneMode.Additive);");
+                    $"        EditorSceneManager.OpenScene(\"{scenePath}\", OpenSceneMode.Additive);"
+                );
                 scriptContent.AppendLine("    }");
                 scriptContent.AppendLine("");
             }
