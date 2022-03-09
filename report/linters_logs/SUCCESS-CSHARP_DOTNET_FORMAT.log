@@ -1,0 +1,10 @@
+Results of dotnet-format linter (version 000)
+See documentation on https://megalinter.github.io/descriptors/csharp_dotnet_format/
+-----------------------------------------------
+
+✅ [SUCCESS] Assets/Plugins/PersistentSceneLoader/Scripts/Editor/SceneMenu.cs
+✅ [SUCCESS] Assets/Plugins/PersistentSceneLoader/Scripts/Editor/SceneMenuList.cs
+✅ [SUCCESS] Assets/ShooterProject/Scripts/Hand/GameHand.cs
+✅ [SUCCESS] Assets/ShooterProject/Scripts/Hand/HandAnimator.cs
+✅ [SUCCESS] Assets/ShooterProject/Scripts/Hand/HandSide.cs
+✅ [SUCCESS] Assets/ShooterProject/Scripts/Teleport/TeleportationToggler.cs - FIXED

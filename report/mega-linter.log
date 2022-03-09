@@ -1,0 +1,56 @@
+----------------------------------------------------------------------------------------------------
+-------------------------------------------- MegaLinter --------------------------------------------
+----------------------------------------------------------------------------------------------------
+ - Image Creation Date: 2022-02-18T22:32:48Z
+ - Image Revision: a4a213b63
+ - Image Version: v5
+----------------------------------------------------------------------------------------------------
+The MegaLinter documentation can be found at:
+ - https://megalinter.github.io
+----------------------------------------------------------------------------------------------------
+GITHUB_REPOSITORY: MTUCI-VR/shooter-project
+GITHUB_REF: refs/pull/1/merge
+GITHUB_RUN_ID: 1958572213
+
+
+SNAKEMAKE_SNAKEFMT has been temporary disabled in MegaLinter, please use a previous MegaLinter version or wait for the next one !
+Skipped linters: ACTION_ACTIONLINT, ANSIBLE_ANSIBLE_LINT, ARM_ARM_TTK, BASH_EXEC, BASH_SHELLCHECK, BASH_SHFMT, CLOJURE_CLJ_KONDO, CLOUDFORMATION_CFN_LINT, COFFEE_COFFEELINT, COPYPASTE_JSCPD, CPP_CPPLINT, CREDENTIALS_SECRETLINT, CSS_SCSS_LINT, CSS_STYLELINT, C_CPPLINT, DART_DARTANALYZER, DOCKERFILE_DOCKERFILELINT, DOCKERFILE_HADOLINT, EDITORCONFIG_EDITORCONFIG_CHECKER, ENV_DOTENV_LINTER, GHERKIN_GHERKIN_LINT, GIT_GIT_DIFF, GO_GOLANGCI_LINT, GO_REVIVE, GRAPHQL_GRAPHQL_SCHEMA_LINTER, GROOVY_NPM_GROOVY_LINT, HTML_HTMLHINT, JAVASCRIPT_ES, JAVASCRIPT_PRETTIER, JAVASCRIPT_STANDARD, JAVA_CHECKSTYLE, JSON_ESLINT_PLUGIN_JSONC, JSON_JSONLINT, JSON_PRETTIER, JSON_V8R, JSX_ESLINT, KOTLIN_KTLINT, KUBERNETES_KUBEVAL, LATEX_CHKTEX, LUA_LUACHECK, MARKDOWN_MARKDOWNLINT, MARKDOWN_MARKDOWN_LINK_CHECK, MARKDOWN_MARKDOWN_TABLE_FORMATTER, MARKDOWN_REMARK_LINT, OPENAPI_SPECTRAL, PERL_PERLCRITIC, PHP_BUILTIN, PHP_PHPCS, PHP_PHPLINT, PHP_PHPSTAN, PHP_PSALM, POWERSHELL_POWERSHELL, PROTOBUF_PROTOLINT, PUPPET_PUPPET_LINT, PYTHON_BANDIT, PYTHON_BLACK, PYTHON_FLAKE8, PYTHON_ISORT, PYTHON_MYPY, PYTHON_PYLINT, RAKU_RAKU, RST_RSTCHECK, RST_RSTFMT, RST_RST_LINT, RUBY_RUBOCOP, RUST_CLIPPY, R_LINTR, SALESFORCE_SFDX_SCANNER_APEX, SALESFORCE_SFDX_SCANNER_AURA, SALESFORCE_SFDX_SCANNER_LWC, SCALA_SCALAFIX, SNAKEMAKE_LINT, SNAKEMAKE_SNAKEFMT, SPELL_CSPELL, SPELL_MISSPELL, SQL_SQLFLUFF, SQL_SQL_LINT, SQL_TSQLLINT, SWIFT_SWIFTLINT, TEKTON_TEKTON_LINT, TERRAFORM_CHECKOV, TERRAFORM_KICS, TERRAFORM_TERRAFORM_FMT, TERRAFORM_TERRAGRUNT, TERRAFORM_TERRASCAN, TERRAFORM_TFLINT, TSX_ESLINT, TYPESCRIPT_ES, TYPESCRIPT_PRETTIER, TYPESCRIPT_STANDARD, VBDOTNET_DOTNET_FORMAT, XML_XMLLINT, YAML_PRETTIER, YAML_V8R, YAML_YAMLLINT
+To receive reports as email, please set variable EMAIL_REPORTER_EMAIL
+Listing all files in directory [/github/workspace], then filter with:
+- File extensions: .cs
+- Including regex: (Assets\/.*\.cs)
+- Excluding regex: (Assets\/.*\.meta)
+- Excluding .gitignored files [0]: 
+Kept [6] files on [186] found files
+
++----MATCHING LINTERS--------+----------+----------------+------------+
+| Descriptor | Linter        | Criteria | Matching files | Format/Fix |
++------------+---------------+----------+----------------+------------+
+| CSHARP     | dotnet-format | .cs      | 6              | yes        |
++------------+---------------+----------+----------------+------------+
+
+
+[1m### Processed [CSHARP] files[0m
+- Using [dotnet-format v000] https://megalinter.github.io/v5/descriptors/csharp_dotnet_format
+- MegaLinter key: [CSHARP_DOTNET_FORMAT]
+- Rules config: identified by [dotnet-format]
+[dotnet-format] Assets/Plugins/PersistentSceneLoader/Scripts/Editor/SceneMenu.cs - SUCCESS - 0 error(s)
+[dotnet-format] Assets/Plugins/PersistentSceneLoader/Scripts/Editor/SceneMenuList.cs - SUCCESS - 0 error(s)
+[dotnet-format] Assets/ShooterProject/Scripts/Hand/GameHand.cs - SUCCESS - 0 error(s)
+[dotnet-format] Assets/ShooterProject/Scripts/Hand/HandAnimator.cs - SUCCESS - 0 error(s)
+[dotnet-format] Assets/ShooterProject/Scripts/Hand/HandSide.cs - SUCCESS - 0 error(s)
+[36m[dotnet-format] Assets/ShooterProject/Scripts/Teleport/TeleportationToggler.cs - SUCCESS - 0 error(s) - FIXED[0m
+[32m✅ Linted [CSHARP] files with [dotnet-format] successfully - (14.34s)[0m
+[Text Reporter] Generated TEXT report: /github/workspace/report/linters_logs/SUCCESS-CSHARP_DOTNET_FORMAT.log
+
++----SUMMARY-+---------------+------+-------+-------+--------+--------------+
+| Descriptor | Linter        | Mode | Files | Fixed | Errors | Elapsed time |
++------------+---------------+------+-------+-------+--------+--------------+
+| ✅ CSHARP  | dotnet-format | file |     6 |     1 |      0 |       14.34s |
++------------+---------------+------+-------+-------+--------+--------------+
+
+Identified PR#1 from environment
+[GitHub Comment Reporter] Posted summary as comment on MTUCI-VR/shooter-project #PR1
+[Updated Sources Reporter] copied 1 fixed source files in folder /github/workspace/report/updated_sources.
+Download it from artifacts then copy-paste it in your local repo to apply linters updates
+[32m✅ Successfully linted all files without errors[0m
