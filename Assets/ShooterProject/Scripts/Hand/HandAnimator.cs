@@ -22,7 +22,7 @@ namespace ShooterProject.Scripts.Hand
         [SerializeField]
         private InputActionProperty gripAction;
 
-        private Animator _animator;
+        private Animator _animatorge;
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace ShooterProject.Scripts.Hand
 
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
+            _animatorge = GetComponent<Animator>();
         }
 
         private void Update()
@@ -44,8 +44,8 @@ namespace ShooterProject.Scripts.Hand
 
         private void UpdateAnimatorTriggers()
         {
-            _animator.SetFloat(Grip, gripAction.action.ReadValue<float>());
-            _animator.SetFloat(Trigger, triggerAction.action.ReadValue<float>());
+            _animatorge.SetFloat(Grip, gripAction.action.ReadValue<float>());
+            _animatorge.SetFloat(Trigger, triggerAction.action.ReadValue<float>());
         }
 
         #endregion
