@@ -18,7 +18,7 @@ namespace ShooterProject.Scripts.Teleport
 
 		#region LifeCycle
 
-		private void Awake()
+		     private void Awake()
 		{
 			StartCoroutine(DisableInteractor());
 		}
