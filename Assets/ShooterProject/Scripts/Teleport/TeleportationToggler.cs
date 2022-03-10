@@ -12,13 +12,13 @@ namespace ShooterProject.Scripts.Teleport
 		private InputActionProperty activateAction;
 
 		[SerializeField]
-		  private GameObject teleportInteractor;
+		private GameObject teleportInteractor;
 
 		#endregion
 
 		#region LifeCycle
 
-		     private void Awake()
+		private void Awake()
 		{
 			StartCoroutine(DisableInteractor());
 		}
