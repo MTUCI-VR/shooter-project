@@ -12,7 +12,7 @@ namespace ShooterProject.Scripts.Teleport
 		private InputActionProperty activateAction;
 
 		[SerializeField]
-		private GameObject teleportInteractor;
+		  private GameObject teleportInteractor;
 
 		#endregion
 
