@@ -42,6 +42,7 @@ namespace ShooterProject.Scripts.Teleport
 		private void EnableInteractor()
 		{
 			teleportInteractor.SetActive(true);
+			Debug.Log("worked");
 		}
 
 		private IEnumerator DisableInteractor()
