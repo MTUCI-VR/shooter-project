@@ -9,7 +9,7 @@ namespace ShooterProject.Scripts.Actors
 	{
 		#region Private fields
 		[SerializeField]
-		private float _maxHealth;
+		private float _maxHealthPoints;
 
 		[SerializeField]
 		private float _healthPoints;
@@ -29,13 +29,13 @@ namespace ShooterProject.Scripts.Actors
 		/// Добавляет очки здоровья
 		/// </summary> 
 		/// <param name="hp">Кол-во добавочных очков здоровья</param> 
-		public void AddHealth(float hp)
+		public void AddHealthPoints(float hp)
 		{
 			_healthPoints += hp;
 
-			if (_healthPoints > _maxHealth)
+			if (_healthPoints > _maxHealthPoints)
 			{
-				_healthPoints = _maxHealth;
+				_healthPoints = _maxHealthPoints;
 			}
 			OnHPChanged?.Invoke(_healthPoints);
 		}
