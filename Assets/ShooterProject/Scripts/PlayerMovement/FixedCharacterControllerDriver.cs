@@ -1,6 +1,6 @@
 namespace UnityEngine.XR.Interaction.Toolkit
 {
-    public class UpdateCharacterController : CharacterControllerDriver
+    public class FixedCharacterControllerDriver : CharacterControllerDriver
     {
         #region LifeCycle
 
