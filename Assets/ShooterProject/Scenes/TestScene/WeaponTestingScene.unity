@@ -664,7 +664,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ammoSize: 50
   _ammoCount: 50
-  _secondsToDestroyAfterUse: 1
 --- !u!114 &682590214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -885,7 +884,7 @@ GameObject:
   - component: {fileID: 713375860}
   - component: {fileID: 713375859}
   - component: {fileID: 713375858}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1308,23 +1307,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f791e42ebb522645b8e30f5140e2525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activateAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Activate
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 59698a5c-3d09-4af2-bee5-fbd8644be13e
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -2775837120590753941, guid: da2b439d1a2de5c46a4f428f8cf4fe19, type: 3}
-  _shootingDelaySeconds: 1
-  _bulletSpawner: {fileID: 34892255}
-  _bulletPrefab: {fileID: 4603887225765051972, guid: 55fc08c2ec20e9f4d8e198f4c66f74c1, type: 3}
-  _damage: 10
-  _interactableHandle: {fileID: 239531815}
+  _weaponParts:
+    BulletSpawner: {fileID: 34892255}
+    InteractableHandle: {fileID: 239531815}
+  _weaponParams:
+    BulletPrefab: {fileID: 4603887225765051972, guid: 55fc08c2ec20e9f4d8e198f4c66f74c1, type: 3}
+    ActivateAction:
+      m_UseReference: 1
+      m_Action:
+        m_Name: Activate
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: c8d862e4-788a-4eca-90f3-40eeac37eea4
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+      m_Reference: {fileID: -2775837120590753941, guid: da2b439d1a2de5c46a4f428f8cf4fe19, type: 3}
+    ShootingDelaySeconds: 1
+    Damage: 50
+    CanFireBursts: 0
 --- !u!4 &1106154923
 Transform:
   m_ObjectHideFlags: 0
@@ -1666,7 +1668,20 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1106154924}
+        m_TargetAssemblyTypeName: ShooterProject.Scripts.Items.Weapons.Reloading.WeaponReloadController,
+          Assembly-CSharp
+        m_MethodName: MagazineDetached
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnHoverEntered:
     m_PersistentCalls:
       m_Calls: []

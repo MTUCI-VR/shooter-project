@@ -1,33 +1,23 @@
-using System;
+using ShooterProject.Scripts.Items.Weapons.Reloading;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
-
 namespace ShooterProject.Scripts.Items.Weapons
 {
-	
+
 	public class Weapon : MonoBehaviour
 	{
 		#region Fields
 
 		[SerializeField]
-		private InputActionProperty activateAction;
+		private WeaponParts _weaponParts;
 
 		[SerializeField]
-		private int _shootingDelaySeconds;
+		private WeaponParams _weaponParams;
 
 		[SerializeField]
-		private Transform _bulletSpawner;
-
-		[SerializeField]
-		private GameObject _bulletPrefab;
-
-		[SerializeField]
-		private float _damage;
-		[SerializeField]
-		private XRGrabInteractable _interactableHandle;
+		private WeaponShootingEffects _weaponShootingEffects;
 
 		private AmmoMagazine _includedMagazine;
 		private bool _isSelected = false;
@@ -38,36 +28,43 @@ namespace ShooterProject.Scripts.Items.Weapons
 
 		#region Properties
 		public bool IsSelected => _isSelected;
-		private bool CanShoot => _isSelected && _includedMagazine != null && _includedMagazine.HasAmmo;
+		private bool _canShoot => _isSelected && _includedMagazine != null;
+		private bool _canPlayNoAmooSound => _weaponParts.WeaponAudioSource != null && _weaponShootingEffects.NoAmmoSound != null;
+		#endregion
+
+		#region Events
+		public event System.Action<AmmoMagazine> OnMagazineChanged;
+		public event System.Action OnMagazineDetached;
 		#endregion
 
 		#region LifeCycle
 
 		private void OnEnable()
 		{
-			activateAction.action.performed += OnActivateActionPerformed;
-			activateAction.action.canceled += OnActivateActionCanceled;
-
-			_interactableHandle.selectEntered.AddListener(OnSelectEntered);
-			_interactableHandle.selectExited.AddListener(OnSelectExited);
+			AddEventsListeners();
 		}
 
 		private void OnDisable()
 		{
-			activateAction.action.performed -= OnActivateActionPerformed;
-			activateAction.action.canceled -= OnActivateActionCanceled;
-
-			_interactableHandle.selectEntered.RemoveListener(OnSelectEntered);
-			_interactableHandle.selectExited.RemoveListener(OnSelectExited);
+			RemoveEventsListeners();
 		}
 
 		#endregion
 
 		#region Public Methods
-
+		/// <summary>
+		/// Меняет текущий магазин с патронами и вызывает события OnMagazineChanged или OnMagazineDetached
+		/// </summary>
+		/// <param name="magazine">
+		/// Магазин с патронами
+		/// </param>
 		public void ChangeAmmoMagazine(AmmoMagazine magazine)
 		{
 			_includedMagazine = magazine;
+			if (magazine == null)
+				OnMagazineDetached?.Invoke();
+			else
+				OnMagazineChanged?.Invoke(magazine);
 		}
 		#endregion
 
@@ -75,22 +72,52 @@ namespace ShooterProject.Scripts.Items.Weapons
 
 		private IEnumerator ShootingCoroutine()
 		{
+			while (_canShoot)
+			{
+				if (!_includedMagazine.HasAmmo)
+				{
+					if (_canPlayNoAmooSound)
+						PlaySound(_weaponShootingEffects.NoAmmoSound);
+					yield break;
+				}
 
- 		    if (!CanShoot || !_coolDownOver)
-				yield break;
+				if (!_coolDownOver)
+				{
+					yield return new WaitForEndOfFrame();
+					continue;
+				}
+
+				SingleShot();
+
+				PlaySound(_weaponShootingEffects.ShootignSound);
+
+				StartCoroutine(ShootingCoolDownCoroutine());
+
+				if (!_weaponParams.CanFireBursts)
+					yield break;
+			}
+		}
+
+		private void SingleShot()
+		{
 			_includedMagazine.DecreaseAmmoCount();
-			var bulletObject = Instantiate(_bulletPrefab, _bulletSpawner.position, _bulletSpawner.rotation);
-			
+			var bulletObject = Instantiate(_weaponParams.BulletPrefab, _weaponParts.BulletSpawner.position, _weaponParts.BulletSpawner.rotation);
 			if (bulletObject.TryGetComponent<Bullet>(out Bullet bulletComponent))
 			{
-				bulletComponent.SetDamage(_damage);
+				bulletComponent.SetDamage(_weaponParams.Damage);
 			}
-			StartCoroutine(ShootingCoolDownCoroutine());
 		}
+
+		private void PlaySound(AudioClip clip)
+		{
+			_weaponParts.WeaponAudioSource.clip = clip;
+			_weaponParts.WeaponAudioSource.Play();
+		}
+
 		private IEnumerator ShootingCoolDownCoroutine()
 		{
 			_coolDownOver = false;
-			yield return new WaitForSeconds(_shootingDelaySeconds);
+			yield return new WaitForSeconds(_weaponParams.ShootingDelaySeconds);
 			_coolDownOver = true;
 
 		}
@@ -110,13 +137,30 @@ namespace ShooterProject.Scripts.Items.Weapons
 		{
 			_isSelected = true;
 		}
+
 		private void OnSelectExited(SelectExitEventArgs arg0)
 		{
 			_isSelected = false;
 		}
 
+		private void AddEventsListeners()
+		{
+			_weaponParams.ActivateAction.action.performed += OnActivateActionPerformed;
+			_weaponParams.ActivateAction.action.canceled += OnActivateActionCanceled;
+
+			_weaponParts.InteractableHandle.selectEntered.AddListener(OnSelectEntered);
+			_weaponParts.InteractableHandle.selectExited.AddListener(OnSelectExited);
+		}
+
+		private void RemoveEventsListeners()
+		{
+			_weaponParams.ActivateAction.action.performed -= OnActivateActionPerformed;
+			_weaponParams.ActivateAction.action.canceled -= OnActivateActionCanceled;
+
+			_weaponParts.InteractableHandle.selectEntered.RemoveListener(OnSelectEntered);
+			_weaponParts.InteractableHandle.selectExited.RemoveListener(OnSelectExited);
+		}
+
 		#endregion
-
-
 	}
 }

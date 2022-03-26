@@ -19,12 +19,20 @@ namespace ShooterProject.Scripts.Items
 		void Start()
 		{
 			var rigidBodyComponent = GetComponent<Rigidbody>();
+
 			rigidBodyComponent.AddForce(transform.forward * _startImpulse, ForceMode.Impulse);
+
 			Destroy(gameObject, 5);
 		}
 		#endregion
 
 		#region Public Methods
+		/// <summary>
+		/// Устанавливает урон пули
+		/// </summary>
+		/// <param name="damage">
+		/// Значение урона
+		/// </param>
 		public void SetDamage(float damage)
 		{
 			if (damage > 0)

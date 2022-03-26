@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-namespace ShooterProject.Scripts.Items.Weapons
+namespace ShooterProject.Scripts.Items.Weapons.Reloading
 {
 	[RequireComponent(typeof(XRSocketInteractor))]
 	public class WeaponReloadController : MonoBehaviour
@@ -17,14 +17,12 @@ namespace ShooterProject.Scripts.Items.Weapons
 
 		#endregion
 
-		#region LifeCycleMethods
-		private void Start()
-		{
-		}
-		#endregion
-
 		#region Public Methods
 
+		/// <summary>
+		/// Обработка события присоединения магазина
+		/// </summary>
+		/// <param name="arg0">Данные события</param>
 		public void MagazineAttached(SelectEnterEventArgs arg0)
 		{
 			var interactable = arg0.interactable.gameObject;
@@ -38,8 +36,20 @@ namespace ShooterProject.Scripts.Items.Weapons
 			{
 				Debug.LogError($"На объекте {interactable} отсутствует компонент AmmoMagazine");
 			}
-		}
 #endif
+		}
+
+		/// <summary>
+		/// Обработка события отсоединения магазина
+		/// </summary>
+		/// <param name="arg0">Данные события</param>
+		public void MagazineDetached(SelectExitEventArgs arg0)
+		{
+			if(_attachedMagazine != null)
+			{
+				_attachedWeapon.ChangeAmmoMagazine(null);
+			}
+		}
 		#endregion
 
 	}
