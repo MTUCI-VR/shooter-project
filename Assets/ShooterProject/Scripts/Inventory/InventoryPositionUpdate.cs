@@ -10,7 +10,7 @@ namespace ShooterProject.Scripts.Inventory
         private Transform cameraPosition;
 
         [SerializeField]
-        private Vector3 offset;
+        private Vector3 positionOffset;
 
         #endregion
 
@@ -18,7 +18,8 @@ namespace ShooterProject.Scripts.Inventory
         
         private void FixedUpdate()
         {
-            transform.position = cameraPosition.position + offset;
+            transform.position = cameraPosition.position + positionOffset;
+            transform.eulerAngles = new Vector3(0,cameraPosition.eulerAngles.y,0);
         }
 
         #endregion
