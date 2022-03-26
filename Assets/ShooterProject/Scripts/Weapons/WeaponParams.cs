@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 namespace ShooterProject.Scripts.Items.Weapons
@@ -13,7 +13,7 @@ namespace ShooterProject.Scripts.Items.Weapons
 		public InputActionProperty ActivateAction;
 
 		[SerializeField]
-		public int ShootingDelaySeconds;
+		public float ShootingDelaySeconds;
 
 		[SerializeField]
 		public float Damage;

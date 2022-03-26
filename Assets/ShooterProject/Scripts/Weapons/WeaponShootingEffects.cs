@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 namespace ShooterProject.Scripts.Items.Weapons
 {
 	[System.Serializable]
@@ -8,6 +8,6 @@ namespace ShooterProject.Scripts.Items.Weapons
 		public AudioClip ShootignSound;
 
 		[SerializeField]
-		public AudioClip NoAmmoSound;
+		public ParticleSystem Particles;
 	}
 }
