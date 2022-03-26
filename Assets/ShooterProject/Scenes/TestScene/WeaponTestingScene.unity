@@ -1084,7 +1084,7 @@ MonoBehaviour:
     Damage: 50
     CanFireBursts: 0
   _weaponShootingEffects:
-    ShootignSound: {fileID: 8300000, guid: c13e2348eb420a94cab78960787edbc4, type: 3}
+    ShootignSound: {fileID: 8300000, guid: 8619657419e3d4948964329e6c0651dc, type: 3}
     Particles: {fileID: 1858187376}
 --- !u!4 &1106154923
 Transform:
