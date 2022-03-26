@@ -1,4 +1,3 @@
-using ShooterProject.Scripts.Items.Weapons.Reloading;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,7 +18,6 @@ namespace ShooterProject.Scripts.Items.Weapons
 		[SerializeField]
 		private WeaponShootingEffects _weaponShootingEffects;
 
-		private AmmoMagazine _includedMagazine;
 		private bool _isSelected = false;
 		private bool _coolDownOver = true;
 		private Coroutine _workingShootingCoroutine;
@@ -28,16 +26,10 @@ namespace ShooterProject.Scripts.Items.Weapons
 
 		#region Properties
 		public bool IsSelected => _isSelected;
-		private bool _canShoot => _isSelected && _includedMagazine != null;
-		private bool _canPlayNoAmooSound => _weaponParts.WeaponAudioSource != null && _weaponShootingEffects.NoAmmoSound != null;
+		private bool _canShoot => _isSelected;
 		#endregion
 
-		#region Events
-		public event System.Action<AmmoMagazine> OnMagazineChanged;
-		public event System.Action OnMagazineDetached;
-		#endregion
-
-		#region LifeCycle
+		#region LifeCycle Methods
 
 		private void OnEnable()
 		{
@@ -51,35 +43,12 @@ namespace ShooterProject.Scripts.Items.Weapons
 
 		#endregion
 
-		#region Public Methods
-		/// <summary>
-		/// Меняет текущий магазин с патронами и вызывает события OnMagazineChanged или OnMagazineDetached
-		/// </summary>
-		/// <param name="magazine">
-		/// Магазин с патронами
-		/// </param>
-		public void ChangeAmmoMagazine(AmmoMagazine magazine)
-		{
-			_includedMagazine = magazine;
-			if (magazine == null)
-				OnMagazineDetached?.Invoke();
-			else
-				OnMagazineChanged?.Invoke(magazine);
-		}
-		#endregion
-
 		#region Private Methods
 
 		private IEnumerator ShootingCoroutine()
 		{
 			while (_canShoot)
 			{
-				if (!_includedMagazine.HasAmmo)
-				{
-					if (_canPlayNoAmooSound)
-						PlaySound(_weaponShootingEffects.NoAmmoSound);
-					yield break;
-				}
 
 				if (!_coolDownOver)
 				{
@@ -100,16 +69,13 @@ namespace ShooterProject.Scripts.Items.Weapons
 
 		private void SingleShot()
 		{
-			_includedMagazine.DecreaseAmmoCount();
 			var bulletObject = Instantiate(_weaponParams.BulletPrefab, _weaponParts.BulletSpawner.position, _weaponParts.BulletSpawner.rotation);
-			if (bulletObject.TryGetComponent<Bullet>(out Bullet bulletComponent))
-			{
-				bulletComponent.SetDamage(_weaponParams.Damage);
-			}
 		}
 
 		private void PlaySound(AudioClip clip)
 		{
+			if (_weaponParts.WeaponAudioSource == null && clip == null)
+				return;
 			_weaponParts.WeaponAudioSource.clip = clip;
 			_weaponParts.WeaponAudioSource.Play();
 		}

@@ -11,7 +11,6 @@ namespace ShooterProject.Scripts.Items
 
 		[SerializeField]
 		private float _startImpulse;
-		private float _damage;
 
 		#endregion
 
@@ -24,24 +23,6 @@ namespace ShooterProject.Scripts.Items
 
 			Destroy(gameObject, 5);
 		}
-		#endregion
-
-		#region Public Methods
-		/// <summary>
-		/// Устанавливает урон пули
-		/// </summary>
-		/// <param name="damage">
-		/// Значение урона
-		/// </param>
-		public void SetDamage(float damage)
-		{
-			if (damage > 0)
-				_damage = damage;
-#if UNITY_EDITOR
-			else
-				Debug.LogError($"Ошибка {gameObject.name} невозможно установить отрицательное или нулевое значение урона {damage}");
-		}
-#endif
 		#endregion
 
 		#region Private Methods
