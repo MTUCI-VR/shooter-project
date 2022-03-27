@@ -1,23 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GetInventoryInfoForCanvas : MonoBehaviour
-{
-    #region Fields
-    private Text text;
-
-    #endregion
-
-    #region LifeCycle
-
-    private void Awake()
+namespace ShooterProject.Scripts.Inventory
+{	
+    public class GetInventoryInfoForCanvas : MonoBehaviour
     {
-        text = GetComponent<Text>();
-    }
-    private void Update()
-    {
-        text.text = $"Магазинов на поясе: {InventoryInfo.ammoCount}\nНож: {InventoryInfo.hasKnife}";
-    }
+        #region Fields
+        private Text canvasText;
 
-    #endregion
+        #endregion
+
+        #region LifeCycle
+
+        private void Awake()
+        {
+            canvasText = GetComponent<Text>();
+        }
+        private void Update()
+        {
+            canvasText.text = $"Магазинов: {InventoryInfo.ammoMagazineCount}\nНож: {InventoryInfo.hasKnife}";
+        }
+
+        #endregion
+    }
 }

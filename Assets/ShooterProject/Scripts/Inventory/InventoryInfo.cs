@@ -1,49 +1,51 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class InventoryInfo : MonoBehaviour
-{
-    #region Fields
-
-    [SerializeField]
-    private GameObject inventory;
-    
-    #endregion
-
-    #region Properties
-    
-    public static int ammoCount { get; set; }
-
-    public static bool hasKnife { get; set; }
-
-    #endregion
-
-    #region LifeCycle
-
-    private void Update()
+namespace ShooterProject.Scripts.Inventory
+{	
+	public class InventoryInfo : MonoBehaviour
 	{
-		Counting();
-	}
+		#region Fields
 
-	#endregion
+		[SerializeField]
+		private GameObject inventory;
+		
+		#endregion
 
-	#region  Private Methods
-	private void Counting()
-	{
-		XRSocketInteractor[] socketZones = inventory.GetComponentsInChildren<XRSocketInteractor>();
+		#region Properties
+		
+		public static int ammoMagazineCount { get; private set; }
 
-		ammoCount = 0;
+		public static bool hasKnife { get; private set; }
 
-		foreach (var socketZone in socketZones)
+		#endregion
+
+		#region LifeCycle
+
+		private void Update()
 		{
-			if (socketZone.name.Contains("Ammo") && socketZone.hasSelection)
-			{
-				ammoCount++;
-			}
-			
-			hasKnife = socketZone.name.Contains("Knife") && socketZone.hasSelection;
+			Counting();
 		}
-	}
 
-	#endregion
+		#endregion
+
+		#region  Private Methods
+
+		private void Counting()
+		{
+			XRSocketInteractor[] snapZones = inventory.GetComponentsInChildren<XRSocketInteractor>();
+
+			ammoMagazineCount = 0;
+
+			foreach (var snapZone in snapZones)
+			{
+				if (snapZone.tag == "AmmoMagazineSnapZone" && snapZone.hasSelection)
+					ammoMagazineCount++;
+				
+				hasKnife = snapZone.tag == "KnifeSnapZone" && snapZone.hasSelection;
+			}
+		}
+
+		#endregion
+	}
 }
