@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -16,11 +15,12 @@ namespace ShooterProject.Scripts.Inventory
         #endregion
 
         #region LifeCycle
+        
         private void Awake()
         {
             TryGetComponent<XRSocketInteractor>(out socketInteractor);
         }
-        private void FixedUpdate()
+        private void Start()
         {
             socketInteractor.hoverEntered.AddListener(HoverModelOn);
             socketInteractor.hoverExited.AddListener(HoverModelOff);
@@ -30,9 +30,11 @@ namespace ShooterProject.Scripts.Inventory
         #endregion
 
         #region Private Methods
+
 		private void HoverModelOn(HoverEnterEventArgs arg0)
 		{
-			hoverModel.SetActive(true);
+            if (!socketInteractor.hasSelection)
+			    hoverModel.SetActive(true);
 		}
 		private void HoverModelOff(HoverExitEventArgs arg0)
 		{
