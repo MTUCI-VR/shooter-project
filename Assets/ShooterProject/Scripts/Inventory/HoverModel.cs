@@ -2,39 +2,39 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 namespace ShooterProject.Scripts.Inventory
-{	
-    [RequireComponent(typeof(XRSocketInteractor))]
-    public class HoverModel : MonoBehaviour
-    {
-        #region Fields
+{
+	[RequireComponent(typeof(XRSocketInteractor))]
+	public class HoverModel : MonoBehaviour
+	{
+		#region Fields
 
-        [SerializeField]
-        private GameObject hoverModel;
-        private XRSocketInteractor socketInteractor;
+		[SerializeField]
+		private GameObject hoverModel;
+		private XRSocketInteractor socketInteractor;
 
-        #endregion
+		#endregion
 
-        #region LifeCycle
-        
-        private void Awake()
-        {
-            TryGetComponent<XRSocketInteractor>(out socketInteractor);
-        }
-        private void Start()
-        {
-            socketInteractor.hoverEntered.AddListener(HoverModelOn);
-            socketInteractor.hoverExited.AddListener(HoverModelOff);
-            socketInteractor.selectEntered.AddListener(HoverModelOff);
-        }
+		#region LifeCycle
 
-        #endregion
+		private void Awake()
+		{
+			TryGetComponent<XRSocketInteractor>(out socketInteractor);
+		}
+		private void Start()
+		{
+			socketInteractor.hoverEntered.AddListener(HoverModelOn);
+			socketInteractor.hoverExited.AddListener(HoverModelOff);
+			socketInteractor.selectEntered.AddListener(HoverModelOff);
+		}
 
-        #region Private Methods
+		#endregion
+
+		#region Private Methods
 
 		private void HoverModelOn(HoverEnterEventArgs arg0)
 		{
-            if (!socketInteractor.hasSelection)
-			    hoverModel.SetActive(true);
+			if (!socketInteractor.hasSelection)
+				hoverModel.SetActive(true);
 		}
 		private void HoverModelOff(HoverExitEventArgs arg0)
 		{
@@ -46,7 +46,7 @@ namespace ShooterProject.Scripts.Inventory
 			hoverModel.SetActive(false);
 		}
 
-        #endregion
-    }
+		#endregion
+	}
 }
 

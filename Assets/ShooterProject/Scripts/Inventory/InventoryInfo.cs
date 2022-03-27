@@ -2,18 +2,18 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 namespace ShooterProject.Scripts.Inventory
-{	
+{
 	public class InventoryInfo : MonoBehaviour
 	{
 		#region Fields
 
 		[SerializeField]
 		private GameObject inventory;
-		
+
 		#endregion
 
 		#region Properties
-		
+
 		public static int ammoMagazineCount { get; private set; }
 
 		public static bool hasKnife { get; private set; }
@@ -41,7 +41,7 @@ namespace ShooterProject.Scripts.Inventory
 			{
 				if (snapZone.tag == "AmmoMagazineSnapZone" && snapZone.hasSelection)
 					ammoMagazineCount++;
-				
+
 				hasKnife = snapZone.tag == "KnifeSnapZone" && snapZone.hasSelection;
 			}
 		}
