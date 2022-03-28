@@ -70,7 +70,7 @@ namespace ShooterProject.Scripts.Items.Weapons
 		private void SingleShot()
 		{
 			var bulletObject = Instantiate(_weaponParams.BulletPrefab, _weaponParts.BulletSpawner.position, _weaponParts.BulletSpawner.rotation);
-            _weaponShootingEffects.Particles?.Play();
+			_weaponShootingEffects.Particles?.Play();
 		}
 
 		private void PlaySound(AudioClip clip)
@@ -96,7 +96,7 @@ namespace ShooterProject.Scripts.Items.Weapons
 
 		private void OnActivateActionCanceled(InputAction.CallbackContext callbackContext)
 		{
-			if(_workingShootingCoroutine != null)
+			if (_workingShootingCoroutine != null)
 				StopCoroutine(_workingShootingCoroutine);
 		}
 
