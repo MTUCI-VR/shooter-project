@@ -1,5 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
-namespace ShooterProject.Scripts.Items.Weapons
+namespace ShooterProject.Scripts.Weapons
 {
 	[System.Serializable]
 	public struct WeaponShootingEffects
@@ -9,5 +10,16 @@ namespace ShooterProject.Scripts.Items.Weapons
 
 		[SerializeField]
 		public ParticleSystem Particles;
+
+		[Header("Impacts")]
+		
+		[SerializeField]
+		public GameObject ImpactPrefab;
+
+		[SerializeField]
+		public int MaxImpacts;
+
+		[SerializeField]
+		public List<string> ImpactIgnoreTags;
 	}
 }
