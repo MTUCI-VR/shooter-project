@@ -60,9 +60,7 @@ namespace ShooterProject.Scripts.General
 				if (!poolObject.gameObject.activeSelf)
 				{
 					element = poolObject;
-					element.SetActive(true);
-					_objects.Remove(element);
-					_objects.Add(element);
+					GetElement(element);
 					return true;
 				}
 			}
@@ -77,9 +75,7 @@ namespace ShooterProject.Scripts.General
 			if(allowLongTimeNotUsed)
 			{
 				element = _objects[0];
-				element.SetActive(true);
-				_objects.Remove(element);
-				_objects.Add(element);
+				GetElement(element);
 				return true;
 			}
 
@@ -107,6 +103,12 @@ namespace ShooterProject.Scripts.General
 			newObject.gameObject.SetActive(_activeByDefault);
 			_objects.Add(newObject);
 			return newObject;
+		}
+		private void GetElement(GameObject element)
+		{
+			element.SetActive(true);
+			_objects.Remove(element);
+			_objects.Add(element);
 		}
 
 		#endregion

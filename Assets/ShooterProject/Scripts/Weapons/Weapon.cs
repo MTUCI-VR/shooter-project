@@ -75,8 +75,6 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void SingleShot()
 		{
-			//var bulletObject = Instantiate(_weaponParams.BulletPrefab, _weaponParts.BulletSpawner.position, _weaponParts.BulletSpawner.rotation);
-			//_weaponShootingEffects.Particles?.Play();
 			RaycastHit hitInfo;
 			Vector3 weaponForward = _weaponParts.BulletSpawner.forward;
 
