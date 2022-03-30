@@ -1,8 +1,10 @@
+using ShooterProject.Scripts.General;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
-namespace ShooterProject.Scripts.Items.Weapons
+
+namespace ShooterProject.Scripts.Weapons
 {
 
 	public class Weapon : MonoBehaviour
@@ -21,6 +23,7 @@ namespace ShooterProject.Scripts.Items.Weapons
 		private bool _isSelected = false;
 		private bool _coolDownOver = true;
 		private Coroutine _workingShootingCoroutine;
+		private GameObjectsPool _impactsPool;
 
 		#endregion
 
@@ -30,7 +33,10 @@ namespace ShooterProject.Scripts.Items.Weapons
 		#endregion
 
 		#region LifeCycle Methods
-
+		private void Start()
+		{
+			_impactsPool = new GameObjectsPool(_weaponShootingEffects.MaxImpacts, false, false, _weaponShootingEffects.ImpactPrefab, null);
+		}
 		private void OnEnable()
 		{
 			AddEventsListeners();
@@ -69,8 +75,22 @@ namespace ShooterProject.Scripts.Items.Weapons
 
 		private void SingleShot()
 		{
-			var bulletObject = Instantiate(_weaponParams.BulletPrefab, _weaponParts.BulletSpawner.position, _weaponParts.BulletSpawner.rotation);
-            _weaponShootingEffects.Particles?.Play();
+			//var bulletObject = Instantiate(_weaponParams.BulletPrefab, _weaponParts.BulletSpawner.position, _weaponParts.BulletSpawner.rotation);
+			//_weaponShootingEffects.Particles?.Play();
+			RaycastHit hitInfo;
+			Vector3 weaponForward = _weaponParts.BulletSpawner.forward;
+
+			if(Physics.Raycast(_weaponParts.BulletSpawner.position,weaponForward,out hitInfo, _weaponParams.ShootingDistance))
+			{
+
+				#region Impacts
+				if (_weaponShootingEffects.ImpactIgnoreTags.Contains(hitInfo.collider.gameObject.tag))
+					return;
+				_impactsPool.TryGetFreeElement(out GameObject freeImpact, true);
+				freeImpact.transform.position = hitInfo.point;
+				freeImpact.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+				#endregion
+			}
 		}
 
 		private void PlaySound(AudioClip clip)
@@ -126,8 +146,9 @@ namespace ShooterProject.Scripts.Items.Weapons
 
 			_weaponParts.InteractableHandle.selectEntered.RemoveListener(OnSelectEntered);
 			_weaponParts.InteractableHandle.selectExited.RemoveListener(OnSelectExited);
+			
 		}
-
+		
 		#endregion
 	}
 }

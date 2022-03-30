@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34892254}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.558}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5215}
   m_LocalScale: {x: 33.333332, y: 33.333336, z: 6.666666}
   m_Children: []
   m_Father: {fileID: 713375857}
@@ -1068,7 +1068,6 @@ MonoBehaviour:
     InteractableHandle: {fileID: 239531815}
     WeaponAudioSource: {fileID: 1795459415}
   _weaponParams:
-    BulletPrefab: {fileID: 4603887225765051972, guid: 55fc08c2ec20e9f4d8e198f4c66f74c1, type: 3}
     ActivateAction:
       m_UseReference: 1
       m_Action:
@@ -1082,11 +1081,15 @@ MonoBehaviour:
         m_Flags: 0
       m_Reference: {fileID: -2775837120590753941, guid: da2b439d1a2de5c46a4f428f8cf4fe19, type: 3}
     ShootingDelaySeconds: 0.2
+    ShootingDistance: 500
     Damage: 50
     CanFireBursts: 0
   _weaponShootingEffects:
     ShootignSound: {fileID: 8300000, guid: 8619657419e3d4948964329e6c0651dc, type: 3}
     Particles: {fileID: 1858187376}
+    ImpactPrefab: {fileID: 2789838498539494108, guid: 5c91af0782fe0c04db52f9fdf274838f, type: 3}
+    MaxImpacts: 4
+    ImpactIgnoreTags: []
 --- !u!4 &1106154923
 Transform:
   m_ObjectHideFlags: 0

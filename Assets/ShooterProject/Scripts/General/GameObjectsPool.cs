@@ -2,16 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace ShooterProject.Scripts.General
 {
-	public class ObjectsPool<T> where T: MonoBehaviour
+	public class GameObjectsPool
 	{
 		#region Fields
 
-		private List<T> _objects;
+		private List<GameObject> _objects;
 
 		private bool _autoExpand;
 		private bool _activeByDefault;
 		private Transform _container;
-		private T _objectPrefab;
+		private GameObject _objectPrefab;
 		private bool _initialized;
 
 		#endregion
@@ -31,7 +31,7 @@ namespace ShooterProject.Scripts.General
 		/// <param name="activeByDefault">Параметр active объектов при инициализации или добавлении в пул</param>
 		/// <param name="prefab">Префаб объекта</param>
 		/// <param name="container">Контейнер пула</param>
-		public ObjectsPool(int maxSize, bool autoExpand,bool activeByDefault, T prefab, Transform container)
+		public GameObjectsPool(int maxSize, bool autoExpand,bool activeByDefault, GameObject prefab, Transform container)
 		{
 			MaxSize = maxSize;
 			_autoExpand = autoExpand;
@@ -49,16 +49,20 @@ namespace ShooterProject.Scripts.General
 		/// Проверяет наличие свободного элемента и возвращает его
 		/// </summary>
 		/// <param name="element">Свободный элемент пула</param>
+		/// <param name="allowLongTimeNotUsed">Если нет свободного элемента и нельзя создать новый, то возвращает давно не использовавшийся элемент</param>
 		/// <returns>Возвращает true если удалось найти свободный элемент, иначе возвращает false</returns>
-		public bool TryGetFreeElement(out T element)
+		public bool TryGetFreeElement(out GameObject element, bool allowLongTimeNotUsed)
 		{
 			if (!_initialized)
-				throw new System.Exception($"Пул объектов типа {typeof(T)} не был инициализирован");
+				throw new System.Exception("Пул объектов не был инициализирован");
 			foreach (var poolObject in _objects)
 			{
-				if (poolObject.gameObject.activeSelf)
+				if (!poolObject.gameObject.activeSelf)
 				{
 					element = poolObject;
+					element.SetActive(true);
+					_objects.Remove(element);
+					_objects.Add(element);
 					return true;
 				}
 			}
@@ -66,6 +70,16 @@ namespace ShooterProject.Scripts.General
 			if (_autoExpand)
 			{
 				element = AddObject();
+				element.SetActive(true);
+				return true;
+			}
+
+			if(allowLongTimeNotUsed)
+			{
+				element = _objects[0];
+				element.SetActive(true);
+				_objects.Remove(element);
+				_objects.Add(element);
 				return true;
 			}
 
@@ -80,14 +94,14 @@ namespace ShooterProject.Scripts.General
 
 		private void InitPool()
 		{
-			_objects = new List<T>();
+			_objects = new List<GameObject>();
 			for (var i = 0; i < MaxSize; i++)
 			{
 				AddObject();
 			}
 			_initialized = true;
 		}
-		private T AddObject()
+		private GameObject AddObject()
 		{
 			var newObject = GameObject.Instantiate(_objectPrefab, _container);
 			newObject.gameObject.SetActive(_activeByDefault);
