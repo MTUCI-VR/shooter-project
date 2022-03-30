@@ -10,6 +10,7 @@ namespace ShooterProject.Scripts.Weapons
 		[SerializeField]
 		public InputActionProperty ActivateAction;
 
+		[Header("Shooting Params")]
 		[SerializeField]
 		public float ShootingDelaySeconds;
 
@@ -21,5 +22,6 @@ namespace ShooterProject.Scripts.Weapons
 
 		[SerializeField]
 		public bool CanFireBursts;
+		
 	}
 }
