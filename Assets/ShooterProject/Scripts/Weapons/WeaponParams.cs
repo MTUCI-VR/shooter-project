@@ -22,6 +22,6 @@ namespace ShooterProject.Scripts.Weapons
 
 		[SerializeField]
 		public bool CanFireBursts;
-		
+
 	}
 }

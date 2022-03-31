@@ -31,7 +31,7 @@ namespace ShooterProject.Scripts.General
 		/// <param name="activeByDefault">Параметр active объектов при инициализации или добавлении в пул</param>
 		/// <param name="prefab">Префаб объекта</param>
 		/// <param name="container">Контейнер пула</param>
-		public GameObjectsPool(int maxSize, bool autoExpand,bool activeByDefault, GameObject prefab, Transform container)
+		public GameObjectsPool(int maxSize, bool autoExpand, bool activeByDefault, GameObject prefab, Transform container)
 		{
 			MaxSize = maxSize;
 			_autoExpand = autoExpand;
@@ -72,7 +72,7 @@ namespace ShooterProject.Scripts.General
 				return true;
 			}
 
-			if(allowLongTimeNotUsed)
+			if (allowLongTimeNotUsed)
 			{
 				element = _objects[0];
 				GetElement(element);
