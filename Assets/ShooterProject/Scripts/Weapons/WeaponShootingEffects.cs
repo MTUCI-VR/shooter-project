@@ -12,7 +12,7 @@ namespace ShooterProject.Scripts.Weapons
 		public ParticleSystem Particles;
 
 		[Header("Impacts")]
-		
+
 		[SerializeField]
 		public GameObject ImpactPrefab;
 

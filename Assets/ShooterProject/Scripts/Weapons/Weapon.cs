@@ -78,7 +78,7 @@ namespace ShooterProject.Scripts.Weapons
 			RaycastHit hitInfo;
 			Vector3 weaponForward = _weaponParts.BulletSpawner.forward;
 
-			if(Physics.Raycast(_weaponParts.BulletSpawner.position,weaponForward,out hitInfo, _weaponParams.ShootingDistance))
+			if (Physics.Raycast(_weaponParts.BulletSpawner.position, weaponForward, out hitInfo, _weaponParams.ShootingDistance))
 			{
 
 				#region Impacts
@@ -114,7 +114,7 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void OnActivateActionCanceled(InputAction.CallbackContext callbackContext)
 		{
-			if(_workingShootingCoroutine != null)
+			if (_workingShootingCoroutine != null)
 				StopCoroutine(_workingShootingCoroutine);
 		}
 
@@ -144,9 +144,9 @@ namespace ShooterProject.Scripts.Weapons
 
 			_weaponParts.InteractableHandle.selectEntered.RemoveListener(OnSelectEntered);
 			_weaponParts.InteractableHandle.selectExited.RemoveListener(OnSelectExited);
-			
+
 		}
-		
+
 		#endregion
 	}
 }
