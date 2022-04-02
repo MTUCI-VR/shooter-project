@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace ShooterProject.Scripts.Weapons
 {
-
+	[RequireComponent(typeof(XRGrabInteractable))]
 	public class Weapon : MonoBehaviour
 	{
 		#region Fields
@@ -24,19 +24,26 @@ namespace ShooterProject.Scripts.Weapons
 		private bool _coolDownOver = true;
 		private Coroutine _workingShootingCoroutine;
 		private GameObjectsPool _impactsPool;
+		private XRGrabInteractable _grabInteractable;
 
 		#endregion
 
 		#region Properties
-		public bool IsSelected => _isSelected;
-		private bool _canShoot => _isSelected;
+
 		#endregion
 
 		#region LifeCycle Methods
-		private void Start()
+
+		private void Awake()
 		{
-			_impactsPool = new GameObjectsPool(_weaponShootingEffects.MaxImpacts, false, false, _weaponShootingEffects.ImpactPrefab, null);
+			_grabInteractable = GetComponent<XRGrabInteractable>();
+			_impactsPool = new GameObjectsPool(_weaponShootingEffects.MaxImpacts,
+				false,
+				false,
+				_weaponShootingEffects.ImpactPrefab,
+				null);
 		}
+
 		private void OnEnable()
 		{
 			AddEventsListeners();
@@ -53,9 +60,8 @@ namespace ShooterProject.Scripts.Weapons
 
 		private IEnumerator ShootingCoroutine()
 		{
-			while (_canShoot)
+			while (_isSelected)
 			{
-
 				if (!_coolDownOver)
 				{
 					yield return new WaitForEndOfFrame();
@@ -64,7 +70,7 @@ namespace ShooterProject.Scripts.Weapons
 
 				SingleShot();
 
-				PlaySound(_weaponShootingEffects.ShootignSound);
+				PlaySound(_weaponShootingEffects.Sound);
 
 				StartCoroutine(ShootingCoolDownCoroutine());
 
@@ -75,19 +81,22 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void SingleShot()
 		{
-			RaycastHit hitInfo;
-			Vector3 weaponForward = _weaponParts.BulletSpawner.forward;
+			_weaponShootingEffects.Particles?.Play();
 
-			if (Physics.Raycast(_weaponParts.BulletSpawner.position, weaponForward, out hitInfo, _weaponParams.ShootingDistance))
+			Vector3 weaponForward = _weaponParts.BulletSpawnPoint.forward;
+			if (Physics.Raycast(_weaponParts.BulletSpawnPoint.position, weaponForward, out RaycastHit hitInfo, _weaponParams.ShootingDistance))
 			{
+				ShowImpact(hitInfo);
+			}
+		}
 
-				#region Impacts
-				if (_weaponShootingEffects.ImpactIgnoreTags.Contains(hitInfo.collider.gameObject.tag))
-					return;
-				_impactsPool.TryGetFreeElement(out GameObject freeImpact, true);
+		private void ShowImpact(RaycastHit hitInfo)
+		{
+			if (!_weaponShootingEffects.ImpactIgnoreTags.Contains(hitInfo.collider.gameObject.tag) &&
+				_impactsPool.TryGetFreeElement(out GameObject freeImpact, true))
+			{
 				freeImpact.transform.position = hitInfo.point;
 				freeImpact.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
-				#endregion
 			}
 		}
 
@@ -104,15 +113,15 @@ namespace ShooterProject.Scripts.Weapons
 			_coolDownOver = false;
 			yield return new WaitForSeconds(_weaponParams.ShootingDelaySeconds);
 			_coolDownOver = true;
-
 		}
+		#region EventsListeners
 
-		private void OnActivateActionPerformed(InputAction.CallbackContext callbackContext)
+		private void OnActivateActionPerformed(ActivateEventArgs arg0)
 		{
 			_workingShootingCoroutine = StartCoroutine(ShootingCoroutine());
 		}
 
-		private void OnActivateActionCanceled(InputAction.CallbackContext callbackContext)
+		private void OnActivateActionCanceled(DeactivateEventArgs arg0)
 		{
 			if (_workingShootingCoroutine != null)
 				StopCoroutine(_workingShootingCoroutine);
@@ -130,22 +139,24 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void AddEventsListeners()
 		{
-			_weaponParams.ActivateAction.action.performed += OnActivateActionPerformed;
-			_weaponParams.ActivateAction.action.canceled += OnActivateActionCanceled;
+			
+			_grabInteractable.activated.AddListener(OnActivateActionPerformed);
+			_grabInteractable.deactivated.AddListener(OnActivateActionCanceled);
 
-			_weaponParts.InteractableHandle.selectEntered.AddListener(OnSelectEntered);
-			_weaponParts.InteractableHandle.selectExited.AddListener(OnSelectExited);
+			_grabInteractable.selectEntered.AddListener(OnSelectEntered);
+			_grabInteractable.selectExited.AddListener(OnSelectExited);
 		}
 
 		private void RemoveEventsListeners()
 		{
-			_weaponParams.ActivateAction.action.performed -= OnActivateActionPerformed;
-			_weaponParams.ActivateAction.action.canceled -= OnActivateActionCanceled;
+			_grabInteractable.activated.RemoveListener(OnActivateActionPerformed);
+			_grabInteractable.deactivated.RemoveListener(OnActivateActionCanceled);
 
-			_weaponParts.InteractableHandle.selectEntered.RemoveListener(OnSelectEntered);
-			_weaponParts.InteractableHandle.selectExited.RemoveListener(OnSelectExited);
-
+			_grabInteractable.selectEntered.RemoveListener(OnSelectEntered);
+			_grabInteractable.selectExited.RemoveListener(OnSelectExited);
 		}
+
+		#endregion
 
 		#endregion
 	}

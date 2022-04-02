@@ -6,13 +6,7 @@ namespace ShooterProject.Scripts.Weapons
 	[Serializable]
 	public struct WeaponParts
 	{
-		[SerializeField]
-		public Transform BulletSpawner;
-
-		[SerializeField]
-		public XRGrabInteractable InteractableHandle;
-
-		[SerializeField]
+		public Transform BulletSpawnPoint;
 		public AudioSource WeaponAudioSource;
 	}
 }
