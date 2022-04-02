@@ -6,13 +6,12 @@ namespace ShooterProject.Scripts.General
 	{
 		#region Fields
 
-		private List<GameObject> _objects;
+		private List<GameObject> _objects = new List<GameObject>();
 
 		private bool _autoExpand;
 		private bool _activeByDefault;
 		private Transform _container;
 		private GameObject _objectPrefab;
-		private bool _initialized;
 
 		#endregion
 
@@ -23,6 +22,7 @@ namespace ShooterProject.Scripts.General
 		#endregion
 
 		#region Constructors
+
 		/// <summary>
 		/// Конструктор класса
 		/// </summary>
@@ -45,6 +45,7 @@ namespace ShooterProject.Scripts.General
 		#endregion
 
 		#region Public Methods
+
 		/// <summary>
 		/// Проверяет наличие свободного элемента и возвращает его
 		/// </summary>
@@ -53,14 +54,13 @@ namespace ShooterProject.Scripts.General
 		/// <returns>Возвращает true если удалось найти свободный элемент, иначе возвращает false</returns>
 		public bool TryGetFreeElement(out GameObject element, bool allowLongTimeNotUsed)
 		{
-			if (!_initialized)
-				throw new System.Exception("Пул объектов не был инициализирован");
 			foreach (var poolObject in _objects)
 			{
-				if (!poolObject.gameObject.activeSelf)
+				if (!poolObject.activeSelf)
 				{
 					element = poolObject;
-					GetElement(element);
+					ActivateElement
+					(element);
 					return true;
 				}
 			}
@@ -75,7 +75,8 @@ namespace ShooterProject.Scripts.General
 			if (allowLongTimeNotUsed)
 			{
 				element = _objects[0];
-				GetElement(element);
+				ActivateElement
+				(element);
 				return true;
 			}
 
@@ -90,13 +91,12 @@ namespace ShooterProject.Scripts.General
 
 		private void InitPool()
 		{
-			_objects = new List<GameObject>();
 			for (var i = 0; i < MaxSize; i++)
 			{
 				AddObject();
 			}
-			_initialized = true;
 		}
+
 		private GameObject AddObject()
 		{
 			var newObject = GameObject.Instantiate(_objectPrefab, _container);
@@ -104,7 +104,9 @@ namespace ShooterProject.Scripts.General
 			_objects.Add(newObject);
 			return newObject;
 		}
-		private void GetElement(GameObject element)
+
+		private void ActivateElement
+		(GameObject element)
 		{
 			element.SetActive(true);
 			_objects.Remove(element);
