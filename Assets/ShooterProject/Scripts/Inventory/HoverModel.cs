@@ -47,7 +47,7 @@ namespace ShooterProject.Scripts.Inventory
 		{
 			if (!socketInteractor.hasSelection)
 				meshRenderer.material = enterMaterial;
-				// hoverModel.SetActive(true);
+			// hoverModel.SetActive(true);
 		}
 		private void HoverModelOff(HoverExitEventArgs arg0)
 		{
