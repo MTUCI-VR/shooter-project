@@ -18,11 +18,11 @@ namespace ShooterProject.Scripts.Inventory
 		private Material exitMaterial;
 
 		private MeshRenderer _meshRenderer;
-		
+
 		private XRSocketInteractor _socketInteractor;
 
 		private bool _hasMeshRenderer;
-		
+
 		private bool _hasSocketInteractor;
 
 		#endregion
@@ -36,7 +36,7 @@ namespace ShooterProject.Scripts.Inventory
 		}
 		private void OnEnable()
 		{
-			if(_hasMeshRenderer && _hasSocketInteractor)
+			if (_hasMeshRenderer && _hasSocketInteractor)
 			{
 				_socketInteractor.hoverEntered.AddListener(ChangeHoverModelMaterial);
 				_socketInteractor.hoverExited.AddListener(ChangeHoverModelMaterial);
