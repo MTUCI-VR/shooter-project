@@ -12,13 +12,13 @@ namespace ShooterProject.Scripts.Weapons
 		#region Fields
 
 		[SerializeField]
-		private WeaponParts _weaponParts;
+		private WeaponParts weaponParts;
 
 		[SerializeField]
-		private WeaponParams _weaponParams;
+		private WeaponParams weaponParams;
 
 		[SerializeField]
-		private WeaponShootingEffects _weaponShootingEffects;
+		private WeaponShootingEffects weaponShootingEffects;
 
 		private bool _isSelected = false;
 		private bool _coolDownOver = true;
@@ -37,10 +37,10 @@ namespace ShooterProject.Scripts.Weapons
 		private void Awake()
 		{
 			_grabInteractable = GetComponent<XRGrabInteractable>();
-			_impactsPool = new GameObjectsPool(_weaponShootingEffects.MaxImpacts,
+			_impactsPool = new GameObjectsPool(weaponShootingEffects.MaxImpacts,
 				false,
 				false,
-				_weaponShootingEffects.ImpactPrefab,
+				weaponShootingEffects.ImpactPrefab,
 				null);
 		}
 
@@ -70,21 +70,21 @@ namespace ShooterProject.Scripts.Weapons
 
 				SingleShot();
 
-				PlaySound(_weaponShootingEffects.Sound);
+				PlaySound(weaponShootingEffects.Sound);
 
 				StartCoroutine(ShootingCoolDownCoroutine());
 
-				if (!_weaponParams.CanFireBursts)
+				if (!weaponParams.CanFireBursts)
 					yield break;
 			}
 		}
 
 		private void SingleShot()
 		{
-			_weaponShootingEffects.Particles?.Play();
+			weaponShootingEffects.Particles?.Play();
 
-			Vector3 weaponForward = _weaponParts.BulletSpawnPoint.forward;
-			if (Physics.Raycast(_weaponParts.BulletSpawnPoint.position, weaponForward, out RaycastHit hitInfo, _weaponParams.ShootingDistance))
+			Vector3 weaponForward = weaponParts.BulletSpawnPoint.forward;
+			if (Physics.Raycast(weaponParts.BulletSpawnPoint.position, weaponForward, out RaycastHit hitInfo, weaponParams.ShootingDistance))
 			{
 				ShowImpact(hitInfo);
 			}
@@ -92,7 +92,7 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void ShowImpact(RaycastHit hitInfo)
 		{
-			if (!_weaponShootingEffects.ImpactIgnoreTags.Contains(hitInfo.collider.gameObject.tag) &&
+			if (!weaponShootingEffects.ImpactIgnoreTags.Contains(hitInfo.collider.gameObject.tag) &&
 				_impactsPool.TryGetFreeElement(out GameObject freeImpact, true))
 			{
 				freeImpact.transform.position = hitInfo.point;
@@ -102,16 +102,16 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void PlaySound(AudioClip clip)
 		{
-			if (_weaponParts.WeaponAudioSource == null && clip == null)
+			if (weaponParts.WeaponAudioSource == null && clip == null)
 				return;
-			_weaponParts.WeaponAudioSource.clip = clip;
-			_weaponParts.WeaponAudioSource.Play();
+			weaponParts.WeaponAudioSource.clip = clip;
+			weaponParts.WeaponAudioSource.Play();
 		}
 
 		private IEnumerator ShootingCoolDownCoroutine()
 		{
 			_coolDownOver = false;
-			yield return new WaitForSeconds(_weaponParams.ShootingDelaySeconds);
+			yield return new WaitForSeconds(weaponParams.ShootingDelaySeconds);
 			_coolDownOver = true;
 		}
 		#region EventsListeners
