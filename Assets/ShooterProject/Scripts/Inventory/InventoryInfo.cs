@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -10,18 +11,60 @@ namespace ShooterProject.Scripts.Inventory
 		[SerializeField]
 		private GameObject inventory;
 
+		private XRSocketInteractor[] _snapZones;
+
+		private static int _ammoMagazineCount;
+
+		private static bool _hasKnife;
+
+		#endregion
+
+		#region Events
+
+		public delegate void OnChange();
+
+		public static event OnChange OnAmmoMagazineCountChanged;
+		
+		public static event OnChange OnHasKnifeChanged;
+
 		#endregion
 
 		#region Properties
 
-		public static int ammoMagazineCount { get; private set; }
+		public static int AmmoMagazineCount 
+		{ 
+			get 
+			{
+				return _ammoMagazineCount;
+			} 
+			private set 
+			{
+				_ammoMagazineCount = value;
+				OnAmmoMagazineCountChanged?.Invoke();
+			} 
+		}
 
-		public static bool hasKnife { get; private set; }
+		public static bool HasKnife 
+		{ 
+			get 
+			{
+				return _hasKnife;
+			} 
+			private set 
+			{
+				_hasKnife = value;
+				OnHasKnifeChanged?.Invoke();
+			} 
+		}
 
 		#endregion
 
 		#region LifeCycle
 
+		private void Awake()
+		{
+			_snapZones = inventory.GetComponentsInChildren<XRSocketInteractor>();
+		}
 		private void Update()
 		{
 			Counting();
@@ -33,16 +76,14 @@ namespace ShooterProject.Scripts.Inventory
 
 		private void Counting()
 		{
-			XRSocketInteractor[] snapZones = inventory.GetComponentsInChildren<XRSocketInteractor>();
+			AmmoMagazineCount = 0;
 
-			ammoMagazineCount = 0;
-
-			foreach (var snapZone in snapZones)
+			foreach (var snapZone in _snapZones)
 			{
 				if (snapZone.tag == "AmmoMagazineSnapZone" && snapZone.hasSelection)
-					ammoMagazineCount++;
+					AmmoMagazineCount++;
 
-				hasKnife = snapZone.tag == "KnifeSnapZone" && snapZone.hasSelection;
+				HasKnife = snapZone.tag == "KnifeSnapZone" && snapZone.hasSelection;
 			}
 		}
 
