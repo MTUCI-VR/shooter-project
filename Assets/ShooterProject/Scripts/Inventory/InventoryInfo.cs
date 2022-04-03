@@ -8,9 +8,9 @@ namespace ShooterProject.Scripts.Inventory
 	{
 		#region  Constant Fields
 
-		private const int AMMO_MAGAZINE_INTERACTION_LAYER = 8;  
-		private const int KNIFE_INTERACTION_LAYER = 16;  
-		
+		private const int AMMO_MAGAZINE_INTERACTION_LAYER = 8;
+		private const int KNIFE_INTERACTION_LAYER = 16;
+
 		#endregion
 
 		#region Fields
@@ -95,14 +95,14 @@ namespace ShooterProject.Scripts.Inventory
 		private void Counting(SelectEnterEventArgs arg0)
 		{
 			if (arg0.interactableObject.interactionLayers.value == AMMO_MAGAZINE_INTERACTION_LAYER)
-					AmmoMagazineCount++;
+				AmmoMagazineCount++;
 			else
 				HasKnife = arg0.interactableObject.interactionLayers.value == KNIFE_INTERACTION_LAYER;
 		}
 		private void Counting(SelectExitEventArgs arg0)
 		{
 			if (arg0.interactableObject.interactionLayers.value == AMMO_MAGAZINE_INTERACTION_LAYER)
-					AmmoMagazineCount--;
+				AmmoMagazineCount--;
 			else
 				HasKnife = !(arg0.interactableObject.interactionLayers.value == KNIFE_INTERACTION_LAYER);
 		}
