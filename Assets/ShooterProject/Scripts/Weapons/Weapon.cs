@@ -77,7 +77,10 @@ namespace ShooterProject.Scripts.Weapons
 			weaponShootingEffects.Particles?.Play();
 
 			Vector3 weaponForward = weaponParts.BulletSpawnPoint.forward;
-			if (Physics.Raycast(weaponParts.BulletSpawnPoint.position, weaponForward, out RaycastHit hitInfo, weaponParams.ShootingDistance))
+			if (Physics.Raycast(weaponParts.BulletSpawnPoint.position,
+				weaponForward,
+				out RaycastHit hitInfo,
+				weaponParams.ShootingDistance))
 			{
 				ShowImpact(hitInfo);
 			}
