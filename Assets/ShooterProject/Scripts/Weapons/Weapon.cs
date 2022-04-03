@@ -28,10 +28,6 @@ namespace ShooterProject.Scripts.Weapons
 
 		#endregion
 
-		#region Properties
-
-		#endregion
-
 		#region LifeCycle Methods
 
 		private void Awake()
@@ -69,11 +65,8 @@ namespace ShooterProject.Scripts.Weapons
 				}
 
 				SingleShot();
-
 				PlaySound(weaponShootingEffects.Sound);
-
 				StartCoroutine(ShootingCoolDownCoroutine());
-
 				if (!weaponParams.CanFireBursts)
 					yield break;
 			}
@@ -139,7 +132,6 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void AddEventsListeners()
 		{
-			
 			_grabInteractable.activated.AddListener(OnActivateActionPerformed);
 			_grabInteractable.deactivated.AddListener(OnActivateActionCanceled);
 
