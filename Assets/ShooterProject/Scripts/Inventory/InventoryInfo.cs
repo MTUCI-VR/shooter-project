@@ -6,6 +6,13 @@ namespace ShooterProject.Scripts.Inventory
 {
 	public class InventoryInfo : MonoBehaviour
 	{
+		#region  Constant Fields
+
+		private const int AMMO_MAGAZINE_INTERACTION_LAYER = 8;  
+		private const int KNIFE_INTERACTION_LAYER = 16;  
+		
+		#endregion
+
 		#region Fields
 
 		[SerializeField]
@@ -65,26 +72,39 @@ namespace ShooterProject.Scripts.Inventory
 		{
 			_snapZones = inventory.GetComponentsInChildren<XRSocketInteractor>();
 		}
-		private void Update()
+		private void OnEnable()
 		{
-			Counting();
+			foreach (var snapZone in _snapZones)
+			{
+				snapZone.selectEntered.AddListener(Counting);
+				snapZone.selectExited.AddListener(Counting);
+			}
+		}
+		private void OnDisable()
+		{
+			foreach (var snapZone in _snapZones)
+			{
+				snapZone.selectEntered.RemoveAllListeners();
+				snapZone.selectExited.RemoveAllListeners();
+			}
 		}
 
 		#endregion
 
 		#region  Private Methods
-
-		private void Counting()
+		private void Counting(SelectEnterEventArgs arg0)
 		{
-			AmmoMagazineCount = 0;
-
-			foreach (var snapZone in _snapZones)
-			{
-				if (snapZone.tag == "AmmoMagazineSnapZone" && snapZone.hasSelection)
+			if (arg0.interactableObject.interactionLayers.value == AMMO_MAGAZINE_INTERACTION_LAYER)
 					AmmoMagazineCount++;
-
-				HasKnife = snapZone.tag == "KnifeSnapZone" && snapZone.hasSelection;
-			}
+			else
+				HasKnife = arg0.interactableObject.interactionLayers.value == KNIFE_INTERACTION_LAYER;
+		}
+		private void Counting(SelectExitEventArgs arg0)
+		{
+			if (arg0.interactableObject.interactionLayers.value == AMMO_MAGAZINE_INTERACTION_LAYER)
+					AmmoMagazineCount--;
+			else
+				HasKnife = !(arg0.interactableObject.interactionLayers.value == KNIFE_INTERACTION_LAYER);
 		}
 
 		#endregion
