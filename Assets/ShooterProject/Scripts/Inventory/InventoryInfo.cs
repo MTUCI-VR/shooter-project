@@ -31,37 +31,37 @@ namespace ShooterProject.Scripts.Inventory
 		public delegate void OnChange();
 
 		public static event OnChange OnAmmoMagazineCountChanged;
-		
+
 		public static event OnChange OnHasKnifeChanged;
 
 		#endregion
 
 		#region Properties
 
-		public static int AmmoMagazineCount 
-		{ 
-			get 
+		public static int AmmoMagazineCount
+		{
+			get
 			{
 				return _ammoMagazineCount;
-			} 
-			private set 
+			}
+			private set
 			{
 				_ammoMagazineCount = value;
 				OnAmmoMagazineCountChanged?.Invoke();
-			} 
+			}
 		}
 
-		public static bool HasKnife 
-		{ 
-			get 
+		public static bool HasKnife
+		{
+			get
 			{
 				return _hasKnife;
-			} 
-			private set 
+			}
+			private set
 			{
 				_hasKnife = value;
 				OnHasKnifeChanged?.Invoke();
-			} 
+			}
 		}
 
 		#endregion
