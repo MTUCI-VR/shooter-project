@@ -6,7 +6,9 @@ namespace ShooterProject.Scripts.Weapons
 	public struct WeaponShootingEffects
 	{
 		public AudioClip Sound;
+		public AudioClip NoAmmoSound;
 		public ParticleSystem Particles;
+
 		[Header("Impacts")]
 		public GameObject ImpactPrefab;
 		public int MaxImpacts;

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
-
+using ShooterProject.Scripts.Weapons.Reloading;
 namespace ShooterProject.Scripts.Weapons
 {
 	[RequireComponent(typeof(XRGrabInteractable))]
@@ -22,9 +22,17 @@ namespace ShooterProject.Scripts.Weapons
 
 		private bool _isSelected = false;
 		private bool _coolDownOver = true;
+
+		private AmmoMagazine _includedMagazine;
 		private Coroutine _workingShootingCoroutine;
 		private GameObjectsPool _impactsPool;
 		private XRGrabInteractable _grabInteractable;
+
+		#endregion
+
+		#region Properties
+		private bool _canShoot => _isSelected && _includedMagazine != null;
+		private bool _canPlayNoAmooSound => weaponParts.WeaponAudioSource != null && weaponShootingEffects.NoAmmoSound != null;
 
 		#endregion
 
@@ -52,12 +60,34 @@ namespace ShooterProject.Scripts.Weapons
 
 		#endregion
 
+		#region Public Methods
+
+		/// <summary>
+		/// Меняет текущий магазин с патронами и вызывает события OnMagazineChanged или OnMagazineDetached
+		/// </summary>
+		/// <param name="magazine">
+		/// Магазин с патронами
+		/// </param>
+		public void ChangeAmmoMagazine(AmmoMagazine magazine)
+		{
+			_includedMagazine = magazine;
+		}
+
+		#endregion
+
 		#region Private Methods
 
 		private IEnumerator ShootingCoroutine()
 		{
-			while (_isSelected)
+			while (_canShoot)
 			{
+				if (!_includedMagazine.HasAmmo)
+				{
+					if (_canPlayNoAmooSound)
+						PlaySound(weaponShootingEffects.NoAmmoSound);
+					yield break;
+				}
+
 				if (!_coolDownOver)
 				{
 					yield return new WaitForEndOfFrame();
@@ -66,7 +96,9 @@ namespace ShooterProject.Scripts.Weapons
 
 				SingleShot();
 				PlaySound(weaponShootingEffects.Sound);
+
 				StartCoroutine(ShootingCoolDownCoroutine());
+
 				if (!weaponParams.CanFireBursts)
 					yield break;
 			}
@@ -74,6 +106,8 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void SingleShot()
 		{
+			_includedMagazine.DecreaseAmmoCount();
+
 			weaponShootingEffects.Particles?.Play();
 
 			Vector3 weaponForward = weaponParts.BulletSpawnPoint.forward;
@@ -111,7 +145,6 @@ namespace ShooterProject.Scripts.Weapons
 			_coolDownOver = true;
 		}
 		#region EventsListeners
-
 		private void OnActivateActionPerformed(ActivateEventArgs arg0)
 		{
 			_workingShootingCoroutine = StartCoroutine(ShootingCoroutine());
