@@ -105,8 +105,7 @@ namespace ShooterProject.Scripts.General
 			return newObject;
 		}
 
-		private void ActivateElement
-		(GameObject element)
+		private void ActivateElement(GameObject element)
 		{
 			element.SetActive(true);
 			_objects.Remove(element);
