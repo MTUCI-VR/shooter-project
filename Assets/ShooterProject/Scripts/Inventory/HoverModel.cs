@@ -23,55 +23,61 @@ namespace ShooterProject.Scripts.Inventory
 
 		private bool _hasMeshRenderer;
 
-		private bool _hasSocketInteractor;
-
 		#endregion
 
 		#region LifeCycle
 
 		private void Awake()
 		{
-			_hasSocketInteractor = TryGetComponent<XRSocketInteractor>(out _socketInteractor);
+			_socketInteractor = GetComponent<XRSocketInteractor>();
 			_hasMeshRenderer = hoverModel.TryGetComponent<MeshRenderer>(out _meshRenderer);
 		}
 		private void OnEnable()
 		{
-			if (_hasMeshRenderer && _hasSocketInteractor)
-			{
-				_socketInteractor.hoverEntered.AddListener(ChangeHoverModelMaterial);
-				_socketInteractor.hoverExited.AddListener(ChangeHoverModelMaterial);
-				_socketInteractor.selectEntered.AddListener(HoverModelOff);
-				_socketInteractor.selectExited.AddListener(HoverModelOn);
-			}
+			if (_hasMeshRenderer)
+				AddListeners();
 		}
 
 		private void OnDisable()
 		{
-			_socketInteractor.hoverEntered.RemoveAllListeners();
-			_socketInteractor.hoverExited.RemoveAllListeners();
-			_socketInteractor.selectEntered.RemoveAllListeners();
-			_socketInteractor.selectExited.RemoveAllListeners();
+			RemoveListeners();
 		}
 
 		#endregion
 
 		#region Private Methods
 
-		private void ChangeHoverModelMaterial(HoverEnterEventArgs arg0)
+		private void AddListeners()
+		{
+			_socketInteractor.hoverEntered.AddListener(OnChangeMaterialToEnter);
+			_socketInteractor.hoverExited.AddListener(OnChangeMaterialToExit);
+			_socketInteractor.selectEntered.AddListener(OnDisableModel);
+			_socketInteractor.selectExited.AddListener(OnEnableModel);
+		}
+
+		private void RemoveListeners()
+		{
+			_socketInteractor.hoverEntered.RemoveListener(OnChangeMaterialToEnter);
+			_socketInteractor.hoverExited.RemoveListener(OnChangeMaterialToExit);
+			_socketInteractor.selectEntered.RemoveListener(OnDisableModel);
+			_socketInteractor.selectExited.RemoveListener(OnEnableModel);
+		}
+
+		private void OnChangeMaterialToEnter(HoverEnterEventArgs hoverEnterEventArgs)
 		{
 			if (!_socketInteractor.hasSelection)
 				_meshRenderer.material = enterMaterial;
 		}
-		private void ChangeHoverModelMaterial(HoverExitEventArgs arg0)
+		private void OnChangeMaterialToExit(HoverExitEventArgs hoverExitEventArgs)
 		{
 			_meshRenderer.material = exitMaterial;
 		}
 
-		private void HoverModelOff(SelectEnterEventArgs arg0)
+		private void OnDisableModel(SelectEnterEventArgs selectEnterEventArgs)
 		{
 			hoverModel.SetActive(false);
 		}
-		private void HoverModelOn(SelectExitEventArgs arg0)
+		private void OnEnableModel(SelectExitEventArgs selectExitEventArgs)
 		{
 			hoverModel.SetActive(true);
 		}
