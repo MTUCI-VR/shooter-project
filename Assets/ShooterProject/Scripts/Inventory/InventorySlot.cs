@@ -3,6 +3,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace ShooterProject.Scripts.Inventory
 {
+	[RequireComponent(typeof(XRSocketInteractor))]
 	public abstract class InventorySlot : MonoBehaviour
 	{
 		#region Fiedls

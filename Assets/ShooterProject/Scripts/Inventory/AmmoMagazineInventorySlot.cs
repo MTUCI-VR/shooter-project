@@ -3,7 +3,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace ShooterProject.Scripts.Inventory
 {
-	[RequireComponent(typeof(XRSocketInteractor))]
 	public class AmmoMagazineInventorySlot : InventorySlot
 	{
 		#region Protetected Override Methods

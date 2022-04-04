@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 9188852588518881036}
   - component: {fileID: 9188852588518881027}
   - component: {fileID: 9188852588518881039}
+  - component: {fileID: 4996410835778166406}
   m_Layer: 0
   m_Name: AmmoMagazineSnapZone
   m_TagString: AmmoMagazineSnapZone
@@ -218,6 +219,18 @@ MonoBehaviour:
   hoverModel: {fileID: 9188852588944743872}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
+--- !u!114 &4996410835778166406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188852588518881025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3660df7a9298534a85f1d2cd0e107e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9188852588944743872
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +373,7 @@ GameObject:
   - component: {fileID: 9188852589137951290}
   - component: {fileID: 9188852589137951289}
   - component: {fileID: 9188852589137951288}
+  - component: {fileID: 1374910494236331038}
   m_Layer: 0
   m_Name: AmmoMagazineSnapZone
   m_TagString: AmmoMagazineSnapZone
@@ -469,6 +483,18 @@ MonoBehaviour:
   hoverModel: {fileID: 9188852589174717036}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
+--- !u!114 &1374910494236331038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188852589137951294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3660df7a9298534a85f1d2cd0e107e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9188852589174717036
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +589,7 @@ GameObject:
   - component: {fileID: 9188852589679589584}
   - component: {fileID: 9188852589679589591}
   - component: {fileID: 9188852589679589587}
+  - component: {fileID: 413382380135619547}
   m_Layer: 0
   m_Name: KnifeSnapZone
   m_TagString: KnifeSnapZone
@@ -672,3 +699,15 @@ MonoBehaviour:
   hoverModel: {fileID: 563415597141429460}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
+--- !u!114 &413382380135619547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188852589679589589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5d1eae81bea2f419c6add488e959c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
