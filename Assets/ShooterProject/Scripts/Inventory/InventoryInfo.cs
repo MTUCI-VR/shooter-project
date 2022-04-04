@@ -14,7 +14,7 @@ namespace ShooterProject.Scripts.Inventory
 		#endregion
 
 		#region Events
-		
+
 		public static event Action OnAmmoMagazineCountChanged;
 
 		public static event Action OnHasKnifeChanged;
@@ -49,6 +49,6 @@ namespace ShooterProject.Scripts.Inventory
 			}
 		}
 
-		#endregion		
+		#endregion
 	}
 }

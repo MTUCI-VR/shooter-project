@@ -3,52 +3,52 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace ShooterProject.Scripts.Inventory
 {
-    public abstract class InventorySlot : MonoBehaviour
-    {
-        #region Fiedls
+	public abstract class InventorySlot : MonoBehaviour
+	{
+		#region Fiedls
 
-        private XRSocketInteractor _socketInterector;
-        
-        #endregion
+		private XRSocketInteractor _socketInterector;
 
-        #region  LifeCycle
+		#endregion
 
-        private void Awake()
-        {
-            _socketInterector = GetComponent<XRSocketInteractor>();
-        }
+		#region  LifeCycle
 
-        private void OnEnable() 
-        {
-            AddListeners();
-        }
-        private void OnDisable() 
-        {
-            RemoveListeners();
-        }
+		private void Awake()
+		{
+			_socketInterector = GetComponent<XRSocketInteractor>();
+		}
 
-        #endregion
+		private void OnEnable()
+		{
+			AddListeners();
+		}
+		private void OnDisable()
+		{
+			RemoveListeners();
+		}
 
-        #region Private Methods
-        private void AddListeners()
-        {
-            _socketInterector.selectEntered.AddListener(OnPutInInventory);
-            _socketInterector.selectExited.AddListener(OnTakenFromInventory);
-        }
-        private void RemoveListeners()
-        {
-            _socketInterector.selectEntered.RemoveListener(OnPutInInventory);
-            _socketInterector.selectExited.RemoveListener(OnTakenFromInventory);
-        }
+		#endregion
 
-        #endregion
+		#region Private Methods
+		private void AddListeners()
+		{
+			_socketInterector.selectEntered.AddListener(OnPutInInventory);
+			_socketInterector.selectExited.AddListener(OnTakenFromInventory);
+		}
+		private void RemoveListeners()
+		{
+			_socketInterector.selectEntered.RemoveListener(OnPutInInventory);
+			_socketInterector.selectExited.RemoveListener(OnTakenFromInventory);
+		}
 
-        #region Protected Abstract Methods
+		#endregion
 
-        protected abstract void OnPutInInventory(SelectEnterEventArgs enterEventArgs);
+		#region Protected Abstract Methods
 
-        protected abstract void OnTakenFromInventory(SelectExitEventArgs exitEventArgs);
+		protected abstract void OnPutInInventory(SelectEnterEventArgs enterEventArgs);
 
-        #endregion
-    }
+		protected abstract void OnTakenFromInventory(SelectExitEventArgs exitEventArgs);
+
+		#endregion
+	}
 }
