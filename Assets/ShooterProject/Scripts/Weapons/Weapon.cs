@@ -20,7 +20,6 @@ namespace ShooterProject.Scripts.Weapons
 		[SerializeField]
 		private WeaponShootingEffects weaponShootingEffects;
 
-		private bool _isSelected = false;
 		private bool _coolDownOver = true;
 		private Coroutine _workingShootingCoroutine;
 		private GameObjectsPool _impactsPool;
@@ -56,20 +55,17 @@ namespace ShooterProject.Scripts.Weapons
 
 		private IEnumerator ShootingCoroutine()
 		{
-			while (_isSelected)
+			if (!_coolDownOver)
 			{
-				if (!_coolDownOver)
-				{
-					yield return new WaitForEndOfFrame();
-					continue;
-				}
-
+				yield break;
+			}
+			do
+			{
 				SingleShot();
 				PlaySound(weaponShootingEffects.Sound);
-				StartCoroutine(ShootingCoolDownCoroutine());
-				if (!weaponParams.CanFireBursts)
-					yield break;
-			}
+				yield return StartCoroutine(ShootingCoolDownCoroutine());
+
+			} while (weaponParams.CanFireBursts);
 		}
 
 		private void SingleShot()
@@ -110,7 +106,6 @@ namespace ShooterProject.Scripts.Weapons
 			yield return new WaitForSeconds(weaponParams.ShootingDelaySeconds);
 			_coolDownOver = true;
 		}
-		#region EventsListeners
 
 		private void OnActivateActionPerformed(ActivateEventArgs arg0)
 		{
@@ -123,35 +118,17 @@ namespace ShooterProject.Scripts.Weapons
 				StopCoroutine(_workingShootingCoroutine);
 		}
 
-		private void OnSelectEntered(SelectEnterEventArgs arg0)
-		{
-			_isSelected = true;
-		}
-
-		private void OnSelectExited(SelectExitEventArgs arg0)
-		{
-			_isSelected = false;
-		}
-
 		private void AddEventsListeners()
 		{
 			_grabInteractable.activated.AddListener(OnActivateActionPerformed);
 			_grabInteractable.deactivated.AddListener(OnActivateActionCanceled);
-
-			_grabInteractable.selectEntered.AddListener(OnSelectEntered);
-			_grabInteractable.selectExited.AddListener(OnSelectExited);
 		}
 
 		private void RemoveEventsListeners()
 		{
 			_grabInteractable.activated.RemoveListener(OnActivateActionPerformed);
 			_grabInteractable.deactivated.RemoveListener(OnActivateActionCanceled);
-
-			_grabInteractable.selectEntered.RemoveListener(OnSelectEntered);
-			_grabInteractable.selectExited.RemoveListener(OnSelectExited);
 		}
-
-		#endregion
 
 		#endregion
 	}
