@@ -8,7 +8,6 @@ namespace ShooterProject.Scripts.Weapons
 		public AudioClip Sound;
 		public AudioClip NoAmmoSound;
 		public ParticleSystem Particles;
-
 		[Header("Impacts")]
 		public GameObject ImpactPrefab;
 		public int MaxImpacts;

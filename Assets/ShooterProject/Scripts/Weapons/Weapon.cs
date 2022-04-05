@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using ShooterProject.Scripts.Weapons.Reloading;
+
 namespace ShooterProject.Scripts.Weapons
 {
 	[RequireComponent(typeof(XRGrabInteractable))]
@@ -21,7 +22,6 @@ namespace ShooterProject.Scripts.Weapons
 		private WeaponShootingEffects weaponShootingEffects;
 
 		private bool _coolDownOver = true;
-
 		private AmmoMagazine _includedMagazine;
 		private Coroutine _workingShootingCoroutine;
 		private GameObjectsPool _impactsPool;
@@ -78,7 +78,6 @@ namespace ShooterProject.Scripts.Weapons
 
 		private IEnumerator ShootingCoroutine()
 		{
-			
 			if (!_canShoot || !_includedMagazine.HasAmmo)
 			{
 				if (_canPlayNoAmooSound)
@@ -88,8 +87,9 @@ namespace ShooterProject.Scripts.Weapons
 
 			if (!_coolDownOver)
 			{
-				yield return new WaitForEndOfFrame();
+				yield break;
 			}
+      
 			do
 			{
 				SingleShot();
@@ -102,7 +102,7 @@ namespace ShooterProject.Scripts.Weapons
 		private void SingleShot()
 		{
 			_includedMagazine.DecreaseAmmoCount();
-
+      
 			weaponShootingEffects.Particles?.Play();
 
 			Vector3 weaponForward = weaponParts.BulletSpawnPoint.forward;
@@ -150,7 +150,6 @@ namespace ShooterProject.Scripts.Weapons
 			if (_workingShootingCoroutine != null)
 				StopCoroutine(_workingShootingCoroutine);
 		}
-
 
 		private void AddEventsListeners()
 		{
