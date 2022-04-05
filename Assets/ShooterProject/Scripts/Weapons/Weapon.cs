@@ -20,7 +20,6 @@ namespace ShooterProject.Scripts.Weapons
 		[SerializeField]
 		private WeaponShootingEffects weaponShootingEffects;
 
-		private bool _isSelected = false;
 		private bool _coolDownOver = true;
 
 		private AmmoMagazine _includedMagazine;
@@ -31,7 +30,7 @@ namespace ShooterProject.Scripts.Weapons
 		#endregion
 
 		#region Properties
-		private bool _canShoot => _isSelected && _includedMagazine != null;
+		private bool _canShoot => _includedMagazine != null;
 		private bool _canPlayNoAmooSound => weaponParts.WeaponAudioSource != null && weaponShootingEffects.NoAmmoSound != null;
 
 		#endregion
@@ -79,29 +78,25 @@ namespace ShooterProject.Scripts.Weapons
 
 		private IEnumerator ShootingCoroutine()
 		{
-			while (_canShoot)
+			
+			if (!_canShoot || !_includedMagazine.HasAmmo)
 			{
-				if (!_includedMagazine.HasAmmo)
-				{
-					if (_canPlayNoAmooSound)
-						PlaySound(weaponShootingEffects.NoAmmoSound);
-					yield break;
-				}
+				if (_canPlayNoAmooSound)
+					PlaySound(weaponShootingEffects.NoAmmoSound);
+				yield break;
+			}
 
-				if (!_coolDownOver)
-				{
-					yield return new WaitForEndOfFrame();
-					continue;
-				}
-
+			if (!_coolDownOver)
+			{
+				yield return new WaitForEndOfFrame();
+			}
+			do
+			{
 				SingleShot();
 				PlaySound(weaponShootingEffects.Sound);
 
-				StartCoroutine(ShootingCoolDownCoroutine());
-
-				if (!weaponParams.CanFireBursts)
-					yield break;
-			}
+				yield return StartCoroutine(ShootingCoolDownCoroutine());
+			} while (_includedMagazine.HasAmmo && weaponParams.CanFireBursts);
 		}
 
 		private void SingleShot()
@@ -144,7 +139,7 @@ namespace ShooterProject.Scripts.Weapons
 			yield return new WaitForSeconds(weaponParams.ShootingDelaySeconds);
 			_coolDownOver = true;
 		}
-		#region EventsListeners
+
 		private void OnActivateActionPerformed(ActivateEventArgs arg0)
 		{
 			_workingShootingCoroutine = StartCoroutine(ShootingCoroutine());
@@ -156,35 +151,18 @@ namespace ShooterProject.Scripts.Weapons
 				StopCoroutine(_workingShootingCoroutine);
 		}
 
-		private void OnSelectEntered(SelectEnterEventArgs arg0)
-		{
-			_isSelected = true;
-		}
-
-		private void OnSelectExited(SelectExitEventArgs arg0)
-		{
-			_isSelected = false;
-		}
 
 		private void AddEventsListeners()
 		{
 			_grabInteractable.activated.AddListener(OnActivateActionPerformed);
 			_grabInteractable.deactivated.AddListener(OnActivateActionCanceled);
-
-			_grabInteractable.selectEntered.AddListener(OnSelectEntered);
-			_grabInteractable.selectExited.AddListener(OnSelectExited);
 		}
 
 		private void RemoveEventsListeners()
 		{
 			_grabInteractable.activated.RemoveListener(OnActivateActionPerformed);
 			_grabInteractable.deactivated.RemoveListener(OnActivateActionCanceled);
-
-			_grabInteractable.selectEntered.RemoveListener(OnSelectEntered);
-			_grabInteractable.selectExited.RemoveListener(OnSelectExited);
 		}
-
-		#endregion
 
 		#endregion
 	}

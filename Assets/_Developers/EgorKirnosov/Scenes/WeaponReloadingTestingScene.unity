@@ -451,8 +451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d04cc605ec8e04e9f2724401cca5d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ammoSize: 50
-  _ammoCount: 50
+  _ammoSize: 5
+  _ammoCount: 5
 --- !u!114 &540809016
 MonoBehaviour:
   m_ObjectHideFlags: 0
