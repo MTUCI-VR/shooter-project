@@ -786,6 +786,9 @@ MonoBehaviour:
     MaxImpacts: 6
     ImpactIgnoreTags:
     - Player
+  layer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &843681365
 MonoBehaviour:
   m_ObjectHideFlags: 0

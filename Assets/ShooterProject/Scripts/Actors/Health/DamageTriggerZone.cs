@@ -42,6 +42,8 @@ public class DamageTriggerZone : MonoBehaviour
 	}
 	private void OnTriggerExit(Collider other)
 	{
+		if (!_activeHitCoroutinesDict.ContainsKey(other))
+			return;
 		StopCoroutine(_activeHitCoroutinesDict[other]);
 		_activeHitCoroutinesDict.Remove(other);
 	}
