@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using ShooterProject.Scripts.General;
 
 namespace ShooterProject.Scripts.Spawner
@@ -9,51 +10,81 @@ namespace ShooterProject.Scripts.Spawner
         #region Fields
 
         [SerializeField]
-        protected GameObject[] objectsForSpawn;
+        protected SpawnObjectParams[] objectsForSpawn;
 
         [SerializeField]
         private int timeToNextSpawn;
 
         protected GameObjectsPool[] _impactPools;
 
+        private List<int> _spawnWeights;
+
+        private int _spawnWeightsSum = 0;
+
+        #endregion
+
+        #region LifeCycle
+
+        private void Awake()
+        {
+            _impactPools = new GameObjectsPool[objectsForSpawn.Length];
+
+            for (int i = 0; i < objectsForSpawn.Length; i++)
+            {
+                _impactPools[i] = new GameObjectsPool(objectsForSpawn[i].maxImpacts,
+                    false,
+                    false,
+                    objectsForSpawn[i].gameObject,
+                    null);
+            }
+
+            SpawnWeightsSort();
+        }
+
         #endregion
 
         #region Private Methods
 
-        private int GetImpactPoolSpawnObject(GameObject[] objectsForSpawn)
+        private void SpawnWeightsSort()
         {
-            System.Collections.Generic.List<int> spawnWeights = new System.Collections.Generic.List<int>();
+            _spawnWeights = new List<int>();
 
-            int sum = 0;
-
-            foreach (var objectForSpawn in objectsForSpawn)
+            for (int i = 0; i < objectsForSpawn.Length; i++)
             {
-                int objectSpawnWeight = objectForSpawn.GetComponent<SpawnObjectParams>().SpawnWeight;
-
-                spawnWeights.Add(objectSpawnWeight);
-                sum += objectSpawnWeight;
+                if (!_spawnWeights.Contains(objectsForSpawn[i].SpawnWeight))
+                {
+                    _spawnWeightsSum += objectsForSpawn[i].SpawnWeight; 
+                    _spawnWeights.Add(objectsForSpawn[i].SpawnWeight);
+                }
             }
 
-            int[] spawnWeightsForCount = spawnWeights.ToArray();
-            
-            System.Array.Sort(spawnWeightsForCount);
+            _spawnWeights.Sort();
+        }
 
-            int spawnWeight = 0;
+        private int GetSpawnObjectIndex()
+        {
+            int currentSpawnWeight = 0;
 
-            int random = Random.Range(0, sum);
+            int random = Random.Range(0, _spawnWeightsSum);
 
-            for (int i = 0; i < spawnWeightsForCount.Length; i++)
+            for (int i = 0; i < _spawnWeights.Count; i++)
             {
-                if (random < spawnWeightsForCount[i])
+                if (random < _spawnWeights[i])
                 {
-                    spawnWeight = spawnWeightsForCount[i];
+                    currentSpawnWeight = _spawnWeights[i];
                     break;
                 }
                 else
-                    random -= spawnWeightsForCount[i];
+                    random -= _spawnWeights[i];
             }
 
-            return spawnWeights.FindIndex(x => x == spawnWeight);
+            List<int> indices = new List<int>();
+
+            for (int i = 0; i < objectsForSpawn.Length; i++)
+                if (objectsForSpawn[i].SpawnWeight == currentSpawnWeight)
+                    indices.Add(i);
+
+            return indices[Random.Range(0,indices.Count)];
         }
 
         #endregion
@@ -65,10 +96,12 @@ namespace ShooterProject.Scripts.Spawner
             {
                 yield return new WaitForSeconds(timeToNextSpawn);
 
-                int spawnObjectIndex = GetImpactPoolSpawnObject(objectsForSpawn);
+                int spawnObjectIndex = GetSpawnObjectIndex();
+
+                Debug.Log(spawnObjectIndex);
 
                 GameObjectsPool impact = _impactPools[spawnObjectIndex];
-                GameObject objectForSpawn = objectsForSpawn[spawnObjectIndex];
+                GameObject objectForSpawn = objectsForSpawn[spawnObjectIndex].gameObject;
 
                 if (impact.TryGetFreeElement(out objectForSpawn,true))
                 {

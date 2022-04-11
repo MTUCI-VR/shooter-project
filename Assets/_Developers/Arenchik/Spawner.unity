@@ -514,7 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 722661361}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Spawners
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1009,7 +1009,7 @@ GameObject:
   - component: {fileID: 1832756475}
   - component: {fileID: 1832756474}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: TestSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1042,10 +1042,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsForSpawn:
-  - {fileID: 4053454189936786752, guid: 122a49e2d4afcb947a7b8bc3886e101b, type: 3}
-  - {fileID: 334049011905838950, guid: cd91d023775756842b511a19cfdca10c, type: 3}
-  - {fileID: 7807534985870342708, guid: 8c2e727ab1ff1b4429e00f8a2ac8acff, type: 3}
-  timeToNextSpawn: 1
+  - {fileID: 4120206761425389139, guid: 8c2e727ab1ff1b4429e00f8a2ac8acff, type: 3}
+  - {fileID: 3796262927589761956, guid: 122a49e2d4afcb947a7b8bc3886e101b, type: 3}
+  - {fileID: 4989060258211107164, guid: cd91d023775756842b511a19cfdca10c, type: 3}
+  - {fileID: 3796262927589761956, guid: 122a49e2d4afcb947a7b8bc3886e101b, type: 3}
+  - {fileID: 3796262927589761956, guid: 586d348981096ef449f518ef27abf895, type: 3}
+  timeToNextSpawn: 3
 --- !u!54 &1832756475
 Rigidbody:
   m_ObjectHideFlags: 0

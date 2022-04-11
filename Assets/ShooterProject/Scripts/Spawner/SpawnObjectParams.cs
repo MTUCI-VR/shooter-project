@@ -8,7 +8,8 @@ namespace ShooterProject.Scripts.Spawner
         
         #region Fields
 
-        public int spawnWeight;
+        [SerializeField]
+        private int spawnWeight;
 
         public int maxImpacts;
 	
@@ -16,17 +17,7 @@ namespace ShooterProject.Scripts.Spawner
 
         #region Properties
 
-        public int SpawnWeight 
-        { 
-            get 
-            {
-                return spawnWeight;
-            }
-            private set 
-            {
-                spawnWeight = value;
-            }
-        }
+        public int SpawnWeight => spawnWeight;
 
         #endregion
     }

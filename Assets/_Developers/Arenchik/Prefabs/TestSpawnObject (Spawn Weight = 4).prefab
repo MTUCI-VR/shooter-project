@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4053454189936786783}
   - component: {fileID: 3796262927589761956}
   m_Layer: 0
-  m_Name: Enemy (Spawn Weight = 4)
+  m_Name: TestSpawnObject (Spawn Weight = 4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
