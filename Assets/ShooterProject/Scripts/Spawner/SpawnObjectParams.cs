@@ -2,23 +2,23 @@ using UnityEngine;
 
 namespace ShooterProject.Scripts.Spawner
 {
-    public class SpawnObjectParams : MonoBehaviour
-    {
-        [Header("Spawn Object Params")]
-        
-        #region Fields
+	public class SpawnObjectParams : MonoBehaviour
+	{
+		[Header("Spawn Object Params")]
 
-        [SerializeField]
-        private int spawnWeight;
+		#region Fields
 
-        public int maxImpacts;
-	
-        #endregion
+		[SerializeField]
+		private int spawnWeight;
 
-        #region Properties
+		public int maxImpacts;
 
-        public int SpawnWeight => spawnWeight;
+		#endregion
 
-        #endregion
-    }
+		#region Properties
+
+		public int SpawnWeight => spawnWeight;
+
+		#endregion
+	}
 }
