@@ -793,6 +793,7 @@ MonoBehaviour:
   weaponParts:
     BulletSpawnPoint: {fileID: 1197249922}
     WeaponAudioSource: {fileID: 1248834507}
+    ReloadController: {fileID: 843681371}
   weaponParams:
     ShootingDelaySeconds: 0.3
     ShootingDistance: 100

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+
 namespace ShooterProject.Scripts.Weapons.Reloading
 {
 	[RequireComponent(typeof(Rigidbody),typeof(XRGrabInteractable))]
@@ -42,6 +43,5 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 		}
 
 		#endregion
-
 	}
 }

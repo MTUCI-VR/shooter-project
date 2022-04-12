@@ -22,7 +22,6 @@ namespace ShooterProject.Scripts.Weapons
 		private WeaponShootingEffects weaponShootingEffects;
 
 		private bool _coolDownOver = true;
-		private AmmoMagazine _includedMagazine;
 		private Coroutine _workingShootingCoroutine;
 		private GameObjectsPool _impactsPool;
 		private XRGrabInteractable _grabInteractable;
@@ -30,8 +29,9 @@ namespace ShooterProject.Scripts.Weapons
 		#endregion
 
 		#region Properties
-		private bool _canShoot => _includedMagazine != null;
-		private bool _canPlayNoAmooSound => weaponParts.WeaponAudioSource != null && weaponShootingEffects.NoAmmoSound != null;
+
+		private WeaponMagazineController _magazineController => weaponParts.ReloadController;
+		private bool _canPlayNoAmmoSound => weaponParts.WeaponAudioSource != null && weaponShootingEffects.NoAmmoSound != null;
 
 		#endregion
 
@@ -59,28 +59,13 @@ namespace ShooterProject.Scripts.Weapons
 
 		#endregion
 
-		#region Public Methods
-
-		/// <summary>
-		/// Меняет текущий магазин с патронами и вызывает события OnMagazineChanged или OnMagazineDetached
-		/// </summary>
-		/// <param name="magazine">
-		/// Магазин с патронами
-		/// </param>
-		public void ChangeAmmoMagazine(AmmoMagazine magazine)
-		{
-			_includedMagazine = magazine;
-		}
-
-		#endregion
-
 		#region Private Methods
 
 		private IEnumerator ShootingCoroutine()
 		{
-			if (!_canShoot || !_includedMagazine.HasAmmo)
+			if (!_magazineController.HasAmmo)
 			{
-				if (_canPlayNoAmooSound)
+				if (_canPlayNoAmmoSound)
 					PlaySound(weaponShootingEffects.NoAmmoSound);
 				yield break;
 			}
@@ -96,12 +81,12 @@ namespace ShooterProject.Scripts.Weapons
 				PlaySound(weaponShootingEffects.Sound);
 
 				yield return StartCoroutine(ShootingCoolDownCoroutine());
-			} while (_includedMagazine.HasAmmo && weaponParams.CanFireBursts);
+			} while (_magazineController.HasAmmo && weaponParams.CanFireBursts);
 		}
 
 		private void SingleShot()
 		{
-			_includedMagazine.DecreaseAmmoCount();
+			_magazineController.DecreaseAmmoCount();
       
 			weaponShootingEffects.Particles?.Play();
 
