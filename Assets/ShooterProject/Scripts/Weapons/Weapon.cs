@@ -74,7 +74,7 @@ namespace ShooterProject.Scripts.Weapons
 			{
 				yield break;
 			}
-      
+
 			do
 			{
 				SingleShot();
@@ -87,7 +87,7 @@ namespace ShooterProject.Scripts.Weapons
 		private void SingleShot()
 		{
 			_magazineController.DecreaseAmmoCount();
-      
+
 			weaponShootingEffects.Particles?.Play();
 
 			Vector3 weaponForward = weaponParts.BulletSpawnPoint.forward;

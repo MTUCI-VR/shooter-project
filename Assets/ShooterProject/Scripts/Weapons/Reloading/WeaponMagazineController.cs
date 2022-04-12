@@ -51,7 +51,7 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 		/// </summary>
 		public void DecreaseAmmoCount()
 		{
-			if(MagazineAttached)
+			if (MagazineAttached)
 				_attachedMagazine.DecreaseAmmoCount();
 		}
 
@@ -70,7 +70,7 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 
 		private void OnObjectDetached(SelectExitEventArgs selectExitEventArg)
 		{
-			if(_attachedMagazine != null)
+			if (_attachedMagazine != null)
 			{
 				_attachedMagazine = null;
 			}

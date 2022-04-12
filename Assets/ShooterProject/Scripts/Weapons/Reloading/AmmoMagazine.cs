@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace ShooterProject.Scripts.Weapons.Reloading
 {
-	[RequireComponent(typeof(Rigidbody),typeof(XRGrabInteractable))]
+	[RequireComponent(typeof(Rigidbody), typeof(XRGrabInteractable))]
 	public class AmmoMagazine : MonoBehaviour
 	{
 		#region Fields
@@ -38,8 +38,8 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 		/// </summary>
 		public void DecreaseAmmoCount()
 		{
-			if(_ammoCount > 0)
-			_ammoCount--;
+			if (_ammoCount > 0)
+				_ammoCount--;
 		}
 
 		#endregion
