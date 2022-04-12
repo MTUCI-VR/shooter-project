@@ -13,13 +13,18 @@ namespace ShooterProject.Scripts.Spawner
 		protected SpawnObjectParams[] objectsForSpawn;
 
 		[SerializeField]
-		private int timeToNextSpawn;
+		private int spawnDelayInSeconds;
+
+		[SerializeField]
+		private string blockSpawnTag;
 
 		protected GameObjectsPool[] _impactPools;
 
-		private List<int> _spawnWeights;
+		private List<int> _spawnWeights = new List<int>();
 
 		private int _spawnWeightsSum = 0;
+
+		private IEnumerator _spawnCoroutine;
 
 		#endregion
 
@@ -27,6 +32,8 @@ namespace ShooterProject.Scripts.Spawner
 
 		private void Awake()
 		{
+			_spawnCoroutine = Spawn();
+
 			_impactPools = new GameObjectsPool[objectsForSpawn.Length];
 
 			for (int i = 0; i < objectsForSpawn.Length; i++)
@@ -41,14 +48,17 @@ namespace ShooterProject.Scripts.Spawner
 			SpawnWeightsSort();
 		}
 
+		private void Start()
+        {
+            StartCoroutine(_spawnCoroutine);
+        }
+
 		#endregion
 
 		#region Private Methods
 
 		private void SpawnWeightsSort()
 		{
-			_spawnWeights = new List<int>();
-
 			for (int i = 0; i < objectsForSpawn.Length; i++)
 			{
 				if (!_spawnWeights.Contains(objectsForSpawn[i].SpawnWeight))
@@ -87,29 +97,39 @@ namespace ShooterProject.Scripts.Spawner
 			return indices[Random.Range(0, indices.Count)];
 		}
 
-		#endregion
-
-		#region Protected Methods
 		protected IEnumerator Spawn()
 		{
 			while (_impactPools != null)
 			{
-				yield return new WaitForSeconds(timeToNextSpawn);
+				yield return new WaitForSeconds(spawnDelayInSeconds);
 
 				int spawnObjectIndex = GetSpawnObjectIndex();
-
-				Debug.Log(spawnObjectIndex);
 
 				GameObjectsPool impact = _impactPools[spawnObjectIndex];
 				GameObject objectForSpawn = objectsForSpawn[spawnObjectIndex].gameObject;
 
-				if (impact.TryGetFreeElement(out objectForSpawn, true))
+				if (impact.TryGetFreeElement(out objectForSpawn, false))
 				{
 					objectForSpawn.transform.position = transform.position;
 					objectForSpawn.transform.rotation = transform.rotation;
 				}
 			}
 		}
+
+		private void OnTriggerEnter(Collider collider) {
+            
+            if (collider.tag == blockSpawnTag)
+            {
+                StopCoroutine(_spawnCoroutine);
+            }
+        }
+        private void OnTriggerExit(Collider collider) {
+
+            if (collider.tag == blockSpawnTag)
+            {
+                StartCoroutine(_spawnCoroutine);
+            }
+        }
 
 		#endregion
 	}
