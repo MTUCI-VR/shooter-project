@@ -49,9 +49,9 @@ namespace ShooterProject.Scripts.Spawner
 		}
 
 		private void Start()
-        {
-            StartCoroutine(_spawnCoroutine);
-        }
+		{
+			StartCoroutine(_spawnCoroutine);
+		}
 
 		#endregion
 
@@ -116,20 +116,22 @@ namespace ShooterProject.Scripts.Spawner
 			}
 		}
 
-		private void OnTriggerEnter(Collider collider) {
-            
-            if (collider.tag == blockSpawnTag)
-            {
-                StopCoroutine(_spawnCoroutine);
-            }
-        }
-        private void OnTriggerExit(Collider collider) {
+		private void OnTriggerEnter(Collider collider)
+		{
 
-            if (collider.tag == blockSpawnTag)
-            {
-                StartCoroutine(_spawnCoroutine);
-            }
-        }
+			if (collider.tag == blockSpawnTag)
+			{
+				StopCoroutine(_spawnCoroutine);
+			}
+		}
+		private void OnTriggerExit(Collider collider)
+		{
+
+			if (collider.tag == blockSpawnTag)
+			{
+				StartCoroutine(_spawnCoroutine);
+			}
+		}
 
 		#endregion
 	}

@@ -4,39 +4,41 @@ using ShooterProject.Scripts.General;
 
 namespace ShooterProject.Scripts.Spawner
 {
-    public class EnemySpawner : GeneralSpawner
-    {
-        #region Fields
-        private IEnumerator _spawnCoroutine;
+	public class EnemySpawner : GeneralSpawner
+	{
+		#region Fields
+		private IEnumerator _spawnCoroutine;
 
-        #endregion
+		#endregion
 
-        #region  LifeCycle
-        
-        private void Start()
-        {
-            _spawnCoroutine = Spawn();
-            StartCoroutine(_spawnCoroutine);
-        }
+		#region  LifeCycle
 
-        #endregion
+		private void Start()
+		{
+			_spawnCoroutine = Spawn();
+			StartCoroutine(_spawnCoroutine);
+		}
 
-        #region Private Methods
-        private void OnTriggerEnter(Collider collider) {
-            
-            if (collider.tag == "Player")
-            {
-                StopCoroutine(_spawnCoroutine);
-            }
-        }
-        private void OnTriggerExit(Collider collider) {
+		#endregion
 
-            if (collider.tag == "Player")
-            {
-                StartCoroutine(_spawnCoroutine);
-            }
-        }
+		#region Private Methods
+		private void OnTriggerEnter(Collider collider)
+		{
 
-        #endregion
-    }
+			if (collider.tag == "Player")
+			{
+				StopCoroutine(_spawnCoroutine);
+			}
+		}
+		private void OnTriggerExit(Collider collider)
+		{
+
+			if (collider.tag == "Player")
+			{
+				StartCoroutine(_spawnCoroutine);
+			}
+		}
+
+		#endregion
+	}
 }
