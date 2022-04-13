@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using ShooterProject.Scripts.PlayerScripts;
 
 namespace ShooterProject.Scripts.Spawner
 {
@@ -42,14 +43,14 @@ namespace ShooterProject.Scripts.Spawner
 
 		private void OnTriggerEnter(Collider collider)
 		{
-			if (collider.tag == playerTag)
+			if (collider.TryGetComponent<Player>(out Player player))
 			{
 				_canSpawn = false;
 			}
 		}
 		private void OnTriggerExit(Collider collider)
 		{
-			if (collider.tag == playerTag)
+			if (collider.TryGetComponent<Player>(out Player player))
 			{
 				StartCoroutine(EnemySpawn());
 
