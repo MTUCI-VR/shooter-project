@@ -50,7 +50,12 @@ public class DamageTriggerZone : MonoBehaviour
 	{
 		if (!_activeHitCoroutinesDict.ContainsKey(other))
 			return;
-		StopCoroutine(_activeHitCoroutinesDict[other]);
+
+		Coroutine thisCoroutine = _activeHitCoroutinesDict[other];
+
+		if (thisCoroutine != null)
+			StopCoroutine(thisCoroutine);
+
 		_activeHitCoroutinesDict.Remove(other);
 	}
 	private IEnumerator HitCoroutine(Health health)
@@ -60,6 +65,7 @@ public class DamageTriggerZone : MonoBehaviour
 			health.TakeHit(damage);
 			yield return new WaitForSeconds(hitDelaySeconds);
 		}
+
 	}
 
 	#endregion
