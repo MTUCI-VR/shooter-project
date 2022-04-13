@@ -24,13 +24,13 @@ namespace _Developers.EgorKirnosov.Scripts.Health
 
 		private void OnEnable()
 		{
-			targetHealth.OnHit += OnHit;
+			targetHealth.OnHpChanged += OnHit;
 			targetHealth.OnHpZeroed += OnHpZeroed;
 		}
 
 		private void OnDisable()
 		{
-			targetHealth.OnHit -= OnHit;
+			targetHealth.OnHpChanged -= OnHit;
 			targetHealth.OnHpZeroed -= OnHpZeroed;
 		}
 
