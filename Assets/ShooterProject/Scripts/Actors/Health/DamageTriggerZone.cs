@@ -12,7 +12,7 @@ public class DamageTriggerZone : MonoBehaviour
 	private float damage;
 
 	[SerializeField]
-	private List<string> ignoreTags;
+	private LayerMask iteractionLayer;
 
 	[SerializeField]
 	private float hitDelaySeconds;
@@ -33,13 +33,19 @@ public class DamageTriggerZone : MonoBehaviour
 
 	#region Private Methods
 
+	private bool IsLayerMatch(int layer)
+	{
+		return (iteractionLayer & (1 << layer)) != 0;
+	}
+
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.TryGetComponent<Health>(out Health enemyHealth) && !ignoreTags.Contains(other.tag))
+		if (other.TryGetComponent<Health>(out var enemyHealth) && IsLayerMatch(other.gameObject.layer))
 		{
 			_activeHitCoroutinesDict.Add(other, StartCoroutine(HitCoroutine(enemyHealth)));
 		}
 	}
+
 	private void OnTriggerExit(Collider other)
 	{
 		if (!_activeHitCoroutinesDict.ContainsKey(other))
@@ -49,7 +55,7 @@ public class DamageTriggerZone : MonoBehaviour
 	}
 	private IEnumerator HitCoroutine(Health health)
 	{
-		while (true)
+		while (health.CurrentHealth > 0)
 		{
 			health.TakeHit(damage);
 			yield return new WaitForSeconds(hitDelaySeconds);

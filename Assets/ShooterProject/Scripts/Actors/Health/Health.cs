@@ -23,7 +23,7 @@ namespace ShooterProject.Scripts.Actors
 		#region Events
 
 		public event Action OnHpZeroed;
-		public event Action OnHit;
+		public event Action OnHpChanged;
 
 		#endregion
 
@@ -32,19 +32,23 @@ namespace ShooterProject.Scripts.Actors
 		private void Start()
 		{
 			_health = maxHealth;
-			OnHit?.Invoke();
+			OnHpChanged?.Invoke();
 		}
 
 		#endregion
 
 		#region Public Methods
 
+		/// <summary>
+		/// Наносит урон объекту
+		/// </summary>
+		/// <param name="damage">Кол-во отнимаемого хп</param>
 		public void TakeHit(float damage)
 		{
 			if (_health > damage)
 			{
 				_health -= damage;
-				OnHit?.Invoke();
+				OnHpChanged?.Invoke();
 			}
 			else
 			{
