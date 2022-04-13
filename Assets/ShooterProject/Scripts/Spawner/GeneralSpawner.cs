@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using ShooterProject.Scripts.General;
 
@@ -10,21 +9,13 @@ namespace ShooterProject.Scripts.Spawner
 		#region Fields
 
 		[SerializeField]
-		protected SpawnObjectParams[] objectsForSpawn;
+		private SpawnObjectParams[] objectsForSpawn;
 
-		[SerializeField]
-		private int spawnDelayInSeconds;
-
-		[SerializeField]
-		private string blockSpawnTag;
-
-		protected GameObjectsPool[] _impactPools;
+		private GameObjectsPool[] _objectsForSpawnPools;
 
 		private List<int> _spawnWeights = new List<int>();
 
 		private int _spawnWeightsSum = 0;
-
-		private IEnumerator _spawnCoroutine;
 
 		#endregion
 
@@ -32,39 +23,31 @@ namespace ShooterProject.Scripts.Spawner
 
 		private void Awake()
 		{
-			_spawnCoroutine = Spawn();
-
-			_impactPools = new GameObjectsPool[objectsForSpawn.Length];
+			_objectsForSpawnPools = new GameObjectsPool[objectsForSpawn.Length];
 
 			for (int i = 0; i < objectsForSpawn.Length; i++)
 			{
-				_impactPools[i] = new GameObjectsPool(objectsForSpawn[i].maxImpacts,
+				_objectsForSpawnPools[i] = new GameObjectsPool(objectsForSpawn[i].maxCount,
 					false,
 					false,
 					objectsForSpawn[i].gameObject,
 					null);
 			}
 
-			SpawnWeightsSort();
+			SortSpawnWeights();
 		}
-
-		private void Start()
-		{
-			StartCoroutine(_spawnCoroutine);
-		}
-
 		#endregion
 
 		#region Private Methods
 
-		private void SpawnWeightsSort()
+		private void SortSpawnWeights()
 		{
-			for (int i = 0; i < objectsForSpawn.Length; i++)
+			foreach (var objectForSpawn in objectsForSpawn)
 			{
-				if (!_spawnWeights.Contains(objectsForSpawn[i].SpawnWeight))
+				if (!_spawnWeights.Contains(objectForSpawn.SpawnWeight))
 				{
-					_spawnWeightsSum += objectsForSpawn[i].SpawnWeight;
-					_spawnWeights.Add(objectsForSpawn[i].SpawnWeight);
+					_spawnWeightsSum += objectForSpawn.SpawnWeight;
+					_spawnWeights.Add(objectForSpawn.SpawnWeight);
 				}
 			}
 
@@ -85,54 +68,42 @@ namespace ShooterProject.Scripts.Spawner
 					break;
 				}
 				else
+				{
 					random -= _spawnWeights[i];
+				}
 			}
 
 			List<int> indices = new List<int>();
 
 			for (int i = 0; i < objectsForSpawn.Length; i++)
+			{
 				if (objectsForSpawn[i].SpawnWeight == currentSpawnWeight)
+				{
 					indices.Add(i);
+				}
+			}
 
 			return indices[Random.Range(0, indices.Count)];
 		}
 
-		protected IEnumerator Spawn()
+		#endregion
+
+		#region Protected Methods 
+
+		protected void Spawn()
 		{
-			while (_impactPools != null)
+			int spawnObjectIndex = GetSpawnObjectIndex();
+
+			GameObjectsPool objectForSpawnPool = _objectsForSpawnPools[spawnObjectIndex];
+			GameObject objectForSpawn = objectsForSpawn[spawnObjectIndex].gameObject;
+
+			if (objectForSpawnPool.TryGetFreeElement(out objectForSpawn, false))
 			{
-				yield return new WaitForSeconds(spawnDelayInSeconds);
-
-				int spawnObjectIndex = GetSpawnObjectIndex();
-
-				GameObjectsPool impact = _impactPools[spawnObjectIndex];
-				GameObject objectForSpawn = objectsForSpawn[spawnObjectIndex].gameObject;
-
-				if (impact.TryGetFreeElement(out objectForSpawn, false))
-				{
-					objectForSpawn.transform.position = transform.position;
-					objectForSpawn.transform.rotation = transform.rotation;
-				}
+				objectForSpawn.transform.position = transform.position;
+				objectForSpawn.transform.rotation = transform.rotation;
 			}
 		}
-
-		private void OnTriggerEnter(Collider collider)
-		{
-
-			if (collider.tag == blockSpawnTag)
-			{
-				StopCoroutine(_spawnCoroutine);
-			}
-		}
-		private void OnTriggerExit(Collider collider)
-		{
-
-			if (collider.tag == blockSpawnTag)
-			{
-				StartCoroutine(_spawnCoroutine);
-			}
-		}
-
+		
 		#endregion
 	}
 

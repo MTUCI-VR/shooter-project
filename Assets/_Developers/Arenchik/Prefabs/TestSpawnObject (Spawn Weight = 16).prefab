@@ -110,4 +110,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnWeight: 16
-  maxImpacts: 3
+  maxCount: 3

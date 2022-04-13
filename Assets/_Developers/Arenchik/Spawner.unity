@@ -913,7 +913,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1416185326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14760eefff8aab9429862a1eb0b65440, type: 3}
+  m_Script: {fileID: 11500000, guid: 2724161c27bac934cb413be690ed4106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectsForSpawn:
@@ -923,8 +923,8 @@ MonoBehaviour:
   - {fileID: 3796262927589761956, guid: 586d348981096ef449f518ef27abf895, type: 3}
   - {fileID: 4120206761425389139, guid: 8c2e727ab1ff1b4429e00f8a2ac8acff, type: 3}
   - {fileID: 4989060258211107164, guid: cd91d023775756842b511a19cfdca10c, type: 3}
-  spawnDelayInSeconds: 3
-  blockSpawnTag: Items
+  spawnDelayInSeconds: 5
+  itemTag: Items
 --- !u!135 &1416185329
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1173,7 +1173,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1832756472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14760eefff8aab9429862a1eb0b65440, type: 3}
+  m_Script: {fileID: 11500000, guid: f7ba39fd33b08044481a35546c0e93f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectsForSpawn:
@@ -1183,8 +1183,8 @@ MonoBehaviour:
   - {fileID: 3796262927589761956, guid: 586d348981096ef449f518ef27abf895, type: 3}
   - {fileID: 4120206761425389139, guid: 8c2e727ab1ff1b4429e00f8a2ac8acff, type: 3}
   - {fileID: 4989060258211107164, guid: cd91d023775756842b511a19cfdca10c, type: 3}
-  spawnDelayInSeconds: 3
-  blockSpawnTag: Player
+  spawnDelayInSeconds: 5
+  playerTag: Player
 --- !u!54 &1832756475
 Rigidbody:
   m_ObjectHideFlags: 0

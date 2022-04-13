@@ -11,7 +11,8 @@ namespace ShooterProject.Scripts.Spawner
 		[SerializeField]
 		private int spawnWeight;
 
-		public int maxImpacts;
+		[SerializeField]
+		public int maxCount;
 
 		#endregion
 
