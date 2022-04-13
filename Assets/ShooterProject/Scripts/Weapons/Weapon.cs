@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
+using ShooterProject.Scripts.Weapons.Reloading;
 
 namespace ShooterProject.Scripts.Weapons
 {
@@ -24,6 +25,13 @@ namespace ShooterProject.Scripts.Weapons
 		private Coroutine _workingShootingCoroutine;
 		private GameObjectsPool _impactsPool;
 		private XRGrabInteractable _grabInteractable;
+
+		#endregion
+
+		#region Properties
+
+		private WeaponMagazineController _magazineController => weaponParts.ReloadController;
+		private bool _canPlayNoAmmoSound => weaponParts.WeaponAudioSource != null && weaponShootingEffects.NoAmmoSound != null;
 
 		#endregion
 
@@ -55,21 +63,31 @@ namespace ShooterProject.Scripts.Weapons
 
 		private IEnumerator ShootingCoroutine()
 		{
+			if (!_magazineController.HasAmmo)
+			{
+				if (_canPlayNoAmmoSound)
+					PlaySound(weaponShootingEffects.NoAmmoSound);
+				yield break;
+			}
+
 			if (!_coolDownOver)
 			{
 				yield break;
 			}
+
 			do
 			{
 				SingleShot();
 				PlaySound(weaponShootingEffects.Sound);
-				yield return StartCoroutine(ShootingCoolDownCoroutine());
 
-			} while (weaponParams.CanFireBursts);
+				yield return StartCoroutine(ShootingCoolDownCoroutine());
+			} while (_magazineController.HasAmmo && weaponParams.CanFireBursts);
 		}
 
 		private void SingleShot()
 		{
+			_magazineController.DecreaseAmmoCount();
+
 			weaponShootingEffects.Particles?.Play();
 
 			Vector3 weaponForward = weaponParts.BulletSpawnPoint.forward;
