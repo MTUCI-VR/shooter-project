@@ -103,7 +103,7 @@ namespace ShooterProject.Scripts.Spawner
 				objectForSpawn.transform.rotation = transform.rotation;
 			}
 		}
-		
+
 		#endregion
 	}
 

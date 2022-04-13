@@ -3,9 +3,9 @@ using System.Collections;
 
 namespace ShooterProject.Scripts.Spawner
 {
-    public class ItemSpawner : GeneralSpawner
-    {
-        #region Fields
+	public class ItemSpawner : GeneralSpawner
+	{
+		#region Fields
 
 		[SerializeField]
 		private int spawnDelayInSeconds;
@@ -52,11 +52,11 @@ namespace ShooterProject.Scripts.Spawner
 			if (collider.tag == itemTag)
 			{
 				StartCoroutine(ItemSpawn());
-				
+
 				_canSpawn = true;
 			}
 		}
 
 		#endregion
-    }
+	}
 }
