@@ -26,7 +26,7 @@ namespace ShooterProject.Scripts.Weapons
 		private LayerMask layer;
 
 		private bool _coolDownOver = true;
-		
+
 		private Coroutine _workingShootingCoroutine;
 		private GameObjectsPool _impactsPool;
 		private XRGrabInteractable _grabInteractable;
@@ -105,7 +105,7 @@ namespace ShooterProject.Scripts.Weapons
 				))
 			{
 				ShowImpact(hitInfo);
-				if(hitInfo.collider.TryGetComponent<Health>(out Health enemyHealth))
+				if (hitInfo.collider.TryGetComponent<Health>(out Health enemyHealth))
 				{
 					enemyHealth.TakeHit(weaponParams.Damage);
 				}

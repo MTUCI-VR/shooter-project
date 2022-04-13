@@ -55,7 +55,7 @@ namespace ShooterProject.Scripts.Actors
 				_health = 0;
 				OnHpZeroed?.Invoke();
 			}
-			
+
 		}
 
 		#endregion
