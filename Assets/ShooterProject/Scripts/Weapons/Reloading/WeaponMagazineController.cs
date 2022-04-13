@@ -61,7 +61,7 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 
 		private void OnObjectAttached(SelectEnterEventArgs selectEnterEventArg)
 		{
-			var interactable = selectEnterEventArg.interactable.gameObject;
+			var interactable = selectEnterEventArg.interactableObject.transform.gameObject;
 			if (interactable.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine))
 			{
 				_attachedMagazine = magazine;
