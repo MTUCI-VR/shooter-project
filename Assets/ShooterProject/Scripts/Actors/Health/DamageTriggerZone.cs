@@ -40,7 +40,7 @@ public class DamageTriggerZone : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.TryGetComponent<Health>(out var enemyHealth) && IsLayerMatch(other.gameObject.layer))
+		if (other.TryGetComponent<Health>(out var enemyHealth) && enemyHealth.CurrentHealth > 0 && IsLayerMatch(other.gameObject.layer))
 		{
 			_activeHitCoroutinesDict.Add(other, StartCoroutine(HitCoroutine(enemyHealth)));
 		}
