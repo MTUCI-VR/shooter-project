@@ -4,7 +4,6 @@ using ShooterProject.Scripts.Items;
 
 namespace ShooterProject.Scripts.InteractableThings
 {
-    [RequireComponent(typeof(SphereCollider))]
     public class ObjectHighlight : MonoBehaviour
     {
         #region Fields
@@ -13,12 +12,9 @@ namespace ShooterProject.Scripts.InteractableThings
         private XRDirectInteractor directInteractor;
 
         [SerializeField] 
-        private LayerMask grabLayer;
-        
-        [SerializeField] 
-        private LayerMask defaultLayer;
+        private LayerMask objectHighlightLayer;
 
-        private SphereCollider _collider;
+        private int _objectHighlightLayerValue;
 
         #endregion
 
@@ -26,10 +22,18 @@ namespace ShooterProject.Scripts.InteractableThings
 
         private void Awake()
         {
-            _collider = GetComponent<SphereCollider>();
+            _objectHighlightLayerValue = (int)System.Math.Log(objectHighlightLayer,2);
+        }
 
+        private void OnEnable()
+        {
             directInteractor.selectEntered.AddListener(OnObjectHighlightDisable);
             directInteractor.selectExited.AddListener(OnObjectHighlightEnable);
+        }
+        private void OnDisable()
+        {
+            directInteractor.selectEntered.RemoveListener(OnObjectHighlightDisable);
+            directInteractor.selectExited.RemoveListener(OnObjectHighlightEnable);
         }
 
         #endregion
@@ -38,7 +42,7 @@ namespace ShooterProject.Scripts.InteractableThings
 
         private void OnTriggerEnter(Collider collider)
         {
-            if(collider.TryGetComponent<Item>(out Item item))
+            if(collider.TryGetComponent<Item>(out Item item) && !collider.gameObject.GetComponent<XRGrabInteractable>().isSelected) 
             {
                 ObjectHighlightEnable(collider.gameObject);                
             }
@@ -54,26 +58,22 @@ namespace ShooterProject.Scripts.InteractableThings
 
         private void OnObjectHighlightDisable(SelectEnterEventArgs selectEnterEventArgs)
         {
-            _collider.enabled = false;
-
             ObjectHighlightDisable(selectEnterEventArgs.interactableObject.transform.gameObject);
         }
         
         private void OnObjectHighlightEnable(SelectExitEventArgs selectExitEventArgs)
         {
             ObjectHighlightEnable(selectExitEventArgs.interactableObject.transform.gameObject);
-
-            _collider.enabled = true;
         }
 
         private void ObjectHighlightEnable(GameObject objectHighlight)
         {
-            objectHighlight.layer = (int)System.Math.Log(grabLayer,2);
+            objectHighlight.layer = _objectHighlightLayerValue;
         }
 
         private void ObjectHighlightDisable(GameObject objectHighlight)
         {
-            objectHighlight.layer = (int)System.Math.Log(defaultLayer,2);
+            objectHighlight.layer = objectHighlight.GetComponent<Item>().initialLayerValue;
         }
 
         #endregion

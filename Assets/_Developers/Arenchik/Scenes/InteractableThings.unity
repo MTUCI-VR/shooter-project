@@ -136,8 +136,8 @@ GameObject:
   - component: {fileID: 3744895}
   - component: {fileID: 3744894}
   - component: {fileID: 3744893}
-  - component: {fileID: 3744892}
   - component: {fileID: 3744897}
+  - component: {fileID: 3744892}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -409,12 +409,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directInteractor: {fileID: 593858877}
-  grabLayer:
+  objectHighlightLayer:
     serializedVersion: 2
     m_Bits: 512
-  defaultLayer:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!135 &141585392
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -703,8 +700,8 @@ GameObject:
   - component: {fileID: 398674107}
   - component: {fileID: 398674106}
   - component: {fileID: 398674105}
-  - component: {fileID: 398674104}
   - component: {fileID: 398674109}
+  - component: {fileID: 398674104}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -1720,12 +1717,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directInteractor: {fileID: 2144321100}
-  grabLayer:
+  objectHighlightLayer:
     serializedVersion: 2
     m_Bits: 512
-  defaultLayer:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!135 &892643954
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2219,8 +2213,8 @@ GameObject:
   - component: {fileID: 2064496860}
   - component: {fileID: 2064496859}
   - component: {fileID: 2064496858}
-  - component: {fileID: 2064496857}
   - component: {fileID: 2064496862}
+  - component: {fileID: 2064496857}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
