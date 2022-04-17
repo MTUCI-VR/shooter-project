@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 namespace ShooterProject.Scripts.General
 {
 	public static class LayerUtils
