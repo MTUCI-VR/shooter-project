@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
-using ShooterProject.Scripts.Actors;
+using ShooterProject.Scripts.Actors.Health;
 
 namespace ShooterProject.Scripts.Weapons
 {
@@ -22,7 +22,7 @@ namespace ShooterProject.Scripts.Weapons
 		private WeaponShootingEffects weaponShootingEffects;
 
 		[SerializeField]
-		private LayerMask layer;
+		private LayerMask interactionLayer;
 
 		private bool _coolDownOver = true;
 		
@@ -83,14 +83,14 @@ namespace ShooterProject.Scripts.Weapons
 				weaponForward,
 				out RaycastHit hitInfo,
 				weaponParams.ShootingDistance,
-				layer,
+				interactionLayer,
 				QueryTriggerInteraction.Ignore
 				))
 			{
 				ShowImpact(hitInfo);
-				if(hitInfo.collider.TryGetComponent<Health>(out Health enemyHealth))
+				if(hitInfo.collider.TryGetComponent<Health>(out var targetHealth))
 				{
-					enemyHealth.TakeHit(weaponParams.Damage);
+					targetHealth.TakeHit(weaponParams.Damage);
 				}
 			}
 		}

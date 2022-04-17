@@ -1,72 +1,82 @@
-using ShooterProject.Scripts.Actors;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[RequireComponent(typeof(BoxCollider))]
-public class DamageTriggerZone : MonoBehaviour
+using ShooterProject.Scripts.General;
+namespace ShooterProject.Scripts.Actors.Health
 {
-	#region Fields
-
-	[SerializeField]
-	private float damage;
-
-	[SerializeField]
-	private LayerMask iteractionLayer;
-
-	[SerializeField]
-	private float hitDelaySeconds;
-
-	private Dictionary<Collider, Coroutine> _activeHitCoroutinesDict = new Dictionary<Collider, Coroutine>();
-
-	#endregion
-
-	#region LifeCycle Methods
-
-	private void OnDisable()
+	[RequireComponent(typeof(BoxCollider))]
+	public class DamageTriggerZone : MonoBehaviour
 	{
-		StopAllCoroutines();
-		_activeHitCoroutinesDict.Clear();
-	}
+		#region Fields
 
-	#endregion
+		[SerializeField]
+		private float damage;
 
-	#region Private Methods
+		[SerializeField]
+		private LayerMask interactionLayer;
 
-	private bool IsLayerMatch(int layer)
-	{
-		return (iteractionLayer & (1 << layer)) != 0;
-	}
+		[SerializeField]
+		private float hitDelaySeconds;
 
-	private void OnTriggerEnter(Collider other)
-	{
-		if (other.TryGetComponent<Health>(out var enemyHealth) && enemyHealth.CurrentHealth > 0 && IsLayerMatch(other.gameObject.layer))
+		private Dictionary<Collider, Coroutine> _activeHitCoroutinesDict = new Dictionary<Collider, Coroutine>();
+
+		#endregion
+
+		#region LifeCycle Methods
+
+		private void OnDisable()
 		{
-			_activeHitCoroutinesDict.Add(other, StartCoroutine(HitCoroutine(enemyHealth)));
-		}
-	}
-
-	private void OnTriggerExit(Collider other)
-	{
-		if (!_activeHitCoroutinesDict.ContainsKey(other))
-			return;
-
-		Coroutine thisCoroutine = _activeHitCoroutinesDict[other];
-
-		if (thisCoroutine != null)
-			StopCoroutine(thisCoroutine);
-
-		_activeHitCoroutinesDict.Remove(other);
-	}
-	private IEnumerator HitCoroutine(Health health)
-	{
-		while (health.CurrentHealth > 0)
-		{
-			health.TakeHit(damage);
-			yield return new WaitForSeconds(hitDelaySeconds);
+			StopAllCoroutines();
+			_activeHitCoroutinesDict.Clear();
 		}
 
-	}
+		private void OnTriggerEnter(Collider other)
+		{
+			if (other.TryGetComponent<Health>(out var targetHealth)
+				&& targetHealth.CurrentHealth > 0
+				&& LayerUtils.IsLayerMatch(interactionLayer, other.gameObject.layer))
+			{
+				_activeHitCoroutinesDict.Add(other, StartCoroutine(HitCoroutine(targetHealth)));
+			}
+		}
 
-	#endregion
+		private void OnTriggerExit(Collider other)
+		{
+			if (!_activeHitCoroutinesDict.ContainsKey(other))
+				return;
+
+			var thisCoroutine = _activeHitCoroutinesDict[other];
+
+			if (thisCoroutine != null)
+				StopCoroutine(thisCoroutine);
+
+			_activeHitCoroutinesDict.Remove(other);
+		}
+
+		#endregion
+
+		#region Private Methods
+		
+		private IEnumerator HitCoroutine(Health health)
+		{
+			while (health.CurrentHealth > 0)
+			{
+				health.TakeHit(damage);
+				yield return new WaitForSeconds(hitDelaySeconds);
+			}
+
+		}
+
+		#endregion
+	}
+}
+namespace ShooterProject.Scripts.General
+{
+	public static class LayerUtils
+	{
+		public static bool IsLayerMatch(LayerMask sourceLayer, int testingLayer)
+		{
+			return (sourceLayer & (1 << testingLayer)) != 0;
+		}
+	}
 }
