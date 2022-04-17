@@ -105,7 +105,7 @@ namespace ShooterProject.Scripts.Weapons
 				))
 			{
 				ShowImpact(hitInfo);
-				if(hitInfo.collider.TryGetComponent<Health>(out var targetHealth))
+				if (hitInfo.collider.TryGetComponent<Health>(out var targetHealth))
 				{
 					targetHealth.TakeHit(weaponParams.Damage);
 				}
