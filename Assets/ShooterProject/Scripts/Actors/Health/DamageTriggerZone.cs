@@ -56,7 +56,7 @@ namespace ShooterProject.Scripts.Actors.Health
 		#endregion
 
 		#region Private Methods
-		
+
 		private IEnumerator HitCoroutine(Health health)
 		{
 			while (health.CurrentHealth > 0)
