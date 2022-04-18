@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
+using ShooterProject.Scripts.Actors.Health;
 using ShooterProject.Scripts.Weapons.Reloading;
 
 namespace ShooterProject.Scripts.Weapons
@@ -21,7 +22,11 @@ namespace ShooterProject.Scripts.Weapons
 		[SerializeField]
 		private WeaponShootingEffects weaponShootingEffects;
 
+		[SerializeField]
+		private LayerMask interactionLayer;
+
 		private bool _coolDownOver = true;
+
 		private Coroutine _workingShootingCoroutine;
 		private GameObjectsPool _impactsPool;
 		private XRGrabInteractable _grabInteractable;
@@ -94,9 +99,16 @@ namespace ShooterProject.Scripts.Weapons
 			if (Physics.Raycast(weaponParts.BulletSpawnPoint.position,
 				weaponForward,
 				out RaycastHit hitInfo,
-				weaponParams.ShootingDistance))
+				weaponParams.ShootingDistance,
+				interactionLayer,
+				QueryTriggerInteraction.Ignore
+				))
 			{
 				ShowImpact(hitInfo);
+				if (hitInfo.collider.TryGetComponent<Health>(out var targetHealth))
+				{
+					targetHealth.TakeHit(weaponParams.Damage);
+				}
 			}
 		}
 
