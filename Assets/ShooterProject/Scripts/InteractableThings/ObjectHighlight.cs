@@ -50,14 +50,12 @@ namespace ShooterProject.Scripts.InteractableThings
 		#region Private Methods 
 		private void OnHoverEntered(HoverEnterEventArgs hoverEnterEventArgs)
 		{
-			if (hoverEnterEventArgs.interactableObject.transform.TryGetComponent<Item>(out Item item))
-				ObjectHighlightEnable(hoverEnterEventArgs.interactableObject.transform.gameObject);
+			ObjectHighlightEnable(hoverEnterEventArgs.interactableObject.transform.gameObject);
 		}
 
 		private void OnHoverExited(HoverExitEventArgs hoverExitEventArgs)
 		{
-			if (hoverExitEventArgs.interactableObject.transform.TryGetComponent<Item>(out Item item))
-				ObjectHighlightDisable(hoverExitEventArgs.interactableObject.transform.gameObject);
+			ObjectHighlightDisable(hoverExitEventArgs.interactableObject.transform.gameObject);
 		}
 
 		private void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
