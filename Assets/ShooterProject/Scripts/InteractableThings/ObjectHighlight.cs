@@ -37,7 +37,7 @@ namespace ShooterProject.Scripts.InteractableThings
 			_grabInteractable.hoverExited.AddListener(OnHoverExited);
 			_grabInteractable.selectEntered.AddListener(OnSelectEntered);
 		}
-		
+
 		private void OnDisable()
 		{
 			_grabInteractable.hoverEntered.RemoveListener(OnHoverEntered);
