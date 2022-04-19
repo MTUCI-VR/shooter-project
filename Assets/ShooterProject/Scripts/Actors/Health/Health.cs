@@ -62,6 +62,15 @@ namespace ShooterProject.Scripts.Actors.Health
 			CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
 		}
 
+		/// <summary>
+		/// Пополняет здоровье объекту
+		/// </summary>
+		/// <param name="healthPoints">Кол-во добоваляемого хп</param>
+		public void Heal(float healthPoints)
+		{
+			CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + healthPoints);
+		}
+
 		#endregion
 	}
 }
