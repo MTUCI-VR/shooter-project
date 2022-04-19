@@ -7,5 +7,10 @@ namespace ShooterProject.Scripts.General
 		{
 			return (sourceLayer & (1 << testingLayer)) != 0;
 		}
+
+		public static int GetLayerMaskValue(LayerMask layerMask)
+		{
+			return (int)System.Math.Log(layerMask, 2);
+		}
 	}
 }

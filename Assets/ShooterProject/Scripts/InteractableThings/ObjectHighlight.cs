@@ -1,20 +1,22 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using ShooterProject.Scripts.Items;
+using ShooterProject.Scripts.General;
 
 namespace ShooterProject.Scripts.InteractableThings
 {
+	[RequireComponent(typeof(XRGrabInteractable))]
 	public class ObjectHighlight : MonoBehaviour
 	{
 		#region Fields
 
 		[SerializeField]
-		private XRDirectInteractor directInteractor;
-
-		[SerializeField]
 		private LayerMask objectHighlightLayer;
 
 		private int _objectHighlightLayerValue;
+
+		private int _initialLayerValue;
+		private XRGrabInteractable _grabInteractable;
 
 		#endregion
 
@@ -22,48 +24,45 @@ namespace ShooterProject.Scripts.InteractableThings
 
 		private void Awake()
 		{
-			_objectHighlightLayerValue = (int)System.Math.Log(objectHighlightLayer, 2);
+			_grabInteractable = GetComponent<XRGrabInteractable>();
+
+			_objectHighlightLayerValue = LayerUtils.GetLayerMaskValue(objectHighlightLayer);
+
+			_initialLayerValue = gameObject.layer;
 		}
 
 		private void OnEnable()
 		{
-			directInteractor.selectEntered.AddListener(OnObjectHighlightDisable);
-			directInteractor.selectExited.AddListener(OnObjectHighlightEnable);
+			_grabInteractable.hoverEntered.AddListener(OnHoverEntered);
+			_grabInteractable.hoverExited.AddListener(OnHoverExited);
+			_grabInteractable.selectEntered.AddListener(OnSelectEntered);
 		}
+		
 		private void OnDisable()
 		{
-			directInteractor.selectEntered.RemoveListener(OnObjectHighlightDisable);
-			directInteractor.selectExited.RemoveListener(OnObjectHighlightEnable);
+			_grabInteractable.hoverEntered.RemoveListener(OnHoverEntered);
+			_grabInteractable.hoverExited.RemoveListener(OnHoverExited);
+			_grabInteractable.selectEntered.RemoveListener(OnSelectEntered);
 		}
 
 		#endregion
 
-		#region Private Methods
-
-		private void OnTriggerEnter(Collider collider)
+		#region Private Methods 
+		private void OnHoverEntered(HoverEnterEventArgs hoverEnterEventArgs)
 		{
-			if (collider.TryGetComponent<Item>(out Item item) && !collider.gameObject.GetComponent<XRGrabInteractable>().isSelected)
-			{
-				ObjectHighlightEnable(collider.gameObject);
-			}
+			if (hoverEnterEventArgs.interactableObject.transform.TryGetComponent<Item>(out Item item))
+				ObjectHighlightEnable(hoverEnterEventArgs.interactableObject.transform.gameObject);
 		}
 
-		private void OnTriggerExit(Collider collider)
+		private void OnHoverExited(HoverExitEventArgs hoverExitEventArgs)
 		{
-			if (collider.TryGetComponent<Item>(out Item item))
-			{
-				ObjectHighlightDisable(collider.gameObject);
-			}
+			if (hoverExitEventArgs.interactableObject.transform.TryGetComponent<Item>(out Item item))
+				ObjectHighlightDisable(hoverExitEventArgs.interactableObject.transform.gameObject);
 		}
 
-		private void OnObjectHighlightDisable(SelectEnterEventArgs selectEnterEventArgs)
+		private void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
 		{
 			ObjectHighlightDisable(selectEnterEventArgs.interactableObject.transform.gameObject);
-		}
-
-		private void OnObjectHighlightEnable(SelectExitEventArgs selectExitEventArgs)
-		{
-			ObjectHighlightEnable(selectExitEventArgs.interactableObject.transform.gameObject);
 		}
 
 		private void ObjectHighlightEnable(GameObject objectHighlight)
@@ -73,7 +72,7 @@ namespace ShooterProject.Scripts.InteractableThings
 
 		private void ObjectHighlightDisable(GameObject objectHighlight)
 		{
-			objectHighlight.layer = objectHighlight.GetComponent<Item>().initialLayerValue;
+			objectHighlight.layer = _initialLayerValue;
 		}
 
 		#endregion
