@@ -16,7 +16,7 @@ TagManager:
   - WeaponTrunk
   - Bullet
   - Player
-  - Grab
+  - ObjectHighlight
   - 
   - 
   - 

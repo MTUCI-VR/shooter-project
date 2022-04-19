@@ -11,9 +11,6 @@ namespace ShooterProject.Scripts.Spawner
 		[SerializeField]
 		private int spawnDelayInSeconds;
 
-		[SerializeField]
-		private string playerTag;
-
 		private bool _canSpawn = true;
 
 		#endregion
