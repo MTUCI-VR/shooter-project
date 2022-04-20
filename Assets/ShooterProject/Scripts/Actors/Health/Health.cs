@@ -17,6 +17,18 @@ namespace ShooterProject.Scripts.Actors.Health
 
 		#region Properties
 
+		public float MaxHealth
+		{
+			get
+			{
+				return maxHealth;
+			}
+			private set
+			{
+				maxHealth = value;
+			}
+		}
+
 		public float CurrentHealth
 		{
 			get

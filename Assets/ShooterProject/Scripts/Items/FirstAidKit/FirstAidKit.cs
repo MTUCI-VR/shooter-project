@@ -42,8 +42,11 @@ namespace ShooterProject.Scripts.Items.FirstAidKit
 
         private void OnActivated(ActivateEventArgs activateEventArgs)
         {
-            playerHealth.Heal(healthPointsForHealing);
-            Destroy(gameObject);
+            if (playerHealth.CurrentHealth < playerHealth.MaxHealth)
+            {
+                playerHealth.Heal(healthPointsForHealing);
+                Destroy(gameObject);
+            }
         }
 
         #endregion
