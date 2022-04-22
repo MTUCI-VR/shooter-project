@@ -8,73 +8,119 @@ using ShooterProject.Scripts.WaveControllers;
 
 namespace ShooterProject.Scripts.GameInterface
 {
-    [RequireComponent(typeof(TextMeshProUGUI))]
-    public class GameInterface : MonoBehaviour
-    {
-        #region Fields
+	[RequireComponent(typeof(TextMeshProUGUI))]
+	public class GameInterface : MonoBehaviour
+	{
+		#region Fields
 
-        [SerializeField]
-        private Health playerHealth;
+		[SerializeField]
+		private Health playerHealth;
 
-        [SerializeField]
-        private WaveController waveControler;
+		[SerializeField]
+		private WaveController waveControler;
 
-        [SerializeField]
-        private XRDirectInteractor HandDirectInteractor;
+		[SerializeField]
+		private XRDirectInteractor HandDirectInteractor;
 
-        private TextMeshProUGUI _text;
+		private int _attachedMagazineAmmoCount;
 
-        #endregion
+		private TextMeshProUGUI _gameInterfaceText;
 
-        #region Life Cycle
+		#endregion
 
-        private void Awake()
-        {
-            _text = GetComponent<TextMeshProUGUI>();
-        }
+		#region Life Cycle
 
-        private void OnEnable()
-        {
-            AddListeners();
-        }
+		private void Awake()
+		{
+			_gameInterfaceText = GetComponent<TextMeshProUGUI>();
+		}
 
-        private void OnDisable()
-        {
-            RemoveListeners();
-        } 
+		private void OnEnable()
+		{
+			AddListeners();
+		}
 
-        #endregion
+		private void OnDisable()
+		{
+			RemoveListeners();
+		}
 
-        #region Private Methods
+		#endregion
 
-        private void AddListeners()
-        {
-            playerHealth.OnChanged += Print;
-            HandDirectInteractor.selectEntered.AddListener(OnSelectEntered);
-            InventoryInfo.OnAmmoMagazineCountChanged += Print;
-            InventoryInfo.OnHasKnifeChanged += Print;
-        }
+		#region Private Methods
 
-        private void RemoveListeners()
-        {
-            playerHealth.OnChanged -= Print;
-            InventoryInfo.OnAmmoMagazineCountChanged -= Print;
-            InventoryInfo.OnHasKnifeChanged -= Print;
-        }
+		private void AddListeners()
+		{
+			playerHealth.OnChanged += Print;
+			InventoryInfo.OnAmmoCountChanged += Print;
+			InventoryInfo.OnHasKnifeChanged += Print;
+			waveControler.OnTimeBetweenWavesChanged += Print;
+			HandDirectInteractor.selectEntered.AddListener(OnDirectInteractorSelectEntered);
+			HandDirectInteractor.selectExited.AddListener(OnDirectInteractorSelectExited);
+		}
 
-        private void Print()
-        {
-            Debug.Log($"HP: {playerHealth.CurrentHealth}\nAmmo: {80}/{100}\nKnife: {InventoryInfo.HasKnife}\n00:{waveControler.TimeBetweenWaves}");
-        }
+		private void RemoveListeners()
+		{
+			playerHealth.OnChanged -= Print;
+			InventoryInfo.OnAmmoCountChanged -= Print;
+			InventoryInfo.OnHasKnifeChanged -= Print;
+			waveControler.OnTimeBetweenWavesChanged -= Print;
+			HandDirectInteractor.selectEntered.RemoveListener(OnDirectInteractorSelectEntered);
+			HandDirectInteractor.selectExited.RemoveListener(OnDirectInteractorSelectExited);
+		}
 
-        private void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
-        {
-            if (selectEnterEventArgs.interactableObject.transform.TryGetComponent<WeaponMagazineController>(out var weaponMagazine))
-            {
-                // weaponMagazine.GetComponent<XRSocketInteractor>().
-            }
-        }
+		private void OnDirectInteractorSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
+		{
+			if (selectEnterEventArgs.interactableObject.transform.TryGetComponent<WeaponMagazineController>(out var weaponMagazine))
+			{
+				XRSocketInteractor weaponMagazineSocketInteractor = weaponMagazine.GetComponent<XRSocketInteractor>();
 
-        #endregion
-    }
+				weaponMagazineSocketInteractor.selectEntered.AddListener(OnSocketInteractorSelectEntered);
+				weaponMagazineSocketInteractor.selectExited.AddListener(OnSocketInteractorSelectExited);
+			}
+		}
+
+		private void OnDirectInteractorSelectExited(SelectExitEventArgs selectExitEventArgs)
+		{
+			if (selectExitEventArgs.interactableObject.transform.TryGetComponent<WeaponMagazineController>(out var weaponMagazine))
+			{
+				XRSocketInteractor weaponMagazineSocketInteractor = weaponMagazine.GetComponent<XRSocketInteractor>();
+
+				weaponMagazineSocketInteractor.selectEntered.RemoveListener(OnSocketInteractorSelectEntered);
+				weaponMagazineSocketInteractor.selectExited.RemoveListener(OnSocketInteractorSelectExited);
+			}
+		}
+
+		private void OnSocketInteractorSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
+		{
+			AmmoMagazine attachedMagazine = selectEnterEventArgs.interactableObject.transform.GetComponent<AmmoMagazine>();
+
+			_attachedMagazineAmmoCount = attachedMagazine.AmmoCount;
+
+			attachedMagazine.OnAmmoCountChanged += OnAmmoCountChanged;
+
+			Print();
+		}
+
+		private void OnSocketInteractorSelectExited(SelectExitEventArgs selectExitEventArgs)
+		{
+			_attachedMagazineAmmoCount = 0;
+
+			Print();
+		}
+
+		private void OnAmmoCountChanged(int ammoCount)
+		{
+			_attachedMagazineAmmoCount = ammoCount;
+
+			Print();
+		}
+
+		private void Print()
+		{
+			_gameInterfaceText.text = $"HP: {playerHealth.CurrentHealth}\nAmmo: {_attachedMagazineAmmoCount}/{InventoryInfo.AmmoCount}\nKnife: {InventoryInfo.HasKnife}\n00:{waveControler.TimeBetweenWavesInSeconds}";
+		}
+
+		#endregion
+	}
 }
