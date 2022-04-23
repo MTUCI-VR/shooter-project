@@ -8,7 +8,6 @@ using ShooterProject.Scripts.WaveControllers;
 
 namespace ShooterProject.Scripts.GameInterface
 {
-	[RequireComponent(typeof(TextMeshProUGUI))]
 	public class GameInterface : MonoBehaviour
 	{
 		#region Fields
@@ -22,18 +21,15 @@ namespace ShooterProject.Scripts.GameInterface
 		[SerializeField]
 		private XRDirectInteractor HandDirectInteractor;
 
+		[SerializeField]
+		private TextMeshProUGUI _gameInterfaceText;
+
 		private int _attachedMagazineAmmoCount;
 
-		private TextMeshProUGUI _gameInterfaceText;
 
 		#endregion
 
 		#region Life Cycle
-
-		private void Awake()
-		{
-			_gameInterfaceText = GetComponent<TextMeshProUGUI>();
-		}
 
 		private void OnEnable()
 		{
@@ -95,15 +91,19 @@ namespace ShooterProject.Scripts.GameInterface
 		{
 			AmmoMagazine attachedMagazine = selectEnterEventArgs.interactableObject.transform.GetComponent<AmmoMagazine>();
 
-			_attachedMagazineAmmoCount = attachedMagazine.AmmoCount;
-
 			attachedMagazine.OnAmmoCountChanged += OnAmmoCountChanged;
+
+			_attachedMagazineAmmoCount = attachedMagazine.AmmoCount;
 
 			Print();
 		}
 
 		private void OnSocketInteractorSelectExited(SelectExitEventArgs selectExitEventArgs)
 		{
+			AmmoMagazine attachedMagazine = selectExitEventArgs.interactableObject.transform.GetComponent<AmmoMagazine>();
+
+			attachedMagazine.OnAmmoCountChanged -= OnAmmoCountChanged;
+
 			_attachedMagazineAmmoCount = 0;
 
 			Print();
