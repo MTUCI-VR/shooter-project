@@ -36,26 +36,26 @@ namespace ShooterProject.Scripts.WaveControllers
 
 		#endregion
 
-        #region Life Cycle
+		#region Life Cycle
 
-        private void Start()
-        {
-            StartCoroutine(TestWaveTimer());
-        }
+		private void Start()
+		{
+			StartCoroutine(TestWaveTimer());
+		}
 
-        #endregion
+		#endregion
 
-        #region Private Methods
+		#region Private Methods
 
-        private IEnumerator TestWaveTimer()
-        {
-            while (TimeBetweenWavesInSeconds > 0)
-            {
-                yield return new WaitForSeconds(1);
-                TimeBetweenWavesInSeconds--;
-            }
-        }
+		private IEnumerator TestWaveTimer()
+		{
+			while (TimeBetweenWavesInSeconds > 0)
+			{
+				yield return new WaitForSeconds(1);
+				TimeBetweenWavesInSeconds--;
+			}
+		}
 
-        #endregion
+		#endregion
 	}
 }
