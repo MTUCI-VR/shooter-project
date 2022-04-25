@@ -20,7 +20,7 @@ namespace ShooterProject.Scripts.GameInterface
 
 		[SerializeField]
 		private XRDirectInteractor leftHandDirectInteractor;
-		
+
 		[SerializeField]
 		private XRDirectInteractor rightHandDirectInteractor;
 
