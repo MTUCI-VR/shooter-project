@@ -29,8 +29,8 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 			}
 			private set
 			{
+				OnAmmoCountChanged?.Invoke(_ammoCount - value);
 				_ammoCount = value;
-				OnAmmoCountChanged?.Invoke(_ammoCount);
 			}
 		}
 

@@ -19,7 +19,10 @@ namespace ShooterProject.Scripts.GameInterface
 		private WaveController waveControler;
 
 		[SerializeField]
-		private XRDirectInteractor HandDirectInteractor;
+		private XRDirectInteractor leftHandDirectInteractor;
+		
+		[SerializeField]
+		private XRDirectInteractor rightHandDirectInteractor;
 
 		[SerializeField]
 		private TextMeshProUGUI _gameInterfaceText;
@@ -51,8 +54,10 @@ namespace ShooterProject.Scripts.GameInterface
 			InventoryInfo.OnAmmoCountChanged += Print;
 			InventoryInfo.OnHasKnifeChanged += Print;
 			waveControler.OnTimeBetweenWavesChanged += Print;
-			HandDirectInteractor.selectEntered.AddListener(OnDirectInteractorSelectEntered);
-			HandDirectInteractor.selectExited.AddListener(OnDirectInteractorSelectExited);
+			leftHandDirectInteractor.selectEntered.AddListener(OnDirectInteractorSelectEntered);
+			leftHandDirectInteractor.selectExited.AddListener(OnDirectInteractorSelectExited);
+			rightHandDirectInteractor.selectEntered.AddListener(OnDirectInteractorSelectEntered);
+			rightHandDirectInteractor.selectExited.AddListener(OnDirectInteractorSelectExited);
 		}
 
 		private void RemoveListeners()
@@ -61,8 +66,10 @@ namespace ShooterProject.Scripts.GameInterface
 			InventoryInfo.OnAmmoCountChanged -= Print;
 			InventoryInfo.OnHasKnifeChanged -= Print;
 			waveControler.OnTimeBetweenWavesChanged -= Print;
-			HandDirectInteractor.selectEntered.RemoveListener(OnDirectInteractorSelectEntered);
-			HandDirectInteractor.selectExited.RemoveListener(OnDirectInteractorSelectExited);
+			leftHandDirectInteractor.selectEntered.RemoveListener(OnDirectInteractorSelectEntered);
+			leftHandDirectInteractor.selectExited.RemoveListener(OnDirectInteractorSelectExited);
+			rightHandDirectInteractor.selectEntered.RemoveListener(OnDirectInteractorSelectEntered);
+			rightHandDirectInteractor.selectExited.RemoveListener(OnDirectInteractorSelectExited);
 		}
 
 		private void OnDirectInteractorSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
@@ -93,7 +100,7 @@ namespace ShooterProject.Scripts.GameInterface
 
 			attachedMagazine.OnAmmoCountChanged += OnAmmoCountChanged;
 
-			_attachedMagazineAmmoCount = attachedMagazine.AmmoCount;
+			_attachedMagazineAmmoCount += attachedMagazine.AmmoCount;
 
 			Print();
 		}
@@ -104,14 +111,14 @@ namespace ShooterProject.Scripts.GameInterface
 
 			attachedMagazine.OnAmmoCountChanged -= OnAmmoCountChanged;
 
-			_attachedMagazineAmmoCount = 0;
+			_attachedMagazineAmmoCount -= attachedMagazine.AmmoCount;
 
 			Print();
 		}
 
 		private void OnAmmoCountChanged(int ammoCount)
 		{
-			_attachedMagazineAmmoCount = ammoCount;
+			_attachedMagazineAmmoCount -= ammoCount;
 
 			Print();
 		}
