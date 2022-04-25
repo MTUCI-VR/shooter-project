@@ -24,7 +24,7 @@ namespace ShooterProject.Scripts.Weapons
 
 		[SerializeField]
 		private LayerMask interactionLayer;
-    
+
 		private bool _coolDownOver = true;
 		private Coroutine _workingShootingCoroutine;
 		private GameObjectsPool _impactsPool;
