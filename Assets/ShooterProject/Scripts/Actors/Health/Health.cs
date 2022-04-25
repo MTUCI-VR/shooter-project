@@ -1,13 +1,14 @@
 using UnityEngine;
 using System;
 
-namespace ShooterProject.Scripts.Actors
+namespace ShooterProject.Scripts.Actors.Health
 {
 	public class Health : MonoBehaviour
 	{
 		#region Fields
 
 		[SerializeField]
+		[Min(0)]
 		private float maxHealth;
 
 		private float _health;
@@ -16,23 +17,36 @@ namespace ShooterProject.Scripts.Actors
 
 		#region Properties
 
-		public float CurrentHealth => _health;
+		public float CurrentHealth
+		{
+			get
+			{
+				return _health;
+			}
+			private set
+			{
+				_health = value;
+				if (value == 0)
+					OnDied?.Invoke();
+				else
+					OnChanged?.Invoke();
+			}
+		}
 
 		#endregion
 
 		#region Events
 
-		public event Action OnHpZeroed;
-		public event Action OnHpChanged;
+		public event Action OnDied;
+		public event Action OnChanged;
 
 		#endregion
 
 		#region LifeCycle Methods
 
-		private void Start()
+		private void Awake()
 		{
-			_health = maxHealth;
-			OnHpChanged?.Invoke();
+			CurrentHealth = maxHealth;
 		}
 
 		#endregion
@@ -45,17 +59,7 @@ namespace ShooterProject.Scripts.Actors
 		/// <param name="damage">Кол-во отнимаемого хп</param>
 		public void TakeHit(float damage)
 		{
-			if (_health > damage)
-			{
-				_health -= damage;
-				OnHpChanged?.Invoke();
-			}
-			else
-			{
-				_health = 0;
-				OnHpZeroed?.Invoke();
-			}
-			
+			CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
 		}
 
 		#endregion

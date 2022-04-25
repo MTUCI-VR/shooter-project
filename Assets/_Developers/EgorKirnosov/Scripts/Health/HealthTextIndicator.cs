@@ -3,7 +3,7 @@ using TMPro;
 
 namespace _Developers.EgorKirnosov.Scripts.Health
 {
-	[RequireComponent(typeof(ShooterProject.Scripts.Actors.Health))]
+	[RequireComponent(typeof(ShooterProject.Scripts.Actors.Health.Health))]
 	public class HealthTextIndicator : MonoBehaviour
 	{
 		#region Fields
@@ -11,7 +11,7 @@ namespace _Developers.EgorKirnosov.Scripts.Health
 		[SerializeField]
 		private TextMeshProUGUI textLabel;
 
-		private ShooterProject.Scripts.Actors.Health targetHealth;
+		private ShooterProject.Scripts.Actors.Health.Health targetHealth;
 
 		#endregion
 
@@ -19,19 +19,19 @@ namespace _Developers.EgorKirnosov.Scripts.Health
 
 		private void Awake()
 		{
-			targetHealth = GetComponent<ShooterProject.Scripts.Actors.Health>();
+			targetHealth = GetComponent<ShooterProject.Scripts.Actors.Health.Health>();
 		}
 
 		private void OnEnable()
 		{
-			targetHealth.OnHpChanged += OnHit;
-			targetHealth.OnHpZeroed += OnHpZeroed;
+			targetHealth.OnChanged += OnHit;
+			targetHealth.OnDied += OnHpZeroed;
 		}
 
 		private void OnDisable()
 		{
-			targetHealth.OnHpChanged -= OnHit;
-			targetHealth.OnHpZeroed -= OnHpZeroed;
+			targetHealth.OnChanged -= OnHit;
+			targetHealth.OnDied -= OnHpZeroed;
 		}
 
 		#endregion
