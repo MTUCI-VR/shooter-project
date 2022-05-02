@@ -2,15 +2,18 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using ShooterProject.Scripts.PlayerScripts;
+using System;
+
 namespace ShooterProject.Scripts.Spawner
 {
-	public class EnemySpawner : GeneralSpawner, General.IObservable<EnemySpawnerActivationData>
+	public class EnemySpawner : GeneralSpawner
 	{
 		#region Fields
+		[SerializeField]
+		private int spawnDelayInSeconds;
 
 		private bool _canSpawn = true;
 
-		private List<General.IObserver<EnemySpawnerActivationData>> _observers = new List<General.IObserver<EnemySpawnerActivationData>>();
 		#endregion
 
 		#region Properties
@@ -23,33 +26,41 @@ namespace ShooterProject.Scripts.Spawner
 			}
 			private set
 			{
-				Notify(new EnemySpawnerActivationData(this,value));
+				OnActivationChanged?.Invoke(this, value);
 				_canSpawn = value;
 			}
 		}
 
 		#endregion
 
+		#region Event
+
+		public event Action<EnemySpawner,bool> OnActivationChanged;
+
+		#endregion
+
 		#region Public Methods
 
-		public void Spawn(float spawnDelayInSeconds)
+		public GameObject SpawnEnemy()
 		{
 			if (_canSpawn)
-				StartCoroutine(SpawnCoroutine(spawnDelayInSeconds));
+			{
+				StartCoroutine(SpawnCoolDownCoroutine(spawnDelayInSeconds));
+				return Spawn();
+			}
+			return null;
 		}
 
 		#endregion
 
 		#region Private Methods
 
-		private IEnumerator SpawnCoroutine(float spawnDelayInSeconds)
+		private IEnumerator SpawnCoolDownCoroutine(float spawnDelayInSeconds)
 		{
-			Spawn();
 			CanSpawn = false;
 			yield return new WaitForSeconds(spawnDelayInSeconds);
 			CanSpawn = true;
 		}
-
 		private void OnTriggerEnter(Collider collider)
 		{
 			if (collider.TryGetComponent<Player>(out Player player))
@@ -63,23 +74,6 @@ namespace ShooterProject.Scripts.Spawner
 			{
 				CanSpawn = true;
 			}
-		}
-
-		public void Subscribe(General.IObserver<EnemySpawnerActivationData> observer)
-		{
-			_observers.Add(observer);
-		}
-
-		public void Unsubscribe(General.IObserver<EnemySpawnerActivationData> observer)
-		{
-			if(_observers.Contains(observer))
-			_observers.Remove(observer);
-		}
-
-		public void Notify(EnemySpawnerActivationData data)
-		{
-			foreach (var observer in _observers)
-				observer.Notify(data);
 		}
 
 		#endregion

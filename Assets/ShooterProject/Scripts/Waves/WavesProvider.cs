@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ShooterProject.Scripts.Spawner;
+using System;
 
 namespace ShooterProject.Scripts.Waves
 {
-	public class WavesProvider : MonoBehaviour, General.IObserver<EnemySpawnerActivationData>
+	public class WavesProvider : MonoBehaviour
 	{
 		#region Static Fields
 
@@ -22,12 +23,27 @@ namespace ShooterProject.Scripts.Waves
 		private List<WaveParams> waves;
 
 		private List<EnemySpawner> _activeSpawners = new List<EnemySpawner>();
+		private WaveEnemiesObserver _waveEnemiesObserver = new WaveEnemiesObserver();
+
+		#endregion
+
+		#region Events
+
+		/// <summary>
+		/// Вызывается при начале волны, передает номер новой волны
+		/// </summary>
+		public event Action<int> OnWaveStarted;
+		/// <summary>
+		/// Выщывается при окончании волны, передает кол-во секунд до начала новой волны
+		/// </summary>
+		public event Action<float> OnWaveEnded;
 
 		#endregion
 
 		#region Properties
 
 		public int CurrentWave { get; private set; }
+		private WaveParams currentWaveParams => waves[CurrentWave];
 
 		#endregion
 
@@ -37,31 +53,61 @@ namespace ShooterProject.Scripts.Waves
 		{
 			SingletonInitialization();
 		}
-		private void Start()
-		{
-			StartCoroutine(WorkingCoroutine());
-		}
 		private void OnEnable()
 		{
 			foreach (var spawner in spawners)
-				spawner.Subscribe(this);
+				spawner.OnActivationChanged += OnSpawnerActivationChanged;
+		}
+		private void Start()
+		{
+			if (spawners.Count == 0)
+			{
+#if DEBUG
+				Debug.LogError("Error: At least one added EnemySpawner is required");
+#endif
+			}
+			else
+			{
+				StartCoroutine(WaveCoroutine());
+			}
 		}
 		private void OnDisable()
 		{
 			foreach (var spawner in spawners)
-				spawner.Unsubscribe(this);
-			StopCoroutine(WorkingCoroutine());
+				spawner.OnActivationChanged -= OnSpawnerActivationChanged;
+			StopCoroutine(WaveCoroutine());
 		}
 
 		#endregion
 
 		#region Private Methods
 
-		private IEnumerator WorkingCoroutine()
+		private IEnumerator WaveCoroutine()
 		{
 			while(CurrentWave < waves.Count)
 			{
+				OnWaveStarted?.Invoke(CurrentWave + 1); //Добавляем 1, так как передаем НОМЕР волны
 
+				_waveEnemiesObserver.Setup(currentWaveParams.EnemiesCount);
+				SetupSpawners();
+
+				var spawnedEnemies = 0;
+
+				while(spawnedEnemies < currentWaveParams.EnemiesCount)
+				{
+					if(_activeSpawners.Count > 0)
+					{
+						var newEnemy = _activeSpawners[0].SpawnEnemy();
+						_waveEnemiesObserver.AddTarget(newEnemy);
+
+						spawnedEnemies++;
+					}
+					yield return null;
+				}
+
+				CurrentWave++;
+				OnWaveEnded?.Invoke(currentWaveParams.NextWavePreparationSeconds);
+				yield return new WaitForSeconds(currentWaveParams.NextWavePreparationSeconds);
 			}
 			yield break;
 		}
@@ -86,19 +132,13 @@ namespace ShooterProject.Scripts.Waves
 			else
 				_activeSpawners.Remove(spawner);
 		}
-
-		public void Notify(EnemySpawnerActivationData data)
+		private void SetupSpawners()
 		{
-			if(data.CanSpawn)
+			foreach(var spawner in spawners)
 			{
-				spawners.Add(data.EnemySpawner);
-			}
-			else
-			{
-				spawners.Remove(data.EnemySpawner);
+				spawner.ChangeObjects(currentWaveParams.AvailableEnemies);
 			}
 		}
-
 		#endregion
 
 	}
