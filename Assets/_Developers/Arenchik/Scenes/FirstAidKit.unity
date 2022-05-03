@@ -752,7 +752,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPointsForHealing: 10
-  playerHealth: {fileID: 2024201774}
 --- !u!114 &854129253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1662,7 +1661,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPointsForHealing: 10
-  playerHealth: {fileID: 2024201774}
 --- !u!114 &1866396617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2578,6 +2576,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textLabel: {fileID: 1273703931}
+--- !u!114 &2024201776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024201773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560a23d0c75469a4a914be1f48c7900c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2047166662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2849,4 +2859,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPointsForHealing: 10
-  playerHealth: {fileID: 2024201774}

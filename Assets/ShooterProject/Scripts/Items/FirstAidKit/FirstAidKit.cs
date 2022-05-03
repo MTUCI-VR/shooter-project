@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using ShooterProject.Scripts.Actors.Health;
+using ShooterProject.Scripts.PlayerScripts;
 
 namespace ShooterProject.Scripts.Items.FirstAidKit
 {
@@ -12,8 +13,7 @@ namespace ShooterProject.Scripts.Items.FirstAidKit
 		[SerializeField]
 		private int healthPointsForHealing;
 
-		[SerializeField]
-		private Health playerHealth;
+		private Health _playerHealth;
 
 		private XRGrabInteractable _grabInteractable;
 
@@ -23,6 +23,8 @@ namespace ShooterProject.Scripts.Items.FirstAidKit
 
 		private void Awake()
 		{
+			_playerHealth = Player.instance.PlayerHealth;
+
 			_grabInteractable = GetComponent<XRGrabInteractable>();
 		}
 
@@ -42,9 +44,9 @@ namespace ShooterProject.Scripts.Items.FirstAidKit
 
 		private void OnActivated(ActivateEventArgs activateEventArgs)
 		{
-			if (playerHealth.CurrentHealth < playerHealth.MaxHealth)
+			if (_playerHealth.CurrentHealth < _playerHealth.MaxHealth)
 			{
-				playerHealth.Heal(healthPointsForHealing);
+				_playerHealth.Heal(healthPointsForHealing);
 				Destroy(gameObject);
 			}
 		}
