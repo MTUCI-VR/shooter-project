@@ -21,7 +21,7 @@ namespace ShooterProject.Scripts.PlayerScripts
 			if (instance == null)
 			{
 				instance = this;
-			}	
+			}
 			else
 			{
 				Destroy(gameObject);
