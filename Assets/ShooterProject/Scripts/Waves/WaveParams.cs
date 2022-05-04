@@ -20,7 +20,7 @@ namespace ShooterProject.Scripts.Waves
 		{
 			foreach (var spawnObjectParams in AvailableEnemies)
 			{
-				if(!spawnObjectParams.TryGetComponent<Health>(out var enemyHealth))
+				if (!spawnObjectParams.TryGetComponent<Health>(out var enemyHealth))
 				{
 					AvailableEnemies.Remove(spawnObjectParams);
 #if UNITY_EDITOR

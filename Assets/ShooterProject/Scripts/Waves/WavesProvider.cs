@@ -87,7 +87,7 @@ namespace ShooterProject.Scripts.Waves
 
 		private IEnumerator WaveCoroutine()
 		{
-			while(CurrentWave < waves.Count)
+			while (CurrentWave < waves.Count)
 			{
 				OnWavePreparationStarted?.Invoke(currentWaveParams.WavePreparationTime);
 				yield return new WaitForSeconds(currentWaveParams.WavePreparationTime);
@@ -98,9 +98,9 @@ namespace ShooterProject.Scripts.Waves
 
 				var spawnedEnemies = 0;
 
-				while(spawnedEnemies < currentWaveParams.EnemiesCount)
+				while (spawnedEnemies < currentWaveParams.EnemiesCount)
 				{
-					if(_activeSpawners.Count > 0)
+					if (_activeSpawners.Count > 0)
 					{
 						var newEnemy = _activeSpawners[0].SpawnEnemy();
 						_waveEnemiesObserver.AddTarget(newEnemy);
