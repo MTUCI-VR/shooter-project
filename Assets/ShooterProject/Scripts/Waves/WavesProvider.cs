@@ -110,7 +110,7 @@ namespace ShooterProject.Scripts.Waves
 					yield return new WaitForEndOfFrame();
 				}
 
-				while (!_waveEnemiesObserver.WaweKilled)
+				while (!_waveEnemiesObserver.WaveKilled)
 					yield return new WaitForEndOfFrame();
 
 				CurrentWave++;
