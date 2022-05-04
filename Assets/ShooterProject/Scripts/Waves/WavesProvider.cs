@@ -36,7 +36,9 @@ namespace ShooterProject.Scripts.Waves
 		/// <summary>
 		/// Выщывается при окончании волны, передает кол-во секунд до начала новой волны
 		/// </summary>
-		public event Action<float> OnWaveEnded;
+		public event Action<float> OnWavePreparationStarted;
+
+		public event Action OnWavesEnded;
 
 		#endregion
 
@@ -52,6 +54,7 @@ namespace ShooterProject.Scripts.Waves
 		void Awake()
 		{
 			SingletonInitialization();
+			spawners.ForEach(e => _activeSpawners.Add(e));
 		}
 		private void OnEnable()
 		{
@@ -62,8 +65,8 @@ namespace ShooterProject.Scripts.Waves
 		{
 			if (spawners.Count == 0)
 			{
-#if DEBUG
-				Debug.LogError("Error: At least one added EnemySpawner is required");
+#if UNITY_EDITOR
+				Debug.LogError($"Warning: At least one added {nameof(EnemySpawner)} is required");
 #endif
 			}
 			else
@@ -86,6 +89,8 @@ namespace ShooterProject.Scripts.Waves
 		{
 			while(CurrentWave < waves.Count)
 			{
+				OnWavePreparationStarted?.Invoke(currentWaveParams.WavePreparationTime);
+				yield return new WaitForSeconds(currentWaveParams.WavePreparationTime);
 				OnWaveStarted?.Invoke(CurrentWave + 1); //Добавляем 1, так как передаем НОМЕР волны
 
 				_waveEnemiesObserver.Setup(currentWaveParams.EnemiesCount);
@@ -102,26 +107,27 @@ namespace ShooterProject.Scripts.Waves
 
 						spawnedEnemies++;
 					}
-					yield return null;
+					yield return new WaitForEndOfFrame();
 				}
 
+				while (!_waveEnemiesObserver.WaweKilled)
+					yield return new WaitForEndOfFrame();
+
 				CurrentWave++;
-				OnWaveEnded?.Invoke(currentWaveParams.NextWavePreparationSeconds);
-				yield return new WaitForSeconds(currentWaveParams.NextWavePreparationSeconds);
 			}
-			yield break;
+			OnWavesEnded?.Invoke();
 		}
 		private void SingletonInitialization()
 		{
-			if (!Instance)
+			if (Instance == null)
 			{
 				Instance = this;
 			}
 			else
 			{
 				Destroy(this);
-#if DEBUG
-				Debug.LogWarning($"Error: Object of type {nameof(WavesProvider)} already exists");
+#if UNITY_EDITOR
+				Debug.LogWarning($"Warning: Object of type {nameof(WavesProvider)} already exists");
 #endif
 			}
 		}
@@ -134,11 +140,12 @@ namespace ShooterProject.Scripts.Waves
 		}
 		private void SetupSpawners()
 		{
-			foreach(var spawner in spawners)
+			foreach (var spawner in spawners)
 			{
-				spawner.ChangeObjects(currentWaveParams.AvailableEnemies);
+				spawner.ChangeObjects(currentWaveParams.AvailableEnemies.ToArray());
 			}
 		}
+
 		#endregion
 
 	}

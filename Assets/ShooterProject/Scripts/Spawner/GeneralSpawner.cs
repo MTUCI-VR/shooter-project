@@ -39,6 +39,7 @@ namespace ShooterProject.Scripts.Spawner
 
 			SortSpawnWeights();
 		}
+
 		#endregion
 
 		#region Public Methods
@@ -65,7 +66,6 @@ namespace ShooterProject.Scripts.Spawner
 
 			_spawnWeights.Sort();
 		}
-
 		private int GetSpawnObjectIndex()
 		{
 			int currentSpawnWeight = 0;

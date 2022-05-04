@@ -15,6 +15,12 @@ namespace ShooterProject.Scripts.Waves
 
 		#endregion
 
+		#region Properties
+
+		public bool WaweKilled { get; private set; }
+
+		#endregion
+
 		#region Events
 
 		public event Action OnEnemiesDied;
@@ -35,6 +41,7 @@ namespace ShooterProject.Scripts.Waves
 		{
 			_waveEnemiesCount = waveEnemiesCount;
 			_deadEnemyCount = 0;
+			WaweKilled = false;
 			_enemies.Clear();
 		}
 
@@ -49,7 +56,10 @@ namespace ShooterProject.Scripts.Waves
 			_deadEnemyCount++;
 
 			if (_deadEnemyCount == _waveEnemiesCount)
+			{
 				OnEnemiesDied?.Invoke();
+				WaweKilled = true;
+			}
 		}
 
 		#endregion

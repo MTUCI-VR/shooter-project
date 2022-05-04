@@ -10,7 +10,7 @@ namespace ShooterProject.Scripts.Spawner
 	{
 		#region Fields
 		[SerializeField]
-		private int spawnDelayInSeconds;
+		private float spawnDelayInSeconds;
 
 		private bool _canSpawn = true;
 
@@ -39,28 +39,8 @@ namespace ShooterProject.Scripts.Spawner
 
 		#endregion
 
-		#region Public Methods
+		#region Life Cycle
 
-		public GameObject SpawnEnemy()
-		{
-			if (_canSpawn)
-			{
-				StartCoroutine(SpawnCoolDownCoroutine(spawnDelayInSeconds));
-				return Spawn();
-			}
-			return null;
-		}
-
-		#endregion
-
-		#region Private Methods
-
-		private IEnumerator SpawnCoolDownCoroutine(float spawnDelayInSeconds)
-		{
-			CanSpawn = false;
-			yield return new WaitForSeconds(spawnDelayInSeconds);
-			CanSpawn = true;
-		}
 		private void OnTriggerEnter(Collider collider)
 		{
 			if (collider.TryGetComponent<Player>(out Player player))
@@ -74,6 +54,32 @@ namespace ShooterProject.Scripts.Spawner
 			{
 				CanSpawn = true;
 			}
+		}
+
+		#endregion
+
+		#region Public Methods
+
+		public GameObject SpawnEnemy()
+		{
+			if (_canSpawn)
+			{
+				var spawnedObject = Spawn();
+				StartCoroutine(SpawnCoolDownCoroutine(spawnDelayInSeconds));
+				return spawnedObject;
+			}
+			return null;
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		private IEnumerator SpawnCoolDownCoroutine(float spawnDelayInSeconds)
+		{
+			CanSpawn = false;
+			yield return new WaitForSeconds(spawnDelayInSeconds);
+			CanSpawn = true;
 		}
 
 		#endregion
