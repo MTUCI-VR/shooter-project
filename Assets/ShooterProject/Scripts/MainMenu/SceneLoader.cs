@@ -5,11 +5,10 @@ using UnityEngine.SceneManagement;
 
 namespace ShooterProject.Scripts.MainMenu
 {
-	[System.Serializable]
 	public class SceneLoader : MonoBehaviour
 	{
 		#region Fields
-        
+
 		public static SceneLoader instance;
 
 		private float _progress;
@@ -26,8 +25,11 @@ namespace ShooterProject.Scripts.MainMenu
 			}
 			private set
 			{
-				_progress = value;
-				OnProgressChanged?.Invoke();
+				if (_progress != value)
+				{
+					_progress = value;
+					OnProgressChanged?.Invoke();
+				}
 			}
 		}
 

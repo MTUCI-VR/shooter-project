@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ShooterProject.Scripts.MainMenu
 {
@@ -16,11 +17,14 @@ namespace ShooterProject.Scripts.MainMenu
 		[SerializeField]
 		private Button quitButton;
 
-        [SerializeField]
-        private GameObject loadingBar;
+		[SerializeField]
+		private GameObject loadingBar;
 
-        [SerializeField]
-        private Image progressBar;
+		[SerializeField]
+		private Image progressBar;
+
+		[SerializeField]
+		private TextMeshProUGUI progressText;
 
 		#endregion
 
@@ -46,17 +50,25 @@ namespace ShooterProject.Scripts.MainMenu
 		{
 			StartCoroutine(SceneLoader.instance.LoadScene(sceneForLoadName));
 
-            startButton.gameObject.SetActive(false);
-            quitButton.gameObject.SetActive(false);
-            loadingBar.SetActive(true);
+			startButton.gameObject.SetActive(false);
+			quitButton.gameObject.SetActive(false);
+			loadingBar.SetActive(true);
 
-			SceneLoader.instance.OnProgressChanged += () => {progressBar.fillAmount = SceneLoader.instance.Progress;};
+			SceneLoader.instance.OnProgressChanged += OnProgressChanged;
 		}
 
 		private void OnQuitButtonClick()
 		{
-			Debug.Log("Quit");
 			Application.Quit();
+		}
+
+		private void OnProgressChanged()
+		{
+			progressBar.fillAmount = SceneLoader.instance.Progress;
+			progressText.text = $"{(int)(SceneLoader.instance.Progress * 100)}%";
+
+			if (SceneLoader.instance.Progress == 1)
+				SceneLoader.instance.OnProgressChanged -= OnProgressChanged;
 		}
 
 		#endregion
