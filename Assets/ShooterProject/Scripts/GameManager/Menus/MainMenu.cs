@@ -1,8 +1,8 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace ShooterProject.Scripts.MainMenu
+namespace ShooterProject.Scripts.GameManager.Menus
 {
 	public class MainMenu : MonoBehaviour
 	{
@@ -20,15 +20,19 @@ namespace ShooterProject.Scripts.MainMenu
 		[SerializeField]
 		private GameObject loadingBar;
 
-		[SerializeField]
-		private Image progressBar;
+		private Image _progressBar;
 
-		[SerializeField]
-		private TextMeshProUGUI progressText;
+		private TextMeshProUGUI _progressText;
 
 		#endregion
 
 		#region Life Cycle
+
+		private void Awake()
+		{
+			_progressBar = loadingBar.GetComponentInChildren<Image>();
+			_progressText = loadingBar.GetComponentInChildren<TextMeshProUGUI>();
+		}
 
 		private void OnEnable()
 		{
@@ -64,10 +68,10 @@ namespace ShooterProject.Scripts.MainMenu
 
 		private void OnProgressChanged()
 		{
-			progressBar.fillAmount = SceneLoader.instance.Progress;
-			progressText.text = $"{(int)(SceneLoader.instance.Progress * 100)}%";
+			_progressBar.fillAmount = SceneLoader.instance.Progress;
+			_progressText.text = $"{(int)(SceneLoader.instance.Progress * 100)}%";
 
-			if (SceneLoader.instance.Progress == 1)
+			if (SceneLoader.instance.SceneIsLoaded)
 				SceneLoader.instance.OnProgressChanged -= OnProgressChanged;
 		}
 

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ShooterProject.Scripts.MainMenu
+namespace ShooterProject.Scripts.GameManager
 {
 	public class SceneLoader : MonoBehaviour
 	{
@@ -32,6 +32,8 @@ namespace ShooterProject.Scripts.MainMenu
 				}
 			}
 		}
+
+		public bool SceneIsLoaded { get; private set; }
 
 		#endregion
 
@@ -63,14 +65,16 @@ namespace ShooterProject.Scripts.MainMenu
 		/// <summary>
 		/// Загружает указанную сцену
 		/// </summary>
-		/// <param name="sceneForLoadName">Название сцены для перехода</param>
-		public IEnumerator LoadScene(string sceneForLoadName)
+		/// <param name="sceneName">Название сцены для перехода</param>
+		public IEnumerator LoadScene(string sceneName)
 		{
-			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName);
+			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneName);
 
 			do
 			{
 				Progress = sceneAsyncOperation.progress * (10f / 9f);
+
+				SceneIsLoaded = sceneAsyncOperation.isDone;
 
 				yield return null;
 
