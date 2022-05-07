@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -17,9 +15,30 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 		#endregion
 
 		#region Properties
+		
+		public AmmoMagazine AttachedMagazine 
+		{
+			get
+			{
+				return _attachedMagazine;
+			}
+
+			private set
+			{
+				_attachedMagazine = value;
+				OnAttachedMagazine?.Invoke();
+			}
+		}
 
 		public bool MagazineAttached => _attachedMagazine != null;
+		
 		public bool HasAmmo => MagazineAttached && _attachedMagazine.HasAmmo;
+
+		#endregion
+
+		#region Events
+
+		public event Action OnAttachedMagazine;
 
 		#endregion
 
@@ -52,7 +71,7 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 		public void DecreaseAmmoCount()
 		{
 			if (MagazineAttached)
-				_attachedMagazine.DecreaseAmmoCount();
+				AttachedMagazine.DecreaseAmmoCount();
 		}
 
 		#endregion
@@ -64,15 +83,15 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 			var interactable = selectEnterEventArg.interactableObject.transform.gameObject;
 			if (interactable.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine))
 			{
-				_attachedMagazine = magazine;
+				AttachedMagazine = magazine;
 			}
 		}
 
 		private void OnObjectDetached(SelectExitEventArgs selectExitEventArg)
 		{
-			if (_attachedMagazine != null)
+			if (AttachedMagazine != null)
 			{
-				_attachedMagazine = null;
+				AttachedMagazine = null;
 			}
 		}
 

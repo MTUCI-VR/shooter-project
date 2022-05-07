@@ -29,8 +29,8 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 			}
 			private set
 			{
-				OnAmmoCountChanged?.Invoke(_ammoCount - value);
 				_ammoCount = value;
+				OnAmmoCountChanged?.Invoke();
 			}
 		}
 
@@ -40,7 +40,7 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 
 		#region Events
 
-		public event Action<int> OnAmmoCountChanged;
+		public event Action OnAmmoCountChanged;
 
 		#endregion
 
