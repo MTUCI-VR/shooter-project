@@ -15,8 +15,8 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 		#endregion
 
 		#region Properties
-		
-		public AmmoMagazine AttachedMagazine 
+
+		public AmmoMagazine AttachedMagazine
 		{
 			get
 			{
@@ -31,7 +31,7 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 		}
 
 		public bool MagazineAttached => _attachedMagazine != null;
-		
+
 		public bool HasAmmo => MagazineAttached && _attachedMagazine.HasAmmo;
 
 		#endregion

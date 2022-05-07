@@ -16,7 +16,7 @@ namespace ShooterProject.Scripts.GameInterface
 		private TextMeshProUGUI _gameInterfaceText;
 
 		private Health _playerHealth;
-		
+
 		#endregion
 
 		#region Life Cycle
