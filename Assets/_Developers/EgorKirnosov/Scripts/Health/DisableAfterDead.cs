@@ -5,7 +5,7 @@ using UnityEngine;
 namespace _Developers.EgorKirnosov.Scripts.Health
 {
 	[RequireComponent(typeof(ShooterProject.Scripts.Actors.Health.Health))]
-	public class DestroyAfterDead : MonoBehaviour
+	public class DisableAfterDead : MonoBehaviour
 	{
 		#region Fields
 
@@ -34,7 +34,7 @@ namespace _Developers.EgorKirnosov.Scripts.Health
 
 		private void OnDied(ShooterProject.Scripts.Actors.Health.Health sendeer)
 		{
-			Destroy(this.gameObject);
+			gameObject.SetActive(false);
 		}
 
 		#endregion

@@ -71,51 +71,57 @@ namespace ShooterProject.Scripts.Waves
 			}
 			else
 			{
-				StartCoroutine(WaveCoroutine());
+				StartCoroutine(SpawnWaweCoroutine());
 			}
 		}
 		private void OnDisable()
 		{
 			foreach (var spawner in spawners)
 				spawner.OnActivationChanged -= OnSpawnerActivationChanged;
-			StopCoroutine(WaveCoroutine());
+			StopCoroutine(SpawnWaweCoroutine());
+
+			if (_waveEnemiesObserver != null)
+				_waveEnemiesObserver.OnEnemiesDied -= OnWaveKilled;
 		}
 
 		#endregion
 
 		#region Private Methods
 
-		private IEnumerator WaveCoroutine()
+		private IEnumerator SpawnWaweCoroutine()
 		{
-			while(CurrentWave < waves.Count)
+			if (CurrentWave >= waves.Count)
 			{
-				OnWavePreparationStarted?.Invoke(currentWaveParams.WavePreparationTime);
-				yield return new WaitForSeconds(currentWaveParams.WavePreparationTime);
-				OnWaveStarted?.Invoke(CurrentWave + 1); //Добавляем 1, так как передаем НОМЕР волны
-
-				_waveEnemiesObserver.Setup(currentWaveParams.EnemiesCount);
-				SetupSpawners();
-
-				var spawnedEnemies = 0;
-
-				while(spawnedEnemies < currentWaveParams.EnemiesCount)
-				{
-					if(_activeSpawners.Count > 0)
-					{
-						var newEnemy = _activeSpawners[0].SpawnEnemy();
-						_waveEnemiesObserver.AddTarget(newEnemy);
-
-						spawnedEnemies++;
-					}
-					yield return new WaitForEndOfFrame();
-				}
-
-				while (!_waveEnemiesObserver.WaveKilled)
-					yield return new WaitForEndOfFrame();
-
-				CurrentWave++;
+				OnWavesEnded?.Invoke();
+				yield break;
 			}
-			OnWavesEnded?.Invoke();
+
+			OnWavePreparationStarted?.Invoke(currentWaveParams.WavePreparationTime);
+			yield return new WaitForSeconds(currentWaveParams.WavePreparationTime);
+
+			OnWaveStarted?.Invoke(CurrentWave + 1); //Добавляем 1, так как передаем НОМЕР волны
+			_waveEnemiesObserver.Setup(currentWaveParams.EnemiesCount);
+			SetupSpawners();
+
+			var spawnedEnemies = 0;
+
+			while (spawnedEnemies < currentWaveParams.EnemiesCount)
+			{
+				if (_activeSpawners.Count > 0)
+				{
+					var newEnemy = _activeSpawners[0].SpawnEnemy();
+					_waveEnemiesObserver.AddTarget(newEnemy);
+
+					spawnedEnemies++;
+				}
+				yield return new WaitForEndOfFrame();
+			}
+			_waveEnemiesObserver.OnEnemiesDied += OnWaveKilled;
+		}
+		private void OnWaveKilled()
+		{
+			CurrentWave++;
+			StartCoroutine(SpawnWaweCoroutine());
 		}
 		private void SingletonInitialization()
 		{

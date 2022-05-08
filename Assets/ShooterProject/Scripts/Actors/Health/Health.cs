@@ -27,9 +27,9 @@ namespace ShooterProject.Scripts.Actors.Health
 			{
 				_health = value;
 				if (value == 0)
-					OnDied?.Invoke();
+					OnDied?.Invoke(this);
 				else
-					OnChanged?.Invoke();
+					OnChanged?.Invoke(this);
 			}
 		}
 
@@ -37,8 +37,8 @@ namespace ShooterProject.Scripts.Actors.Health
 
 		#region Events
 
-		public event Action OnDied;
-		public event Action OnChanged;
+		public event Action<Health> OnDied;
+		public event Action<Health> OnChanged;
 
 		#endregion
 
