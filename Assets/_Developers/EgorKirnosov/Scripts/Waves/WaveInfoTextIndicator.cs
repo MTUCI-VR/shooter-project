@@ -55,7 +55,7 @@ namespace _Developers.EgorKirnosov.Scripts.Waves
 		private IEnumerator WavePreparationTimeIndication(float preparationTime)
 		{
 			var time = preparationTime;
-			while(time > 0)
+			while (time > 0)
 			{
 				textLabel.text = $"Время до следующей волны: {time.ToString()} секунд";
 

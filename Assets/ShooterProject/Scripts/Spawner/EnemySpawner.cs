@@ -35,7 +35,7 @@ namespace ShooterProject.Scripts.Spawner
 
 		#region Event
 
-		public event Action<EnemySpawner,bool> OnActivationChanged;
+		public event Action<EnemySpawner, bool> OnActivationChanged;
 
 		#endregion
 
