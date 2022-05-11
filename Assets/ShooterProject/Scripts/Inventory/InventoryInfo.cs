@@ -7,7 +7,7 @@ namespace ShooterProject.Scripts.Inventory
 	{
 		#region Fields
 
-		private static int _ammoMagazineCount;
+		private static int _ammoCount;
 
 		private static bool _hasKnife;
 
@@ -15,7 +15,7 @@ namespace ShooterProject.Scripts.Inventory
 
 		#region Events
 
-		public static event Action OnAmmoMagazineCountChanged;
+		public static event Action OnAmmoCountChanged;
 
 		public static event Action OnHasKnifeChanged;
 
@@ -23,16 +23,16 @@ namespace ShooterProject.Scripts.Inventory
 
 		#region Properties
 
-		public static int AmmoMagazineCount
+		public static int AmmoCount
 		{
 			get
 			{
-				return _ammoMagazineCount;
+				return _ammoCount;
 			}
 			set
 			{
-				_ammoMagazineCount = value;
-				OnAmmoMagazineCountChanged?.Invoke();
+				_ammoCount = value;
+				OnAmmoCountChanged?.Invoke();
 			}
 		}
 

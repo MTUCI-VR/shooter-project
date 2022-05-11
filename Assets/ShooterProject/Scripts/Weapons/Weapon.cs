@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using ShooterProject.Scripts.Actors.Health;
 using ShooterProject.Scripts.Weapons.Reloading;
+using ShooterProject.Scripts.GameInterface;
 
 namespace ShooterProject.Scripts.Weapons
 {
@@ -148,16 +149,31 @@ namespace ShooterProject.Scripts.Weapons
 				StopCoroutine(_workingShootingCoroutine);
 		}
 
+		private void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
+		{
+			weaponParts.WeaponInterface.gameObject.SetActive(true);
+		}
+		private void OnSelectExited(SelectExitEventArgs selectExitEventArgs)
+		{
+			weaponParts.WeaponInterface.gameObject.SetActive(false);
+		}
+
 		private void AddEventsListeners()
 		{
 			_grabInteractable.activated.AddListener(OnActivateActionPerformed);
 			_grabInteractable.deactivated.AddListener(OnActivateActionCanceled);
+
+			_grabInteractable.selectEntered.AddListener(OnSelectEntered);
+			_grabInteractable.selectExited.AddListener(OnSelectExited);
 		}
 
 		private void RemoveEventsListeners()
 		{
 			_grabInteractable.activated.RemoveListener(OnActivateActionPerformed);
 			_grabInteractable.deactivated.RemoveListener(OnActivateActionCanceled);
+
+			_grabInteractable.selectEntered.RemoveListener(OnSelectEntered);
+			_grabInteractable.selectExited.RemoveListener(OnSelectExited);
 		}
 
 		#endregion

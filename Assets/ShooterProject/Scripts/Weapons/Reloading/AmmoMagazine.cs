@@ -21,13 +21,24 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 
 		#region Properties
 
-		public int AmmoCount => _ammoCount;
+		public int AmmoCount
+		{
+			get => _ammoCount;
+
+			private set
+			{
+				_ammoCount = value;
+				OnAmmoCountChanged?.Invoke();
+			}
+		}
+
+		public bool HasAmmo => _ammoCount > 0;
 
 		#endregion
 
-		#region Properties
+		#region Events
 
-		public bool HasAmmo => _ammoCount > 0;
+		public event Action OnAmmoCountChanged;
 
 		#endregion
 
@@ -38,8 +49,8 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 		/// </summary>
 		public void DecreaseAmmoCount()
 		{
-			if (_ammoCount > 0)
-				_ammoCount--;
+			if (AmmoCount > 0)
+				AmmoCount--;
 		}
 
 		#endregion
