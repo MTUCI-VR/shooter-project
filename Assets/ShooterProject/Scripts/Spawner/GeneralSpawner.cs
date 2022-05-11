@@ -11,6 +11,9 @@ namespace ShooterProject.Scripts.Spawner
 		[SerializeField]
 		private SpawnObjectParams[] objectsForSpawn;
 
+		[SerializeField]
+		private bool poolAutoExpand;
+
 		private GameObjectsPool[] _objectsForSpawnPools;
 
 		private List<int> _spawnWeights = new List<int>();
@@ -28,7 +31,7 @@ namespace ShooterProject.Scripts.Spawner
 			for (int i = 0; i < objectsForSpawn.Length; i++)
 			{
 				_objectsForSpawnPools[i] = new GameObjectsPool(objectsForSpawn[i].maxCount,
-					false,
+					poolAutoExpand,
 					false,
 					objectsForSpawn[i].gameObject,
 					null);
@@ -36,6 +39,16 @@ namespace ShooterProject.Scripts.Spawner
 
 			SortSpawnWeights();
 		}
+
+		#endregion
+
+		#region Public Methods
+
+		public void ChangeObjects(SpawnObjectParams[] objectsForSpawn)
+		{
+			this.objectsForSpawn = objectsForSpawn;
+		}
+
 		#endregion
 
 		#region Private Methods
@@ -53,7 +66,6 @@ namespace ShooterProject.Scripts.Spawner
 
 			_spawnWeights.Sort();
 		}
-
 		private int GetSpawnObjectIndex()
 		{
 			int currentSpawnWeight = 0;
@@ -90,7 +102,7 @@ namespace ShooterProject.Scripts.Spawner
 
 		#region Protected Methods 
 
-		protected void Spawn()
+		protected GameObject Spawn()
 		{
 			int spawnObjectIndex = GetSpawnObjectIndex();
 
@@ -101,7 +113,9 @@ namespace ShooterProject.Scripts.Spawner
 			{
 				objectForSpawn.transform.position = transform.position;
 				objectForSpawn.transform.rotation = transform.rotation;
+				return objectForSpawn;
 			}
+			return null;
 		}
 
 		#endregion
