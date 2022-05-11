@@ -13,6 +13,7 @@ namespace ShooterProject.Scripts.GameInterface
 		[SerializeField]
 		private WaveController waveControler;
 
+		[SerializeField]
 		private TextMeshProUGUI _gameInterfaceText;
 
 		private Health _playerHealth;
@@ -23,7 +24,6 @@ namespace ShooterProject.Scripts.GameInterface
 
 		private void Awake()
 		{
-			_gameInterfaceText = GetComponentInChildren<TextMeshProUGUI>();
 			_playerHealth = Player.instance.PlayerHealth;
 		}
 

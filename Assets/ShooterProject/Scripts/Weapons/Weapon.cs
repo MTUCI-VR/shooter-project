@@ -149,11 +149,11 @@ namespace ShooterProject.Scripts.Weapons
 				StopCoroutine(_workingShootingCoroutine);
 		}
 
-		private void OnEnableWeaponInterface(SelectEnterEventArgs selectEnterEventArgs)
+		private void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
 		{
 			weaponParts.WeaponInterface.gameObject.SetActive(true);
 		}
-		private void OnDisableWeaponInterface(SelectExitEventArgs selectExitEventArgs)
+		private void OnSelectExited(SelectExitEventArgs selectExitEventArgs)
 		{
 			weaponParts.WeaponInterface.gameObject.SetActive(false);
 		}
@@ -163,8 +163,8 @@ namespace ShooterProject.Scripts.Weapons
 			_grabInteractable.activated.AddListener(OnActivateActionPerformed);
 			_grabInteractable.deactivated.AddListener(OnActivateActionCanceled);
 
-			_grabInteractable.selectEntered.AddListener(OnEnableWeaponInterface);
-			_grabInteractable.selectExited.AddListener(OnDisableWeaponInterface);
+			_grabInteractable.selectEntered.AddListener(OnSelectEntered);
+			_grabInteractable.selectExited.AddListener(OnSelectExited);
 		}
 
 		private void RemoveEventsListeners()
@@ -172,8 +172,8 @@ namespace ShooterProject.Scripts.Weapons
 			_grabInteractable.activated.RemoveListener(OnActivateActionPerformed);
 			_grabInteractable.deactivated.RemoveListener(OnActivateActionCanceled);
 
-			_grabInteractable.selectEntered.RemoveListener(OnEnableWeaponInterface);
-			_grabInteractable.selectExited.RemoveListener(OnDisableWeaponInterface);
+			_grabInteractable.selectEntered.RemoveListener(OnSelectEntered);
+			_grabInteractable.selectExited.RemoveListener(OnSelectExited);
 		}
 
 		#endregion

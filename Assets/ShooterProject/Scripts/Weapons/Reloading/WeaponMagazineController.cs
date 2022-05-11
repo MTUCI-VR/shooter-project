@@ -18,10 +18,7 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 
 		public AmmoMagazine AttachedMagazine
 		{
-			get
-			{
-				return _attachedMagazine;
-			}
+			get => _attachedMagazine;
 
 			private set
 			{

@@ -9,33 +9,33 @@ namespace ShooterProject.Scripts.GameInterface
 	{
 		#region Fields
 
-		private TextMeshProUGUI _weaponInterfaceText;
+		[SerializeField]
+		private TextMeshProUGUI weaponInterfaceText;
 
-		private WeaponMagazineController _weaponMagazineController;
+		[SerializeField]
+		private WeaponMagazineController weaponMagazineController;
 
 		private AmmoMagazine _attachedMagazine;
 
-		private int _attachedMagazineAmmoCount;
+		#endregion
+
+		#region Properties
+
+		private int AttachedMagazineAmmoCount => _attachedMagazine ? _attachedMagazine.AmmoCount : 0;
 
 		#endregion
 
 		#region Life Cycle
 
-		private void Awake()
-		{
-			_weaponInterfaceText = GetComponentInChildren<TextMeshProUGUI>();
-			_weaponMagazineController = GetComponentInParent<WeaponMagazineController>();
-		}
-
 		private void OnEnable()
 		{
-			_weaponMagazineController.OnAttachedMagazine += GettingAttachedMagazine;
+			weaponMagazineController.OnAttachedMagazine += GettingAttachedMagazine;
 			InventoryInfo.OnAmmoCountChanged += Print;
 			Print();
 		}
 		private void OnDisable()
 		{
-			_weaponMagazineController.OnAttachedMagazine -= GettingAttachedMagazine;
+			weaponMagazineController.OnAttachedMagazine -= GettingAttachedMagazine;
 			InventoryInfo.OnAmmoCountChanged -= Print;
 		}
 
@@ -45,9 +45,9 @@ namespace ShooterProject.Scripts.GameInterface
 
 		private void GettingAttachedMagazine()
 		{
-			if (_weaponMagazineController.AttachedMagazine != null)
+			if (weaponMagazineController.AttachedMagazine != null)
 			{
-				_attachedMagazine = _weaponMagazineController.AttachedMagazine;
+				_attachedMagazine = weaponMagazineController.AttachedMagazine;
 				_attachedMagazine.OnAmmoCountChanged += Print;
 				Print();
 			}
@@ -61,16 +61,7 @@ namespace ShooterProject.Scripts.GameInterface
 
 		private void Print()
 		{
-			if (_attachedMagazine != null)
-			{
-				_attachedMagazineAmmoCount = _attachedMagazine.AmmoCount;
-			}
-			else
-			{
-				_attachedMagazineAmmoCount = 0;
-			}
-
-			_weaponInterfaceText.text = $"{_attachedMagazineAmmoCount}/{InventoryInfo.AmmoCount}";
+			weaponInterfaceText.text = $"{AttachedMagazineAmmoCount}/{InventoryInfo.AmmoCount}";
 		}
 
 		#endregion

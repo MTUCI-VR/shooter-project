@@ -23,10 +23,8 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 
 		public int AmmoCount
 		{
-			get
-			{
-				return _ammoCount;
-			}
+			get => _ammoCount;
+			
 			private set
 			{
 				_ammoCount = value;
