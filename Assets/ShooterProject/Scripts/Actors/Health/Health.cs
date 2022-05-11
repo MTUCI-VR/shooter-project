@@ -17,6 +17,18 @@ namespace ShooterProject.Scripts.Actors.Health
 
 		#region Properties
 
+		public float MaxHealth
+		{
+			get
+			{
+				return maxHealth;
+			}
+			private set
+			{
+				maxHealth = value;
+			}
+		}
+
 		public float CurrentHealth
 		{
 			get
@@ -60,6 +72,15 @@ namespace ShooterProject.Scripts.Actors.Health
 		public void TakeHit(float damage)
 		{
 			CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
+		}
+
+		/// <summary>
+		/// Пополняет здоровье объекту
+		/// </summary>
+		/// <param name="healthPoints">Кол-во добоваляемого хп</param>
+		public void Heal(float healthPoints)
+		{
+			CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + healthPoints);
 		}
 
 		#endregion
