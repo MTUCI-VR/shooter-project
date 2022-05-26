@@ -412,10 +412,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d206f551db1ab47ad4c4a8a562aa1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneForLoadName: TestScene
-  startButton: {fileID: 52460557}
+  loadingBarObjects:
+    loadingBar: {fileID: 477229196}
+    _progress: {fileID: 1254953630}
+    _progressText: {fileID: 1811631568}
+  menuButtons:
+  - button: {fileID: 52460557}
+    sceneForLoadName: TestScene
   quitButton: {fileID: 1717630583}
-  loadingBar: {fileID: 477229196}
 --- !u!1 &477229196
 GameObject:
   m_ObjectHideFlags: 0
