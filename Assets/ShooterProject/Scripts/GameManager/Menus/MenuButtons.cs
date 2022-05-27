@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ShooterProject.Scripts.GameManager.Menus
 {
 	[System.Serializable]
-	public struct ButtonsForMenus
+	public struct MenuButtons
 	{
         public Button button;
 

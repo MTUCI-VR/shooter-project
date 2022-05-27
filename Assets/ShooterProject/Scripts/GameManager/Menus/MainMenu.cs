@@ -15,9 +15,16 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		#region Life Cycle
 
-		private void Awake()
+		protected override void OnEnable()
 		{
+			base.OnEnable();
 			quitButton.onClick.AddListener(OnQuitButtonClick);
+		}
+		
+		protected override void OnDisable()
+		{
+			base.OnDisable();
+			quitButton.onClick.RemoveListener(OnQuitButtonClick);
 		}
 
 		#endregion
@@ -26,9 +33,6 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		private void OnQuitButtonClick()
 		{
-			Debug.Log("dsa");
-			quitButton.onClick.RemoveListener(OnQuitButtonClick);
-
 			Application.Quit();
 		}
 

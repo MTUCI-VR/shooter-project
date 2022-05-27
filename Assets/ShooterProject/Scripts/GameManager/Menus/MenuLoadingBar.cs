@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ShooterProject.Scripts.GameManager.Menus
 {
 	[System.Serializable]
-	public struct LoadingBarForMenus
+	public struct MenuLoadingBar
 	{
         public GameObject loadingBar;
 

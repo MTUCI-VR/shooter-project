@@ -10,23 +10,23 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		#region Fields
 
 		[SerializeField]
-		protected LoadingBarForMenus loadingBarObjects;
+		protected MenuLoadingBar loadingBarObjects;
 
 		[SerializeField]
-		protected List<ButtonsForMenus> menuButtons;
+		protected List<MenuButtons> menuButtons;
 
 		#endregion
 
 		#region Life Cycle
 
-		private void OnEnable()
+		protected virtual void OnEnable()
 		{
 			foreach (var menuButton in menuButtons)
 			{
 				menuButton.button.onClick.AddListener(delegate{OnMenuButtonClick(menuButton);});
 			}
 		}
-		private void OnDisable()
+		protected virtual void OnDisable()
 		{
 			foreach (var menuButton in menuButtons)
 			{
@@ -38,7 +38,7 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		#region Private Methods
 
-		private void OnMenuButtonClick(ButtonsForMenus buttonForMenus)
+		private void OnMenuButtonClick(MenuButtons buttonForMenus)
 		{
 			StartCoroutine(SceneLoader.instance.LoadScene(buttonForMenus.sceneForLoadName));
 
