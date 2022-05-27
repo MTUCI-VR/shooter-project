@@ -6,8 +6,8 @@ namespace ShooterProject.Scripts.GameManager.Menus
 	[System.Serializable]
 	public struct MenuButtons
 	{
-        public Button button;
+		public Button button;
 
-        public string sceneForLoadName;
+		public string sceneForLoadName;
 	}
 }

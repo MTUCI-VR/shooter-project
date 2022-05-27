@@ -23,14 +23,14 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		{
 			foreach (var menuButton in menuButtons)
 			{
-				menuButton.button.onClick.AddListener(delegate{OnMenuButtonClick(menuButton);});
+				menuButton.button.onClick.AddListener(delegate { OnMenuButtonClick(menuButton); });
 			}
 		}
 		protected virtual void OnDisable()
 		{
 			foreach (var menuButton in menuButtons)
 			{
-				menuButton.button.onClick.RemoveListener(delegate{OnMenuButtonClick(menuButton);});
+				menuButton.button.onClick.RemoveListener(delegate { OnMenuButtonClick(menuButton); });
 			}
 		}
 

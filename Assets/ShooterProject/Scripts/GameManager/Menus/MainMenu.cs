@@ -20,7 +20,7 @@ namespace ShooterProject.Scripts.GameManager.Menus
 			base.OnEnable();
 			quitButton.onClick.AddListener(OnQuitButtonClick);
 		}
-		
+
 		protected override void OnDisable()
 		{
 			base.OnDisable();
