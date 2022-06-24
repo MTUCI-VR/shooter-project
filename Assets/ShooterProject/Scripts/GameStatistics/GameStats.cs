@@ -6,9 +6,9 @@ namespace ShooterProject.Scripts.GameStatistics
     {
         #region Static Properties
 
-		public static int deadEnemyCount { get; set; }
+		public static int DeadEnemyCount { get; set; }
 
-		public static int completeWaveCount { get; set; }
+		public static int CompleteWaveCount { get; set; }
 
         #endregion
     }

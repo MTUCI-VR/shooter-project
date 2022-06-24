@@ -19,7 +19,7 @@ namespace ShooterProject.Scripts.Waves
 
 		public bool WaveKilled { get; private set; }
 
-		public int DeadEnemyCount => _deadEnemyCount;
+		public int TotalDeadEnemyCount { get; private set; }
 
 		#endregion
 
@@ -55,7 +55,9 @@ namespace ShooterProject.Scripts.Waves
 		{
 			_enemies.Remove(enemyHealth);
 			enemyHealth.OnDied -= OnEnemyDied;
+			
 			_deadEnemyCount++;
+			TotalDeadEnemyCount++;
 
 			if (_deadEnemyCount == _waveEnemiesCount)
 			{

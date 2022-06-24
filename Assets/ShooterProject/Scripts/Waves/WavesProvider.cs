@@ -102,7 +102,7 @@ namespace ShooterProject.Scripts.Waves
 			yield return new WaitForSeconds(currentWaveParams.WavePreparationTime);
 
 			OnWaveStarted?.Invoke(CurrentWave + 1); //Добавляем 1, так как передаем НОМЕР волны
-			_waveEnemiesObserver.Setup(currentWaveParams.EnemiesCount); /////////////////////////////////////// Здесь враги = 0
+			_waveEnemiesObserver.Setup(currentWaveParams.EnemiesCount);
 			SetupSpawners();
 
 			var spawnedEnemies = 0;
@@ -118,7 +118,7 @@ namespace ShooterProject.Scripts.Waves
 				}
 				yield return new WaitForEndOfFrame();
 			}
-			_waveEnemiesObserver.OnEnemiesDied -= OnWaveKilled;
+			_waveEnemiesObserver.OnEnemiesDied -= OnWaveKilled; // Иначе метод OnWaveKilled вызывается много раз
 			_waveEnemiesObserver.OnEnemiesDied += OnWaveKilled;
 		}
 		private void OnWaveKilled()

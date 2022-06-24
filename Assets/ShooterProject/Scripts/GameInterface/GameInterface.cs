@@ -45,21 +45,27 @@ namespace ShooterProject.Scripts.GameInterface
 		{
 			_playerHealth.OnChanged += Print;
 			WavesProvider.Instance.OnWavePreparationStarted += Print;
+			WavesProvider.Instance.OnWaveStarted += Print;
 		}
 
 		private void RemoveListeners()
 		{
 			_playerHealth.OnChanged -= Print;
 			WavesProvider.Instance.OnWavePreparationStarted -= Print;
+			WavesProvider.Instance.OnWaveStarted -= Print;
 		}
 
 		private void Print(Health playerHealth)
 		{
-			_gameInterfaceText.text = $"HP: {_playerHealth.CurrentHealth}\n00:{_wavePreparationTime}";
+			_gameInterfaceText.text = $"HP: {_playerHealth.CurrentHealth}\n00:{(int)_wavePreparationTime}";
 		}
 		private void Print(float wavePreparationTime)
 		{
 			StartCoroutine(WavePreparationTimeIndication(wavePreparationTime));
+		}
+		private void Print(int currentWave)
+		{
+			_gameInterfaceText.text = $"HP: {_playerHealth.CurrentHealth}\nВолна {currentWave}";
 		}
 	
 		private IEnumerator WavePreparationTimeIndication(float wavePreparationTime)
@@ -68,7 +74,7 @@ namespace ShooterProject.Scripts.GameInterface
 
 			while (_wavePreparationTime > 0)
 			{
-				_gameInterfaceText.text = $"HP: {_playerHealth.CurrentHealth}\n00:{_wavePreparationTime}";
+				_gameInterfaceText.text = $"HP: {_playerHealth.CurrentHealth}\n00:{(int)_wavePreparationTime}";
 
 				_wavePreparationTime -= Time.deltaTime;
 				yield return new WaitForEndOfFrame();

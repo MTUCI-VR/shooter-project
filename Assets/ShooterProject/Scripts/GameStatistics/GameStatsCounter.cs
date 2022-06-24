@@ -2,6 +2,7 @@ using UnityEngine;
 using ShooterProject.Scripts.Waves;
 using ShooterProject.Scripts.Actors.Health;
 using ShooterProject.Scripts.PlayerScripts;
+using ShooterProject.Scripts.GameManager;
 
 namespace ShooterProject.Scripts.GameStatistics
 {
@@ -12,6 +13,13 @@ namespace ShooterProject.Scripts.GameStatistics
 		public static GameStatsCounter instance;
 
         #endregion
+
+		#region Fields
+
+		[SerializeField]
+		private string _gameStatsSceneName;
+
+		#endregion
 
 		#region Life Cycle
 
@@ -42,33 +50,32 @@ namespace ShooterProject.Scripts.GameStatistics
 
 		private void AddListeners()
 		{
-			//WavesProvider.Instance.OnWavesEnded += OnWavesEnded;
-			//Player.instance.PlayerHealth.OnDied += OnPlayerDied;
+			WavesProvider.Instance.OnWavesEnded += OnWavesEnded;
+			Player.instance.PlayerHealth.OnDied += OnPlayerDied;
 		}
 
 		private void RemoveListeners()
 		{
-			//WavesProvider.Instance.OnWavesEnded -= OnWavesEnded;
-			//Player.instance.PlayerHealth.OnDied -= OnPlayerDied;
+			WavesProvider.Instance.OnWavesEnded -= OnWavesEnded;
+			Player.instance.PlayerHealth.OnDied -= OnPlayerDied;
 		}
 
         private void OnWavesEnded()
         {
             Counting();
-			//GameStatsSceneLoading
+			StartCoroutine(SceneLoader.instance.LoadScene(_gameStatsSceneName));
         }
 
 		private void OnPlayerDied(Health playerHealth)
 		{
 			Counting();
-			//GameStatsSceneLoading
+			StartCoroutine(SceneLoader.instance.LoadScene(_gameStatsSceneName));
 		}
 
 		private void Counting()
 		{
-			Debug.Log($"{WavesProvider.Instance.CurrentWave} Волн пройдено");
-			// GameStats.completeWaveCount = WavesProvider.Instance.CurrentWave;
-			// GameStats.deadEnemyCount += WavesProvider.Instance.waveEnemiesObserver.DeadEnemyCount;
+			GameStats.CompleteWaveCount = WavesProvider.Instance.CurrentWave;
+			GameStats.DeadEnemyCount = WavesProvider.Instance.waveEnemiesObserver.TotalDeadEnemyCount;
 		}
 
 		#endregion
