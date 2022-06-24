@@ -19,6 +19,8 @@ namespace ShooterProject.Scripts.Waves
 
 		public bool WaveKilled { get; private set; }
 
+		public int DeadEnemyCount => _deadEnemyCount;
+
 		#endregion
 
 		#region Events

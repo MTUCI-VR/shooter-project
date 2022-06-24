@@ -45,13 +45,15 @@ namespace ShooterProject.Scripts.Waves
 		#region Properties
 
 		public int CurrentWave { get; private set; }
+
+		public WaveEnemiesObserver waveEnemiesObserver => _waveEnemiesObserver;
 		private WaveParams currentWaveParams => waves[CurrentWave];
 
 		#endregion
 
 		#region LifeCycle
 
-		void Awake()
+		private void Awake()
 		{
 			SingletonInitialization();
 			spawners.ForEach(e => _activeSpawners.Add(e));
@@ -100,7 +102,7 @@ namespace ShooterProject.Scripts.Waves
 			yield return new WaitForSeconds(currentWaveParams.WavePreparationTime);
 
 			OnWaveStarted?.Invoke(CurrentWave + 1); //Добавляем 1, так как передаем НОМЕР волны
-			_waveEnemiesObserver.Setup(currentWaveParams.EnemiesCount);
+			_waveEnemiesObserver.Setup(currentWaveParams.EnemiesCount); /////////////////////////////////////// Здесь враги = 0
 			SetupSpawners();
 
 			var spawnedEnemies = 0;
@@ -116,12 +118,13 @@ namespace ShooterProject.Scripts.Waves
 				}
 				yield return new WaitForEndOfFrame();
 			}
+			_waveEnemiesObserver.OnEnemiesDied -= OnWaveKilled;
 			_waveEnemiesObserver.OnEnemiesDied += OnWaveKilled;
 		}
 		private void OnWaveKilled()
 		{
 			CurrentWave++;
-			StartCoroutine(SpawnWaweCoroutine());
+			StartCoroutine(SpawnWaweCoroutine()); // Вызывается и подписывается повторно на OnEnemiesDied
 		}
 		private void SingletonInitialization()
 		{
