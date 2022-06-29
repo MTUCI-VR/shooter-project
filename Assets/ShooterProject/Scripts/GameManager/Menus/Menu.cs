@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,10 +16,18 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		#endregion
 
+		#region Events
+
+		protected event System.Action OnMenuButtonsClick;
+
+		#endregion
+
 		#region Life Cycle
 
 		protected virtual void OnEnable()
 		{
+			SceneLoader.OnProgressChanged += OnProgressChanged;
+			
 			foreach (var menuButton in menuButtons)
 			{
 				menuButton.button.onClick.AddListener(delegate { OnMenuButtonClick(menuButton); });
@@ -28,6 +35,8 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		}
 		protected virtual void OnDisable()
 		{
+			SceneLoader.OnProgressChanged -= OnProgressChanged;
+
 			foreach (var menuButton in menuButtons)
 			{
 				menuButton.button.onClick.RemoveListener(delegate { OnMenuButtonClick(menuButton); });
@@ -38,23 +47,20 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		#region Private Methods
 
-		private void OnMenuButtonClick(MenuButtons buttonForMenus)
+		private void OnMenuButtonClick(MenuButtons buttonForMenu)
 		{
-			StartCoroutine(SceneLoader.instance.LoadScene(buttonForMenus.sceneForLoadName));
+			StartCoroutine(SceneLoader.LoadScene(buttonForMenu.sceneForLoadName));
 
-			buttonForMenus.button.gameObject.SetActive(false);
+			OnMenuButtonsClick?.Invoke();
+
+			menuButtons.ForEach(menuButton => menuButton.button.gameObject.SetActive(false));
 			loadingBarObjects.loadingBar.SetActive(true);
-
-			SceneLoader.instance.OnProgressChanged += OnProgressChanged;
 		}
 
 		private void OnProgressChanged()
 		{
-			loadingBarObjects._progress.fillAmount = SceneLoader.instance.Progress;
-			loadingBarObjects._progressText.text = $"{(int)(SceneLoader.instance.Progress * 100)}%";
-
-			if (SceneLoader.instance.SceneIsLoaded)
-				SceneLoader.instance.OnProgressChanged -= OnProgressChanged;
+			loadingBarObjects._progress.fillAmount = SceneLoader.Progress;
+			loadingBarObjects._progressText.text = $"{(int)(SceneLoader.Progress * 100)}%";
 		}
 
 		#endregion

@@ -5,19 +5,17 @@ using UnityEngine.SceneManagement;
 
 namespace ShooterProject.Scripts.GameManager
 {
-	public class SceneLoader : MonoBehaviour
+	public static class SceneLoader
 	{
 		#region Fields
 
-		public static SceneLoader instance;
-
-		private float _progress;
+		private static float _progress;
 
 		#endregion
 
 		#region Properties
 
-		public float Progress
+		public static float Progress
 		{
 			get
 			{
@@ -33,30 +31,11 @@ namespace ShooterProject.Scripts.GameManager
 			}
 		}
 
-		public bool SceneIsLoaded { get; private set; }
-
 		#endregion
 
 		#region Events
 
-		public event Action OnProgressChanged;
-
-		#endregion
-
-		#region Life Cycle
-
-		private void Awake()
-		{
-			if (instance == null)
-			{
-				instance = this;
-				DontDestroyOnLoad(gameObject);
-			}
-			else
-			{
-				Destroy(gameObject);
-			}
-		}
+		public static event Action OnProgressChanged;
 
 		#endregion
 
@@ -66,17 +45,17 @@ namespace ShooterProject.Scripts.GameManager
 		/// Загружает указанную сцену
 		/// </summary>
 		/// <param name="sceneName">Название сцены для перехода</param>
-		public IEnumerator LoadScene(string sceneName)
+		public static IEnumerator LoadScene(string sceneName)
 		{
 			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneName);
+
+			Progress = 0;
 
 			do
 			{
 				Progress = sceneAsyncOperation.progress * (10f / 9f);
 
-				SceneIsLoaded = sceneAsyncOperation.isDone;
-
-				yield return null;
+				yield return new WaitForEndOfFrame();
 
 			} while (!sceneAsyncOperation.isDone);
 		}

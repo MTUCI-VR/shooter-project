@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,12 +18,14 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		{
 			base.OnEnable();
 			quitButton.onClick.AddListener(OnQuitButtonClick);
+			OnMenuButtonsClick += DisableQuitButton;
 		}
 
 		protected override void OnDisable()
 		{
 			base.OnDisable();
 			quitButton.onClick.RemoveListener(OnQuitButtonClick);
+			OnMenuButtonsClick -= DisableQuitButton;
 		}
 
 		#endregion
@@ -34,6 +35,11 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		private void OnQuitButtonClick()
 		{
 			Application.Quit();
+		}
+
+		private void DisableQuitButton()
+		{
+			quitButton.gameObject.SetActive(false);
 		}
 
 		#endregion
