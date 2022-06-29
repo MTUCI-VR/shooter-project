@@ -10,6 +10,8 @@ namespace ShooterProject.Scripts.Weapons
 	public class KnifeHitsProvider : MonoBehaviour
 	{
 
+		#region Fields
+
 		[SerializeField]
 		private LayerMask interactionLayer;
 
@@ -32,12 +34,21 @@ namespace ShooterProject.Scripts.Weapons
 		private Vector3 _previousPosition;
 		private Quaternion _previousRotation;
 
+		#endregion
+
+		#region Properties
+
 		public bool CanHit => _xrInteractable.isSelected && _coolDownOver && _target != null;
+
+		#endregion
+
+		#region LifeCycle
 
 		private void Awake()
 		{
 			_xrInteractable = GetComponent<XRBaseInteractable>();
 		}
+
 		private void Start()
 		{
 			_previousPosition = transform.position;
@@ -48,7 +59,6 @@ namespace ShooterProject.Scripts.Weapons
 		{
 			_coolDownOver = true;
 		}
-
 
 		private void Update()
 		{
@@ -83,20 +93,26 @@ namespace ShooterProject.Scripts.Weapons
 			}
 		}
 
+		#endregion
+
+		#region Private Methods
+
 		private void ResetTarget()
         {
 			_target = null;
-        }
+		}
+
 		private void TryHit(float currentVelocity, float angularVelocity)
 		{
 			if (!CanHit)
 				return;
-			if(currentVelocity >= minHitVelocity || angularVelocity >= minHitAngularVelocity)
+			if (currentVelocity >= minHitVelocity || angularVelocity >= minHitAngularVelocity)
 			{
 				_target.TakeHit(damage);
 				StartCoroutine(HitCoolDownCoroutine());
 			}
 		}
+
 		private IEnumerator HitCoolDownCoroutine()
 		{
 			_coolDownOver = false;
@@ -104,7 +120,9 @@ namespace ShooterProject.Scripts.Weapons
 			_coolDownOver = true;
 		}
 
+		#endregion
+
 	}
-	
+
 }
 
