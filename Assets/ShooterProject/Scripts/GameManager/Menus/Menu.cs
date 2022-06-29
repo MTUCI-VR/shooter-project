@@ -27,7 +27,7 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		protected virtual void OnEnable()
 		{
 			SceneLoader.OnProgressChanged += OnProgressChanged;
-			
+
 			foreach (var menuButton in menuButtons)
 			{
 				menuButton.button.onClick.AddListener(delegate { OnMenuButtonClick(menuButton); });
