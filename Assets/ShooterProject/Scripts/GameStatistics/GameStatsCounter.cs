@@ -22,11 +22,6 @@ namespace ShooterProject.Scripts.GameStatistics
 			AddListeners();
 		}
 
-		private void OnDisable()
-		{
-			RemoveListeners();
-		}
-
 		#endregion
 
 		#region Private Methods
@@ -59,6 +54,8 @@ namespace ShooterProject.Scripts.GameStatistics
 		{
 			GameStats.CompleteWaveCount = WavesProvider.Instance.CurrentWave;
 			GameStats.DeadEnemyCount = WavesProvider.Instance.waveEnemiesObserver.TotalDeadEnemyCount;
+
+			RemoveListeners();
 		}
 
 		#endregion
