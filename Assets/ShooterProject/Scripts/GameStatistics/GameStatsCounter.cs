@@ -8,12 +8,6 @@ namespace ShooterProject.Scripts.GameStatistics
 {
 	public class GameStatsCounter : MonoBehaviour
 	{
-		#region Static Fields
-
-		public static GameStatsCounter instance;
-
-        #endregion
-
 		#region Fields
 
 		[SerializeField]
@@ -21,24 +15,13 @@ namespace ShooterProject.Scripts.GameStatistics
 
 		#endregion
 
-		#region Life Cycle
-
-		private void Awake()
-		{
-			if (instance == null)
-			{
-				instance = this;
-			}
-			else
-			{
-				Destroy(gameObject);
-			}
-		}
+		#region Life Cycles
 
 		private void OnEnable()
 		{
 			AddListeners();
 		}
+
 		private void OnDisable()
 		{
 			RemoveListeners();
@@ -51,25 +34,25 @@ namespace ShooterProject.Scripts.GameStatistics
 		private void AddListeners()
 		{
 			WavesProvider.Instance.OnWavesEnded += OnWavesEnded;
-			Player.instance.PlayerHealth.OnDied += OnPlayerDied;
+			Player.Instance.PlayerHealth.OnDied += OnPlayerDied;
 		}
 
 		private void RemoveListeners()
 		{
 			WavesProvider.Instance.OnWavesEnded -= OnWavesEnded;
-			Player.instance.PlayerHealth.OnDied -= OnPlayerDied;
+			Player.Instance.PlayerHealth.OnDied -= OnPlayerDied;
 		}
 
         private void OnWavesEnded()
         {
             Counting();
-			StartCoroutine(SceneLoader.instance.LoadScene(_gameStatsSceneName));
+			StartCoroutine(SceneLoader.LoadScene(_gameStatsSceneName));
         }
 
 		private void OnPlayerDied(Health playerHealth)
 		{
 			Counting();
-			StartCoroutine(SceneLoader.instance.LoadScene(_gameStatsSceneName));
+			StartCoroutine(SceneLoader.LoadScene(_gameStatsSceneName));
 		}
 
 		private void Counting()

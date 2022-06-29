@@ -1,35 +1,34 @@
 using UnityEngine;
 using ShooterProject.Scripts.Actors.Health;
+using ShooterProject.Scripts.General;
 
 namespace ShooterProject.Scripts.PlayerScripts
 {
 	[RequireComponent(typeof(Health))]
-	public class Player : MonoBehaviour
+	public class Player : Singleton<Player>
 	{
 		#region Fields
 
-		public static Player instance;
-
-		public Health PlayerHealth { get; private set; }
+		private Health _playerHealth;
 
 		#endregion
 
-		#region Life Cycle
+		#region  Properties
 
-		private void Awake()
+		public Health PlayerHealth 
 		{
-			if (instance == null)
+			get 
 			{
-				instance = this;
-			}
-			else
-			{
-				Destroy(gameObject);
-			}
+				if (_playerHealth == null)
+				{
+					_playerHealth = GetComponent<Health>();
+				}
 
-			PlayerHealth = GetComponent<Health>();
+				return _playerHealth;
+			}
 		}
 
 		#endregion
+
 	}
 }
