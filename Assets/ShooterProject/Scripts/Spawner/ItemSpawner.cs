@@ -41,17 +41,17 @@ namespace ShooterProject.Scripts.Spawner
 		private void OnTriggerEnter(Collider collider)
 		{
 			if (collider.TryGetComponent<Item>(out Item item))
-			{
+			{Debug.Log("enter");
 				_canSpawn = false;
 			}
 		}
 		private void OnTriggerExit(Collider collider)
 		{
 			if (collider.TryGetComponent<Item>(out Item item))
-			{
-				StartCoroutine(ItemSpawn());
-
+			{Debug.Log("Exit");
 				_canSpawn = true;
+
+				StartCoroutine(ItemSpawn());
 			}
 		}
 

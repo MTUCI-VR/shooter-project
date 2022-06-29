@@ -1,9 +1,8 @@
 using System;
-using UnityEngine;
 
 namespace ShooterProject.Scripts.Inventory
 {
-	public class InventoryInfo : MonoBehaviour
+	public static class InventoryInfo
 	{
 		#region Fields
 

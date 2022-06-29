@@ -2,7 +2,8 @@ using TMPro;
 using UnityEngine;
 using ShooterProject.Scripts.Actors.Health;
 using ShooterProject.Scripts.PlayerScripts;
-using ShooterProject.Scripts.WaveControllers;
+using ShooterProject.Scripts.Waves;
+using System.Collections;
 
 namespace ShooterProject.Scripts.GameInterface
 {
@@ -11,21 +12,13 @@ namespace ShooterProject.Scripts.GameInterface
 		#region Fields
 
 		[SerializeField]
-		private WaveController waveControler;
-
-		[SerializeField]
 		private TextMeshProUGUI _gameInterfaceText;
 
-		private Health _playerHealth;
+		private float _wavePreparationTime;
 
 		#endregion
 
 		#region Life Cycle
-
-		private void Awake()
-		{
-			_playerHealth = Player.instance.PlayerHealth;
-		}
 
 		private void OnEnable()
 		{
@@ -43,19 +36,42 @@ namespace ShooterProject.Scripts.GameInterface
 
 		private void AddListeners()
 		{
-			_playerHealth.OnChanged += Print;
-			waveControler.OnTimeBetweenWavesChanged += Print;
+			Player.instance.PlayerHealth.OnChanged += Print;
+			WavesProvider.Instance.OnWavePreparationStarted += Print;
+			WavesProvider.Instance.OnWaveStarted += Print;
 		}
 
 		private void RemoveListeners()
 		{
-			_playerHealth.OnChanged -= Print;
-			waveControler.OnTimeBetweenWavesChanged -= Print;
+			Player.instance.PlayerHealth.OnChanged -= Print;
+			WavesProvider.Instance.OnWavePreparationStarted -= Print;
+			WavesProvider.Instance.OnWaveStarted -= Print;
 		}
 
-		private void Print()
+		private void Print(Health playerHealth)
 		{
-			_gameInterfaceText.text = $"HP: {_playerHealth.CurrentHealth}\n00:{waveControler.TimeBetweenWavesInSeconds}";
+			_gameInterfaceText.text = $"HP: {Player.instance.PlayerHealth.CurrentHealth}\nВолна {WavesProvider.Instance.CurrentWave + 1}";
+		}
+		private void Print(float wavePreparationTime)
+		{
+			StartCoroutine(WavePreparationTimeIndication(wavePreparationTime));
+		}
+		private void Print(int currentWave)
+		{
+			_gameInterfaceText.text = $"HP: {Player.instance.PlayerHealth.CurrentHealth}\nВолна {currentWave}";
+		}
+	
+		private IEnumerator WavePreparationTimeIndication(float wavePreparationTime)
+		{
+			_wavePreparationTime = wavePreparationTime;
+
+			while (_wavePreparationTime > 0)
+			{
+				_gameInterfaceText.text = $"HP: {Player.instance.PlayerHealth.CurrentHealth}\n00:{(int)_wavePreparationTime}";
+
+				_wavePreparationTime -= Time.deltaTime;
+				yield return new WaitForEndOfFrame();
+			}
 		}
 
 		#endregion
