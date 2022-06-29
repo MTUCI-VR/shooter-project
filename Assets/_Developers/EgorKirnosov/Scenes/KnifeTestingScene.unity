@@ -1612,9 +1612,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   damage: 2
-  hitCoolDownSeconds: 5
+  hitCoolDownSeconds: 1
   minHitVelocity: 1
-  minHitAngularSpeed: 0.5
+  minHitAngularVelocity: 0.5
 --- !u!1 &1254588787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,6 +1877,10 @@ PrefabInstance:
       value: Knife
       objectReference: {fileID: 0}
     - target: {fileID: 8949349839328805347, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
+      propertyPath: m_MovementType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949349839328805347, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 259332478}
@@ -1886,4 +1890,5 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8949349839483874911, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
+    - {fileID: 266729619102508707, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}

@@ -24,12 +24,13 @@ namespace ShooterProject.Scripts.Weapons
 		private float minHitVelocity;
 
 		[SerializeField]
-		private float minHitAngularSpeed;
+		private float minHitAngularVelocity;
 
 		private XRBaseInteractable _xrInteractable;
 		private Health _target;
 		private bool _coolDownOver;
-		private Vector3 _lastPosition;
+		private Vector3 _previousPosition;
+		private Quaternion _previousRotation;
 
 		public bool CanHit => _xrInteractable.isSelected && _coolDownOver && _target != null;
 
@@ -39,7 +40,8 @@ namespace ShooterProject.Scripts.Weapons
 		}
 		private void Start()
 		{
-			_lastPosition = transform.position;
+			_previousPosition = transform.position;
+			_previousRotation = transform.rotation;
 		}
 
 		private void OnEnable()
@@ -50,9 +52,15 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void Update()
 		{
-			var velocity = ((transform.position - _lastPosition) / Time.deltaTime).magnitude;
-			_lastPosition = transform.position;
-			TryHit(velocity);
+			var positionDelta = transform.position - _previousPosition;
+			var velocity = (positionDelta / Time.deltaTime).magnitude;
+
+			var rotationDelta = transform.rotation * Quaternion.Inverse(_previousRotation);
+			var angularVelocity = (rotationDelta.eulerAngles / Time.deltaTime).magnitude;
+
+			_previousPosition = transform.position;
+			_previousRotation = transform.rotation;
+			TryHit(velocity,angularVelocity);
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -79,11 +87,11 @@ namespace ShooterProject.Scripts.Weapons
         {
 			_target = null;
         }
-		private void TryHit(float currentVelocity)
+		private void TryHit(float currentVelocity, float angularVelocity)
 		{
 			if (!CanHit)
 				return;
-			if(currentVelocity >= minHitVelocity)
+			if(currentVelocity >= minHitVelocity || angularVelocity >= minHitAngularVelocity)
 			{
 				_target.TakeHit(damage);
 				StartCoroutine(HitCoolDownCoroutine());
