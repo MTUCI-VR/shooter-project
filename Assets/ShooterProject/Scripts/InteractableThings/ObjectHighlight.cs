@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using ShooterProject.Scripts.Items;
 using ShooterProject.Scripts.General;
 
 namespace ShooterProject.Scripts.InteractableThings
@@ -16,6 +15,7 @@ namespace ShooterProject.Scripts.InteractableThings
 		private int _objectHighlightLayerValue;
 
 		private int _initialLayerValue;
+		
 		private XRGrabInteractable _grabInteractable;
 
 		#endregion
