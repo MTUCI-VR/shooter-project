@@ -7,12 +7,22 @@ namespace ShooterProject.Scripts.Actors.AI
 {
 	public class PatrolBehaviour : IEnemyBehaviour
 	{
+		#region Fields
 
 		private float _patrolAreaRadius;
+
+		#endregion
+
+		#region Constructors
+
 		public PatrolBehaviour(float patrolAreaRadius)
 		{
 			_patrolAreaRadius = patrolAreaRadius;
 		}
+
+		#endregion
+
+		#region Public Methods
 		public Vector3 GetDestinationPoint(NavMeshAgent currentAgent, Transform player)
 		{
 			var randomPoint = new Vector3(Random.Range(-_patrolAreaRadius, _patrolAreaRadius), currentAgent.transform.position.y, Random.Range(-_patrolAreaRadius, _patrolAreaRadius));
@@ -26,5 +36,7 @@ namespace ShooterProject.Scripts.Actors.AI
 			currentAgent.SetDestination(point);
 			return point;
 		}
+
+		#endregion
 	}
 }

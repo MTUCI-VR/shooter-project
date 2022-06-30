@@ -8,9 +8,15 @@ namespace ShooterProject.Scripts.Actors.AI
 	[RequireComponent(typeof(NavMeshAgent))]
 	public class EnemyMovement : MonoBehaviour
 	{
+		#region Private Fields
+
 		private IEnemyBehaviour _behaviour;
 		private NavMeshAgent _agent;
 		private Vector3 _target;
+
+		#endregion
+
+		#region LifeCycle
 
 		private void Awake()
 		{
@@ -26,10 +32,7 @@ namespace ShooterProject.Scripts.Actors.AI
 			if(!_agent.hasPath)
 				_target = _behaviour.SetDestinationPoint(_agent, transform);
 		}
-		private void OnDrawGizmos()
-		{
-			Gizmos.color = Color.red;
-			Gizmos.DrawSphere(_target,5);
-		}
+
+		#endregion
 	}
 }
