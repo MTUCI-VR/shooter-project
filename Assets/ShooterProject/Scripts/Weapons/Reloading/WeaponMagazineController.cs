@@ -9,9 +9,11 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 	{
 		#region Fields
 
+		[SerializeField]
+		private AudioSource _magazineAttachedAudioSource;
+
 		private AmmoMagazine _attachedMagazine;
 		private XRSocketInteractor _socketInteractor;
-
 		#endregion
 
 		#region Properties
@@ -81,6 +83,8 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 			if (interactable.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine))
 			{
 				AttachedMagazine = magazine;
+
+				_magazineAttachedAudioSource.Play();
 			}
 		}
 

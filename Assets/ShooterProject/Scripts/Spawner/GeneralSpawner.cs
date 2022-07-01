@@ -9,10 +9,13 @@ namespace ShooterProject.Scripts.Spawner
 		#region Fields
 
 		[SerializeField]
+		protected AudioSource audioSource;
+
+		[SerializeField]
 		private SpawnObjectParams[] objectsForSpawn;
 
 		[SerializeField]
-		private bool poolAutoExpand;
+		private bool poolAutoExpand;		
 
 		private GameObjectsPool[] _objectsForSpawnPools;
 
@@ -113,6 +116,10 @@ namespace ShooterProject.Scripts.Spawner
 			{
 				objectForSpawn.transform.position = transform.position;
 				objectForSpawn.transform.rotation = transform.rotation;
+
+				if (audioSource != null && audioSource.clip != null)
+					audioSource.Play();
+
 				return objectForSpawn;
 			}
 			return null;
