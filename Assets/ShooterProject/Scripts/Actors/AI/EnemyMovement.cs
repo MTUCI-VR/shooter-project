@@ -10,9 +10,11 @@ namespace ShooterProject.Scripts.Actors.AI
 	{
 		#region Private Fields
 
+		[SerializeField] private Transform player;
+
 		private IEnemyBehaviour _behaviour;
 		private NavMeshAgent _agent;
-		private Vector3 _target;
+		private Coroutine _currentBehaviourCoroutine;
 
 		#endregion
 
@@ -24,13 +26,28 @@ namespace ShooterProject.Scripts.Actors.AI
 		}
 		private void Start()
 		{
-			_behaviour = new PatrolBehaviour(40);
+			ChangeBehaviour(new PatrolBehaviour(40));
 		}
 
-		private void Update()
+		private void OnTriggerEnter(Collider other)
 		{
-			if(!_agent.hasPath)
-				_target = _behaviour.SetDestinationPoint(_agent, transform);
+			if(other.gameObject == player)
+			{
+				ChangeBehaviour(new ChaseBehaviour());
+			}
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		private void ChangeBehaviour(IEnemyBehaviour newBehaviour)
+		{
+			if (_currentBehaviourCoroutine != null)
+				StopCoroutine(_currentBehaviourCoroutine);
+
+			_behaviour = newBehaviour;
+			_currentBehaviourCoroutine = StartCoroutine(_behaviour.GetMovingCoroutine(_agent,player));
 		}
 
 		#endregion

@@ -10,6 +10,7 @@ namespace ShooterProject.Scripts.Actors.AI
 		#region Fields
 
 		private float _patrolAreaRadius;
+		private Vector3 _destination;
 
 		#endregion
 
@@ -22,19 +23,39 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		#endregion
 
-		#region Public Methods
-		public Vector3 GetDestinationPoint(NavMeshAgent currentAgent, Transform player)
+		#region Private Methods
+
+		private void CalculateDestination(NavMeshAgent currentAgent, Transform player)
 		{
 			var randomPoint = new Vector3(Random.Range(-_patrolAreaRadius, _patrolAreaRadius), currentAgent.transform.position.y, Random.Range(-_patrolAreaRadius, _patrolAreaRadius));
 			NavMesh.SamplePosition(randomPoint, out var hit, 200, NavMesh.AllAreas);
-			return hit.position;
+			_destination = hit.position;
 		}
 
-		public Vector3 SetDestinationPoint(NavMeshAgent currentAgent, Transform player)
+		#endregion
+
+		#region Public Methods
+		public Vector3 GetDestinationPoint(NavMeshAgent currentAgent, Transform player)
 		{
-			var point = GetDestinationPoint(currentAgent, player);
-			currentAgent.SetDestination(point);
-			return point;
+			return _destination;
+		}
+
+		public Vector3 NewDestinationPoint(NavMeshAgent currentAgent, Transform player)
+		{
+			CalculateDestination(currentAgent, player);
+			currentAgent.SetDestination(_destination);
+			return _destination;
+		}
+
+		public IEnumerator GetMovingCoroutine(NavMeshAgent currentAgent, Transform player)
+		{
+			while (true)
+			{
+				NewDestinationPoint(currentAgent, player);
+				while (currentAgent.hasPath)
+					yield return new WaitForEndOfFrame();
+				yield return new WaitForEndOfFrame();
+			}
 		}
 
 		#endregion

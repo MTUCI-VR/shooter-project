@@ -7,6 +7,7 @@ namespace ShooterProject.Scripts.Actors.AI
 {
 	public interface IEnemyBehaviour
 	{
+
 		#region Public Methods
 
 		/// <summary>
@@ -23,8 +24,9 @@ namespace ShooterProject.Scripts.Actors.AI
 		/// <param name="currentAgent">Компонент NavMeshAgent текущего агента</param>
 		/// <param name="player">Transform Игрока</param>
 		/// <returns>Координаты точки назначения</returns>
-		public Vector3 SetDestinationPoint(NavMeshAgent currentAgent, Transform player);
+		public Vector3 NewDestinationPoint(NavMeshAgent currentAgent, Transform player);
 
+		public IEnumerator GetMovingCoroutine(NavMeshAgent currentAgent, Transform player);
 		#endregion
 	}
 }

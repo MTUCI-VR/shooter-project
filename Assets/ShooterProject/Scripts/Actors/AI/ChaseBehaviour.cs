@@ -1,18 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class ChaseBehaviour : MonoBehaviour
+namespace ShooterProject.Scripts.Actors.AI
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public class ChaseBehaviour : IEnemyBehaviour
+	{
+		#region Fields
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		private Vector3 _destination;
+
+		#endregion
+
+		#region Public Methods
+
+		public Vector3 GetDestinationPoint(NavMeshAgent currentAgent, Transform player)
+		{
+			return _destination;
+		}
+
+		public Vector3 NewDestinationPoint(NavMeshAgent currentAgent, Transform player)
+		{
+			_destination = player.position;
+			return player.position;
+		}
+
+		public IEnumerator GetMovingCoroutine(NavMeshAgent currentAgent, Transform player)
+		{
+			while(true)
+			{
+				currentAgent.SetDestination(NewDestinationPoint(currentAgent,player));
+				yield return new WaitForEndOfFrame();
+			}
+		}
+
+		#endregion
+	}
 }
