@@ -14408,6 +14408,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1325125115931180029, guid: 5218d3b2614e57e42b1682869209bcbb, type: 3}
+      propertyPath: waves.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325125115931180029, guid: 5218d3b2614e57e42b1682869209bcbb, type: 3}
       propertyPath: spawners.Array.data[0]
       value: 
       objectReference: {fileID: 1716456205}
@@ -14428,8 +14432,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 671518596}
     - target: {fileID: 1325125115931180029, guid: 5218d3b2614e57e42b1682869209bcbb, type: 3}
+      propertyPath: waves.Array.data[0].EnemiesCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325125115931180029, guid: 5218d3b2614e57e42b1682869209bcbb, type: 3}
+      propertyPath: waves.Array.data[2].EnemiesCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325125115931180029, guid: 5218d3b2614e57e42b1682869209bcbb, type: 3}
+      propertyPath: waves.Array.data[0].WavePreparationTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325125115931180029, guid: 5218d3b2614e57e42b1682869209bcbb, type: 3}
       propertyPath: waves.Array.data[1].WavePreparationTime
-      value: 30
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325125115931180029, guid: 5218d3b2614e57e42b1682869209bcbb, type: 3}
+      propertyPath: waves.Array.data[2].WavePreparationTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325125115931180029, guid: 5218d3b2614e57e42b1682869209bcbb, type: 3}
+      propertyPath: waves.Array.data[3].WavePreparationTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1325125115931180030, guid: 5218d3b2614e57e42b1682869209bcbb, type: 3}
       propertyPath: m_Name
