@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace ShooterProject.Scripts.GameManager.Menus
 {
 	public class Menu : MonoBehaviour
@@ -9,16 +8,10 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		#region Fields
 
 		[SerializeField]
-		protected MenuLoadingBar loadingBarObjects;
+		protected List<MenuButton> menuButtons;
 
 		[SerializeField]
-		protected List<MenuButtons> menuButtons;
-
-		#endregion
-
-		#region Events
-
-		protected event System.Action OnMenuButtonsClick;
+		protected MenuLoadingBar loadingBar;
 
 		#endregion
 
@@ -26,41 +19,29 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		protected virtual void OnEnable()
 		{
-			SceneLoader.OnProgressChanged += OnProgressChanged;
-
 			foreach (var menuButton in menuButtons)
 			{
-				menuButton.button.onClick.AddListener(delegate { OnMenuButtonClick(menuButton); });
+				menuButton.onClick += OnMenuButtonClick;
 			}
 		}
 		protected virtual void OnDisable()
 		{
-			SceneLoader.OnProgressChanged -= OnProgressChanged;
-
 			foreach (var menuButton in menuButtons)
 			{
-				menuButton.button.onClick.RemoveListener(delegate { OnMenuButtonClick(menuButton); });
+				menuButton.onClick -= OnMenuButtonClick;
 			}
 		}
 
 		#endregion
 
-		#region Private Methods
+		#region Protected Methods
 
-		private void OnMenuButtonClick(MenuButtons buttonForMenu)
+		protected virtual void OnMenuButtonClick(string sceneForLoadName)
 		{
-			StartCoroutine(SceneLoader.LoadScene(buttonForMenu.sceneForLoadName));
+			StartCoroutine(SceneLoader.LoadScene(sceneForLoadName));
 
-			OnMenuButtonsClick?.Invoke();
-
-			menuButtons.ForEach(menuButton => menuButton.button.gameObject.SetActive(false));
-			loadingBarObjects.loadingBar.SetActive(true);
-		}
-
-		private void OnProgressChanged()
-		{
-			loadingBarObjects._progress.fillAmount = SceneLoader.Progress;
-			loadingBarObjects._progressText.text = $"{(int)(SceneLoader.Progress * 100)}%";
+			menuButtons.ForEach(menuButton => menuButton.gameObject.SetActive(false));
+			loadingBar.gameObject.SetActive(true);
 		}
 
 		#endregion

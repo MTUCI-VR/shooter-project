@@ -4,13 +4,39 @@ using UnityEngine.UI;
 
 namespace ShooterProject.Scripts.GameManager.Menus
 {
-	[System.Serializable]
-	public struct MenuLoadingBar
+	public class MenuLoadingBar : MonoBehaviour
 	{
-		public GameObject loadingBar;
+		#region Fields
 
-		public Image _progress;
+		[SerializeField]
+		private Image progress;
 
-		public TextMeshProUGUI _progressText;
+		[SerializeField]
+		private TextMeshProUGUI progressText;
+
+		#endregion
+
+		#region Life Cycle
+
+		private void OnEnable()
+		{
+			SceneLoader.OnProgressChanged += OnProgressChanged;
+		}
+		private void OnDisable()
+		{
+			SceneLoader.OnProgressChanged -= OnProgressChanged;
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		private void OnProgressChanged()
+		{
+			progress.fillAmount = SceneLoader.Progress;
+			progressText.text = $"{(int)(SceneLoader.Progress * 100)}%";
+		}
+
+		#endregion
 	}
 }

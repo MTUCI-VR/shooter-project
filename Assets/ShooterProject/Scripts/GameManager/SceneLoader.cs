@@ -17,13 +17,13 @@ namespace ShooterProject.Scripts.GameManager
 
 		public static float Progress
 		{
-			get
-			{
-				return _progress;
-			}
+			get => _progress;
+
 			private set
 			{
-				if (_progress != value)
+				var tolerance = 0.000000001;
+
+				if (!(Math.Abs(_progress - value) < tolerance))
 				{
 					_progress = value;
 					OnProgressChanged?.Invoke();
