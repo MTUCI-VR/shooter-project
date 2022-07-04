@@ -5,34 +5,28 @@ using UnityEngine.AI;
 
 namespace ShooterProject.Scripts.Actors.AI
 {
-	public class ChaseBehaviour : IEnemyBehaviour
+	public class ChaseBehaviour : EnemyBehaviour
 	{
 		#region Fields
 
-		private Vector3 _destination;
+		private Transform _target;
+
+		#endregion
+
+		#region Constructors
+
+		public ChaseBehaviour(NavMeshAgent agent, Transform target) : base(agent)
+		{
+			_target = target;
+		}
 
 		#endregion
 
 		#region Public Methods
 
-		public Vector3 GetDestinationPoint(NavMeshAgent currentAgent, Transform player)
+		public override Vector3 GetDestination()
 		{
-			return _destination;
-		}
-
-		public Vector3 NewDestinationPoint(NavMeshAgent currentAgent, Transform player)
-		{
-			_destination = player.position;
-			return player.position;
-		}
-
-		public IEnumerator GetMovingCoroutine(NavMeshAgent currentAgent, Transform player)
-		{
-			while(true)
-			{
-				currentAgent.SetDestination(NewDestinationPoint(currentAgent,player));
-				yield return new WaitForEndOfFrame();
-			}
+			return _target.position;
 		}
 
 		#endregion

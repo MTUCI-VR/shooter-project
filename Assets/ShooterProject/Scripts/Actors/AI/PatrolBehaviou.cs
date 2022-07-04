@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace ShooterProject.Scripts.Actors.AI
 {
-	public class PatrolBehaviour : IEnemyBehaviour
+	public class PatrolBehaviour : EnemyBehaviour
 	{
 		#region Fields
 
@@ -16,7 +16,7 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		#region Constructors
 
-		public PatrolBehaviour(float patrolAreaRadius)
+		public PatrolBehaviour(NavMeshAgent agent, float patrolAreaRadius) : base(agent)
 		{
 			_patrolAreaRadius = patrolAreaRadius;
 		}
@@ -25,37 +25,21 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		#region Private Methods
 
-		private void CalculateDestination(NavMeshAgent currentAgent, Transform player)
+		private void CalculateDestination()
 		{
-			var randomPoint = new Vector3(Random.Range(-_patrolAreaRadius, _patrolAreaRadius), currentAgent.transform.position.y, Random.Range(-_patrolAreaRadius, _patrolAreaRadius));
-			NavMesh.SamplePosition(randomPoint, out var hit, 200, NavMesh.AllAreas);
+			var randomPoint = new Vector3(Random.Range(-_patrolAreaRadius, _patrolAreaRadius), _agent.transform.position.y, Random.Range(-_patrolAreaRadius, _patrolAreaRadius));
+			NavMesh.SamplePosition(randomPoint, out var hit, int.MaxValue, NavMesh.AllAreas);
 			_destination = hit.position;
 		}
 
 		#endregion
 
 		#region Public Methods
-		public Vector3 GetDestinationPoint(NavMeshAgent currentAgent, Transform player)
+		public override Vector3 GetDestination()
 		{
+			if(!_agent.hasPath)
+				CalculateDestination();
 			return _destination;
-		}
-
-		public Vector3 NewDestinationPoint(NavMeshAgent currentAgent, Transform player)
-		{
-			CalculateDestination(currentAgent, player);
-			currentAgent.SetDestination(_destination);
-			return _destination;
-		}
-
-		public IEnumerator GetMovingCoroutine(NavMeshAgent currentAgent, Transform player)
-		{
-			while (true)
-			{
-				NewDestinationPoint(currentAgent, player);
-				while (currentAgent.hasPath)
-					yield return new WaitForEndOfFrame();
-				yield return new WaitForEndOfFrame();
-			}
 		}
 
 		#endregion

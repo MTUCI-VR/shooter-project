@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1787852898163788195}
   - component: {fileID: 1816173639372407227}
   - component: {fileID: -8755819397483655051}
+  - component: {fileID: -7987392567887792164}
   m_Layer: 0
   m_Name: AIEnemy
   m_TagString: Untagged
@@ -161,6 +162,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470a067b1a4ea674d81caa31ec58b7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+--- !u!135 &-7987392567887792164
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787852898163788222}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 20
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1787852898447066838
 GameObject:
   m_ObjectHideFlags: 0
