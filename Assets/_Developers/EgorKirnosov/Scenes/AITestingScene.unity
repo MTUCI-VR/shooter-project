@@ -1437,9 +1437,17 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -8755819397483655051, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
+      propertyPath: attackEndRadius
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8755819397483655051, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 942838452}
+    - target: {fileID: -8755819397483655051, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
+      propertyPath: attackStartRadius
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: -7987392567887792164, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
       propertyPath: m_Radius
       value: 200

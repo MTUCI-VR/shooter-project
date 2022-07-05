@@ -18,6 +18,14 @@ namespace ShooterProject.Scripts.Actors.AI
 		[Min(1)]
 		private float patrolRadius;
 
+		[SerializeField]
+		[Min(0)]
+		private float attackStartRadius;
+
+		[SerializeField]
+		[Min(1)]
+		private float attackEndRadius;
+
 		private EnemyBehaviour _behaviour;
 		private NavMeshAgent _agent;
 		private Health.Health _targetHealth;
@@ -29,6 +37,7 @@ namespace ShooterProject.Scripts.Actors.AI
 		{
 			_agent = GetComponent<NavMeshAgent>();
 		}
+
 		private void Start()
 		{
 			_behaviour = new PatrolBehaviour(_agent, patrolRadius);
@@ -44,11 +53,13 @@ namespace ShooterProject.Scripts.Actors.AI
 				_behaviour = new ChaseBehaviour(_agent, targetTransform);
 			}
 		}
+
 		private void OnEnable()
 		{
 			if (_targetHealth != null)
 				_targetHealth.OnDied += OnTargetDied;
 		}
+
 		private void OnDisable()
 		{
 			if(_targetHealth != null)
@@ -58,7 +69,19 @@ namespace ShooterProject.Scripts.Actors.AI
 		private void Update()
 		{
 			_behaviour.UpdateDestination();
+			if(_behaviour.GetType() == typeof(ChaseBehaviour)
+				&& _agent.hasPath
+				&& _agent.remainingDistance < attackStartRadius)
+			{
+				_behaviour = new AttackBehaviour(_agent);
+			}
+			else if (_behaviour.GetType() == typeof(AttackBehaviour)
+				&& (_agent.transform.position-targetTransform.position).magnitude > attackEndRadius)
+			{ 
+				_behaviour = new ChaseBehaviour(_agent, targetTransform);
+			}
 		}
+
 		#endregion
 
 		#region Private Methods
@@ -66,6 +89,14 @@ namespace ShooterProject.Scripts.Actors.AI
 		private void OnTargetDied()
 		{
 			_behaviour = new GameoverBehaviour(_agent);
+		}
+
+		private void OnDrawGizmosSelected()
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawWireSphere(transform.position, attackStartRadius);
+			Gizmos.color = Color.blue;
+			Gizmos.DrawWireSphere(transform.position, attackEndRadius);
 		}
 
 		#endregion
