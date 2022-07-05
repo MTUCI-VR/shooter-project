@@ -6,7 +6,7 @@ using UnityEngine.AI;
 namespace ShooterProject.Scripts.Actors.AI.Behaviours
 {
 	public class GameoverBehaviour : EnemyBehaviour
-	{ 
+	{
 		#region Constructors
 
 		public GameoverBehaviour(NavMeshAgent agent) : base(agent)

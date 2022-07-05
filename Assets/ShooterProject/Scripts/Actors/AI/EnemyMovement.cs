@@ -50,10 +50,10 @@ namespace ShooterProject.Scripts.Actors.AI
 		{
 			ChangeBehaviour(new PatrolBehaviour(_agent, patrolRadius));
 		}
-		
+
 		private void OnTriggerEnter(Collider other)
 		{
-			if(other.transform == targetTransform
+			if (other.transform == targetTransform
 				&& other.TryGetComponent<Health.Health>(out var targetHealth))
 			{
 				_targetHealth = targetHealth;
@@ -70,21 +70,21 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void OnDisable()
 		{
-			if(_targetHealth != null)
+			if (_targetHealth != null)
 				_targetHealth.OnDied -= OnTargetDied;
 		}
 
 		private void Update()
 		{
 			_behaviour.UpdateDestination();
-			if(_behaviour.GetType() == typeof(ChaseBehaviour)
+			if (_behaviour.GetType() == typeof(ChaseBehaviour)
 				&& _agent.hasPath
 				&& _agent.remainingDistance < attackStartRadius)
 			{
 				ChangeBehaviour(new AttackBehaviour(_agent));
 			}
 			else if (_behaviour.GetType() == typeof(AttackBehaviour)
-				&& (_agent.transform.position-targetTransform.position).magnitude > attackEndRadius)
+				&& (_agent.transform.position - targetTransform.position).magnitude > attackEndRadius)
 			{
 				ChangeBehaviour(new ChaseBehaviour(_agent, targetTransform));
 			}

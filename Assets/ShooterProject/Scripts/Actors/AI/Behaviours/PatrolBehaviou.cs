@@ -27,7 +27,7 @@ namespace ShooterProject.Scripts.Actors.AI.Behaviours
 
 		public override Vector3 GetDestination()
 		{
-			if(!_agent.hasPath)
+			if (!_agent.hasPath)
 				CalculateDestination();
 			return _destination;
 		}

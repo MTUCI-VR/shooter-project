@@ -70,7 +70,7 @@ namespace ShooterProject.Scripts.Weapons
 
 			_previousPosition = transform.position;
 			_previousRotation = transform.rotation;
-			TryHit(velocity,angularVelocity);
+			TryHit(velocity, angularVelocity);
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -98,7 +98,7 @@ namespace ShooterProject.Scripts.Weapons
 		#region Private Methods
 
 		private void ResetTarget()
-        {
+		{
 			_target = null;
 		}
 
