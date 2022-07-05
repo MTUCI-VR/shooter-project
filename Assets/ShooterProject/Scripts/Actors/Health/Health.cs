@@ -17,6 +17,18 @@ namespace ShooterProject.Scripts.Actors.Health
 
 		#region Properties
 
+		public float MaxHealth
+		{
+			get
+			{
+				return maxHealth;
+			}
+			private set
+			{
+				maxHealth = value;
+			}
+		}
+
 		public float CurrentHealth
 		{
 			get
@@ -27,9 +39,9 @@ namespace ShooterProject.Scripts.Actors.Health
 			{
 				_health = value;
 				if (value == 0)
-					OnDied?.Invoke();
+					OnDied?.Invoke(this);
 				else
-					OnChanged?.Invoke();
+					OnChanged?.Invoke(this);
 			}
 		}
 
@@ -37,8 +49,8 @@ namespace ShooterProject.Scripts.Actors.Health
 
 		#region Events
 
-		public event Action OnDied;
-		public event Action OnChanged;
+		public event Action<Health> OnDied;
+		public event Action<Health> OnChanged;
 
 		#endregion
 
@@ -60,6 +72,15 @@ namespace ShooterProject.Scripts.Actors.Health
 		public void TakeHit(float damage)
 		{
 			CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
+		}
+
+		/// <summary>
+		/// Пополняет здоровье объекту
+		/// </summary>
+		/// <param name="healthPoints">Кол-во добоваляемого хп</param>
+		public void Heal(float healthPoints)
+		{
+			CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + healthPoints);
 		}
 
 		#endregion

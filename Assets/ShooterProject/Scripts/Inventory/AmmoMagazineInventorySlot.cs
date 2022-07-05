@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using ShooterProject.Scripts.Weapons.Reloading;
 
 namespace ShooterProject.Scripts.Inventory
 {
@@ -9,11 +9,11 @@ namespace ShooterProject.Scripts.Inventory
 
 		protected override void OnPutInInventory(SelectEnterEventArgs enterEventArgs)
 		{
-			InventoryInfo.AmmoMagazineCount++;
+			InventoryInfo.AmmoCount += enterEventArgs.interactableObject.transform.GetComponent<AmmoMagazine>().AmmoCount;
 		}
 		protected override void OnTakenFromInventory(SelectExitEventArgs exitEventArgs)
 		{
-			InventoryInfo.AmmoMagazineCount--;
+			InventoryInfo.AmmoCount -= exitEventArgs.interactableObject.transform.GetComponent<AmmoMagazine>().AmmoCount;
 		}
 
 		#endregion
