@@ -40,6 +40,14 @@ namespace ShooterProject.Scripts.Actors.AI.Behaviours
 				_agent.SetDestination(newDestination);
 		}
 
+		/// <summary>
+		/// Возвращает название триггера для переключения анимации
+		/// </summary>
+		/// <returns>название триггера</returns>
+		public virtual string GetAnimationTriggerName()
+		{
+			return this.GetType().Name;
+		}
 		#endregion
 	}
 }

@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using ShooterProject.Scripts.Actors.AI.Behaviours;
 using ShooterProject.Scripts.Actors.Health;
+using System;
+
 namespace ShooterProject.Scripts.Actors.AI
 {
 	[RequireComponent(typeof(NavMeshAgent))]
 	public class EnemyMovement : MonoBehaviour
 	{
-		#region Private Fields
+		#region Fields
 
 		[SerializeField]
 		private Transform targetTransform;
@@ -31,6 +33,12 @@ namespace ShooterProject.Scripts.Actors.AI
 		private Health.Health _targetHealth;
 		#endregion
 
+		#region Events
+
+		public event Action<EnemyBehaviour> BehaviourChanged;
+
+		#endregion
+
 		#region LifeCycle
 
 		private void Awake()
@@ -40,7 +48,7 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void Start()
 		{
-			_behaviour = new PatrolBehaviour(_agent, patrolRadius);
+			ChangeBehaviour(new PatrolBehaviour(_agent, patrolRadius));
 		}
 		
 		private void OnTriggerEnter(Collider other)
@@ -50,7 +58,7 @@ namespace ShooterProject.Scripts.Actors.AI
 			{
 				_targetHealth = targetHealth;
 				_targetHealth.OnDied += OnTargetDied;
-				_behaviour = new ChaseBehaviour(_agent, targetTransform);
+				ChangeBehaviour(new ChaseBehaviour(_agent, targetTransform));
 			}
 		}
 
@@ -73,12 +81,12 @@ namespace ShooterProject.Scripts.Actors.AI
 				&& _agent.hasPath
 				&& _agent.remainingDistance < attackStartRadius)
 			{
-				_behaviour = new AttackBehaviour(_agent);
+				ChangeBehaviour(new AttackBehaviour(_agent));
 			}
 			else if (_behaviour.GetType() == typeof(AttackBehaviour)
 				&& (_agent.transform.position-targetTransform.position).magnitude > attackEndRadius)
-			{ 
-				_behaviour = new ChaseBehaviour(_agent, targetTransform);
+			{
+				ChangeBehaviour(new ChaseBehaviour(_agent, targetTransform));
 			}
 		}
 
@@ -86,9 +94,15 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		#region Private Methods
 
+		private void ChangeBehaviour(EnemyBehaviour newBehaviour)
+		{
+			_behaviour = newBehaviour;
+			BehaviourChanged?.Invoke(newBehaviour);
+		}
+
 		private void OnTargetDied()
 		{
-			_behaviour = new GameoverBehaviour(_agent);
+			ChangeBehaviour(new GameoverBehaviour(_agent));
 		}
 
 		private void OnDrawGizmosSelected()

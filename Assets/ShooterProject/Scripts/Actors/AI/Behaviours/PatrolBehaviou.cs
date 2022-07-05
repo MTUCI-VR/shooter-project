@@ -24,11 +24,16 @@ namespace ShooterProject.Scripts.Actors.AI.Behaviours
 		#endregion
 
 		#region Public Methods
+
 		public override Vector3 GetDestination()
 		{
 			if(!_agent.hasPath)
 				CalculateDestination();
 			return _destination;
+		}
+		public override string GetAnimationTriggerName()
+		{
+			return "Moving";
 		}
 
 		#endregion

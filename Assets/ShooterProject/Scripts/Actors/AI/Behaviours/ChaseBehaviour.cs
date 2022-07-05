@@ -28,6 +28,10 @@ namespace ShooterProject.Scripts.Actors.AI.Behaviours
 		{
 			return _target.position;
 		}
+		public override string GetAnimationTriggerName()
+		{
+			return "Moving";
+		}
 
 		#endregion
 	}
