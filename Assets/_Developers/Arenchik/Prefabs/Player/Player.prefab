@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 956085730495875494}
   - component: {fileID: 10468661811497340}
   - component: {fileID: 7483517418466180182}
+  - component: {fileID: 5294981636988604507}
   - component: {fileID: 558263384963933483}
   - component: {fileID: 4827563490860020495}
   - component: {fileID: 101736597727323686}
@@ -320,6 +321,30 @@ MonoBehaviour:
   m_LocomotionProvider: {fileID: 6059419908130389902}
   m_MinHeight: 0
   m_MaxHeight: 1
+--- !u!114 &5294981636988604507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6059419908130389896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 747db378bd66c754881b14d0442eaa10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraPositionAcitonProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Camera Position Aciton Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 25d45ac8-9270-40a5-a3a6-eb98e3380f1d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 7862207684358717888, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &558263384963933483
 MonoBehaviour:
   m_ObjectHideFlags: 0

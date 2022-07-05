@@ -17,13 +17,13 @@ public class MoveSound : MonoBehaviour
 
     private void OnEnable()
     {
-        leftHandMoveAction.action.started += OnActivateActionPerformed;
+        leftHandMoveAction.action.started += OnActivateActionStarted;
         leftHandMoveAction.action.canceled += OnActivateActionCanceled;
     }
 
     private void OnDisable()
     {
-        leftHandMoveAction.action.started -= OnActivateActionPerformed;
+        leftHandMoveAction.action.started -= OnActivateActionStarted;
         leftHandMoveAction.action.canceled -= OnActivateActionCanceled;
     }
 
@@ -31,7 +31,7 @@ public class MoveSound : MonoBehaviour
 
     #region Private Methods
 
-    private void OnActivateActionPerformed(InputAction.CallbackContext callbackContext)
+    private void OnActivateActionStarted(InputAction.CallbackContext callbackContext)
     {
         audioSource.Play();
     }

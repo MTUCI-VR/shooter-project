@@ -3006,6 +3006,10 @@ PrefabInstance:
       propertyPath: m_PlayAudioClipOnSelectEntered
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4827563490860020495, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6059419908130389896, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_Name
       value: Player

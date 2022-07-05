@@ -2,9 +2,12 @@ namespace UnityEngine.XR.Interaction.Toolkit
 {
 	public class FixedCharacterControllerDriver : CharacterControllerDriver
 	{
-		#region LifeCycle
+		#region Public Methods
 
-		private void FixedUpdate()
+		///<summary>
+		/// Обновляет контроллер игрока
+		///</summary>
+		public void UpdateCharacter()
 		{
 			UpdateCharacterController();
 		}
