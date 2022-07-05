@@ -55,7 +55,7 @@ namespace ShooterProject.Scripts.Waves
 		{
 			_enemies.Remove(enemyHealth);
 			enemyHealth.OnDied -= OnEnemyDied;
-			
+
 			_deadEnemyCount++;
 			TotalDeadEnemyCount++;
 

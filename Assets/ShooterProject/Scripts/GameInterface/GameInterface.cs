@@ -60,7 +60,7 @@ namespace ShooterProject.Scripts.GameInterface
 		{
 			_gameInterfaceText.text = $"HP: {Player.Instance.PlayerHealth.CurrentHealth}\nВолна {currentWave}";
 		}
-	
+
 		private IEnumerator WavePreparationTimeIndication(float wavePreparationTime)
 		{
 			_wavePreparationTime = wavePreparationTime;

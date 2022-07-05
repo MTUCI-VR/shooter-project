@@ -15,9 +15,9 @@ namespace ShooterProject.Scripts.PlayerScripts
 
 		#region  Properties
 
-		public Health PlayerHealth 
+		public Health PlayerHealth
 		{
-			get 
+			get
 			{
 				if (_playerHealth == null)
 				{

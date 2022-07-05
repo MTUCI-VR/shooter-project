@@ -38,11 +38,11 @@ namespace ShooterProject.Scripts.GameStatistics
 			Player.Instance.PlayerHealth.OnDied -= OnPlayerDied;
 		}
 
-        private void OnWavesEnded()
-        {
-            Counting();
+		private void OnWavesEnded()
+		{
+			Counting();
 			StartCoroutine(SceneLoader.LoadScene(_gameStatsSceneName));
-        }
+		}
 
 		private void OnPlayerDied(Health playerHealth)
 		{

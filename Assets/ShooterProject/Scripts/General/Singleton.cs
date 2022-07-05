@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ShooterProject.Scripts.General
 {
 	public abstract class Singleton<T> : MonoBehaviour where T : Component
-	{		
+	{
 		#region Fields
 
 		private static T _instance;
@@ -15,9 +15,9 @@ namespace ShooterProject.Scripts.General
 		{
 			get
 			{
-				if ( _instance == null )
+				if (_instance == null)
 				{
-					_instance = FindObjectOfType<T> ();
+					_instance = FindObjectOfType<T>();
 				}
 				return _instance;
 			}
@@ -27,15 +27,15 @@ namespace ShooterProject.Scripts.General
 
 		#region Methods
 
-		protected virtual void Awake ()
+		protected virtual void Awake()
 		{
-			if ( _instance == null )
+			if (_instance == null)
 			{
 				_instance = this as T;
 			}
 		}
 
 		#endregion
-		
+
 	}
 }
