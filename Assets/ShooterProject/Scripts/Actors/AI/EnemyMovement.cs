@@ -20,7 +20,7 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private EnemyBehaviour _behaviour;
 		private NavMeshAgent _agent;
-		private HealthController _targetHealth;
+		private Health.Health _targetHealth;
 		#endregion
 
 		#region LifeCycle
@@ -33,17 +33,28 @@ namespace ShooterProject.Scripts.Actors.AI
 		{
 			_behaviour = new PatrolBehaviour(_agent, patrolRadius);
 		}
-
+		
 		private void OnTriggerEnter(Collider other)
 		{
 			if(other.transform == targetTransform
-				&& other.TryGetComponent<HealthController>(out var targetHealth))
+				&& other.TryGetComponent<Health.Health>(out var targetHealth))
 			{
 				_targetHealth = targetHealth;
 				_targetHealth.OnDied += OnTargetDied;
 				_behaviour = new ChaseBehaviour(_agent, targetTransform);
 			}
 		}
+		private void OnEnable()
+		{
+			if (_targetHealth != null)
+				_targetHealth.OnDied += OnTargetDied;
+		}
+		private void OnDisable()
+		{
+			if(_targetHealth != null)
+				_targetHealth.OnDied -= OnTargetDied;
+		}
+
 		private void Update()
 		{
 			_behaviour.UpdateDestination();
@@ -54,7 +65,7 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void OnTargetDied()
 		{
-
+			_behaviour = new GameoverBehaviour(_agent);
 		}
 
 		#endregion
