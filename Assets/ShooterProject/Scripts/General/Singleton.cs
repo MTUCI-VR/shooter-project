@@ -25,7 +25,7 @@ namespace ShooterProject.Scripts.General
 
 		#endregion
 
-		#region Methods
+		#region Life Cycle
 
 		protected virtual void Awake()
 		{
