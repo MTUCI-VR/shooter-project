@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace ShooterProject.Scripts.Actors.AI
+namespace ShooterProject.Scripts.Actors.AI.Behaviours
 {
 	public abstract class EnemyBehaviour
 	{

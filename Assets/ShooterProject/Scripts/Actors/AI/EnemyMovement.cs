@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using ShooterProject.Scripts.Actors.AI.Behaviours;
+using ShooterProject.Scripts.Actors.Health;
 namespace ShooterProject.Scripts.Actors.AI
 {
 	[RequireComponent(typeof(NavMeshAgent))]
@@ -11,7 +12,7 @@ namespace ShooterProject.Scripts.Actors.AI
 		#region Private Fields
 
 		[SerializeField]
-		private Transform player;
+		private Transform targetTransform;
 
 		[SerializeField]
 		[Min(1)]
@@ -19,7 +20,7 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private EnemyBehaviour _behaviour;
 		private NavMeshAgent _agent;
-
+		private HealthController _targetHealth;
 		#endregion
 
 		#region LifeCycle
@@ -35,18 +36,27 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if(other.transform == player)
+			if(other.transform == targetTransform
+				&& other.TryGetComponent<HealthController>(out var targetHealth))
 			{
-				_behaviour = new ChaseBehaviour(_agent, player);
+				_targetHealth = targetHealth;
+				_targetHealth.OnDied += OnTargetDied;
+				_behaviour = new ChaseBehaviour(_agent, targetTransform);
 			}
 		}
 		private void Update()
 		{
-			_agent.SetDestination(_behaviour.GetDestination());
+			_behaviour.UpdateDestination();
 		}
 		#endregion
 
 		#region Private Methods
+
+		private void OnTargetDied()
+		{
+
+		}
+
 		#endregion
 	}
 }
