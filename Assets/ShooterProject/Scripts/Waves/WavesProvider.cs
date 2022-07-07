@@ -45,13 +45,15 @@ namespace ShooterProject.Scripts.Waves
 		#region Properties
 
 		public int CurrentWave { get; private set; }
+
+		public WaveEnemiesObserver waveEnemiesObserver => _waveEnemiesObserver;
 		private WaveParams currentWaveParams => waves[CurrentWave];
 
 		#endregion
 
 		#region LifeCycle
 
-		void Awake()
+		private void Awake()
 		{
 			SingletonInitialization();
 			spawners.ForEach(e => _activeSpawners.Add(e));
@@ -116,12 +118,13 @@ namespace ShooterProject.Scripts.Waves
 				}
 				yield return new WaitForEndOfFrame();
 			}
+			_waveEnemiesObserver.OnEnemiesDied -= OnWaveKilled; // Иначе метод OnWaveKilled вызывается много раз
 			_waveEnemiesObserver.OnEnemiesDied += OnWaveKilled;
 		}
 		private void OnWaveKilled()
 		{
 			CurrentWave++;
-			StartCoroutine(SpawnWaweCoroutine());
+			StartCoroutine(SpawnWaweCoroutine()); // Вызывается и подписывается повторно на OnEnemiesDied
 		}
 		private void SingletonInitialization()
 		{
