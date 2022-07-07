@@ -49,6 +49,11 @@ namespace ShooterProject.Scripts.Waves
 
 		#region LifeCycle
 
+		new private void Awake()
+		{
+			base.Awake();
+			spawners.ForEach(e => _activeSpawners.Add(e));
+		}
 		private void OnEnable()
 		{
 			foreach (var spawner in spawners)
@@ -56,7 +61,6 @@ namespace ShooterProject.Scripts.Waves
 		}
 		private void Start()
 		{
-			spawners.ForEach(e => _activeSpawners.Add(e));
 
 			if (spawners.Count == 0)
 			{

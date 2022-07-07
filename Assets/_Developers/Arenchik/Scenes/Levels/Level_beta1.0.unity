@@ -814,23 +814,23 @@ MonoBehaviour:
   - {fileID: 1812699556}
   waves:
   - AvailableEnemies:
-    - {fileID: -8226995553099233340, guid: 37d20211751122b4f81a5a8761b3038c, type: 3}
+    - {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
     EnemiesCount: 5
-    WavePreparationTime: 10
+    WavePreparationTime: 5
   - AvailableEnemies:
-    - {fileID: -8226995553099233340, guid: 37d20211751122b4f81a5a8761b3038c, type: 3}
+    - {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
     EnemiesCount: 8
     WavePreparationTime: 10
   - AvailableEnemies:
-    - {fileID: -8226995553099233340, guid: 37d20211751122b4f81a5a8761b3038c, type: 3}
+    - {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
     EnemiesCount: 15
     WavePreparationTime: 15
   - AvailableEnemies:
-    - {fileID: -8226995553099233340, guid: 37d20211751122b4f81a5a8761b3038c, type: 3}
+    - {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
     EnemiesCount: 25
     WavePreparationTime: 30
   - AvailableEnemies:
-    - {fileID: -8226995553099233340, guid: 37d20211751122b4f81a5a8761b3038c, type: 3}
+    - {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
     EnemiesCount: 25
     WavePreparationTime: 30
 --- !u!1 &291435866
