@@ -31,6 +31,8 @@ namespace ShooterProject.Scripts.GameManager
 			}
 		}
 
+		private static bool sceneIsLoaded => Progress == 1;
+
 		#endregion
 
 		#region Events
@@ -49,6 +51,8 @@ namespace ShooterProject.Scripts.GameManager
 		{
 			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneName);
 
+			sceneAsyncOperation.allowSceneActivation = false;
+
 			Progress = 0;
 
 			do
@@ -57,7 +61,9 @@ namespace ShooterProject.Scripts.GameManager
 
 				yield return new WaitForEndOfFrame();
 
-			} while (!sceneAsyncOperation.isDone);
+			} while (!sceneIsLoaded);
+
+			sceneAsyncOperation.allowSceneActivation = true;
 		}
 
 		#endregion
