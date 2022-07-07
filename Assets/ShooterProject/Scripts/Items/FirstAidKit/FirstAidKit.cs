@@ -23,7 +23,7 @@ namespace ShooterProject.Scripts.Items.FirstAidKit
 
 		private void Awake()
 		{
-			_playerHealth = Player.instance.PlayerHealth;
+			_playerHealth = Player.Instance.PlayerHealth;
 
 			_grabInteractable = GetComponent<XRGrabInteractable>();
 		}

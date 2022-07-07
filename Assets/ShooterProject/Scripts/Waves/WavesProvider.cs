@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using ShooterProject.Scripts.Spawner;
 using System;
+using ShooterProject.Scripts.General;
 
 namespace ShooterProject.Scripts.Waves
 {
-	public class WavesProvider : MonoBehaviour
+	public class WavesProvider : Singleton<WavesProvider>
 	{
-		#region Static Fields
-
-		public static WavesProvider Instance;
-
-		#endregion
 
 		#region Fields
 
@@ -45,17 +41,14 @@ namespace ShooterProject.Scripts.Waves
 		#region Properties
 
 		public int CurrentWave { get; private set; }
+
+		public WaveEnemiesObserver waveEnemiesObserver => _waveEnemiesObserver;
 		private WaveParams currentWaveParams => waves[CurrentWave];
 
 		#endregion
 
 		#region LifeCycle
 
-		void Awake()
-		{
-			SingletonInitialization();
-			spawners.ForEach(e => _activeSpawners.Add(e));
-		}
 		private void OnEnable()
 		{
 			foreach (var spawner in spawners)
@@ -63,6 +56,8 @@ namespace ShooterProject.Scripts.Waves
 		}
 		private void Start()
 		{
+			spawners.ForEach(e => _activeSpawners.Add(e));
+
 			if (spawners.Count == 0)
 			{
 #if UNITY_EDITOR
@@ -116,26 +111,13 @@ namespace ShooterProject.Scripts.Waves
 				}
 				yield return new WaitForEndOfFrame();
 			}
+			_waveEnemiesObserver.OnEnemiesDied -= OnWaveKilled; // Иначе метод OnWaveKilled вызывается много раз
 			_waveEnemiesObserver.OnEnemiesDied += OnWaveKilled;
 		}
 		private void OnWaveKilled()
 		{
 			CurrentWave++;
-			StartCoroutine(SpawnWaweCoroutine());
-		}
-		private void SingletonInitialization()
-		{
-			if (Instance == null)
-			{
-				Instance = this;
-			}
-			else
-			{
-				Destroy(this);
-#if UNITY_EDITOR
-				Debug.LogWarning($"Warning: Object of type {nameof(WavesProvider)} already exists");
-#endif
-			}
+			StartCoroutine(SpawnWaweCoroutine()); // Вызывается и подписывается повторно на OnEnemiesDied
 		}
 		private void OnSpawnerActivationChanged(EnemySpawner spawner, bool activationState)
 		{
