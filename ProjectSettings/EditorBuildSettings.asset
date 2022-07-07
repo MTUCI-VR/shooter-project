@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/_Developers/Arenchik/Scenes/GameOverMenu.unity
     guid: 368447bcbdf8c9445a1823c74f17e57b
   - enabled: 1
-    path: Assets/_Developers/Arenchik/Scenes/TestSceneForGameOver.unity
-    guid: 1eeb19dd3f719a647b6a92b2cf0d073b
+    path: Assets/_Developers/Arenchik/Scenes/Levels/Level_beta1.0.unity
+    guid: 57a051d16125c6044b6f151296ff12f7
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 5cc6e7817237f404090b50cf27954328, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ac34593b3b6c949428da43cfab225c40, type: 2}

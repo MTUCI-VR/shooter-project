@@ -100,7 +100,7 @@ namespace ShooterProject.Scripts.Actors.AI
 			BehaviourChanged?.Invoke(newBehaviour);
 		}
 
-		private void OnTargetDied()
+		private void OnTargetDied(Health.Health targetHealth)
 		{
 			ChangeBehaviour(new GameoverBehaviour(_agent));
 		}

@@ -138,15 +138,15 @@ GameObject:
   - component: {fileID: 8465389416428557464}
   - component: {fileID: 8465389416428557465}
   - component: {fileID: 8465389416428557470}
-  - component: {fileID: 8465389416428557471}
   - component: {fileID: 8465389416428557468}
+  - component: {fileID: 8949993829451426176}
   - component: {fileID: 8465389416428557469}
   - component: {fileID: 8465389416428557458}
   - component: {fileID: -864485626784609840}
   - component: {fileID: 3970960807956559727}
   - component: {fileID: -6684827753661850573}
   m_Layer: 0
-  m_Name: AmmoMagazine
+  m_Name: PistolAmmoMagazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,19 +216,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8465389416428557471
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8465389416428557459}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.06591213, y: 0.11758917, z: 0.047998875}
-  m_Center: {x: -0.008529546, y: 0.0034653284, z: 0.00898768}
 --- !u!54 &8465389416428557468
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -245,6 +232,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &8949993829451426176
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465389416428557459}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1702116506876280349, guid: 2c7adaccb840db745bf091678eaaaafa, type: 3}
 --- !u!114 &8465389416428557469
 MonoBehaviour:
   m_ObjectHideFlags: 0

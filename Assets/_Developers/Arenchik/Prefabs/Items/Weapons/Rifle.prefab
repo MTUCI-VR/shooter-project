@@ -55,13 +55,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316938299619100246}
-  m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00126}
-  m_LocalScale: {x: 0.026632322, y: 0.036117803, z: 0.12184789}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00007}
+  m_LocalScale: {x: 0.0321319, y: 0.043576133, z: 0.14700949}
   m_Children: []
   m_Father: {fileID: 4405402620015356148}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.00184, y: -0.000203}
@@ -568,7 +568,7 @@ MonoBehaviour:
     BulletSpawnPoint: {fileID: 2648874202164088682}
     WeaponAudioSource: {fileID: 2648874202380953891}
     ReloadController: {fileID: 2648874200369648819}
-    WeaponInterface: {fileID: 0}
+    WeaponInterface: {fileID: 5866625011635098507}
   weaponParams:
     ShootingDelaySeconds: 0.2
     ShootingDistance: 100
@@ -614,7 +614,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 8
+    m_Bits: 64
   m_AttachTransform: {fileID: 2648874200627294544}
   m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
@@ -5869,7 +5869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4405402620015356148
 RectTransform:
   m_ObjectHideFlags: 0

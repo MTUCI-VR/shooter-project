@@ -120,7 +120,8 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void ResetTarget()
 		{
-			_target.OnDied -= OnTargetDied;
+			if (_target != null)
+				_target.OnDied -= OnTargetDied;
 			_target = null;
 		}
 

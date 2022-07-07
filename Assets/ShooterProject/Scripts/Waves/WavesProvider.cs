@@ -2,18 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ShooterProject.Scripts.Spawner;
+using ShooterProject.Scripts.General;
 using System;
 
 namespace ShooterProject.Scripts.Waves
 {
-	public class WavesProvider : MonoBehaviour
+	public class WavesProvider : Singleton<WavesProvider>
 	{
-		#region Static Fields
-
-		public static WavesProvider Instance;
-
-		#endregion
-
 		#region Fields
 
 		[SerializeField]
@@ -53,9 +48,9 @@ namespace ShooterProject.Scripts.Waves
 
 		#region LifeCycle
 
-		private void Awake()
+		protected override void Awake()
 		{
-			SingletonInitialization();
+			base.Awake();
 			spawners.ForEach(e => _activeSpawners.Add(e));
 		}
 		private void OnEnable()
@@ -125,20 +120,6 @@ namespace ShooterProject.Scripts.Waves
 		{
 			CurrentWave++;
 			StartCoroutine(SpawnWaweCoroutine()); // Вызывается и подписывается повторно на OnEnemiesDied
-		}
-		private void SingletonInitialization()
-		{
-			if (Instance == null)
-			{
-				Instance = this;
-			}
-			else
-			{
-				Destroy(this);
-#if UNITY_EDITOR
-				Debug.LogWarning($"Warning: Object of type {nameof(WavesProvider)} already exists");
-#endif
-			}
 		}
 		private void OnSpawnerActivationChanged(EnemySpawner spawner, bool activationState)
 		{

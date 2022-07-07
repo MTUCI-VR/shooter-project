@@ -2429,7 +2429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd498aabec4a72d4a9886bded758c094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneForLoadName: TestSceneForGameOver
+  sceneForLoadName: Level_beta1.0
 --- !u!1 &1147362533
 GameObject:
   m_ObjectHideFlags: 0
