@@ -1,58 +1,85 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using ShooterProject.Scripts.PlayerScripts;
+using System;
 
 namespace ShooterProject.Scripts.Spawner
 {
 	public class EnemySpawner : GeneralSpawner
 	{
 		#region Fields
-
 		[SerializeField]
-		private int spawnDelayInSeconds;
+		private float spawnDelayInSeconds;
 
 		private bool _canSpawn = true;
 
 		#endregion
 
-		#region  LifeCycle
+		#region Properties
 
-		private void Start()
+		public bool CanSpawn
 		{
-			StartCoroutine(EnemySpawn());
+			get
+			{
+				return _canSpawn;
+			}
+			private set
+			{
+				OnActivationChanged?.Invoke(this, value);
+				_canSpawn = value;
+			}
 		}
 
 		#endregion
 
-		#region Private Methods
+		#region Event
 
-		private IEnumerator EnemySpawn()
-		{
-			while (true)
-			{
-				yield return new WaitForSeconds(spawnDelayInSeconds);
+		public event Action<EnemySpawner, bool> OnActivationChanged;
 
-				if (!_canSpawn) yield break;
+		#endregion
 
-				Spawn();
-			}
-		}
+		#region Life Cycle
 
 		private void OnTriggerEnter(Collider collider)
 		{
 			if (collider.TryGetComponent<Player>(out Player player))
 			{
-				_canSpawn = false;
+				CanSpawn = false;
 			}
 		}
 		private void OnTriggerExit(Collider collider)
 		{
 			if (collider.TryGetComponent<Player>(out Player player))
 			{
-				StartCoroutine(EnemySpawn());
-
-				_canSpawn = true;
+				CanSpawn = true;
 			}
+		}
+
+		#endregion
+
+		#region Public Methods
+
+		public GameObject SpawnEnemy()
+		{
+			if (_canSpawn)
+			{
+				var spawnedObject = Spawn();
+				StartCoroutine(SpawnCoolDownCoroutine(spawnDelayInSeconds));
+				return spawnedObject;
+			}
+			return null;
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		private IEnumerator SpawnCoolDownCoroutine(float spawnDelayInSeconds)
+		{
+			CanSpawn = false;
+			yield return new WaitForSeconds(spawnDelayInSeconds);
+			CanSpawn = true;
 		}
 
 		#endregion

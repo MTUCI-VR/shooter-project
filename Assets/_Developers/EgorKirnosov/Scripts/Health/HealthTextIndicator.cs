@@ -38,11 +38,11 @@ namespace _Developers.EgorKirnosov.Scripts.Health
 
 		#region Private Methods
 
-		public void OnHit()
+		public void OnHit(ShooterProject.Scripts.Actors.Health.Health sender)
 		{
 			textLabel.text = targetHealth.CurrentHealth.ToString();
 		}
-		public void OnHpZeroed()
+		public void OnHpZeroed(ShooterProject.Scripts.Actors.Health.Health sender)
 		{
 			textLabel.text = "Dead";
 		}

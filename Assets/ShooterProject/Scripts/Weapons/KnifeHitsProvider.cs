@@ -51,26 +51,27 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void Start()
 		{
-			_previousPosition = transform.position;
-			_previousRotation = transform.rotation;
+			SetupPositionRotation();
 		}
 
 		private void OnEnable()
 		{
 			_coolDownOver = true;
 		}
-
+		private void OnDisable()
+		{
+			ResetTarget();
+		}
 		private void Update()
 		{
-			var positionDelta = transform.position - _previousPosition;
-			var velocity = (positionDelta / Time.deltaTime).magnitude;
+			if (CanHit)
+			{
+				var velocity = GetVelocity();
+				var angularVelocity = GetAngularVelocity();
 
-			var rotationDelta = transform.rotation * Quaternion.Inverse(_previousRotation);
-			var angularVelocity = (rotationDelta.eulerAngles / Time.deltaTime).magnitude;
-
-			_previousPosition = transform.position;
-			_previousRotation = transform.rotation;
-			TryHit(velocity, angularVelocity);
+				SetupPositionRotation();
+				TryHit(velocity, angularVelocity);
+			}
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -86,7 +87,7 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void OnTriggerExit(Collider other)
 		{
-			if (other.TryGetComponent(typeof(Health), out var otherHealth)
+			if (other.TryGetComponent<Health>(out var otherHealth)
 			&& _target == otherHealth)
 			{
 				ResetTarget();
@@ -97,15 +98,34 @@ namespace ShooterProject.Scripts.Weapons
 
 		#region Private Methods
 
+		private float GetAngularVelocity()
+		{
+			var rotationDelta = transform.rotation * Quaternion.Inverse(_previousRotation);
+			var angularVelocity = (rotationDelta.eulerAngles / Time.deltaTime).magnitude;
+			return angularVelocity;
+		}
+
+		private float GetVelocity()
+		{
+			var positionDelta = transform.position - _previousPosition;
+			var velocity = (positionDelta / Time.deltaTime).magnitude;
+			return velocity;
+		}
+
+		private void SetupPositionRotation()
+		{
+			_previousPosition = transform.position;
+			_previousRotation = transform.rotation;
+		}
+
 		private void ResetTarget()
 		{
+			_target.OnDied -= ResetTarget;
 			_target = null;
 		}
 
 		private void TryHit(float currentVelocity, float angularVelocity)
 		{
-			if (!CanHit)
-				return;
 			if (currentVelocity >= minHitVelocity || angularVelocity >= minHitAngularVelocity)
 			{
 				_target.TakeHit(damage);

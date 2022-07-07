@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using ShooterProject.Scripts.Weapons.Reloading;
+using ShooterProject.Scripts.GameInterface;
 
 namespace ShooterProject.Scripts.Weapons
 {
@@ -11,5 +12,7 @@ namespace ShooterProject.Scripts.Weapons
 		public Transform BulletSpawnPoint;
 		public AudioSource WeaponAudioSource;
 		public WeaponMagazineController ReloadController;
+
+		public WeaponInterface WeaponInterface;
 	}
 }
