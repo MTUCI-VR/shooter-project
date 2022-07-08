@@ -256,6 +256,10 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8949349839328805347, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 8949349839483874908, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
       propertyPath: m_Enabled
       value: 1

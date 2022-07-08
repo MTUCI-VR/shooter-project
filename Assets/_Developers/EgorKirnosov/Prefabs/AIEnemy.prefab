@@ -345,7 +345,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 250
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &2018170572
 Animator:
@@ -391,7 +391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470a067b1a4ea674d81caa31ec58b7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTransform: {fileID: 0}
   patrolRadius: 50
   attackStartRadius: 1.92
   attackEndRadius: 3.3
