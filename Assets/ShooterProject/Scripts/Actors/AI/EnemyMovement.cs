@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using ShooterProject.Scripts.Actors.AI.Behaviours;
 using ShooterProject.Scripts.Actors.Health;
 using System;
+using ShooterProject.Scripts.PlayerScripts;
 
 namespace ShooterProject.Scripts.Actors.AI
 {
@@ -12,9 +13,6 @@ namespace ShooterProject.Scripts.Actors.AI
 	public class EnemyMovement : MonoBehaviour
 	{
 		#region Fields
-
-		[SerializeField]
-		private Transform targetTransform;
 
 		[SerializeField]
 		[Min(1)]
@@ -31,6 +29,7 @@ namespace ShooterProject.Scripts.Actors.AI
 		private EnemyBehaviour _behaviour;
 		private NavMeshAgent _agent;
 		private Health.Health _targetHealth;
+		private Transform _targetTransform;
 		#endregion
 
 		#region Events
@@ -53,12 +52,13 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.transform == targetTransform
+			if (other.TryGetComponent<Player>(out var player)
 				&& other.TryGetComponent<Health.Health>(out var targetHealth))
 			{
+				_targetTransform = player.transform;
 				_targetHealth = targetHealth;
 				_targetHealth.OnDied += OnTargetDied;
-				ChangeBehaviour(new ChaseBehaviour(_agent, targetTransform));
+				ChangeBehaviour(new ChaseBehaviour(_agent, _targetTransform));
 			}
 		}
 
@@ -84,9 +84,9 @@ namespace ShooterProject.Scripts.Actors.AI
 				ChangeBehaviour(new AttackBehaviour(_agent));
 			}
 			else if (_behaviour.GetType() == typeof(AttackBehaviour)
-				&& (_agent.transform.position - targetTransform.position).magnitude > attackEndRadius)
+				&& (_agent.transform.position - _targetTransform.position).magnitude > attackEndRadius)
 			{
-				ChangeBehaviour(new ChaseBehaviour(_agent, targetTransform));
+				ChangeBehaviour(new ChaseBehaviour(_agent, _targetTransform));
 			}
 		}
 

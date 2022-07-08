@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 1787852898163788192}
   - component: {fileID: -8755819397483655051}
   - component: {fileID: 2018170571}
+  - component: {fileID: 3002807527685915704}
   m_Layer: 0
   m_Name: AIEnemy
   m_TagString: Untagged
@@ -344,7 +345,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 200
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &2018170572
 Animator:
@@ -392,8 +393,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
   patrolRadius: 50
-  attackStartRadius: 5
-  attackEndRadius: 8
+  attackStartRadius: 1.92
+  attackEndRadius: 3.3
 --- !u!114 &2018170571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +407,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3370c6380e8754544a5c5e49d9068059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3002807527685915704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787852898163788222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed61305b33945de4b928514fdd513714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnWeight: 1
+  maxCount: 50
 --- !u!1 &1787852898447066838
 GameObject:
   m_ObjectHideFlags: 0
