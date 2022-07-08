@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 4610615785941353265}
   - component: {fileID: 2669590455437261434}
   - component: {fileID: 1566357717454994965}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RifleAmmoMagazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 5945951803646492455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 5743321490774022745}
   m_Father: {fileID: 0}

@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4335012585450859902}
   - component: {fileID: 4175982471964065398}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grab Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,6 +244,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knife Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8949349839328805345, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8949349839328805347, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
       propertyPath: m_MovementType
       value: 2
@@ -255,6 +259,10 @@ PrefabInstance:
     - target: {fileID: 8949349839483874908, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949349839483875234, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}

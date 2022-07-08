@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7742310556945443876}
   - component: {fileID: 3501067674426277885}
   - component: {fileID: 7420941858158426106}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2667436857848354399}
   - component: {fileID: 8597981998033828305}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Grab Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,6 +261,51 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &4531781101427294858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1410444332520693566}
+  - component: {fileID: 6386724298845136909}
+  m_Layer: 6
+  m_Name: Trunk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1410444332520693566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4531781101427294858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5281881135428797342}
+  m_Father: {fileID: 5281881133465147462}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6386724298845136909
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4531781101427294858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2063891, y: 0.037402578, z: 0.033528127}
+  m_Center: {x: 0.014729768, y: 0.0142605975, z: 1.7023871e-15}
 --- !u!1 &5111813657002184537
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +320,7 @@ GameObject:
   - component: {fileID: 4388090505250590387}
   - component: {fileID: 5299697958467416235}
   - component: {fileID: 5092698650431284288}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: WeaponInterface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,17 +442,15 @@ GameObject:
   - component: {fileID: 5281881133465147461}
   - component: {fileID: 5281881133465147460}
   - component: {fileID: 5281881133465147467}
-  - component: {fileID: 5745508523134948748}
   - component: {fileID: 5281881133465147466}
   - component: {fileID: 5281881133465147465}
   - component: {fileID: 5281881133465147464}
   - component: {fileID: 5281881133465147463}
   - component: {fileID: 5281881133465147456}
-  - component: {fileID: 5281881133465147457}
   - component: {fileID: -1845143372078581884}
   - component: {fileID: -7468151293433016071}
   - component: {fileID: -6530329370754551926}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,11 +464,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5281881133465147471}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.000002995133, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0000000018626451, y: 0, z: -0.00000014415747}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5281881135428797342}
+  - {fileID: 1410444332520693566}
   - {fileID: 5281881135017567858}
   - {fileID: 5281881135480120784}
   - {fileID: 5281881133744389540}
@@ -495,21 +538,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.062037416, y: 0.09195341, z: 0.033528127}
-  m_Center: {x: -0.056992408, y: -0.05037193, z: -0.0002477914}
---- !u!65 &5745508523134948748
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5281881133465147471}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.2063891, y: 0.032557596, z: 0.033528127}
-  m_Center: {x: 0.014729768, y: 0.016683089, z: 0}
+  m_Size: {x: 0.062037416, y: 0.09026159, z: 0.033528127}
+  m_Center: {x: -0.056992408, y: -0.05121784, z: -0.0002477914}
 --- !u!54 &5281881133465147466
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -737,19 +767,6 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
---- !u!135 &5281881133465147457
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5281881133465147471}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.017847944
-  m_Center: {x: -0.05, y: -0.1, z: 0}
 --- !u!114 &-1845143372078581884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -802,6 +819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5281881133744389540}
   - component: {fileID: 7268512344003930593}
+  - component: {fileID: 688162544113430490}
   m_Layer: 0
   m_Name: MagazineAttachmentPoint
   m_TagString: Untagged
@@ -919,6 +937,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &688162544113430490
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5281881133744389547}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.017847944
+  m_Center: {x: -0.01, y: -0.05, z: 0}
 --- !u!1 &5281881135017567857
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,7 +961,7 @@ GameObject:
   - component: {fileID: 5281881135017567858}
   - component: {fileID: 5281881135017567852}
   - component: {fileID: 5281881135017567859}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5790,7 +5821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5281881135428797342}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5804,13 +5835,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5281881135428797341}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.70710665, z: -0, w: 0.707107}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5281881133465147462}
+  m_Father: {fileID: 1410444332520693566}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &5281881135480120790
 GameObject:
   m_ObjectHideFlags: 0
@@ -5821,7 +5852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5281881135480120784}
   - component: {fileID: 5281881135480120791}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5947,7 +5978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1705207040696471158}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AttachPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

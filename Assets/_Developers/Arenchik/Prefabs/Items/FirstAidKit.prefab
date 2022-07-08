@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 2727989309512672548}
   - component: {fileID: 4337579154650270141}
   - component: {fileID: 3971390581858195021}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FirstAidKit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
