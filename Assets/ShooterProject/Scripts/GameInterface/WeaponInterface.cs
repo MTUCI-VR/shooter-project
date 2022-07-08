@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 using ShooterProject.Scripts.Weapons.Reloading;
 using ShooterProject.Scripts.Inventory;
 
@@ -10,7 +11,7 @@ namespace ShooterProject.Scripts.GameInterface
 		#region Fields
 
 		[SerializeField]
-		private TextMeshProUGUI weaponInterfaceText;
+		private List<TextMeshProUGUI> weaponInterfaceTexts;
 
 		[SerializeField]
 		private WeaponMagazineController weaponMagazineController;
@@ -61,7 +62,7 @@ namespace ShooterProject.Scripts.GameInterface
 
 		private void Print()
 		{
-			weaponInterfaceText.text = $"{AttachedMagazineAmmoCount}/{InventoryInfo.AmmoCount}";
+			weaponInterfaceTexts.ForEach(weaponInterface => weaponInterface.text = $"{AttachedMagazineAmmoCount}/{InventoryInfo.AmmoCount}");
 		}
 
 		#endregion
