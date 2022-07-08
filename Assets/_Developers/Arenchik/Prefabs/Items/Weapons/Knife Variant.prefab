@@ -177,8 +177,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 266729619102508707, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
+      propertyPath: minHitVelocity
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 266729619102508707, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
       propertyPath: minHitAngularVelocity
-      value: 0.5
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 7403020421030325452, guid: b95b7f3d8fb423e4280291d551a80580, type: 3}
       propertyPath: audioSource

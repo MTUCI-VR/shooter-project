@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8064410674784566439}
   - component: {fileID: 3027513509006617363}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Grab Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: -864485626784609840}
   - component: {fileID: 3970960807956559727}
   - component: {fileID: -6684827753661850573}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: PistolMagazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

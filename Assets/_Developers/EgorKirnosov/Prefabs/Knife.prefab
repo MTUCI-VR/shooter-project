@@ -246,8 +246,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   damage: 2
-  hitCoolDownSeconds: 2
-  minHitVelocity: 1
+  hitCoolDownSeconds: 1
+  minHitVelocity: 0.5
   minHitAngularVelocity: 200
 --- !u!1 &8949349839483875234
 GameObject:

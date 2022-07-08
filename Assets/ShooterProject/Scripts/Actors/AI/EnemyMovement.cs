@@ -113,6 +113,13 @@ namespace ShooterProject.Scripts.Actors.AI
 			Gizmos.DrawWireSphere(transform.position, attackEndRadius);
 		}
 
+		private void OnDrawGizmos()
+		{
+			if(_behaviour == null) return;
+			Gizmos.color = Color.green;
+			Gizmos.DrawSphere(_behaviour.GetDestination(),2);
+		}
+
 		#endregion
 	}
 }

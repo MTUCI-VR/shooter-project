@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: -8755819397483655051}
   - component: {fileID: 2018170571}
   - component: {fileID: 3002807527685915704}
+  - component: {fileID: -5063632150518963222}
   m_Layer: 0
   m_Name: AIEnemy
   m_TagString: Untagged
@@ -322,7 +323,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.85
-  m_Speed: 3.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -345,7 +346,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 250
+  m_Radius: 25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &2018170572
 Animator:
@@ -420,6 +421,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnWeight: 1
   maxCount: 50
+--- !u!114 &-5063632150518963222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787852898163788222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20cc1169918396c47afc3054ec100150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1787852898447066838
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,14 +595,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787852898751960865}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.48}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.47}
   m_LocalScale: {x: 1, y: 1, z: 0.07}
   m_Children:
   - {fileID: 1787852898447066839}
   m_Father: {fileID: 1787852898163788223}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}

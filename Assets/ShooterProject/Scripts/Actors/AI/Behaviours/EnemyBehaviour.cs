@@ -37,7 +37,9 @@ namespace ShooterProject.Scripts.Actors.AI.Behaviours
 		{
 			var newDestination = GetDestination();
 			if (_agent.destination != newDestination)
+			{
 				_agent.SetDestination(newDestination);
+			}
 		}
 
 		/// <summary>
