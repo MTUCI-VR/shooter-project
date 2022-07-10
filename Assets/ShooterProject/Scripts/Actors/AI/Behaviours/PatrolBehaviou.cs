@@ -50,7 +50,6 @@ namespace ShooterProject.Scripts.Actors.AI.Behaviours
 					_agent.transform.position.y, Random.Range(-_patrolAreaRadius, _patrolAreaRadius));
 				NavMesh.SamplePosition(randomPoint, out hit, int.MaxValue, NavMesh.AllAreas);
 			} while (!_agent.CalculatePath(hit.position, path));
-			Debug.Log(path.status);
 			_destination = hit.position;
 		}
 
