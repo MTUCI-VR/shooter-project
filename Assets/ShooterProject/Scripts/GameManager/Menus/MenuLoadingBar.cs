@@ -20,11 +20,11 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		private void OnEnable()
 		{
-			SceneLoader.OnProgressChanged += OnProgressChanged;
+			SceneLoader.onProgressChanged += OnProgressChanged;
 		}
 		private void OnDisable()
 		{
-			SceneLoader.OnProgressChanged -= OnProgressChanged;
+			SceneLoader.onProgressChanged -= OnProgressChanged;
 		}
 
 		#endregion

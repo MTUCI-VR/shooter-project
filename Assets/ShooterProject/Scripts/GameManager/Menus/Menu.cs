@@ -36,9 +36,15 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		#region Protected Methods
 
-		protected virtual void OnMenuButtonClick(string sceneForLoadName)
+		protected virtual void OnMenuButtonClick(string sceneForLoadName, SceneType sceneType)
 		{
-			StartCoroutine(SceneLoader.LoadScene(sceneForLoadName, gameObject.scene.name, SceneType.Game));
+			if (sceneType == SceneType.Quit)
+			{
+				Application.Quit();
+				return;
+			}
+
+			StartCoroutine(SceneLoader.LoadScene(sceneForLoadName, gameObject.scene.name, sceneType));
 
 			menuButtons.ForEach(menuButton => menuButton.gameObject.SetActive(false));
 			loadingBar.gameObject.SetActive(true);

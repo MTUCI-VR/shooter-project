@@ -10,6 +10,9 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		#region Fields
 
 		[SerializeField]
+		private SceneType sceneType;
+
+		[SerializeField]
 		private string sceneForLoadName;
 
 		private Button _button;
@@ -18,7 +21,7 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		#region Events
 
-		public event Action<string> onClick;
+		public event Action<string, SceneType> onClick;
 
 		#endregion
 
@@ -44,7 +47,7 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		private void OnClick()
 		{
-			onClick?.Invoke(sceneForLoadName);
+			onClick?.Invoke(sceneForLoadName, sceneType);
 		}
 
 		#endregion

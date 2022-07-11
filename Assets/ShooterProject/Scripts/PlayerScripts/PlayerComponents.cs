@@ -42,6 +42,8 @@ namespace ShooterProject.Scripts.PlayerScripts
         ///</summary>
         public void DisableComponents()
         {
+            transform.position = Vector3.zero;
+
             _components.ForEach(component => component.enabled = false);
             playerObjects.ForEach(playerObject => playerObject.SetActive(false));
             GetComponent<CharacterController>().enabled = false;
@@ -54,13 +56,15 @@ namespace ShooterProject.Scripts.PlayerScripts
         ///</summary>
         public void EnableComponents()
         {
+            transform.position = Vector3.zero;
+            
             _components.ForEach(component => component.enabled = true);
             playerObjects.ForEach(playerObject => playerObject.SetActive(true));
             GetComponent<CharacterController>().enabled = true;
 
             rayInteractor.SetActive(false);
         } 
-        
+
         #endregion
     }
 }
