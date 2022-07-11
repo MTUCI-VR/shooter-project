@@ -201,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5859060985249241206, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6059419906626347222, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_LocalPosition.x
@@ -265,15 +265,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6059419908130389907, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.661
+      value: 2.13
       objectReference: {fileID: 0}
     - target: {fileID: 6059419908130389907, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.45
+      value: 7.567
       objectReference: {fileID: 0}
     - target: {fileID: 6059419908130389907, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.14
+      value: 9.6
       objectReference: {fileID: 0}
     - target: {fileID: 6059419908130389907, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_LocalRotation.w
@@ -301,6 +301,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6059419908130389907, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6463240478117768095, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7483517418466180182, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
@@ -335,7 +339,8 @@ PrefabInstance:
       propertyPath: m_InteractionLayers.m_Bits
       value: 64
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5859060985249241205, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
 --- !u!4 &67905250 stripped
 Transform:
@@ -543,6 +548,50 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1642465523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5859060985249241207, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
+  m_PrefabInstance: {fileID: 67905249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1642465525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642465523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2637d120a247634ca9519c94572e8b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraPositionAcitonProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Camera Position Aciton Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 3f40c346-0468-42aa-8678-92e52a2d76d6
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 7862207684358717888, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  cameraRotationAcitonProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Camera Rotation Aciton Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: f62328c2-5091-4cd5-b78d-28957320e87d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -530380113134220495, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  positionOffset: {x: 0, y: -0.15, z: 0}
+  rotationLimit: {x: 50, y: 0, z: 0}
+  speed: 5
 --- !u!1 &1649330098
 GameObject:
   m_ObjectHideFlags: 0
