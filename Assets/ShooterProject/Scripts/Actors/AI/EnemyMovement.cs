@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using ShooterProject.Scripts.Actors.AI.Behaviours;
 using ShooterProject.Scripts.Actors.Health;
 using System;
+using ShooterProject.Scripts.PlayerScripts;
 
 namespace ShooterProject.Scripts.Actors.AI
 {
@@ -12,9 +13,6 @@ namespace ShooterProject.Scripts.Actors.AI
 	public class EnemyMovement : MonoBehaviour
 	{
 		#region Fields
-
-		[SerializeField]
-		private Transform targetTransform;
 
 		[SerializeField]
 		[Min(1)]
@@ -28,10 +26,18 @@ namespace ShooterProject.Scripts.Actors.AI
 		[Min(1)]
 		private float attackEndRadius;
 
-		private EnemyBehaviour _behaviour;
 		private NavMeshAgent _agent;
 		private Health.Health _targetHealth;
+		private Transform _targetTransform;
+
 		#endregion
+
+		#region Properties
+
+		public EnemyBehaviour Behaviour { get; private set; }
+
+		#endregion
+
 
 		#region Events
 
@@ -53,12 +59,13 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.transform == targetTransform
+			if (other.TryGetComponent<Player>(out var player)
 				&& other.TryGetComponent<Health.Health>(out var targetHealth))
 			{
+				_targetTransform = player.transform;
 				_targetHealth = targetHealth;
 				_targetHealth.OnDied += OnTargetDied;
-				ChangeBehaviour(new ChaseBehaviour(_agent, targetTransform));
+				ChangeBehaviour(new ChaseBehaviour(_agent, _targetTransform));
 			}
 		}
 
@@ -76,17 +83,17 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void Update()
 		{
-			_behaviour.UpdateDestination();
-			if (_behaviour.GetType() == typeof(ChaseBehaviour)
+			Behaviour.UpdateDestination();
+			if (Behaviour.GetType() == typeof(ChaseBehaviour)
 				&& _agent.hasPath
 				&& _agent.remainingDistance < attackStartRadius)
 			{
 				ChangeBehaviour(new AttackBehaviour(_agent));
 			}
-			else if (_behaviour.GetType() == typeof(AttackBehaviour)
-				&& (_agent.transform.position - targetTransform.position).magnitude > attackEndRadius)
+			else if (Behaviour.GetType() == typeof(AttackBehaviour)
+				&& (_agent.transform.position - _targetTransform.position).magnitude > attackEndRadius)
 			{
-				ChangeBehaviour(new ChaseBehaviour(_agent, targetTransform));
+				ChangeBehaviour(new ChaseBehaviour(_agent, _targetTransform));
 			}
 		}
 
@@ -96,11 +103,11 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void ChangeBehaviour(EnemyBehaviour newBehaviour)
 		{
-			_behaviour = newBehaviour;
+			Behaviour = newBehaviour;
 			BehaviourChanged?.Invoke(newBehaviour);
 		}
 
-		private void OnTargetDied()
+		private void OnTargetDied(Health.Health targetHealth)
 		{
 			ChangeBehaviour(new GameoverBehaviour(_agent));
 		}
@@ -111,6 +118,13 @@ namespace ShooterProject.Scripts.Actors.AI
 			Gizmos.DrawWireSphere(transform.position, attackStartRadius);
 			Gizmos.color = Color.blue;
 			Gizmos.DrawWireSphere(transform.position, attackEndRadius);
+		}
+
+		private void OnDrawGizmos()
+		{
+			if(Behaviour == null) return;
+			Gizmos.color = Color.green;
+			Gizmos.DrawSphere(Behaviour.GetDestination(), .5f);
 		}
 
 		#endregion

@@ -27,6 +27,9 @@ namespace ShooterProject.Scripts.Actors.Animations
 		private void OnEnable()
 		{
 			_enemyMovement.BehaviourChanged += BehaviourChanged;
+
+			if(_enemyMovement.Behaviour != null)
+				_animator.SetTrigger(_enemyMovement.Behaviour.GetAnimationTriggerName());
 		}
 
 		private void OnDisable()
@@ -42,6 +45,7 @@ namespace ShooterProject.Scripts.Actors.Animations
 		{
 			_animator.SetTrigger(behaviour.GetAnimationTriggerName());
 		}
+		
 
 		#endregion
 	}
