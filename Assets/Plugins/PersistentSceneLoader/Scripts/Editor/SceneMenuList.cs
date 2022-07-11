@@ -16,6 +16,12 @@ public static class SceneMenuList {
         EditorSceneManager.OpenScene("Assets/_Developers/Arenchik/Scenes/FirstAidKit.unity", OpenSceneMode.Additive);
     }
 
+    [MenuItem("Scenes/FixBugsScene")]
+    private static void OpenFixBugsScene() {
+        EditorSceneManager.OpenScene("Assets/ShooterProject/Scenes/PersistentScene/PersistentScene.unity", OpenSceneMode.Single);
+        EditorSceneManager.OpenScene("Assets/_Developers/Arenchik/Scenes/FixBugsScene.unity", OpenSceneMode.Additive);
+    }
+
     [MenuItem("Scenes/GameInterface")]
     private static void OpenGameInterface() {
         EditorSceneManager.OpenScene("Assets/ShooterProject/Scenes/PersistentScene/PersistentScene.unity", OpenSceneMode.Single);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ShooterProject.Scripts.PlayerScripts;
 
 namespace ShooterProject.Scripts.GameManager
 {
@@ -46,10 +47,12 @@ namespace ShooterProject.Scripts.GameManager
 		/// <summary>
 		/// Загружает указанную сцену
 		/// </summary>
-		/// <param name="sceneName">Название сцены для перехода</param>
-		public static IEnumerator LoadScene(string sceneName)
+		/// <param name="sceneForLoadName">Название сцены для перехода</param>
+		/// <param name="sceneForUnloadName">Название текущей сцены для выгрузки</param>
+		/// <param name="sceneType">Тип загружаемой сцены, для определения активности комнонентов игрока</param>
+		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName, SceneType sceneType)
 		{
-			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneName);
+			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName, LoadSceneMode.Additive);
 
 			sceneAsyncOperation.allowSceneActivation = false;
 
@@ -63,7 +66,21 @@ namespace ShooterProject.Scripts.GameManager
 
 			} while (!sceneIsLoaded);
 
+			SceneManager.UnloadSceneAsync(sceneForUnloadName);
+
 			sceneAsyncOperation.allowSceneActivation = true;
+
+			yield return new WaitForEndOfFrame();
+
+			switch (sceneType)
+			{
+				case SceneType.Menu:
+					Player.Instance.GetComponent<PlayerComponents>().DisableComponents();
+					break;
+				case SceneType.Game:
+					Player.Instance.GetComponent<PlayerComponents>().EnableComponents();
+					break;
+			}
 		}
 
 		#endregion

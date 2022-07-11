@@ -38,7 +38,7 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		protected virtual void OnMenuButtonClick(string sceneForLoadName)
 		{
-			StartCoroutine(SceneLoader.LoadScene(sceneForLoadName));
+			StartCoroutine(SceneLoader.LoadScene(sceneForLoadName, gameObject.scene.name, SceneType.Game));
 
 			menuButtons.ForEach(menuButton => menuButton.gameObject.SetActive(false));
 			loadingBar.gameObject.SetActive(true);
