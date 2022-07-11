@@ -26,11 +26,18 @@ namespace ShooterProject.Scripts.Actors.AI
 		[Min(1)]
 		private float attackEndRadius;
 
-		private EnemyBehaviour _behaviour;
 		private NavMeshAgent _agent;
 		private Health.Health _targetHealth;
 		private Transform _targetTransform;
+
 		#endregion
+
+		#region Properties
+
+		public EnemyBehaviour Behaviour { get; private set; }
+
+		#endregion
+
 
 		#region Events
 
@@ -76,14 +83,14 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void Update()
 		{
-			_behaviour.UpdateDestination();
-			if (_behaviour.GetType() == typeof(ChaseBehaviour)
+			Behaviour.UpdateDestination();
+			if (Behaviour.GetType() == typeof(ChaseBehaviour)
 				&& _agent.hasPath
 				&& _agent.remainingDistance < attackStartRadius)
 			{
 				ChangeBehaviour(new AttackBehaviour(_agent));
 			}
-			else if (_behaviour.GetType() == typeof(AttackBehaviour)
+			else if (Behaviour.GetType() == typeof(AttackBehaviour)
 				&& (_agent.transform.position - _targetTransform.position).magnitude > attackEndRadius)
 			{
 				ChangeBehaviour(new ChaseBehaviour(_agent, _targetTransform));
@@ -96,7 +103,7 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void ChangeBehaviour(EnemyBehaviour newBehaviour)
 		{
-			_behaviour = newBehaviour;
+			Behaviour = newBehaviour;
 			BehaviourChanged?.Invoke(newBehaviour);
 		}
 
@@ -115,9 +122,9 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void OnDrawGizmos()
 		{
-			if(_behaviour == null) return;
+			if(Behaviour == null) return;
 			Gizmos.color = Color.green;
-			Gizmos.DrawSphere(_behaviour.GetDestination(),2);
+			Gizmos.DrawSphere(Behaviour.GetDestination(), .5f);
 		}
 
 		#endregion
