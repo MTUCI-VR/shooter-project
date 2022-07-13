@@ -57,8 +57,10 @@ namespace ShooterProject.Scripts.Inventory
 		}
         private void OnRotationActivateActionPerfomed(InputAction.CallbackContext callbackContext)
 		{
-            if (callbackContext.action.ReadValue<Quaternion>().eulerAngles.x < rotationLimit.x)
-                transform.rotation = Quaternion.AngleAxis(callbackContext.action.ReadValue<Quaternion>().eulerAngles.y, Vector3.up);
+			Vector3 eulerAngles = callbackContext.action.ReadValue<Quaternion>().eulerAngles;
+
+            if (eulerAngles.x < rotationLimit.x)
+                transform.rotation = Quaternion.AngleAxis(eulerAngles.y, Vector3.up);
 		}
 
         #endregion

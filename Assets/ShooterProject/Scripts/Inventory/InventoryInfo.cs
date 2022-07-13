@@ -8,15 +8,11 @@ namespace ShooterProject.Scripts.Inventory
 
 		private static int _ammoCount;
 
-		private static bool _hasKnife;
-
 		#endregion
 
 		#region Events
 
 		public static event Action OnAmmoCountChanged;
-
-		public static event Action OnHasKnifeChanged;
 
 		#endregion
 
@@ -32,19 +28,6 @@ namespace ShooterProject.Scripts.Inventory
 			{
 				_ammoCount = value;
 				OnAmmoCountChanged?.Invoke();
-			}
-		}
-
-		public static bool HasKnife
-		{
-			get
-			{
-				return _hasKnife;
-			}
-			set
-			{
-				_hasKnife = value;
-				OnHasKnifeChanged?.Invoke();
 			}
 		}
 
