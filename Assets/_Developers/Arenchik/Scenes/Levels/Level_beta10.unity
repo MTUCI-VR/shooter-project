@@ -460,7 +460,7 @@ MonoBehaviour:
   - AvailableEnemies:
     - {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
     EnemiesCount: 1
-    WavePreparationTime: 0
+    WavePreparationTime: 15
 --- !u!1 &328568347
 GameObject:
   m_ObjectHideFlags: 0
