@@ -3,12 +3,22 @@ guid: f592b3293060cc24e8ff5c262ede781f
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Butt bot_mag and hand UV map
+    second: {fileID: 2100000, guid: 0dc480f4651c9a6478f261f05eda28b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mag and reload UV map
+    second: {fileID: 2100000, guid: 0859077c78f1a324f9df61527fd48aa0, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

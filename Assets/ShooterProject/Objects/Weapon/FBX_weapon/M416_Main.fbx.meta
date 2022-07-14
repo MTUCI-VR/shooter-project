@@ -3,12 +3,42 @@ guid: a1525cd306af98e4685b27c450ef3fad
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel UV map
+    second: {fileID: 2100000, guid: 20f3102292824d04eace931b2094a688, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel wrap UV map
+    second: {fileID: 2100000, guid: e3f0a5dfd0a0aa54aa3543238b9a2bfe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Big butt and in UV map
+    second: {fileID: 2100000, guid: e5446dc67d8d88847ab1fec47bc7e3e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Butt bot_mag and hand UV map
+    second: {fileID: 2100000, guid: 0dc480f4651c9a6478f261f05eda28b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mag and reload UV map
+    second: {fileID: 2100000, guid: 0859077c78f1a324f9df61527fd48aa0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Main UV map
+    second: {fileID: 2100000, guid: dd55b29d8787b3b45949467f2ff2cab8, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
