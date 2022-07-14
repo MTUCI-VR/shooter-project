@@ -81,7 +81,7 @@ namespace ShooterProject.Scripts.Weapons
 				&& LayerUtils.IsLayerMatch(interactionLayer, other.gameObject.layer))
 			{
 				_target = targetHealth;
-				_target.OnDied += ResetTarget;
+				_target.OnDied += OnTargetDied;
 			}
 		}
 
@@ -120,8 +120,15 @@ namespace ShooterProject.Scripts.Weapons
 
 		private void ResetTarget()
 		{
-			_target.OnDied -= ResetTarget;
+			if (_target == null)
+				return;
+			_target.OnDied -= OnTargetDied;
 			_target = null;
+		}
+
+		private void OnTargetDied(Health targetHealth)
+		{
+			ResetTarget();
 		}
 
 		private void TryHit(float currentVelocity, float angularVelocity)
