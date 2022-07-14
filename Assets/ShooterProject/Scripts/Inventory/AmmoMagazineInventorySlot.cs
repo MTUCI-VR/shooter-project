@@ -1,21 +1,124 @@
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using ShooterProject.Scripts.Weapons.Reloading;
 
 namespace ShooterProject.Scripts.Inventory
 {
-	public class AmmoMagazineInventorySlot : InventorySlot
-	{
-		#region Protetected Override Methods
+    [RequireComponent(typeof(XRSocketInteractor))]
+    public class AmmoMagazineInventorySlot : MonoBehaviour
+    {
+        #region Fields
 
-		protected override void OnPutInInventory(SelectEnterEventArgs enterEventArgs)
-		{
-			InventoryInfo.AmmoCount += enterEventArgs.interactableObject.transform.GetComponent<AmmoMagazine>().AmmoCount;
-		}
-		protected override void OnTakenFromInventory(SelectExitEventArgs exitEventArgs)
-		{
-			InventoryInfo.AmmoCount -= exitEventArgs.interactableObject.transform.GetComponent<AmmoMagazine>().AmmoCount;
-		}
+        private Transform _attachTransform;
 
-		#endregion
-	}
+        private List<AmmoMagazine> _magazines = new List<AmmoMagazine>();
+
+        private XRSocketInteractor _socketInteractor;
+
+        #endregion
+
+        #region Life Cycle
+
+        private void Awake()
+        {
+            _socketInteractor = GetComponent<XRSocketInteractor>();
+            _attachTransform = _socketInteractor.attachTransform;
+        }
+
+        private void OnEnable()
+        {
+            _socketInteractor.hoverEntered.AddListener(OnHoverEnter);
+            _socketInteractor.hoverExited.AddListener(OnHoverExit);
+            _socketInteractor.selectEntered.AddListener(OnSelectEntered);
+            _socketInteractor.selectExited.AddListener(OnSelectExit);
+        }
+        private void OnDisable()
+        {
+            _socketInteractor.hoverEntered.RemoveListener(OnHoverEnter);
+            _socketInteractor.hoverExited.RemoveListener(OnHoverExit);
+            _socketInteractor.selectEntered.RemoveListener(OnSelectEntered);
+            _socketInteractor.selectExited.RemoveListener(OnSelectExit);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void OnHoverEnter(HoverEnterEventArgs hoverEnterEventArgs)
+        {
+            if (hoverEnterEventArgs.interactableObject.transform.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine) && !magazine.GetComponent<XRGrabInteractable>().isSelected)
+            {
+                PutInInventorySlot(magazine);
+            }
+        }
+
+        private void OnHoverExit(HoverExitEventArgs hoverExitEventArgs)
+        {
+            if (hoverExitEventArgs.interactableObject.transform.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine) && !magazine.GetComponent<XRGrabInteractable>().isSelected)
+            {
+                PutInInventorySlot(magazine);
+            }
+        }
+
+        private void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
+        {
+            if (selectEnterEventArgs.interactableObject.transform.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine))
+            {
+                if (!_magazines.Contains(magazine))
+                    _magazines.Add(magazine);
+
+                Counting();
+            }
+        }
+
+        private void OnSelectExit(SelectExitEventArgs selectExitEventArgs)
+        {
+            if (selectExitEventArgs.interactableObject.transform.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine))
+            {
+                TakeFromInventorySlot(magazine);
+            }
+        }
+
+        private void PutInInventorySlot(AmmoMagazine magazine)
+        {
+            if (_socketInteractor.hasSelection)
+            {
+                magazine.gameObject.SetActive(false);
+
+                magazine.transform.position = _attachTransform.position;
+                magazine.transform.rotation = _attachTransform.rotation;
+            }
+                
+            if (!_magazines.Contains(magazine))
+                    _magazines.Add(magazine);
+
+            Counting();
+        }
+
+        private void TakeFromInventorySlot(AmmoMagazine magazine)
+        {
+            _magazines.Remove(magazine);
+
+            if (_magazines.Count > 0)
+                _magazines[_magazines.Count - 1].gameObject.SetActive(true);
+
+            Counting();
+        }
+
+        private void Counting()
+        {
+            int ammoCount = 0;
+
+            foreach (AmmoMagazine magazine in _magazines)
+            {
+                ammoCount += magazine.AmmoCount;
+            }
+
+            InventoryInfo.AmmoCount = ammoCount;
+        }
+
+        #endregion
+    }
 }
+
