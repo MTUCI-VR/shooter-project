@@ -22,7 +22,7 @@ namespace ShooterProject.Scripts.GameInterface
 
 		#region Properties
 
-		private int AttachedMagazineAmmoCount => _attachedMagazine ? _attachedMagazine.AmmoCount : 0;
+		private int AttachedMagazineAmmoCount => weaponMagazineController.AttachedMagazine ? weaponMagazineController.AttachedMagazine.AmmoCount : 0;
 
 		#endregion
 
@@ -30,16 +30,17 @@ namespace ShooterProject.Scripts.GameInterface
 
 		private void OnEnable()
 		{
-			weaponMagazineController.OnAttachedMagazine += GettingAttachedMagazine;
-			weaponMagazineController.OnDetachedMagazine += Print;
+			weaponMagazineController.OnAttachedMagazine += OnAttachedMagazine;
+			weaponMagazineController.OnDetachedMagazine += OnDetachedMagazine;
 			InventoryInfo.OnPistolAmmoCountChanged += Print;
 			InventoryInfo.OnRifleAmmoCountChanged += Print;
-			Print();
+
+			OnAttachedMagazine();
 		}
 		private void OnDisable()
 		{
-			weaponMagazineController.OnAttachedMagazine -= GettingAttachedMagazine;
-			weaponMagazineController.OnDetachedMagazine -= Print;
+			weaponMagazineController.OnAttachedMagazine -= OnAttachedMagazine;
+			weaponMagazineController.OnDetachedMagazine -= OnDetachedMagazine;
 			InventoryInfo.OnPistolAmmoCountChanged -= Print;
 			InventoryInfo.OnRifleAmmoCountChanged -= Print;
 		}
@@ -48,20 +49,21 @@ namespace ShooterProject.Scripts.GameInterface
 
 		#region Private Methods
 
-		private void GettingAttachedMagazine()
+		private void OnAttachedMagazine()
 		{
 			if (weaponMagazineController.AttachedMagazine != null)
 			{
 				_attachedMagazine = weaponMagazineController.AttachedMagazine;
 				_attachedMagazine.OnAmmoCountChanged += Print;
-				Print();
 			}
-			else
-			{
-				_attachedMagazine.OnAmmoCountChanged -= Print;
-				_attachedMagazine = null;
-				Print();
-			}
+
+			Print();
+		}
+		private void OnDetachedMagazine()
+		{
+			_attachedMagazine.OnAmmoCountChanged -= Print;
+
+			Print();
 		}
 
 		private void Print()

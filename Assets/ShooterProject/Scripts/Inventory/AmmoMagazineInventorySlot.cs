@@ -94,11 +94,12 @@ namespace ShooterProject.Scripts.Inventory
         {
             _magazines.Remove(magazine);
 
-			GameObject newMagazine = _magazines[_magazines.Count - 1].gameObject;
 
             if (_magazines.Count > 0)
 			{
-				newMagazine.transform.position = _socketInteractor.attachTransform.position;
+                GameObject newMagazine = _magazines[_magazines.Count - 1].gameObject;
+
+                newMagazine.transform.position = _socketInteractor.attachTransform.position;
                 newMagazine.transform.rotation = _socketInteractor.attachTransform.rotation;
 
                 newMagazine.gameObject.SetActive(true);
