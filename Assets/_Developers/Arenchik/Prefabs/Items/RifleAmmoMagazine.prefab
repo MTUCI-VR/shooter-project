@@ -418,3 +418,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ammoSize: 60
   _ammoCount: 60
+  ammoType: 1

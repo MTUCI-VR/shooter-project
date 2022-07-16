@@ -31,13 +31,17 @@ namespace ShooterProject.Scripts.GameInterface
 		private void OnEnable()
 		{
 			weaponMagazineController.OnAttachedMagazine += GettingAttachedMagazine;
-			InventoryInfo.OnAmmoCountChanged += Print;
+			weaponMagazineController.OnDetachedMagazine += Print;
+			InventoryInfo.OnPistolAmmoCountChanged += Print;
+			InventoryInfo.OnRifleAmmoCountChanged += Print;
 			Print();
 		}
 		private void OnDisable()
 		{
 			weaponMagazineController.OnAttachedMagazine -= GettingAttachedMagazine;
-			InventoryInfo.OnAmmoCountChanged -= Print;
+			weaponMagazineController.OnDetachedMagazine -= Print;
+			InventoryInfo.OnPistolAmmoCountChanged -= Print;
+			InventoryInfo.OnRifleAmmoCountChanged -= Print;
 		}
 
 		#endregion
@@ -62,7 +66,18 @@ namespace ShooterProject.Scripts.GameInterface
 
 		private void Print()
 		{
-			weaponInterfaceTexts.ForEach(weaponInterface => weaponInterface.text = $"{AttachedMagazineAmmoCount}/{InventoryInfo.AmmoCount}");
+			switch (weaponMagazineController.AmmoType)
+			{
+				case AmmoType.PistolAmmo:
+					weaponInterfaceTexts.ForEach(weaponInterface => weaponInterface.text = $"{AttachedMagazineAmmoCount}/{InventoryInfo.PistolAmmoCount}");
+					break;
+				case AmmoType.RifleAmmo:
+					weaponInterfaceTexts.ForEach(weaponInterface => weaponInterface.text = $"{AttachedMagazineAmmoCount}/{InventoryInfo.RifleAmmoCount}");
+					break;
+				default:
+				break;
+			}
+
 		}
 
 		#endregion

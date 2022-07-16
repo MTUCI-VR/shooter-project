@@ -10,8 +10,6 @@ namespace ShooterProject.Scripts.Inventory
     {
         #region Fields
 
-        private Transform _attachTransform;
-
         private List<AmmoMagazine> _magazines = new List<AmmoMagazine>();
 
         private XRSocketInteractor _socketInteractor;
@@ -23,7 +21,6 @@ namespace ShooterProject.Scripts.Inventory
         private void Awake()
         {
             _socketInteractor = GetComponent<XRSocketInteractor>();
-            _attachTransform = _socketInteractor.attachTransform;
         }
 
         private void OnEnable()
@@ -85,11 +82,8 @@ namespace ShooterProject.Scripts.Inventory
             if (_socketInteractor.hasSelection)
             {
                 magazine.gameObject.SetActive(false);
-
-                magazine.transform.position = _attachTransform.position;
-                magazine.transform.rotation = _attachTransform.rotation;
             }
-                
+
             if (!_magazines.Contains(magazine))
                     _magazines.Add(magazine);
 
@@ -100,22 +94,48 @@ namespace ShooterProject.Scripts.Inventory
         {
             _magazines.Remove(magazine);
 
+			GameObject newMagazine = _magazines[_magazines.Count - 1].gameObject;
+
             if (_magazines.Count > 0)
-                _magazines[_magazines.Count - 1].gameObject.SetActive(true);
+			{
+				newMagazine.transform.position = _socketInteractor.attachTransform.position;
+                newMagazine.transform.rotation = _socketInteractor.attachTransform.rotation;
+
+                newMagazine.gameObject.SetActive(true);
+			}
 
             Counting();
         }
 
         private void Counting()
         {
-            int ammoCount = 0;
+			if (_magazines.Count == 0)
+			{
+				InventoryInfo.PistolAmmoCount = 0;
+				InventoryInfo.RifleAmmoCount = 0;
+
+				return;
+			}
+
+            int pistolAmmoCount = 0;
+            int rifleAmmoCount = 0;
 
             foreach (AmmoMagazine magazine in _magazines)
             {
-                ammoCount += magazine.AmmoCount;
+                switch (magazine.AmmoType)
+				{
+					case AmmoType.PistolAmmo:
+						pistolAmmoCount += magazine.AmmoCount;
+						InventoryInfo.PistolAmmoCount = pistolAmmoCount;
+						break;
+					case AmmoType.RifleAmmo:
+						rifleAmmoCount += magazine.AmmoCount;
+						InventoryInfo.RifleAmmoCount = rifleAmmoCount;
+						break;
+					default:
+						break;
+				}
             }
-
-            InventoryInfo.AmmoCount = ammoCount;
         }
 
         #endregion

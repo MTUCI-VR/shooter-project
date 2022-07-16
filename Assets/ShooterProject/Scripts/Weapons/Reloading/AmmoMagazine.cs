@@ -17,6 +17,9 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 		[SerializeField]
 		private int _ammoCount;
 
+		[SerializeField]
+		private AmmoType ammoType;
+
 		#endregion
 
 		#region Properties
@@ -32,6 +35,8 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 			}
 		}
 
+		public AmmoType AmmoType => ammoType;
+
 		public bool HasAmmo => _ammoCount > 0;
 
 		#endregion
@@ -44,7 +49,7 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 
 		#region Public methods
 
-		/// <summary> 
+		/// <summary>
 		/// Уменьшает кол-во патронов в текущем магазине.
 		/// </summary>
 		public void DecreaseAmmoCount()

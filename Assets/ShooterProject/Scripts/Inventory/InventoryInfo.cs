@@ -6,28 +6,42 @@ namespace ShooterProject.Scripts.Inventory
 	{
 		#region Fields
 
-		private static int _ammoCount;
+		private static int _pistolAmmoCount;
+		private static int _rifleAmmoCount;
 
 		#endregion
 
 		#region Events
 
-		public static event Action OnAmmoCountChanged;
+		public static event Action OnPistolAmmoCountChanged;
+		public static event Action OnRifleAmmoCountChanged;
 
 		#endregion
 
 		#region Properties
 
-		public static int AmmoCount
+		public static int PistolAmmoCount
 		{
 			get
 			{
-				return _ammoCount;
+				return _pistolAmmoCount;
 			}
 			set
 			{
-				_ammoCount = value;
-				OnAmmoCountChanged?.Invoke();
+				_pistolAmmoCount = value;
+				OnPistolAmmoCountChanged?.Invoke();
+			}
+		}
+		public static int RifleAmmoCount
+		{
+			get
+			{
+				return _rifleAmmoCount;
+			}
+			set
+			{
+				_rifleAmmoCount = value;
+				OnRifleAmmoCountChanged?.Invoke();
 			}
 		}
 
