@@ -122,7 +122,7 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void OnDrawGizmos()
 		{
-			if(Behaviour == null) return;
+			if (Behaviour == null) return;
 			Gizmos.color = Color.green;
 			Gizmos.DrawSphere(Behaviour.GetDestination(), .5f);
 		}
