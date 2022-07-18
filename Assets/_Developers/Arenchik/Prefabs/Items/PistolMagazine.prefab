@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: -864485626784609840}
   - component: {fileID: 3970960807956559727}
   - component: {fileID: -6684827753661850573}
-  - component: {fileID: 1884207097883992665}
+  - component: {fileID: 7987249604882750044}
   m_Layer: 12
   m_Name: PistolMagazine
   m_TagString: Untagged
@@ -174,7 +174,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8465389416428557459}
-  m_Mesh: {fileID: 1702116506876280349, guid: 2c7adaccb840db745bf091678eaaaafa, type: 3}
+  m_Mesh: {fileID: 1702116506876280349, guid: 13c6f55ba7a51564ea7bf5b9f609053f, type: 3}
 --- !u!23 &8465389416428557470
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 3027513509006617363}
---- !u!64 &1884207097883992665
+--- !u!64 &7987249604882750044
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -417,4 +417,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1702116506876280349, guid: 2c7adaccb840db745bf091678eaaaafa, type: 3}
+  m_Mesh: {fileID: 1702116506876280349, guid: 13c6f55ba7a51564ea7bf5b9f609053f, type: 3}
