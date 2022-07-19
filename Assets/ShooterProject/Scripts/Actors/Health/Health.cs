@@ -56,7 +56,7 @@ namespace ShooterProject.Scripts.Actors.Health
 
 		#region LifeCycle Methods
 
-		private void Awake()
+		private void OnEnable()
 		{
 			CurrentHealth = maxHealth;
 		}

@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using ShooterProject.Scripts.PlayerScripts;
 using System;
 
@@ -9,6 +8,7 @@ namespace ShooterProject.Scripts.Spawner
 	public class EnemySpawner : GeneralSpawner
 	{
 		#region Fields
+
 		[SerializeField]
 		private float spawnDelayInSeconds;
 

@@ -16,12 +16,12 @@ MonoBehaviour:
   - Default
   - Hand
   - TeleportArea
-  - Ammo
+  - PistolAmmo
   - Knife
   - UI
-  - 
-  - 
-  - 
+  - RifleAmmo
+  - Pistol
+  - Rifle
   - 
   - 
   - 

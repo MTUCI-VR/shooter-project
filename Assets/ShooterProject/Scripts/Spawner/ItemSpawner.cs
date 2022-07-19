@@ -11,11 +11,45 @@ namespace ShooterProject.Scripts.Spawner
 		[SerializeField]
 		private int spawnDelayInSeconds;
 
-		private bool _canSpawn = true;
+		private int _objectsInColliderCount;
+
+		private bool _canSpawn;
+
+		#endregion
+
+		#region Properties
+
+		private int ObjectsInColliderCount
+		{
+			get => _objectsInColliderCount;
+
+			set
+			{
+				_objectsInColliderCount = value;
+
+				if (_objectsInColliderCount == 0)
+					onColliderEmpty?.Invoke();
+			}
+		}
+
+		#endregion
+
+		#region Events
+
+		private event System.Action onColliderEmpty;
 
 		#endregion
 
 		#region  LifeCycle
+
+		private void OnEnable()
+		{
+			onColliderEmpty += OnColliderEmpty;
+		}
+		private void OnDisable()
+		{
+			onColliderEmpty -= OnColliderEmpty;
+		}
 
 		private void Start()
 		{
@@ -28,30 +62,32 @@ namespace ShooterProject.Scripts.Spawner
 
 		private IEnumerator ItemSpawn()
 		{
-			while (true)
-			{
-				yield return new WaitForSeconds(spawnDelayInSeconds);
+			yield return new WaitForSeconds(spawnDelayInSeconds);
 
-				if (!_canSpawn) yield break;
+			Spawn();
 
-				Spawn();
-			}
+			_canSpawn = true;
+		}
+
+		private void OnColliderEmpty()
+		{
+			if (_canSpawn)
+				StartCoroutine(ItemSpawn());
+			_canSpawn = false;
 		}
 
 		private void OnTriggerEnter(Collider collider)
 		{
 			if (collider.TryGetComponent<Item>(out Item item))
 			{
-				_canSpawn = false;
+				ObjectsInColliderCount++;
 			}
 		}
 		private void OnTriggerExit(Collider collider)
 		{
 			if (collider.TryGetComponent<Item>(out Item item))
 			{
-				StartCoroutine(ItemSpawn());
-
-				_canSpawn = true;
+				ObjectsInColliderCount--;
 			}
 		}
 

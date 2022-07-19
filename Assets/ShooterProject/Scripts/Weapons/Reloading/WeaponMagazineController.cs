@@ -9,9 +9,14 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 	{
 		#region Fields
 
+		[SerializeField]
+		private AudioSource _magazineAttachedAudioSource;
+
+		[SerializeField]
+		private AmmoType ammoType;
+
 		private AmmoMagazine _attachedMagazine;
 		private XRSocketInteractor _socketInteractor;
-
 		#endregion
 
 		#region Properties
@@ -27,6 +32,8 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 			}
 		}
 
+		public AmmoType AmmoType => ammoType;
+
 		public bool MagazineAttached => _attachedMagazine != null;
 
 		public bool HasAmmo => MagazineAttached && _attachedMagazine.HasAmmo;
@@ -36,6 +43,7 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 		#region Events
 
 		public event Action OnAttachedMagazine;
+		public event Action OnDetachedMagazine;
 
 		#endregion
 
@@ -81,6 +89,8 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 			if (interactable.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine))
 			{
 				AttachedMagazine = magazine;
+
+				_magazineAttachedAudioSource.Play();
 			}
 		}
 
@@ -89,6 +99,7 @@ namespace ShooterProject.Scripts.Weapons.Reloading
 			if (AttachedMagazine != null)
 			{
 				AttachedMagazine = null;
+				OnDetachedMagazine?.Invoke();
 			}
 		}
 

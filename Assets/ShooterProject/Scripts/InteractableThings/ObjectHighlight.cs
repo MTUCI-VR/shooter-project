@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using ShooterProject.Scripts.Items;
 using ShooterProject.Scripts.General;
 
 namespace ShooterProject.Scripts.InteractableThings
@@ -16,6 +15,7 @@ namespace ShooterProject.Scripts.InteractableThings
 		private int _objectHighlightLayerValue;
 
 		private int _initialLayerValue;
+
 		private XRGrabInteractable _grabInteractable;
 
 		#endregion
@@ -50,7 +50,8 @@ namespace ShooterProject.Scripts.InteractableThings
 		#region Private Methods 
 		private void OnHoverEntered(HoverEnterEventArgs hoverEnterEventArgs)
 		{
-			ObjectHighlightEnable(hoverEnterEventArgs.interactableObject.transform.gameObject);
+			if (hoverEnterEventArgs.interactorObject.transform.TryGetComponent<XRDirectInteractor>(out XRDirectInteractor directInteractor))
+				ObjectHighlightEnable(hoverEnterEventArgs.interactableObject.transform.gameObject);
 		}
 
 		private void OnHoverExited(HoverExitEventArgs hoverExitEventArgs)

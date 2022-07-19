@@ -218,7 +218,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   m_InteractionLayers:
-    m_Bits: 4294967292
+    m_Bits: 4294967172
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 0
   m_StartingSelectedInteractable: {fileID: 0}
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0.1
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 0
   m_HoverToSelect: 0

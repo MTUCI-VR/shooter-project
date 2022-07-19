@@ -2,12 +2,17 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ShooterProject.Scripts.PlayerScripts;
 
 namespace ShooterProject.Scripts.GameManager
 {
 	public static class SceneLoader
 	{
 		#region Fields
+
+		private static AsyncOperation _sceneAsyncOperation;
+
+		private static SceneType _sceneType;
 
 		private static float _progress;
 
@@ -26,7 +31,7 @@ namespace ShooterProject.Scripts.GameManager
 				if (!(Math.Abs(_progress - value) < tolerance))
 				{
 					_progress = value;
-					OnProgressChanged?.Invoke();
+					onProgressChanged?.Invoke();
 				}
 			}
 		}
@@ -37,7 +42,31 @@ namespace ShooterProject.Scripts.GameManager
 
 		#region Events
 
-		public static event Action OnProgressChanged;
+		public static event Action onProgressChanged;
+
+		#endregion
+
+		#region Private Methods
+
+		private static void OnAsyncOperationComplited(AsyncOperation asyncOperation)
+		{
+			SwitchPlayerComponents(_sceneType);
+
+			_sceneAsyncOperation.completed -= OnAsyncOperationComplited;
+		}
+
+		private static void SwitchPlayerComponents(SceneType sceneType)
+		{
+			switch (sceneType)
+			{
+				case SceneType.Menu:
+					Player.Instance.GetComponent<PlayerComponents>().DisableComponents();
+					break;
+				case SceneType.Game:
+					Player.Instance.GetComponent<PlayerComponents>().EnableComponents();
+					break;
+			}
+		}
 
 		#endregion
 
@@ -46,24 +75,31 @@ namespace ShooterProject.Scripts.GameManager
 		/// <summary>
 		/// Загружает указанную сцену
 		/// </summary>
-		/// <param name="sceneName">Название сцены для перехода</param>
-		public static IEnumerator LoadScene(string sceneName)
+		/// <param name="sceneForLoadName">Название сцены для перехода</param>
+		/// <param name="sceneForUnloadName">Название текущей сцены для выгрузки</param>
+		/// <param name="sceneType">Тип загружаемой сцены, для определения активности комнонентов игрока</param>
+		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName, SceneType sceneType)
 		{
-			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneName);
+			_sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName, LoadSceneMode.Additive);
 
-			sceneAsyncOperation.allowSceneActivation = false;
+			_sceneType = sceneType;
+			_sceneAsyncOperation.completed += OnAsyncOperationComplited;
+
+			_sceneAsyncOperation.allowSceneActivation = false;
 
 			Progress = 0;
 
 			do
 			{
-				Progress = sceneAsyncOperation.progress * (10f / 9f);
+				Progress = _sceneAsyncOperation.progress * (10f / 9f);
 
 				yield return new WaitForEndOfFrame();
 
 			} while (!sceneIsLoaded);
 
-			sceneAsyncOperation.allowSceneActivation = true;
+			SceneManager.UnloadSceneAsync(sceneForUnloadName);
+
+			_sceneAsyncOperation.allowSceneActivation = true;
 		}
 
 		#endregion

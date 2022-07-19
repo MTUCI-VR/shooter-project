@@ -17,6 +17,11 @@ namespace ShooterProject.Scripts.Inventory
 		[SerializeField]
 		private Material exitMaterial;
 
+		[SerializeField]
+		private float modelScaleOnHover;
+
+		private Vector3 _initialModelScale;
+
 		private MeshRenderer _meshRenderer;
 
 		private XRSocketInteractor _socketInteractor;
@@ -31,6 +36,7 @@ namespace ShooterProject.Scripts.Inventory
 		{
 			_socketInteractor = GetComponent<XRSocketInteractor>();
 			_hasMeshRenderer = hoverModel.TryGetComponent<MeshRenderer>(out _meshRenderer);
+			_initialModelScale = hoverModel.transform.localScale;
 		}
 		private void OnEnable()
 		{
@@ -66,11 +72,15 @@ namespace ShooterProject.Scripts.Inventory
 		private void OnChangeMaterialToEnter(HoverEnterEventArgs hoverEnterEventArgs)
 		{
 			if (!_socketInteractor.hasSelection)
+			{
 				_meshRenderer.material = enterMaterial;
+				hoverModel.transform.localScale *= modelScaleOnHover;
+			}
 		}
 		private void OnChangeMaterialToExit(HoverExitEventArgs hoverExitEventArgs)
 		{
 			_meshRenderer.material = exitMaterial;
+			hoverModel.transform.localScale = _initialModelScale;
 		}
 
 		private void OnDisableModel(SelectEnterEventArgs selectEnterEventArgs)

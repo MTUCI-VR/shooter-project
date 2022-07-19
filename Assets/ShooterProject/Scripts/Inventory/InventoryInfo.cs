@@ -1,51 +1,47 @@
 using System;
-using UnityEngine;
 
 namespace ShooterProject.Scripts.Inventory
 {
-	public class InventoryInfo : MonoBehaviour
+	public static class InventoryInfo
 	{
 		#region Fields
 
-		private static int _ammoCount;
-
-		private static bool _hasKnife;
+		private static int _pistolAmmoCount;
+		private static int _rifleAmmoCount;
 
 		#endregion
 
 		#region Events
 
-		public static event Action OnAmmoCountChanged;
-
-		public static event Action OnHasKnifeChanged;
+		public static event Action OnPistolAmmoCountChanged;
+		public static event Action OnRifleAmmoCountChanged;
 
 		#endregion
 
 		#region Properties
 
-		public static int AmmoCount
+		public static int PistolAmmoCount
 		{
 			get
 			{
-				return _ammoCount;
+				return _pistolAmmoCount;
 			}
 			set
 			{
-				_ammoCount = value;
-				OnAmmoCountChanged?.Invoke();
+				_pistolAmmoCount = value;
+				OnPistolAmmoCountChanged?.Invoke();
 			}
 		}
-
-		public static bool HasKnife
+		public static int RifleAmmoCount
 		{
 			get
 			{
-				return _hasKnife;
+				return _rifleAmmoCount;
 			}
 			set
 			{
-				_hasKnife = value;
-				OnHasKnifeChanged?.Invoke();
+				_rifleAmmoCount = value;
+				OnRifleAmmoCountChanged?.Invoke();
 			}
 		}
 

@@ -40,7 +40,7 @@ namespace Shared.Scripts.Editor
 			var scenesGUIDs = AssetDatabase.FindAssets("t:Scene");
 			var scenesPaths = scenesGUIDs
 				.Select(AssetDatabase.GUIDToAssetPath)
-				.Where(path => path.StartsWith("Assets/ShooterProject/"));
+				.Where(path => path.StartsWith("Assets/"));
 			return scenesPaths;
 		}
 

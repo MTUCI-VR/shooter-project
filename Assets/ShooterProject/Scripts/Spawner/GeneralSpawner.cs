@@ -9,10 +9,16 @@ namespace ShooterProject.Scripts.Spawner
 		#region Fields
 
 		[SerializeField]
+		protected AudioSource audioSource;
+
+		[SerializeField]
 		private SpawnObjectParams[] objectsForSpawn;
 
 		[SerializeField]
 		private bool poolAutoExpand;
+
+		[SerializeField]
+		private Transform container;
 
 		private GameObjectsPool[] _objectsForSpawnPools;
 
@@ -34,7 +40,7 @@ namespace ShooterProject.Scripts.Spawner
 					poolAutoExpand,
 					false,
 					objectsForSpawn[i].gameObject,
-					null);
+					container);
 			}
 
 			SortSpawnWeights();
@@ -113,6 +119,10 @@ namespace ShooterProject.Scripts.Spawner
 			{
 				objectForSpawn.transform.position = transform.position;
 				objectForSpawn.transform.rotation = transform.rotation;
+
+				if (audioSource?.clip != null)
+					audioSource.Play();
+
 				return objectForSpawn;
 			}
 			return null;
