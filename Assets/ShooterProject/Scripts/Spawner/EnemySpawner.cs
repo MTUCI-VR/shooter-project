@@ -8,7 +8,7 @@ namespace ShooterProject.Scripts.Spawner
 	public class EnemySpawner : GeneralSpawner
 	{
 		#region Fields
-		
+
 		[SerializeField]
 		private float spawnDelayInSeconds;
 

@@ -15,7 +15,7 @@ namespace ShooterProject.Scripts.InteractableThings
 		private int _objectHighlightLayerValue;
 
 		private int _initialLayerValue;
-		
+
 		private XRGrabInteractable _grabInteractable;
 
 		#endregion

@@ -3,43 +3,43 @@ using UnityEngine.InputSystem;
 
 public class MoveSound : MonoBehaviour
 {
-    #region Fields
+	#region Fields
 
-    [SerializeField]
-    private InputActionProperty leftHandMoveAction;
+	[SerializeField]
+	private InputActionProperty leftHandMoveAction;
 
-    [SerializeField]
-    private AudioSource audioSource;
+	[SerializeField]
+	private AudioSource audioSource;
 
-    #endregion
+	#endregion
 
-    #region Life Cycle
+	#region Life Cycle
 
-    private void OnEnable()
-    {
-        leftHandMoveAction.action.started += OnActivateActionStarted;
-        leftHandMoveAction.action.canceled += OnActivateActionCanceled;
-    }
+	private void OnEnable()
+	{
+		leftHandMoveAction.action.started += OnActivateActionStarted;
+		leftHandMoveAction.action.canceled += OnActivateActionCanceled;
+	}
 
-    private void OnDisable()
-    {
-        leftHandMoveAction.action.started -= OnActivateActionStarted;
-        leftHandMoveAction.action.canceled -= OnActivateActionCanceled;
-    }
+	private void OnDisable()
+	{
+		leftHandMoveAction.action.started -= OnActivateActionStarted;
+		leftHandMoveAction.action.canceled -= OnActivateActionCanceled;
+	}
 
-    #endregion
+	#endregion
 
-    #region Private Methods
+	#region Private Methods
 
-    private void OnActivateActionStarted(InputAction.CallbackContext callbackContext)
-    {
-        audioSource.Play();
-    }
+	private void OnActivateActionStarted(InputAction.CallbackContext callbackContext)
+	{
+		audioSource.Play();
+	}
 
-    private void OnActivateActionCanceled(InputAction.CallbackContext callbackContext)
-    {
-        audioSource.Stop();
-    }
+	private void OnActivateActionCanceled(InputAction.CallbackContext callbackContext)
+	{
+		audioSource.Stop();
+	}
 
-    #endregion
+	#endregion
 }

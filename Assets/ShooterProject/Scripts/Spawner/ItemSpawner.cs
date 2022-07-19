@@ -26,7 +26,7 @@ namespace ShooterProject.Scripts.Spawner
 			set
 			{
 				_objectsInColliderCount = value;
-				
+
 				if (_objectsInColliderCount == 0)
 					onColliderEmpty?.Invoke();
 			}

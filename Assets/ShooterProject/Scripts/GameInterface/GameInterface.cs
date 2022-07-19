@@ -13,7 +13,7 @@ namespace ShooterProject.Scripts.GameInterface
 
 		[SerializeField]
 		private TextMeshProUGUI healthText;
-		
+
 		[SerializeField]
 		private TextMeshProUGUI waveText;
 
@@ -48,7 +48,7 @@ namespace ShooterProject.Scripts.GameInterface
 		{
 			if (Player.Instance != null)
 				Player.Instance.PlayerHealth.OnChanged -= Print;
-			
+
 			if (WavesProvider.Instance != null)
 			{
 				WavesProvider.Instance.OnWavePreparationStarted -= Print;
@@ -70,7 +70,7 @@ namespace ShooterProject.Scripts.GameInterface
 			healthText.text = $"{Player.Instance.PlayerHealth.CurrentHealth}";
 			waveText.text = $"Wave {currentWave}";
 		}
-	
+
 		private IEnumerator WavePreparationTimeIndication(float wavePreparationTime)
 		{
 			_wavePreparationTime = wavePreparationTime;

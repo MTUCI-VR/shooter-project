@@ -9,15 +9,15 @@ namespace ShooterProject.Scripts.Inventory
 		#region Fields
 
 		[SerializeField]
-        private InputActionProperty cameraPositionAcitonProperty;
-        
-        [SerializeField]
-        private InputActionProperty cameraRotationAcitonProperty;
+		private InputActionProperty cameraPositionAcitonProperty;
+
+		[SerializeField]
+		private InputActionProperty cameraRotationAcitonProperty;
 
 		[SerializeField]
 		private Vector3 positionOffset;
-    
-    	[SerializeField]
+
+		[SerializeField]
 		private Vector3 rotationLimit;
 
 		[SerializeField]
@@ -49,21 +49,21 @@ namespace ShooterProject.Scripts.Inventory
 
 		#region Private Methods
 
-        private void OnPositionActivateActionPerfomed(InputAction.CallbackContext callbackContext)
+		private void OnPositionActivateActionPerfomed(InputAction.CallbackContext callbackContext)
 		{
 			var target = Player.Instance.transform.position + _playerController.center + positionOffset;
 
 			transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * speed);
 		}
-        private void OnRotationActivateActionPerfomed(InputAction.CallbackContext callbackContext)
+		private void OnRotationActivateActionPerfomed(InputAction.CallbackContext callbackContext)
 		{
 			Vector3 eulerAngles = callbackContext.action.ReadValue<Quaternion>().eulerAngles;
 
-            if (eulerAngles.x < rotationLimit.x)
-                transform.rotation = Quaternion.AngleAxis(eulerAngles.y, Vector3.up);
+			if (eulerAngles.x < rotationLimit.x)
+				transform.rotation = Quaternion.AngleAxis(eulerAngles.y, Vector3.up);
 		}
 
-        #endregion
+		#endregion
 	}
 }
 

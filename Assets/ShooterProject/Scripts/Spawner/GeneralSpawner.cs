@@ -15,10 +15,10 @@ namespace ShooterProject.Scripts.Spawner
 		private SpawnObjectParams[] objectsForSpawn;
 
 		[SerializeField]
-		private bool poolAutoExpand;	
+		private bool poolAutoExpand;
 
 		[SerializeField]
-		private Transform container;	
+		private Transform container;
 
 		private GameObjectsPool[] _objectsForSpawnPools;
 

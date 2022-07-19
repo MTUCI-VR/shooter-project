@@ -4,45 +4,45 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace ShooterProject.Scripts.PlayerMovement
 {
-    [RequireComponent(typeof(FixedCharacterControllerDriver))]
-    public class CharacterControllerUpdater : MonoBehaviour
-    {
-        #region Fields
+	[RequireComponent(typeof(FixedCharacterControllerDriver))]
+	public class CharacterControllerUpdater : MonoBehaviour
+	{
+		#region Fields
 
-        [SerializeField]
-        private InputActionProperty cameraPositionAcitonProperty;
+		[SerializeField]
+		private InputActionProperty cameraPositionAcitonProperty;
 
-        private FixedCharacterControllerDriver _characterControllerDriver;
+		private FixedCharacterControllerDriver _characterControllerDriver;
 
-        private bool isMoving;
-
-        #endregion
-
-        #region Life Cycle
-
-        private void Awake()
-        {
-            _characterControllerDriver = GetComponent<FixedCharacterControllerDriver>();
-        }
-
-        private void OnEnable()
-        {
-            cameraPositionAcitonProperty.action.performed += OnActivateActionPerfomed;
-        }
-        private void OnDisable()
-        {
-            cameraPositionAcitonProperty.action.performed -= OnActivateActionPerfomed;
-        }
+		private bool isMoving;
 
 		#endregion
-		
-        #region Private Methods
 
-        private void OnActivateActionPerfomed(InputAction.CallbackContext callbackContext)
+		#region Life Cycle
+
+		private void Awake()
 		{
-            _characterControllerDriver.UpdateCharacter();
+			_characterControllerDriver = GetComponent<FixedCharacterControllerDriver>();
 		}
 
-        #endregion
+		private void OnEnable()
+		{
+			cameraPositionAcitonProperty.action.performed += OnActivateActionPerfomed;
+		}
+		private void OnDisable()
+		{
+			cameraPositionAcitonProperty.action.performed -= OnActivateActionPerfomed;
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		private void OnActivateActionPerfomed(InputAction.CallbackContext callbackContext)
+		{
+			_characterControllerDriver.UpdateCharacter();
+		}
+
+		#endregion
 	}
 }
