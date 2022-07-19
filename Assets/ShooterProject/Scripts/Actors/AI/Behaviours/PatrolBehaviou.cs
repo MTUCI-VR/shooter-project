@@ -42,14 +42,8 @@ namespace ShooterProject.Scripts.Actors.AI.Behaviours
 
 		private void CalculateDestination()
 		{
-			NavMeshHit hit;
-			var path = new NavMeshPath();
-			do
-			{
-				var randomPoint = new Vector3(Random.Range(-_patrolAreaRadius, _patrolAreaRadius),
-					_agent.transform.position.y, Random.Range(-_patrolAreaRadius, _patrolAreaRadius));
-				NavMesh.SamplePosition(randomPoint, out hit, int.MaxValue, NavMesh.AllAreas);
-			} while (!_agent.CalculatePath(hit.position, path));
+			var randomPoint = new Vector3(Random.Range(-_patrolAreaRadius, _patrolAreaRadius), _agent.transform.position.y, Random.Range(-_patrolAreaRadius, _patrolAreaRadius));
+			NavMesh.SamplePosition(randomPoint, out var hit, int.MaxValue, NavMesh.AllAreas);
 			_destination = hit.position;
 		}
 
