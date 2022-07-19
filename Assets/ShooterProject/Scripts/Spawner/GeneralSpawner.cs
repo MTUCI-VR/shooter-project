@@ -120,7 +120,7 @@ namespace ShooterProject.Scripts.Spawner
 				objectForSpawn.transform.position = transform.position;
 				objectForSpawn.transform.rotation = transform.rotation;
 
-				if (audioSource != null && audioSource.clip != null)
+				if (audioSource?.clip != null)
 					audioSource.Play();
 
 				return objectForSpawn;

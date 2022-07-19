@@ -5,6 +5,7 @@ using ShooterProject.Scripts.General;
 namespace ShooterProject.Scripts.PlayerScripts
 {
 	[RequireComponent(typeof(Health))]
+	[RequireComponent(typeof(CharacterController))]
 	public class Player : Singleton<Player>
 	{
 		#region Fields

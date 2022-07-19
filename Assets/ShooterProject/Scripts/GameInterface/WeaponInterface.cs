@@ -76,8 +76,6 @@ namespace ShooterProject.Scripts.GameInterface
 				case AmmoType.RifleAmmo:
 					weaponInterfaceTexts.ForEach(weaponInterface => weaponInterface.text = $"{AttachedMagazineAmmoCount}/{InventoryInfo.RifleAmmoCount}");
 					break;
-				default:
-				break;
 			}
 
 		}

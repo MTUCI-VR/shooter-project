@@ -38,7 +38,7 @@ namespace ShooterProject.Scripts.Inventory
 
         private void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
         {
-            Transform attachTransform = selectEnterEventArgs.interactableObject.transform.GetComponent<XRGrabInteractable>().attachTransform;
+            var attachTransform = selectEnterEventArgs.interactableObject.transform.GetComponent<XRGrabInteractable>().attachTransform;
 
             _initialObjectAttachTransform = attachTransform;
 

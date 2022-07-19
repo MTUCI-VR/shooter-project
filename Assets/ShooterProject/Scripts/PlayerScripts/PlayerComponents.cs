@@ -6,6 +6,14 @@ using ShooterProject.Scripts.Actors.Health;
 
 namespace ShooterProject.Scripts.PlayerScripts
 {
+    [RequireComponent(typeof(Health))]
+	[RequireComponent(typeof(CharacterController))]
+	[RequireComponent(typeof(LocomotionSystem))]
+	[RequireComponent(typeof(TeleportationProvider))]
+	[RequireComponent(typeof(TeleportationToggler))]
+	[RequireComponent(typeof(FixedCharacterControllerDriver))]
+	[RequireComponent(typeof(ActionBasedContinuousMoveProvider))]
+	[RequireComponent(typeof(MoveSound))]
     public class PlayerComponents : MonoBehaviour
     {
         #region Fields

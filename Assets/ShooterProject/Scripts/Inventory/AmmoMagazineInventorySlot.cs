@@ -118,8 +118,8 @@ namespace ShooterProject.Scripts.Inventory
 				return;
 			}
 
-            int pistolAmmoCount = 0;
-            int rifleAmmoCount = 0;
+            var pistolAmmoCount = 0;
+            var rifleAmmoCount = 0;
 
             foreach (AmmoMagazine magazine in _magazines)
             {
@@ -132,8 +132,6 @@ namespace ShooterProject.Scripts.Inventory
 					case AmmoType.RifleAmmo:
 						rifleAmmoCount += magazine.AmmoCount;
 						InventoryInfo.RifleAmmoCount = rifleAmmoCount;
-						break;
-					default:
 						break;
 				}
             }
