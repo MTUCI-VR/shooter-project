@@ -54,6 +54,7 @@ namespace ShooterProject.Scripts.GameStatistics
 		{
 			GameStats.CompleteWaveCount = WavesProvider.Instance.CurrentWave;
 			GameStats.DeadEnemyCount = WavesProvider.Instance.waveEnemiesObserver.TotalDeadEnemyCount;
+			GameStats.CompletedGamesCount += 1;
 
 			RemoveListeners();
 		}

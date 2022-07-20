@@ -1,23 +1,11 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShooterProject.Scripts.GameManager.Menus
 {
 	public class MenuLoadingBar : MonoBehaviour
 	{
-		#region Fields
-
-		[SerializeField]
-		private Image progress;
-
-		[SerializeField]
-		private TextMeshProUGUI progressText;
-
-		#endregion
-
 		#region Life Cycle
-
+		
 		private void OnEnable()
 		{
 			SceneLoader.onProgressChanged += OnProgressChanged;
@@ -33,8 +21,9 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		private void OnProgressChanged()
 		{
-			progress.fillAmount = SceneLoader.Progress;
-			progressText.text = $"{(int)(SceneLoader.Progress * 100)}%";
+			transform.localScale = Vector3.Lerp(transform.localScale,
+				new Vector3(transform.localScale.x, SceneLoader.Progress, transform.localScale.z),
+				Time.deltaTime);
 		}
 
 		#endregion

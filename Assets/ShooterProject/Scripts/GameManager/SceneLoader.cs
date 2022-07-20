@@ -50,9 +50,9 @@ namespace ShooterProject.Scripts.GameManager
 
 		private static void OnAsyncOperationComplited(AsyncOperation asyncOperation)
 		{
-			SwitchPlayerComponents(_sceneType);
-
 			_sceneAsyncOperation.completed -= OnAsyncOperationComplited;
+
+			SwitchPlayerComponents(_sceneType);
 		}
 
 		private static void SwitchPlayerComponents(SceneType sceneType)

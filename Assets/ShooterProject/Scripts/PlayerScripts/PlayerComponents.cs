@@ -22,7 +22,7 @@ namespace ShooterProject.Scripts.PlayerScripts
 		private List<GameObject> playerObjects;
 
 		[SerializeField]
-		private GameObject rayInteractor;
+		private GameObject fingerCollider;
 
 		private List<MonoBehaviour> _components = new List<MonoBehaviour>();
 
@@ -32,12 +32,6 @@ namespace ShooterProject.Scripts.PlayerScripts
 
 		private void Awake()
 		{
-			_components.Add(GetComponent<LocomotionSystem>());
-			_components.Add(GetComponent<TeleportationProvider>());
-			_components.Add(GetComponent<TeleportationToggler>());
-			_components.Add(GetComponent<FixedCharacterControllerDriver>());
-			_components.Add(GetComponent<ActionBasedContinuousMoveProvider>());
-			_components.Add(GetComponent<MoveSound>());
 			_components.Add(GetComponent<Health>());
 		}
 
@@ -54,9 +48,8 @@ namespace ShooterProject.Scripts.PlayerScripts
 
 			_components.ForEach(component => component.enabled = false);
 			playerObjects.ForEach(playerObject => playerObject.SetActive(false));
-			GetComponent<CharacterController>().enabled = false;
 
-			rayInteractor.SetActive(true);
+			fingerCollider.SetActive(true);
 		}
 
 		///<summary>
@@ -68,9 +61,8 @@ namespace ShooterProject.Scripts.PlayerScripts
 
 			_components.ForEach(component => component.enabled = true);
 			playerObjects.ForEach(playerObject => playerObject.SetActive(true));
-			GetComponent<CharacterController>().enabled = true;
-
-			rayInteractor.SetActive(false);
+			
+			fingerCollider.SetActive(false);
 		}
 
 		#endregion
