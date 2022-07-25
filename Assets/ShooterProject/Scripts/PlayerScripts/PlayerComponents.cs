@@ -6,20 +6,12 @@ using ShooterProject.Scripts.Actors.Health;
 
 namespace ShooterProject.Scripts.PlayerScripts
 {
-	[RequireComponent(typeof(Health))]
-	[RequireComponent(typeof(CharacterController))]
-	[RequireComponent(typeof(LocomotionSystem))]
-	[RequireComponent(typeof(TeleportationProvider))]
-	[RequireComponent(typeof(TeleportationToggler))]
-	[RequireComponent(typeof(FixedCharacterControllerDriver))]
-	[RequireComponent(typeof(ActionBasedContinuousMoveProvider))]
-	[RequireComponent(typeof(MoveSound))]
 	public class PlayerComponents : MonoBehaviour
 	{
 		#region Fields
 
 		[SerializeField]
-		private List<GameObject> playerObjects;
+		private List<GameObject> playerObjectsForGame;
 
 		[SerializeField]
 		private GameObject leftFingerCollider;
@@ -27,20 +19,10 @@ namespace ShooterProject.Scripts.PlayerScripts
 		[SerializeField]
 		private GameObject rightFingerCollider;
 
-		private List<MonoBehaviour> _components = new List<MonoBehaviour>();
-
-		#endregion
-
-		#region Life Cycle
-
-		private void Awake()
-		{
-			_components.Add(GetComponent<Health>());
-		}
-
 		#endregion
 
 		#region Public Methods
+	
 
 		///<summary>
 		/// Выключает лишние объекты и компоненты игрока для сцен с меню
@@ -49,8 +31,9 @@ namespace ShooterProject.Scripts.PlayerScripts
 		{
 			transform.position = Vector3.zero;
 
-			_components.ForEach(component => component.enabled = false);
-			playerObjects.ForEach(playerObject => playerObject.SetActive(false));
+			Player.Instance.PlayerHealth.enabled = false;
+
+			playerObjectsForGame.ForEach(playerObject => playerObject.SetActive(false));
 
 			leftFingerCollider.SetActive(true);
 			rightFingerCollider.SetActive(true);
@@ -63,8 +46,9 @@ namespace ShooterProject.Scripts.PlayerScripts
 		{
 			transform.position = Vector3.zero;
 
-			_components.ForEach(component => component.enabled = true);
-			playerObjects.ForEach(playerObject => playerObject.SetActive(true));
+			Player.Instance.PlayerHealth.enabled = true;
+
+			playerObjectsForGame.ForEach(playerObject => playerObject.SetActive(true));
 			
 			leftFingerCollider.SetActive(false);
 			rightFingerCollider.SetActive(false);
