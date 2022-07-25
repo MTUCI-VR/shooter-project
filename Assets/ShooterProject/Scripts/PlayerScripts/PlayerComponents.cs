@@ -22,7 +22,10 @@ namespace ShooterProject.Scripts.PlayerScripts
 		private List<GameObject> playerObjects;
 
 		[SerializeField]
-		private GameObject fingerCollider;
+		private GameObject leftFingerCollider;
+		
+		[SerializeField]
+		private GameObject rightFingerCollider;
 
 		private List<MonoBehaviour> _components = new List<MonoBehaviour>();
 
@@ -49,7 +52,8 @@ namespace ShooterProject.Scripts.PlayerScripts
 			_components.ForEach(component => component.enabled = false);
 			playerObjects.ForEach(playerObject => playerObject.SetActive(false));
 
-			fingerCollider.SetActive(true);
+			leftFingerCollider.SetActive(true);
+			rightFingerCollider.SetActive(true);
 		}
 
 		///<summary>
@@ -62,7 +66,8 @@ namespace ShooterProject.Scripts.PlayerScripts
 			_components.ForEach(component => component.enabled = true);
 			playerObjects.ForEach(playerObject => playerObject.SetActive(true));
 			
-			fingerCollider.SetActive(false);
+			leftFingerCollider.SetActive(false);
+			rightFingerCollider.SetActive(false);
 		}
 
 		#endregion

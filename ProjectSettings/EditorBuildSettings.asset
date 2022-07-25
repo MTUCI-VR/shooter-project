@@ -6,17 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Developers/Arenchik/Scenes/MainMenu.unity
-    guid: 4b1263e4b7b2f1c449d69282d7da8db0
-  - enabled: 1
     path: Assets/ShooterProject/Scenes/PersistentScene/PersistentScene.unity
     guid: 4b869d19e27cbe14e91637339ddb2058
-  - enabled: 1
-    path: Assets/_Developers/Arenchik/Scenes/MainMenu.unity
-    guid: 4b1263e4b7b2f1c449d69282d7da8db0
-  - enabled: 1
-    path: Assets/_Developers/Arenchik/Scenes/GameOverMenu.unity
-    guid: 368447bcbdf8c9445a1823c74f17e57b
   - enabled: 1
     path: Assets/_Developers/Arenchik/Scenes/Levels/Level_beta10.unity
     guid: 57a051d16125c6044b6f151296ff12f7
