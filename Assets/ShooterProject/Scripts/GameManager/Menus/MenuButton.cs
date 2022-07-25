@@ -33,7 +33,7 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		private void OnTriggerEnter(Collider collider)
 		{
-			if(collider.TryGetComponent<ButtonClicker>(out var buttonClicker))
+			if (collider.TryGetComponent<ButtonClicker>(out var buttonClicker))
 			{
 				onClick?.Invoke(this);
 			}

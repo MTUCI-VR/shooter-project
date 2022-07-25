@@ -5,7 +5,7 @@ namespace ShooterProject.Scripts.GameManager.Menus
 	public class MenuLoadingBar : MonoBehaviour
 	{
 		#region Life Cycle
-		
+
 		private void OnEnable()
 		{
 			SceneLoader.onProgressChanged += OnProgressChanged;

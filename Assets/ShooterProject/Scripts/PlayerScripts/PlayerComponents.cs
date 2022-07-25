@@ -15,14 +15,14 @@ namespace ShooterProject.Scripts.PlayerScripts
 
 		[SerializeField]
 		private GameObject leftFingerCollider;
-		
+
 		[SerializeField]
 		private GameObject rightFingerCollider;
 
 		#endregion
 
 		#region Public Methods
-	
+
 
 		///<summary>
 		/// Выключает лишние объекты и компоненты игрока для сцен с меню
@@ -49,7 +49,7 @@ namespace ShooterProject.Scripts.PlayerScripts
 			Player.Instance.PlayerHealth.enabled = true;
 
 			playerObjectsForGame.ForEach(playerObject => playerObject.SetActive(true));
-			
+
 			leftFingerCollider.SetActive(false);
 			rightFingerCollider.SetActive(false);
 		}
