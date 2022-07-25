@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using ShooterProject.Scripts.Actors.AI.Behaviours;
-using ShooterProject.Scripts.Actors.Health;
 using System;
 using ShooterProject.Scripts.PlayerScripts;
 
@@ -59,11 +58,10 @@ namespace ShooterProject.Scripts.Actors.AI
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.TryGetComponent<Player>(out var player)
-				&& other.TryGetComponent<Health.Health>(out var targetHealth))
+			if (other.TryGetComponent<Player>(out var player))
 			{
 				_targetTransform = player.transform;
-				_targetHealth = targetHealth;
+				_targetHealth = player.PlayerHealth;
 				_targetHealth.OnDied += OnTargetDied;
 				ChangeBehaviour(new ChaseBehaviour(_agent, _targetTransform));
 			}
