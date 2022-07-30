@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 78344321}
   - component: {fileID: 78344323}
   - component: {fileID: 78344322}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: ButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 115882375}
   - component: {fileID: 115882377}
   - component: {fileID: 115882376}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: ButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 131111762}
   - component: {fileID: 131111766}
   - component: {fileID: 131111761}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1342,7 +1342,7 @@ GameObject:
   - component: {fileID: 609661737}
   - component: {fileID: 609661736}
   - component: {fileID: 609661735}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Clicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2063,7 +2063,7 @@ GameObject:
   - component: {fileID: 1179390400}
   - component: {fileID: 1179390399}
   - component: {fileID: 1179390398}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2734,7 +2734,7 @@ GameObject:
   - component: {fileID: 1592162256}
   - component: {fileID: 1592162260}
   - component: {fileID: 1592162259}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Clicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3490,7 +3490,7 @@ GameObject:
   - component: {fileID: 1886668150}
   - component: {fileID: 1886668149}
   - component: {fileID: 1886668148}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: TextCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3590,7 +3590,7 @@ GameObject:
   - component: {fileID: 1893690369}
   - component: {fileID: 1893690368}
   - component: {fileID: 1893690367}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: TextCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
