@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 7076773930128963273}
   - component: {fileID: 2066672900978213921}
   - component: {fileID: 7051210939429368887}
+  - component: {fileID: 3717547326883783416}
   m_Layer: 0
   m_Name: 2_ograd_004
   m_TagString: Untagged
@@ -113,6 +114,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3717547326883783416
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7017519874679291593}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.7436523, y: 1.105653, z: 0.1067487}
+  m_Center: {x: -0.008912921, y: 0.552825, z: 0.0000005085021}
 --- !u!1 &8904176372091380770
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +138,7 @@ GameObject:
   - component: {fileID: 5379370511296004075}
   - component: {fileID: 485216379546490254}
   - component: {fileID: 2909089972370996591}
+  - component: {fileID: 1209000358911151980}
   m_Layer: 0
   m_Name: 2_ograd_005
   m_TagString: Untagged
@@ -194,3 +209,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1209000358911151980
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904176372091380770}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.106748775, y: 1.1056532, z: 2.1334715}
+  m_Center: {x: -0.000043218955, y: 0.55282503, z: 0.057180345}

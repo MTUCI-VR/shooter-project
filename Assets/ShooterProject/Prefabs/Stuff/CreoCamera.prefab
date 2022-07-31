@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7501414962117865252}
   - component: {fileID: 109340968896043484}
   - component: {fileID: 5859502683521783027}
+  - component: {fileID: 2956656040187890330}
   m_Layer: 0
   m_Name: 1_creohandler_001
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2956656040187890330
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585240627882479724}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9751289, y: 2.489963, z: 0.8487221}
+  m_Center: {x: -0.5000746, y: 1.2449815, z: -0.000000074505806}
 --- !u!1 &2675334688644818890
 GameObject:
   m_ObjectHideFlags: 0

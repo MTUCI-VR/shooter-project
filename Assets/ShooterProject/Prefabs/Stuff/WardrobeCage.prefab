@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5105827054042880170}
   - component: {fileID: 8175248499424696079}
   - component: {fileID: 6237668534555632581}
+  - component: {fileID: 1118570885731619768}
   m_Layer: 0
   m_Name: WardrobeCage
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1118570885731619768
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5589066145060504080}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.6533475, y: 2.4720964, z: 0.86362773}
+  m_Center: {x: 0, y: 0.23604816, z: 0}
