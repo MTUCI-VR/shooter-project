@@ -2,31 +2,31 @@ using UnityEngine;
 
 namespace ShooterProject.Scripts.GameManager
 {
-    public class FadeTransition : MonoBehaviour
-    {
-        #region Fields
+	public class FadeTransition : MonoBehaviour
+	{
+		#region Fields
 
-        [SerializeField]
-        private Animator animator;
+		[SerializeField]
+		private Animator animator;
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        public float FadeTransitionDuration => animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+		public float FadeTransitionDuration => animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
 
-        #endregion
+		#endregion
 
-        #region Public Methods
-        public void FadeTransitionStart()
-        {
-            animator.SetTrigger("Start");
-        }
-        public void FadeTransitionEnd()
-        {
-            animator.SetTrigger("End");
-        }
+		#region Public Methods
+		public void FadeTransitionStart()
+		{
+			animator.SetTrigger("Start");
+		}
+		public void FadeTransitionEnd()
+		{
+			animator.SetTrigger("End");
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }
