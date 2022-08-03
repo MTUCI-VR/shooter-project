@@ -1,11 +1,13 @@
 using UnityEngine;
 using ShooterProject.Scripts.Actors.Health;
 using ShooterProject.Scripts.General;
+using ShooterProject.Scripts.GameManager;
 
 namespace ShooterProject.Scripts.PlayerScripts
 {
 	[RequireComponent(typeof(Health))]
 	[RequireComponent(typeof(CharacterController))]
+	[RequireComponent(typeof(FadeTransition))]
 	public class Player : Singleton<Player>
 	{
 		#region Fields
@@ -30,6 +32,5 @@ namespace ShooterProject.Scripts.PlayerScripts
 		}
 
 		#endregion
-
 	}
 }

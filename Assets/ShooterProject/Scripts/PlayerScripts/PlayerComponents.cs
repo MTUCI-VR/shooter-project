@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
-using ShooterProject.Scripts.Teleport;
-using ShooterProject.Scripts.Actors.Health;
 
 namespace ShooterProject.Scripts.PlayerScripts
 {
