@@ -27,7 +27,7 @@ namespace ShooterProject.Scripts.GameManager
 
 		private IEnumerator MenuSceneLoad()
 		{
-			AsyncOperation asyncOperation =  SceneManager.LoadSceneAsync(menuSceneName,LoadSceneMode.Additive);
+			AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(menuSceneName, LoadSceneMode.Additive);
 
 			while (!asyncOperation.isDone)
 			{
