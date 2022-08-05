@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
+using ShooterProject.Scripts.PlayerScripts;
 
 namespace ShooterProject.Scripts.GameManager
 {
@@ -15,7 +18,23 @@ namespace ShooterProject.Scripts.GameManager
 
 		private void Start()
 		{
-			StartCoroutine(ShooterProject.Scripts.GameManager.SceneLoader.LoadScene(menuSceneName, null, GameManager.SceneType.Menu));
+			StartCoroutine(MenuSceneLoad());
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		private IEnumerator MenuSceneLoad()
+		{
+			AsyncOperation asyncOperation =  SceneManager.LoadSceneAsync(menuSceneName,LoadSceneMode.Additive);
+
+			while (!asyncOperation.isDone)
+			{
+				yield return new WaitForEndOfFrame();
+			}
+
+			Player.Instance.GetComponent<FadeTransition>().FadeTransitionEnd();
 		}
 
 		#endregion
