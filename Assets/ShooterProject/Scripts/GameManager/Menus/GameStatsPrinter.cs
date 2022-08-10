@@ -22,14 +22,7 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		private void Start()
 		{
-			if (GameStats.CompletedGamesCount > 0)
-			{
-				_gameStatsText.text = $"Zombies killed: {GameStats.DeadEnemyCount}\nWaves complited: {GameStats.CompleteWaveCount}\nGames complited: {GameStats.CompletedGamesCount}";
-			}
-			else
-			{
-				_gameStatsText.text = string.Empty;
-			}
+			_gameStatsText.text = GameStats.CompletedGamesCount > 0 ? $"Zombies killed: {GameStats.DeadEnemyCount}\nWaves complited: {GameStats.CompleteWaveCount}\nGames complited : {GameStats.CompletedGamesCount}":string.Empty;
 		}
 
 		#endregion

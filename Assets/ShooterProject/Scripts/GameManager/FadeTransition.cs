@@ -4,6 +4,13 @@ namespace ShooterProject.Scripts.GameManager
 {
 	public class FadeTransition : MonoBehaviour
 	{
+		#region Constant Fields
+
+		private const string START_TRIGGER = "Start";
+		private const string END_TRIGGER = "End";
+
+		#endregion
+
 		#region Fields
 
 		[SerializeField]
@@ -18,13 +25,15 @@ namespace ShooterProject.Scripts.GameManager
 		#endregion
 
 		#region Public Methods
+
 		public void FadeTransitionStart()
 		{
-			animator.SetTrigger("Start");
+			animator.SetTrigger(START_TRIGGER);
 		}
+		
 		public void FadeTransitionEnd()
 		{
-			animator.SetTrigger("End");
+			animator.SetTrigger(END_TRIGGER);
 		}
 
 		#endregion
