@@ -30,7 +30,7 @@ namespace ShooterProject.Scripts.GameManager
 		{
 			animator.SetTrigger(START_TRIGGER);
 		}
-		
+
 		public void FadeTransitionEnd()
 		{
 			animator.SetTrigger(END_TRIGGER);
