@@ -12,6 +12,8 @@ namespace ShooterProject.Scripts.GameManager
 
 		private static float _progress;
 
+		private static bool _sceneIsLoading;
+
 		#endregion
 
 		#region Properties
@@ -69,6 +71,10 @@ namespace ShooterProject.Scripts.GameManager
 		/// <param name="sceneType">Тип загружаемой сцены, для определения активности комнонентов игрока</param>
 		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName, SceneType sceneType)
 		{
+			if (_sceneIsLoading) yield break;
+
+			_sceneIsLoading = true;
+
 			var fadeTransition = Player.Instance.GetComponent<FadeTransition>();
 
 			fadeTransition.FadeTransitionStart();
@@ -92,6 +98,8 @@ namespace ShooterProject.Scripts.GameManager
 			fadeTransition.FadeTransitionEnd();
 
 			SwitchPlayerComponents(sceneType);
+			
+			_sceneIsLoading = false;
 		}
 
 		#endregion

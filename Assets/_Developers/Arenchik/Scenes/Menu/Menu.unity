@@ -2098,7 +2098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneType: 1
-  sceneForLoadName: Level_beta10
+  sceneForLoadName: LocationLevel
 --- !u!171741748 &1179390399
 ArticulationBody:
   m_ObjectHideFlags: 0
