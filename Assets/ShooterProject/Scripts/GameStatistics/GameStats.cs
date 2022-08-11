@@ -10,6 +10,8 @@ namespace ShooterProject.Scripts.GameStatistics
 
 		public static int CompleteWaveCount { get; set; }
 
+		public static int CompletedGamesCount { get; set; }
+
 		#endregion
 	}
 }

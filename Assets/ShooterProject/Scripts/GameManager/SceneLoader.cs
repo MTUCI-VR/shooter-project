@@ -10,10 +10,6 @@ namespace ShooterProject.Scripts.GameManager
 	{
 		#region Fields
 
-		private static AsyncOperation _sceneAsyncOperation;
-
-		private static SceneType _sceneType;
-
 		private static float _progress;
 
 		#endregion
@@ -36,8 +32,6 @@ namespace ShooterProject.Scripts.GameManager
 			}
 		}
 
-		private static bool sceneIsLoaded => Progress == 1;
-
 		#endregion
 
 		#region Events
@@ -48,22 +42,17 @@ namespace ShooterProject.Scripts.GameManager
 
 		#region Private Methods
 
-		private static void OnAsyncOperationComplited(AsyncOperation asyncOperation)
-		{
-			SwitchPlayerComponents(_sceneType);
-
-			_sceneAsyncOperation.completed -= OnAsyncOperationComplited;
-		}
-
 		private static void SwitchPlayerComponents(SceneType sceneType)
 		{
+			var playerComponentsSwither = Player.Instance.GetComponent<PlayerComponents>();
+
 			switch (sceneType)
 			{
 				case SceneType.Menu:
-					Player.Instance.GetComponent<PlayerComponents>().DisableComponents();
+					playerComponentsSwither.DisableComponents();
 					break;
 				case SceneType.Game:
-					Player.Instance.GetComponent<PlayerComponents>().EnableComponents();
+					playerComponentsSwither.EnableComponents();
 					break;
 			}
 		}
@@ -80,26 +69,29 @@ namespace ShooterProject.Scripts.GameManager
 		/// <param name="sceneType">Тип загружаемой сцены, для определения активности комнонентов игрока</param>
 		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName, SceneType sceneType)
 		{
-			_sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName, LoadSceneMode.Additive);
+			var fadeTransition = Player.Instance.GetComponent<FadeTransition>();
 
-			_sceneType = sceneType;
-			_sceneAsyncOperation.completed += OnAsyncOperationComplited;
+			fadeTransition.FadeTransitionStart();
+			yield return new WaitForSeconds(fadeTransition.FadeTransitionDuration);
 
-			_sceneAsyncOperation.allowSceneActivation = false;
+			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName, LoadSceneMode.Additive);
 
 			Progress = 0;
 
 			do
 			{
-				Progress = _sceneAsyncOperation.progress * (10f / 9f);
+				Progress = sceneAsyncOperation.progress * (10f / 9f);
 
 				yield return new WaitForEndOfFrame();
 
-			} while (!sceneIsLoaded);
+			} while (!sceneAsyncOperation.isDone);
 
-			SceneManager.UnloadSceneAsync(sceneForUnloadName);
+			if (!string.IsNullOrWhiteSpace(sceneForUnloadName))
+				SceneManager.UnloadSceneAsync(sceneForUnloadName);
 
-			_sceneAsyncOperation.allowSceneActivation = true;
+			fadeTransition.FadeTransitionEnd();
+
+			SwitchPlayerComponents(sceneType);
 		}
 
 		#endregion

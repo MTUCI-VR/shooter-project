@@ -50,7 +50,7 @@ namespace ShooterProject.Scripts.Weapons
 				false,
 				false,
 				weaponShootingEffects.ImpactPrefab,
-				null);
+				transform);
 		}
 
 		private void OnEnable()
@@ -120,6 +120,7 @@ namespace ShooterProject.Scripts.Weapons
 			{
 				freeImpact.transform.position = hitInfo.point;
 				freeImpact.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+				freeImpact.transform.SetParent(hitInfo.transform);
 			}
 		}
 

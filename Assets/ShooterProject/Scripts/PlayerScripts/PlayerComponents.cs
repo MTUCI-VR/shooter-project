@@ -1,49 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
-using ShooterProject.Scripts.Teleport;
-using ShooterProject.Scripts.Actors.Health;
 
 namespace ShooterProject.Scripts.PlayerScripts
 {
-	[RequireComponent(typeof(Health))]
-	[RequireComponent(typeof(CharacterController))]
-	[RequireComponent(typeof(LocomotionSystem))]
-	[RequireComponent(typeof(TeleportationProvider))]
-	[RequireComponent(typeof(TeleportationToggler))]
-	[RequireComponent(typeof(FixedCharacterControllerDriver))]
-	[RequireComponent(typeof(ActionBasedContinuousMoveProvider))]
-	[RequireComponent(typeof(MoveSound))]
 	public class PlayerComponents : MonoBehaviour
 	{
 		#region Fields
 
 		[SerializeField]
-		private List<GameObject> playerObjects;
-
-		[SerializeField]
-		private GameObject rayInteractor;
-
-		private List<MonoBehaviour> _components = new List<MonoBehaviour>();
-
-		#endregion
-
-		#region Life Cycle
-
-		private void Awake()
-		{
-			_components.Add(GetComponent<LocomotionSystem>());
-			_components.Add(GetComponent<TeleportationProvider>());
-			_components.Add(GetComponent<TeleportationToggler>());
-			_components.Add(GetComponent<FixedCharacterControllerDriver>());
-			_components.Add(GetComponent<ActionBasedContinuousMoveProvider>());
-			_components.Add(GetComponent<MoveSound>());
-			_components.Add(GetComponent<Health>());
-		}
+		private List<GameObject> playerObjectsForGame;
 
 		#endregion
 
 		#region Public Methods
+
 
 		///<summary>
 		/// Выключает лишние объекты и компоненты игрока для сцен с меню
@@ -52,11 +22,9 @@ namespace ShooterProject.Scripts.PlayerScripts
 		{
 			transform.position = Vector3.zero;
 
-			_components.ForEach(component => component.enabled = false);
-			playerObjects.ForEach(playerObject => playerObject.SetActive(false));
-			GetComponent<CharacterController>().enabled = false;
+			Player.Instance.PlayerHealth.enabled = false;
 
-			rayInteractor.SetActive(true);
+			playerObjectsForGame.ForEach(playerObject => playerObject.SetActive(false));
 		}
 
 		///<summary>
@@ -66,11 +34,9 @@ namespace ShooterProject.Scripts.PlayerScripts
 		{
 			transform.position = Vector3.zero;
 
-			_components.ForEach(component => component.enabled = true);
-			playerObjects.ForEach(playerObject => playerObject.SetActive(true));
-			GetComponent<CharacterController>().enabled = true;
+			Player.Instance.PlayerHealth.enabled = true;
 
-			rayInteractor.SetActive(false);
+			playerObjectsForGame.ForEach(playerObject => playerObject.SetActive(true));
 		}
 
 		#endregion

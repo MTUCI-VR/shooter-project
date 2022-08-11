@@ -68,6 +68,13 @@ public static class SceneMenuList
 		EditorSceneManager.OpenScene("Assets/_Developers/Arenchik/Scenes/MainMenu.unity", OpenSceneMode.Additive);
 	}
 
+	[MenuItem("Scenes/Menu")]
+	private static void OpenMenu()
+	{
+		EditorSceneManager.OpenScene("Assets/ShooterProject/Scenes/PersistentScene/PersistentScene.unity", OpenSceneMode.Single);
+		EditorSceneManager.OpenScene("Assets/_Developers/Arenchik/Scenes/Menu/Menu.unity", OpenSceneMode.Additive);
+	}
+
 	[MenuItem("Scenes/Spawner")]
 	private static void OpenSpawner()
 	{
@@ -136,13 +143,6 @@ public static class SceneMenuList
 	{
 		EditorSceneManager.OpenScene("Assets/ShooterProject/Scenes/PersistentScene/PersistentScene.unity", OpenSceneMode.Single);
 		EditorSceneManager.OpenScene("Assets/_Developers/EgorKirnosov/Scenes/WeaponTestingScene.unity", OpenSceneMode.Additive);
-	}
-
-	[MenuItem("Scenes/Location")]
-	private static void OpenLocation()
-	{
-		EditorSceneManager.OpenScene("Assets/ShooterProject/Scenes/PersistentScene/PersistentScene.unity", OpenSceneMode.Single);
-		EditorSceneManager.OpenScene("Assets/ShooterProject/Objects/Location/Location.unity", OpenSceneMode.Additive);
 	}
 
 	[MenuItem("Scenes/PersistentScene")]
