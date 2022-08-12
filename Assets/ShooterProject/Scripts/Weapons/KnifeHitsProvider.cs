@@ -103,11 +103,11 @@ namespace ShooterProject.Scripts.Weapons
 			var rotationDelta = transform.rotation * Quaternion.Inverse(_previousRotation);
 			var deltaAngle = rotationDelta.eulerAngles;
 
-			if (deltaAngle.x > 180) 
+			if (deltaAngle.x > 180)
 				deltaAngle.x -= 360;
-			if (deltaAngle.y > 180) 
+			if (deltaAngle.y > 180)
 				deltaAngle.y -= 360;
-			if (deltaAngle.z > 180) 
+			if (deltaAngle.z > 180)
 				deltaAngle.z -= 360;
 
 			var angularVelocity = (deltaAngle / Time.deltaTime).magnitude;
