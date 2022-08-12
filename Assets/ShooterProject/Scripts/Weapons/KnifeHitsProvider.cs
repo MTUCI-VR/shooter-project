@@ -108,7 +108,6 @@ namespace ShooterProject.Scripts.Weapons
 			if (deltaAngle.z > 180) deltaAngle.z -= 360;
 
 			var angularVelocity = (deltaAngle / Time.deltaTime).magnitude;
-			Debug.Log($"{deltaAngle} - {angularVelocity}");
 			return angularVelocity;
 		}
 
