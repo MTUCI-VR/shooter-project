@@ -23,6 +23,10 @@ namespace ShooterProject.Scripts.Weapons
 		private float hitCoolDownSeconds;
 
 		[SerializeField]
+		[Min(0)]
+		private float velocityCalculationFrequency;
+
+		[SerializeField]
 		private float minHitVelocity;
 
 		[SerializeField]
@@ -64,7 +68,7 @@ namespace ShooterProject.Scripts.Weapons
 		}
 		private void Update()
 		{
-			if (CanHit)
+			if (CanHit )
 			{
 				var velocity = GetVelocity();
 				var angularVelocity = GetAngularVelocity();
@@ -101,7 +105,14 @@ namespace ShooterProject.Scripts.Weapons
 		private float GetAngularVelocity()
 		{
 			var rotationDelta = transform.rotation * Quaternion.Inverse(_previousRotation);
-			var angularVelocity = (rotationDelta.eulerAngles / Time.deltaTime).magnitude;
+			var deltaAngle = rotationDelta.eulerAngles;
+
+			if (deltaAngle.x > 180) deltaAngle.x -= 360;
+			if (deltaAngle.y > 180) deltaAngle.y -= 360;
+			if (deltaAngle.z > 180) deltaAngle.z -= 360;
+
+			var angularVelocity = (deltaAngle / Time.deltaTime).magnitude;
+			Debug.Log($"{deltaAngle} - {angularVelocity}");
 			return angularVelocity;
 		}
 
