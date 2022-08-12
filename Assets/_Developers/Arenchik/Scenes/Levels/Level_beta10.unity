@@ -458,8 +458,8 @@ MonoBehaviour:
   - {fileID: 1557304943}
   waves:
   - AvailableEnemies:
-    - {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
-    EnemiesCount: 1
+    - {fileID: 5831988753997391874, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
+    EnemiesCount: 2
     WavePreparationTime: 15
 --- !u!1 &328568347
 GameObject:
@@ -909,7 +909,7 @@ PrefabInstance:
     - target: {fileID: 4495499132952477230, guid: 13bc171bb56771844a16af28a44fef2f, type: 3}
       propertyPath: objectsForSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
+      objectReference: {fileID: 5831988753997391874, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13bc171bb56771844a16af28a44fef2f, type: 3}
 --- !u!1001 &610508372
@@ -2504,7 +2504,7 @@ PrefabInstance:
     - target: {fileID: 4495499132952477230, guid: 13bc171bb56771844a16af28a44fef2f, type: 3}
       propertyPath: objectsForSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
+      objectReference: {fileID: 5831988753997391874, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13bc171bb56771844a16af28a44fef2f, type: 3}
 --- !u!1 &1419997122
@@ -2664,7 +2664,7 @@ PrefabInstance:
     - target: {fileID: 4495499132952477230, guid: 13bc171bb56771844a16af28a44fef2f, type: 3}
       propertyPath: objectsForSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
+      objectReference: {fileID: 5831988753997391874, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13bc171bb56771844a16af28a44fef2f, type: 3}
 --- !u!1 &1510225319
@@ -3062,7 +3062,7 @@ PrefabInstance:
     - target: {fileID: 4495499132952477230, guid: 13bc171bb56771844a16af28a44fef2f, type: 3}
       propertyPath: objectsForSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 3002807527685915704, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
+      objectReference: {fileID: 5831988753997391874, guid: 446de11bc8fc0ea47affe5c61cc566a2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13bc171bb56771844a16af28a44fef2f, type: 3}
 --- !u!1 &1686671725

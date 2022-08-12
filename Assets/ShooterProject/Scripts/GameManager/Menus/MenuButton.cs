@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShooterProject.Scripts.GameManager.Menus
 {
-	[RequireComponent(typeof(Button))]
 	public class MenuButton : MonoBehaviour
 	{
 		#region Fields
@@ -15,39 +13,30 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		[SerializeField]
 		private string sceneForLoadName;
 
-		private Button _button;
+		#endregion
+
+		#region Properties
+
+		public SceneType SceneType => sceneType;
+
+		public string SceneForLoadName => sceneForLoadName;
 
 		#endregion
 
 		#region Events
 
-		public event Action<string, SceneType> onClick;
-
-		#endregion
-
-		#region Life Cycle
-
-		private void Awake()
-		{
-			_button = GetComponent<Button>();
-		}
-
-		private void OnEnable()
-		{
-			_button.onClick.AddListener(OnClick);
-		}
-		private void OnDisable()
-		{
-			_button.onClick.RemoveListener(OnClick);
-		}
+		public event Action<MenuButton> onClick;
 
 		#endregion
 
 		#region Private Methods
 
-		private void OnClick()
+		private void OnTriggerEnter(Collider collider)
 		{
-			onClick?.Invoke(sceneForLoadName, sceneType);
+			if (collider.TryGetComponent<ButtonClicker>(out var buttonClicker))
+			{
+				onClick?.Invoke(this);
+			}
 		}
 
 		#endregion
