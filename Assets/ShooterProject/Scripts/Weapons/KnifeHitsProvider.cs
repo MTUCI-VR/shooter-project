@@ -23,10 +23,6 @@ namespace ShooterProject.Scripts.Weapons
 		private float hitCoolDownSeconds;
 
 		[SerializeField]
-		[Min(0)]
-		private float velocityCalculationFrequency;
-
-		[SerializeField]
 		private float minHitVelocity;
 
 		[SerializeField]
@@ -68,7 +64,7 @@ namespace ShooterProject.Scripts.Weapons
 		}
 		private void Update()
 		{
-			if (CanHit )
+			if (CanHit)
 			{
 				var velocity = GetVelocity();
 				var angularVelocity = GetAngularVelocity();
