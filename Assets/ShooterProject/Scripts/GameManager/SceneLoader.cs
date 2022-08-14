@@ -92,6 +92,8 @@ namespace ShooterProject.Scripts.GameManager
 
 			} while (!sceneAsyncOperation.isDone);
 
+			SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneForLoadName));
+
 			if (!string.IsNullOrWhiteSpace(sceneForUnloadName))
 				SceneManager.UnloadSceneAsync(sceneForUnloadName);
 
