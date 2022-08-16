@@ -81,13 +81,13 @@ namespace ShooterProject.Scripts.Inventory
 		{
 			selectExitEventArgs.interactableObject.selectExited.RemoveListener(OnMagazineGrabSelectExit);
 
-			if(_socketInteractor.IsHovering(selectExitEventArgs.interactableObject.transform.GetComponent<XRGrabInteractable>()))
+			if (_socketInteractor.IsHovering(selectExitEventArgs.interactableObject.transform.GetComponent<XRGrabInteractable>()))
 				PutInInventorySlot(selectExitEventArgs.interactableObject.transform.GetComponent<AmmoMagazine>());
 		}
 
 		private void PutInInventorySlot(AmmoMagazine magazine)
 		{
-			if(!CanPutInInventory) return;
+			if (!CanPutInInventory) return;
 
 			if (_socketInteractor.hasSelection)
 			{

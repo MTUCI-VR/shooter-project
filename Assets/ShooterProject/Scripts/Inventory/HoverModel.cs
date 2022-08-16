@@ -16,7 +16,7 @@ namespace ShooterProject.Scripts.Inventory
 
 		[SerializeField]
 		private Material exitMaterial;
-		
+
 		[SerializeField]
 		private Material packedMaterial;
 
@@ -44,7 +44,7 @@ namespace ShooterProject.Scripts.Inventory
 		{
 			_socketInteractor = GetComponent<XRSocketInteractor>();
 
-			if(!hoverModel.TryGetComponent<MeshRenderer>(out _meshRenderer))
+			if (!hoverModel.TryGetComponent<MeshRenderer>(out _meshRenderer))
 			{
 #if UNITY_EDITOR
 				Debug.LogError("HoverModel's meshRenderer not found");
@@ -81,11 +81,11 @@ namespace ShooterProject.Scripts.Inventory
 
 		private void OnHoverEntered(HoverEnterEventArgs hoverEnterEventArgs)
 		{
-			if(!CanHover) return;
+			if (!CanHover) return;
 
 			_meshRenderer.material = enterMaterial;
 			hoverModel.transform.localScale = modelScaleOnHover;
-		
+
 		}
 		private void OnHoverExited(HoverExitEventArgs hoverExitEventArgs)
 		{
