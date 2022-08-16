@@ -16,17 +16,25 @@ namespace ShooterProject.Scripts.Inventory
 
 		[SerializeField]
 		private Material exitMaterial;
+		
+		[SerializeField]
+		private Material packedMaterial;
 
 		[SerializeField]
-		private float modelScaleOnHover;
+		private Vector3 modelScaleOnHover;
 
-		private Vector3 _initialModelScale;
+		[SerializeField]
+		private Vector3 StayModelScale;
 
 		private MeshRenderer _meshRenderer;
 
 		private XRSocketInteractor _socketInteractor;
 
-		private bool _hasMeshRenderer;
+		#endregion
+
+		#region Properties
+
+		private bool CanHover => TryGetComponent<AmmoMagazineInventorySlot>(out var ammoMagazineSlot) ? ammoMagazineSlot.CanPutInInventory : !_socketInteractor.hasSelection;
 
 		#endregion
 
@@ -35,13 +43,17 @@ namespace ShooterProject.Scripts.Inventory
 		private void Awake()
 		{
 			_socketInteractor = GetComponent<XRSocketInteractor>();
-			_hasMeshRenderer = hoverModel.TryGetComponent<MeshRenderer>(out _meshRenderer);
-			_initialModelScale = hoverModel.transform.localScale;
+
+			if(!hoverModel.TryGetComponent<MeshRenderer>(out _meshRenderer))
+			{
+#if UNITY_EDITOR
+				Debug.LogError("HoverModel's meshRenderer not found");
+#endif
+			}
 		}
 		private void OnEnable()
 		{
-			if (_hasMeshRenderer)
-				AddListeners();
+			AddListeners();
 		}
 
 		private void OnDisable()
@@ -55,41 +67,36 @@ namespace ShooterProject.Scripts.Inventory
 
 		private void AddListeners()
 		{
-			_socketInteractor.hoverEntered.AddListener(OnChangeMaterialToEnter);
-			_socketInteractor.hoverExited.AddListener(OnChangeMaterialToExit);
-			_socketInteractor.selectEntered.AddListener(OnDisableModel);
-			_socketInteractor.selectExited.AddListener(OnEnableModel);
+			_socketInteractor.hoverEntered.AddListener(OnHoverEntered);
+			_socketInteractor.hoverExited.AddListener(OnHoverExited);
+			_socketInteractor.selectEntered.AddListener(OnSelectEntered);
 		}
 
 		private void RemoveListeners()
 		{
-			_socketInteractor.hoverEntered.RemoveListener(OnChangeMaterialToEnter);
-			_socketInteractor.hoverExited.RemoveListener(OnChangeMaterialToExit);
-			_socketInteractor.selectEntered.RemoveListener(OnDisableModel);
-			_socketInteractor.selectExited.RemoveListener(OnEnableModel);
+			_socketInteractor.hoverEntered.RemoveListener(OnHoverEntered);
+			_socketInteractor.hoverExited.RemoveListener(OnHoverExited);
+			_socketInteractor.selectEntered.RemoveListener(OnSelectEntered);
 		}
 
-		private void OnChangeMaterialToEnter(HoverEnterEventArgs hoverEnterEventArgs)
+		private void OnHoverEntered(HoverEnterEventArgs hoverEnterEventArgs)
 		{
-			if (!_socketInteractor.hasSelection)
-			{
-				_meshRenderer.material = enterMaterial;
-				hoverModel.transform.localScale *= modelScaleOnHover;
-			}
+			if(!CanHover) return;
+
+			_meshRenderer.material = enterMaterial;
+			hoverModel.transform.localScale = modelScaleOnHover;
+		
 		}
-		private void OnChangeMaterialToExit(HoverExitEventArgs hoverExitEventArgs)
+		private void OnHoverExited(HoverExitEventArgs hoverExitEventArgs)
 		{
-			_meshRenderer.material = exitMaterial;
-			hoverModel.transform.localScale = _initialModelScale;
+			_meshRenderer.material = _socketInteractor.hasSelection ? packedMaterial : exitMaterial;
+			hoverModel.transform.localScale = StayModelScale;
 		}
 
-		private void OnDisableModel(SelectEnterEventArgs selectEnterEventArgs)
+		private void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
 		{
-			hoverModel.SetActive(false);
-		}
-		private void OnEnableModel(SelectExitEventArgs selectExitEventArgs)
-		{
-			hoverModel.SetActive(true);
+			_meshRenderer.material = packedMaterial;
+			hoverModel.transform.localScale = StayModelScale;
 		}
 
 		#endregion
