@@ -108,7 +108,7 @@ namespace ShooterProject.Scripts.Spawner
 
 		#region Protected Methods 
 
-		protected GameObject Spawn()
+		protected GameObject Spawn(bool moveToSpawner = true)
 		{
 			int spawnObjectIndex = GetSpawnObjectIndex();
 
@@ -117,8 +117,11 @@ namespace ShooterProject.Scripts.Spawner
 
 			if (objectForSpawnPool.TryGetFreeElement(out objectForSpawn, false))
 			{
-				objectForSpawn.transform.position = transform.position;
-				objectForSpawn.transform.rotation = transform.rotation;
+				if (moveToSpawner)
+				{
+					objectForSpawn.transform.position = transform.position;
+					objectForSpawn.transform.rotation = transform.rotation;
+				}
 
 				if (audioSource?.clip != null)
 					audioSource.Play();
