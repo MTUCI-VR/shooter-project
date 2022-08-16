@@ -38,13 +38,13 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		private void OnMenuButtonClick(MenuButton menuButton)
 		{
-			if (menuButton.SceneType == SceneType.Quit)
+			if (string.IsNullOrWhiteSpace(menuButton.SceneForLoadName))
 			{
 				Application.Quit();
 				return;
 			}
 
-			StartCoroutine(SceneLoader.LoadScene(menuButton.SceneForLoadName, gameObject.scene.name, menuButton.SceneType));
+			StartCoroutine(SceneLoader.LoadScene(menuButton.SceneForLoadName, gameObject.scene.name));
 			loadingBar.gameObject.SetActive(true);
 		}
 

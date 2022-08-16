@@ -41,13 +41,13 @@ namespace ShooterProject.Scripts.GameStatistics
 		private void OnWavesEnded()
 		{
 			Counting();
-			StartCoroutine(SceneLoader.LoadScene(_gameStatsSceneName, gameObject.scene.name, SceneType.Menu));
+			StartCoroutine(SceneLoader.LoadScene(_gameStatsSceneName, gameObject.scene.name));
 		}
 
 		private void OnPlayerDied(Health playerHealth)
 		{
 			Counting();
-			StartCoroutine(SceneLoader.LoadScene(_gameStatsSceneName, gameObject.scene.name, SceneType.Menu));
+			StartCoroutine(SceneLoader.LoadScene(_gameStatsSceneName, gameObject.scene.name));
 		}
 
 		private void Counting()

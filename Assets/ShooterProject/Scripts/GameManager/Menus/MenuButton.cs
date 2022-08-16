@@ -8,16 +8,11 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		#region Fields
 
 		[SerializeField]
-		private SceneType sceneType;
-
-		[SerializeField]
 		private string sceneForLoadName;
 
 		#endregion
 
 		#region Properties
-
-		public SceneType SceneType => sceneType;
 
 		public string SceneForLoadName => sceneForLoadName;
 
