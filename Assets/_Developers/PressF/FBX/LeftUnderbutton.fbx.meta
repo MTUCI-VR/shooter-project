@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7e8d4a2f3b30fca4190f1a619c59e4cd
+guid: b0f2341ed4296e045b94ef2a55c7f24f
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: TitleMenu
-    second: {fileID: 2100000, guid: ef161168d16a9ce4f990f8563a716e75, type: 2}
+      name: UnderButtonMenu
+    second: {fileID: 2100000, guid: 806e8c87e81bad94ba3141fbf57b44e2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

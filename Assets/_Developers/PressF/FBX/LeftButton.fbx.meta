@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 4cb5f1400ca4f584889d34eef8e368c6
+guid: 66faae3d327cc1d4aa92ad1bd6e741f4
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Buttons
+    second: {fileID: 2100000, guid: 55e5cef426316fa4b97a3442fd29ff5a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

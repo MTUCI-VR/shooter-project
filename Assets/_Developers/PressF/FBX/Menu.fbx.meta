@@ -23,16 +23,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Screen
-    second: {fileID: 2100000, guid: d20173c4ac2c6a148a1f68e30cb1181c, type: 2}
+    second: {fileID: 2100000, guid: 72c2905d208c4b04d9553a34ba33781b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ScreenBorder
-    second: {fileID: 2100000, guid: 806e8c87e81bad94ba3141fbf57b44e2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: UnderButtonMenu
     second: {fileID: 2100000, guid: 806e8c87e81bad94ba3141fbf57b44e2, type: 2}
   - first:
       type: UnityEngine:Material
