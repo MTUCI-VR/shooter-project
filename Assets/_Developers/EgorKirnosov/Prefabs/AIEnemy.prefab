@@ -312,7 +312,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1787852898163788222}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.85
+  m_Radius: 0.774
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -336,7 +336,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 200
+  m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &2018170572
 Animator:
@@ -383,8 +383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolRadius: 50
-  attackStartRadius: 5
-  attackEndRadius: 8
+  attackStartRadius: 3
+  attackEndRadius: 5
 --- !u!114 &2018170571
 MonoBehaviour:
   m_ObjectHideFlags: 0

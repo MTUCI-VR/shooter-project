@@ -107,7 +107,7 @@ NavMeshSettings:
     serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.5
-    agentHeight: 2
+    agentHeight: 1.3
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: bbe1d8d56e522774085858d1b60f86e4, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &426504776
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,11 +173,6 @@ MonoBehaviour:
 --- !u!1 &544208169 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2763961846960681545, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
-  m_PrefabInstance: {fileID: 2875807163383512898}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &740840521 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 617545186577507234, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
   m_PrefabInstance: {fileID: 2875807163383512898}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &805711588 stripped
@@ -435,7 +430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 617545186577507234, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 622870652719622255, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_Layer
@@ -443,7 +438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 646887897106695709, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1033566014687071646, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_Layer
@@ -483,7 +478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2763961846960681545, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2875807162346737173, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: playerObjectsForGame.Array.size
@@ -492,15 +487,15 @@ PrefabInstance:
     - target: {fileID: 2875807162346737173, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: playerObjectsForGame.Array.data[0]
       value: 
-      objectReference: {fileID: 544208169}
+      objectReference: {fileID: 0}
     - target: {fileID: 2875807162346737173, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: playerObjectsForGame.Array.data[1]
       value: 
-      objectReference: {fileID: 1425816672}
+      objectReference: {fileID: 544208169}
     - target: {fileID: 2875807162346737173, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: playerObjectsForGame.Array.data[2]
       value: 
-      objectReference: {fileID: 740840521}
+      objectReference: {fileID: 1425816672}
     - target: {fileID: 2875807162346737173, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: playerObjectsForGame.Array.data[3]
       value: 
@@ -615,7 +610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5921808913164967850, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5921808913164967851, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
       propertyPath: m_LocalPosition.y
@@ -765,5 +760,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2875807162346737173, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 305ef7addbf61c843a3f7220fd0b7d21, type: 3}

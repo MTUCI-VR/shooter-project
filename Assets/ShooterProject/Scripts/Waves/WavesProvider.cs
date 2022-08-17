@@ -53,8 +53,10 @@ namespace ShooterProject.Scripts.Waves
 			base.Awake();
 			spawners.ForEach(e => _activeSpawners.Add(e));
 		}
-		private void OnEnable()
+		protected override void OnEnable()
 		{
+			base.OnEnable();
+
 			foreach (var spawner in spawners)
 				spawner.OnActivationChanged += OnSpawnerActivationChanged;
 		}
@@ -71,8 +73,10 @@ namespace ShooterProject.Scripts.Waves
 				StartCoroutine(SpawnWaweCoroutine());
 			}
 		}
-		private void OnDisable()
+		protected override void OnDisable()
 		{
+			base.OnDisable();
+
 			foreach (var spawner in spawners)
 				spawner.OnActivationChanged -= OnSpawnerActivationChanged;
 			StopCoroutine(SpawnWaweCoroutine());
@@ -92,7 +96,7 @@ namespace ShooterProject.Scripts.Waves
 				OnWavesEnded?.Invoke();
 				yield break;
 			}
-
+			
 			OnWavePreparationStarted?.Invoke(currentWaveParams.WavePreparationTime);
 			yield return new WaitForSeconds(currentWaveParams.WavePreparationTime);
 

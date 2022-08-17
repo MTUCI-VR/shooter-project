@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using ShooterProject.Scripts.General;
 using ShooterProject.Scripts.Actors.Health;
 using ShooterProject.Scripts.PlayerScripts;
 using ShooterProject.Scripts.Waves;
@@ -25,12 +26,14 @@ namespace ShooterProject.Scripts.GameInterface
 
 		private void OnEnable()
 		{
-			AddListeners();
+			Singleton<WavesProvider>.OnEnabled +=  AddListeners;
+			Singleton<WavesProvider>.OnDisabled +=  RemoveListeners;
 		}
 
 		private void OnDisable()
 		{
-			RemoveListeners();
+			Singleton<WavesProvider>.OnEnabled -=  AddListeners;
+			Singleton<WavesProvider>.OnDisabled -=  RemoveListeners;
 		}
 
 		#endregion
@@ -40,16 +43,17 @@ namespace ShooterProject.Scripts.GameInterface
 		private void AddListeners()
 		{
 			Player.Instance.PlayerHealth.OnChanged += Print;
+
 			WavesProvider.Instance.OnWavePreparationStarted += Print;
 			WavesProvider.Instance.OnWaveStarted += Print;
 		}
 
 		private void RemoveListeners()
 		{
-			if (Player.Instance != null)
+			if (!(Player.Instance is null))
 				Player.Instance.PlayerHealth.OnChanged -= Print;
 
-			if (WavesProvider.Instance != null)
+			if (!(WavesProvider.Instance is null))
 			{
 				WavesProvider.Instance.OnWavePreparationStarted -= Print;
 				WavesProvider.Instance.OnWaveStarted -= Print;

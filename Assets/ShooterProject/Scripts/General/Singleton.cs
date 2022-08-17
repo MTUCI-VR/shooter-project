@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ShooterProject.Scripts.General
@@ -7,6 +8,13 @@ namespace ShooterProject.Scripts.General
 		#region Fields
 
 		private static T _instance;
+
+		#endregion
+
+		#region Events
+
+		public static event Action OnEnabled;
+		public static event Action OnDisabled;
 
 		#endregion
 
@@ -30,9 +38,19 @@ namespace ShooterProject.Scripts.General
 		protected virtual void Awake()
 		{
 			if (_instance == null)
-			{
+			{ 
 				_instance = this as T;
 			}
+		}
+
+		protected virtual void OnEnable()
+		{
+			OnEnabled?.Invoke();
+		}
+
+		protected virtual void OnDisable()
+		{
+			OnDisabled?.Invoke();
 		}
 
 		#endregion

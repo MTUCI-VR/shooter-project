@@ -42,25 +42,6 @@ namespace ShooterProject.Scripts.GameManager
 
 		#endregion
 
-		#region Private Methods
-
-		private static void SwitchPlayerComponents(SceneType sceneType)
-		{
-			var playerComponentsSwither = Player.Instance.GetComponent<PlayerComponents>();
-
-			switch (sceneType)
-			{
-				case SceneType.Menu:
-					playerComponentsSwither.DisableComponents();
-					break;
-				case SceneType.Game:
-					playerComponentsSwither.EnableComponents();
-					break;
-			}
-		}
-
-		#endregion
-
 		#region Public Methods
 
 		/// <summary>
@@ -69,7 +50,7 @@ namespace ShooterProject.Scripts.GameManager
 		/// <param name="sceneForLoadName">Название сцены для перехода</param>
 		/// <param name="sceneForUnloadName">Название текущей сцены для выгрузки</param>
 		/// <param name="sceneType">Тип загружаемой сцены, для определения активности комнонентов игрока</param>
-		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName, SceneType sceneType)
+		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName)
 		{
 			if (_sceneIsLoading) yield break;
 
@@ -98,8 +79,6 @@ namespace ShooterProject.Scripts.GameManager
 				SceneManager.UnloadSceneAsync(sceneForUnloadName);
 
 			fadeTransition.FadeTransitionEnd();
-
-			SwitchPlayerComponents(sceneType);
 			
 			_sceneIsLoading = false;
 		}
