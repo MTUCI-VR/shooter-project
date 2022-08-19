@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using ShooterProject.Scripts.PlayerScripts;
 using System;
+using ShooterProject.Scripts.Actors.AI;
 
 namespace ShooterProject.Scripts.Spawner
 {
@@ -64,7 +65,10 @@ namespace ShooterProject.Scripts.Spawner
 		{
 			if (_canSpawn)
 			{
-				var spawnedObject = Spawn();
+				var spawnedObject = Spawn(false);
+				if (spawnedObject.TryGetComponent<EnemyMovement>(out var movement))
+					movement.MoveToPosition(transform.position);
+
 				StartCoroutine(SpawnCoolDownCoroutine(spawnDelayInSeconds));
 				return spawnedObject;
 			}

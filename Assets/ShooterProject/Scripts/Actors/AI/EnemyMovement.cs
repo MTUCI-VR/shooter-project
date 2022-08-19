@@ -71,12 +71,16 @@ namespace ShooterProject.Scripts.Actors.AI
 		{
 			if (_targetHealth != null)
 				_targetHealth.OnDied += OnTargetDied;
+
+			_agent.Warp(transform.position);
+			_agent.updatePosition = true;
 		}
 
 		private void OnDisable()
 		{
 			if (_targetHealth != null)
 				_targetHealth.OnDied -= OnTargetDied;
+			_agent.updatePosition = false;
 		}
 
 		private void Update()
@@ -93,6 +97,17 @@ namespace ShooterProject.Scripts.Actors.AI
 			{
 				ChangeBehaviour(new ChaseBehaviour(_agent, _targetTransform));
 			}
+		}
+
+		#endregion
+
+		#region Public Methods
+
+		public void MoveToPosition(Vector3 position)
+		{
+			_agent.enabled = false;
+			_agent.Warp(position);
+			_agent.enabled = true;
 		}
 
 		#endregion
