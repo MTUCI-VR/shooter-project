@@ -10,9 +10,6 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		[SerializeField]
 		private List<MenuButton> menuButtons;
 
-		[SerializeField]
-		private MenuLoadingBar loadingBar;
-
 		#endregion
 
 		#region Life Cycle
@@ -45,7 +42,6 @@ namespace ShooterProject.Scripts.GameManager.Menus
 			}
 
 			StartCoroutine(SceneLoader.LoadScene(menuButton.SceneForLoadName, gameObject.scene.name));
-			loadingBar.gameObject.SetActive(true);
 		}
 
 		#endregion

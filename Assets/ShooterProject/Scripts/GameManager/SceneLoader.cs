@@ -78,6 +78,8 @@ namespace ShooterProject.Scripts.GameManager
 			if (!string.IsNullOrWhiteSpace(sceneForUnloadName))
 				SceneManager.UnloadSceneAsync(sceneForUnloadName);
 
+			Player.Instance.transform.position = Vector3.zero;
+
 			fadeTransition.FadeTransitionEnd();
 			
 			_sceneIsLoading = false;
