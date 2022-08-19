@@ -11,7 +11,7 @@ namespace ShooterProject.Scripts.Inventory
 		#region Fields
 
 		[SerializeField]
-		private int maxCount;
+		private int magazineMaxCount;
 
 		private List<AmmoMagazine> _magazines = new List<AmmoMagazine>();
 
@@ -21,7 +21,7 @@ namespace ShooterProject.Scripts.Inventory
 
 		#region Properties
 
-		public bool CanPutInInventory => _magazines.Count < maxCount;
+		public bool CanPutInInventory => _magazines.Count < magazineMaxCount;
 
 		#endregion
 
@@ -93,17 +93,13 @@ namespace ShooterProject.Scripts.Inventory
 			{
 				magazine.gameObject.SetActive(false);
 
-				if (!_magazines.Contains(magazine))
-				{
-					_magazines.Add(magazine);
-					Counting();
-				}
+				AddingMagazineInList(magazine);
 			}
 		}
 
 		private void TakeFromInventorySlot(AmmoMagazine magazine)
 		{
-			_magazines.Remove(magazine);
+			RemovingMagazineFromList(magazine);
 
 
 			if (_magazines.Count > 0)
@@ -115,8 +111,24 @@ namespace ShooterProject.Scripts.Inventory
 
 				newMagazine.gameObject.SetActive(true);
 			}
+		}
 
-			Counting();
+		private void AddingMagazineInList(AmmoMagazine magazine)
+		{
+			if (!_magazines.Contains(magazine))
+			{
+				_magazines.Add(magazine);
+				Counting();
+			}
+		}
+
+		private void RemovingMagazineFromList(AmmoMagazine magazine)
+		{
+			if (_magazines.Contains(magazine))
+			{
+				_magazines.Remove(magazine);
+				Counting();
+			}
 		}
 
 		private void Counting()
