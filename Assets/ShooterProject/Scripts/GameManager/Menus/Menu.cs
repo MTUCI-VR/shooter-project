@@ -10,9 +10,6 @@ namespace ShooterProject.Scripts.GameManager.Menus
 		[SerializeField]
 		private List<MenuButton> menuButtons;
 
-		[SerializeField]
-		private MenuLoadingBar loadingBar;
-
 		#endregion
 
 		#region Life Cycle
@@ -38,14 +35,13 @@ namespace ShooterProject.Scripts.GameManager.Menus
 
 		private void OnMenuButtonClick(MenuButton menuButton)
 		{
-			if (menuButton.SceneType == SceneType.Quit)
+			if (string.IsNullOrWhiteSpace(menuButton.SceneForLoadName))
 			{
 				Application.Quit();
 				return;
 			}
 
-			StartCoroutine(SceneLoader.LoadScene(menuButton.SceneForLoadName, gameObject.scene.name, menuButton.SceneType));
-			loadingBar.gameObject.SetActive(true);
+			StartCoroutine(SceneLoader.LoadScene(menuButton.SceneForLoadName, gameObject.scene.name));
 		}
 
 		#endregion
