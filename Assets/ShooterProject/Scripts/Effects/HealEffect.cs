@@ -3,7 +3,7 @@ using ShooterProject.Scripts.PlayerScripts;
 
 namespace ShooterProject.Scripts.Effects
 {
-	public class DamageEffect : Effect
+	public class HealEffect : Effect
 	{
 		#region Constant Fields
 
@@ -14,20 +14,20 @@ namespace ShooterProject.Scripts.Effects
 
 		private void OnEnable()
 		{
-			Player.Instance.PlayerHealth.onDamaged += OnDamaged;
+			Player.Instance.PlayerHealth.onHealed += OnHealed;
 		}
 
 		private void OnDisable()
 		{
             if(!(Player.Instance is null))
-                Player.Instance.PlayerHealth.onDamaged -= OnDamaged;
+			    Player.Instance.PlayerHealth.onHealed -= OnHealed;
 		}
 
 		#endregion
 
 		#region Private Methods
 
-		private void OnDamaged()
+		private void OnHealed()
 		{
 			_animator.SetTrigger(START_TRIGGER);
 		}
