@@ -52,6 +52,9 @@ namespace ShooterProject.Scripts.Actors.Health
 		public event Action<Health> OnDied;
 		public event Action<Health> OnChanged;
 
+		public event Action onDamaged;
+		public event Action onHealed;
+
 		#endregion
 
 		#region LifeCycle Methods
@@ -72,6 +75,7 @@ namespace ShooterProject.Scripts.Actors.Health
 		public void TakeHit(float damage)
 		{
 			CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
+			onDamaged?.Invoke();
 		}
 
 		/// <summary>
@@ -81,6 +85,7 @@ namespace ShooterProject.Scripts.Actors.Health
 		public void Heal(float healthPoints)
 		{
 			CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + healthPoints);
+			onHealed?.Invoke();
 		}
 
 		#endregion
