@@ -19,8 +19,8 @@ namespace ShooterProject.Scripts.Effects
 
 		private void OnDisable()
 		{
-            if(!(Player.Instance is null))
-                Player.Instance.PlayerHealth.onDamaged -= OnDamaged;
+			if (!(Player.Instance is null))
+				Player.Instance.PlayerHealth.onDamaged -= OnDamaged;
 		}
 
 		#endregion

@@ -17,7 +17,7 @@ namespace ShooterProject.Scripts.GameManager
 
 		[SerializeField]
 		private Animator fadeCubeAnimator;
-		
+
 		[SerializeField]
 		private Animator fadeBackgroundAnimator;
 

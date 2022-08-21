@@ -76,9 +76,9 @@ namespace ShooterProject.Scripts.GameManager
 				SceneManager.UnloadSceneAsync(sceneForUnloadName);
 
 			Player.Instance.transform.position = Vector3.zero;
-			
+
 			FadeTransition.Instance.FadeTransitionEnd();
-			
+
 			_sceneIsLoading = false;
 		}
 

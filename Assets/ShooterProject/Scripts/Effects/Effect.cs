@@ -2,22 +2,22 @@ using UnityEngine;
 
 namespace ShooterProject.Scripts.Effects
 {
-    [RequireComponent(typeof(Animator))]
-    public class Effect : MonoBehaviour
-    {
-        #region Fields
+	[RequireComponent(typeof(Animator))]
+	public class Effect : MonoBehaviour
+	{
+		#region Fields
 
-        protected Animator _animator;
+		protected Animator _animator;
 
-        #endregion
+		#endregion
 
-        #region Life Cycle
+		#region Life Cycle
 
-        protected virtual void Awake()
-        {
-            _animator = GetComponent<Animator>();
-        }
+		protected virtual void Awake()
+		{
+			_animator = GetComponent<Animator>();
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }
