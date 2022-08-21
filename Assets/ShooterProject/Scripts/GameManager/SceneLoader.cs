@@ -56,7 +56,7 @@ namespace ShooterProject.Scripts.GameManager
 			_sceneIsLoading = true;
 
 			FadeTransition.Instance.FadeTransitionStart();
-			yield return new WaitForSeconds(FadeTransition.Instance.FadeBackgroundDuration);
+			yield return new WaitForSeconds(FadeTransition.Instance.Duration);
 
 			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName, LoadSceneMode.Additive);
 

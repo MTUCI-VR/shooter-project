@@ -516,6 +516,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeCubeAnimator: {fileID: 2142098868}
   fadeBackgroundAnimator: {fileID: 1783637447}
+  fadeCubeStartAnimationClip: {fileID: 7400000, guid: 3e70e68ed56ddc94381f4922afd0d4a6, type: 2}
+  fadeBackgroundStartAnimationClip: {fileID: 7400000, guid: a5b60e5c49016764891f16b81836b72e, type: 2}
 --- !u!1 &1425816672 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5900620076557062616, guid: 3a759de3b686dc845b5e6d29d8bd9e48, type: 3}

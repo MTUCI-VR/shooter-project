@@ -31,8 +31,10 @@ namespace ShooterProject.Scripts.GameManager
 
 		#region Properties
 
-		public float FadeBackgroundDuration => fadeBackgroundStartAnimationClip.length;
-		public float FadeCubeDuration => fadeCubeStartAnimationClip.length;
+		private float FadeBackgroundDuration => fadeBackgroundStartAnimationClip.length;
+		private float FadeCubeDuration => fadeCubeStartAnimationClip.length;
+
+		public float Duration => FadeBackgroundDuration + FadeCubeDuration;
 
 		#endregion
 
@@ -42,7 +44,7 @@ namespace ShooterProject.Scripts.GameManager
 		{
 			fadeCubeAnimator.SetTrigger(START_TRIGGER);
 
-			yield return new WaitForSecondsRealtime(FadeCubeDuration);
+			yield return new WaitForSeconds(FadeCubeDuration);
 
 			fadeBackgroundAnimator.SetTrigger(START_TRIGGER);
 		}
@@ -51,7 +53,7 @@ namespace ShooterProject.Scripts.GameManager
 		{
 			fadeBackgroundAnimator.SetTrigger(END_TRIGGER);
 
-			yield return new WaitForSecondsRealtime(FadeBackgroundDuration);
+			yield return new WaitForSeconds(FadeBackgroundDuration);
 
 			fadeCubeAnimator.SetTrigger(END_TRIGGER);
 		}
