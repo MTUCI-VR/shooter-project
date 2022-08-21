@@ -42,7 +42,7 @@ namespace ShooterProject.Scripts.GameManager
 		{
 			fadeCubeAnimator.SetTrigger(START_TRIGGER);
 
-			yield return new WaitForSeconds(FadeCubeDuration);
+			yield return new WaitForSecondsRealtime(FadeCubeDuration);
 
 			fadeBackgroundAnimator.SetTrigger(START_TRIGGER);
 		}
@@ -51,7 +51,7 @@ namespace ShooterProject.Scripts.GameManager
 		{
 			fadeBackgroundAnimator.SetTrigger(END_TRIGGER);
 
-			yield return new WaitForSeconds(FadeBackgroundDuration);
+			yield return new WaitForSecondsRealtime(FadeBackgroundDuration);
 
 			fadeCubeAnimator.SetTrigger(END_TRIGGER);
 		}
