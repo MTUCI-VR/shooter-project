@@ -49,17 +49,14 @@ namespace ShooterProject.Scripts.GameManager
 		/// </summary>
 		/// <param name="sceneForLoadName">Название сцены для перехода</param>
 		/// <param name="sceneForUnloadName">Название текущей сцены для выгрузки</param>
-		/// <param name="sceneType">Тип загружаемой сцены, для определения активности комнонентов игрока</param>
 		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName)
 		{
 			if (_sceneIsLoading) yield break;
 
 			_sceneIsLoading = true;
 
-			var fadeTransition = Player.Instance.GetComponent<FadeTransition>();
-
-			fadeTransition.FadeTransitionStart();
-			yield return new WaitForSeconds(fadeTransition.FadeTransitionDuration);
+			FadeTransition.Instance.FadeTransitionStart();
+			yield return new WaitForSeconds(FadeTransition.Instance.FadeBackgroundDuration);
 
 			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName, LoadSceneMode.Additive);
 
@@ -79,8 +76,8 @@ namespace ShooterProject.Scripts.GameManager
 				SceneManager.UnloadSceneAsync(sceneForUnloadName);
 
 			Player.Instance.transform.position = Vector3.zero;
-
-			fadeTransition.FadeTransitionEnd();
+			
+			FadeTransition.Instance.FadeTransitionEnd();
 			
 			_sceneIsLoading = false;
 		}

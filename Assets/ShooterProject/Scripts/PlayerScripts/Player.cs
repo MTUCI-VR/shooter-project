@@ -7,7 +7,6 @@ namespace ShooterProject.Scripts.PlayerScripts
 {
 	[RequireComponent(typeof(Health))]
 	[RequireComponent(typeof(CharacterController))]
-	[RequireComponent(typeof(FadeTransition))]
 	public class Player : Singleton<Player>
 	{
 		#region Fields
