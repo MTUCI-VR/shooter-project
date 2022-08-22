@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using ShooterProject.Scripts.PlayerScripts;
+using ShooterProject.Scripts.Effects;
 
 namespace ShooterProject.Scripts.GameManager
 {
@@ -12,7 +13,7 @@ namespace ShooterProject.Scripts.GameManager
 
 		private static float _progress;
 
-		private static bool _sceneIsLoading;
+		private static bool _isSceneLoading;
 
 		#endregion
 
@@ -51,9 +52,10 @@ namespace ShooterProject.Scripts.GameManager
 		/// <param name="sceneForUnloadName">Название текущей сцены для выгрузки</param>
 		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName)
 		{
-			if (_sceneIsLoading) yield break;
+			if (_isSceneLoading)
+				yield break;
 
-			_sceneIsLoading = true;
+			_isSceneLoading = true;
 
 			FadeTransition.Instance.FadeTransitionStart();
 			yield return new WaitForSeconds(FadeTransition.Instance.Duration);
@@ -79,7 +81,7 @@ namespace ShooterProject.Scripts.GameManager
 
 			FadeTransition.Instance.FadeTransitionEnd();
 
-			_sceneIsLoading = false;
+			_isSceneLoading = false;
 		}
 
 		#endregion

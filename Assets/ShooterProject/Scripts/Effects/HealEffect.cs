@@ -10,17 +10,18 @@ namespace ShooterProject.Scripts.Effects
 		private const string START_TRIGGER = "Start";
 
 		#endregion
+		
 		#region Life Cycle
 
 		private void OnEnable()
 		{
-			Player.Instance.PlayerHealth.onHealed += OnHealed;
+			Player.Instance.PlayerHealth.OnHealed += OnHealed;
 		}
 
 		private void OnDisable()
 		{
 			if (!(Player.Instance is null))
-				Player.Instance.PlayerHealth.onHealed -= OnHealed;
+				Player.Instance.PlayerHealth.OnHealed -= OnHealed;
 		}
 
 		#endregion

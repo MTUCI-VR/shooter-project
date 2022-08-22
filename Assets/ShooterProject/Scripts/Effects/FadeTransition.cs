@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using ShooterProject.Scripts.General;
 
-namespace ShooterProject.Scripts.GameManager
+namespace ShooterProject.Scripts.Effects
 {
 	public class FadeTransition : Singleton<FadeTransition>
 	{
@@ -31,10 +31,11 @@ namespace ShooterProject.Scripts.GameManager
 
 		#region Properties
 
-		private float FadeBackgroundDuration => fadeBackgroundStartAnimationClip.length;
-		private float FadeCubeDuration => fadeCubeStartAnimationClip.length;
+		public float Duration => _fadeBackgroundDuration + _fadeCubeDuration;
 
-		public float Duration => FadeBackgroundDuration + FadeCubeDuration;
+		private float _fadeBackgroundDuration => fadeBackgroundStartAnimationClip.length;
+		
+		private float _fadeCubeDuration => fadeCubeStartAnimationClip.length;
 
 		#endregion
 
@@ -44,7 +45,7 @@ namespace ShooterProject.Scripts.GameManager
 		{
 			fadeCubeAnimator.SetTrigger(START_TRIGGER);
 
-			yield return new WaitForSeconds(FadeCubeDuration);
+			yield return new WaitForSeconds(_fadeCubeDuration);
 
 			fadeBackgroundAnimator.SetTrigger(START_TRIGGER);
 		}
@@ -53,7 +54,7 @@ namespace ShooterProject.Scripts.GameManager
 		{
 			fadeBackgroundAnimator.SetTrigger(END_TRIGGER);
 
-			yield return new WaitForSeconds(FadeBackgroundDuration);
+			yield return new WaitForSeconds(_fadeBackgroundDuration);
 
 			fadeCubeAnimator.SetTrigger(END_TRIGGER);
 		}
