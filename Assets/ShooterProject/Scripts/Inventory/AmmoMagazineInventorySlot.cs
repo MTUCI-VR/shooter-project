@@ -61,11 +61,7 @@ namespace ShooterProject.Scripts.Inventory
 		{
 			if (selectEnterEventArgs.interactableObject.transform.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine))
 			{
-				if (!_magazines.Contains(magazine))
-				{
-					_magazines.Add(magazine);
-					Counting();
-				}
+				AddingMagazineInList(magazine);
 			}
 		}
 
