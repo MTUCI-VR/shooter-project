@@ -709,8 +709,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeCubeAnimator: {fileID: 2142098868}
   fadeBackgroundAnimator: {fileID: 1783637447}
-  fadeCubeStartAnimationClip: {fileID: 7400000, guid: 3e70e68ed56ddc94381f4922afd0d4a6, type: 2}
-  fadeBackgroundStartAnimationClip: {fileID: 7400000, guid: a5b60e5c49016764891f16b81836b72e, type: 2}
+  fadeCubeAnimationEvent: {fileID: 2142098869}
+  fadeBackgroundAnimationEvent: {fileID: 1783637448}
 --- !u!1 &1691392901
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +868,7 @@ GameObject:
   - component: {fileID: 1783637446}
   - component: {fileID: 1783637445}
   - component: {fileID: 1783637447}
+  - component: {fileID: 1783637448}
   m_Layer: 3
   m_Name: BackgroundImage
   m_TagString: Untagged
@@ -951,6 +952,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1783637448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783637443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc103d6e21d0e0141b049a47946e250f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1807006539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1225,7 @@ GameObject:
   - component: {fileID: 2142098871}
   - component: {fileID: 2142098870}
   - component: {fileID: 2142098868}
+  - component: {fileID: 2142098869}
   m_Layer: 3
   m_Name: FadeCube
   m_TagString: Untagged
@@ -1252,6 +1266,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2142098869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142098866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f674150eee22a04c8fba013c53369bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &2142098870
 MeshRenderer:
   m_ObjectHideFlags: 0

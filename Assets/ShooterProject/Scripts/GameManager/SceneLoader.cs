@@ -56,9 +56,11 @@ namespace ShooterProject.Scripts.GameManager
 				yield break;
 
 			_isSceneLoading = true;
-
+			
 			FadeTransition.Instance.FadeTransitionStart();
-			yield return new WaitForSeconds(FadeTransition.Instance.Duration);
+
+			while(!FadeTransition.Instance.IsFadeBackroundDarkened)
+				yield return new WaitForEndOfFrame();
 
 			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName, LoadSceneMode.Additive);
 
@@ -77,7 +79,7 @@ namespace ShooterProject.Scripts.GameManager
 			if (!string.IsNullOrWhiteSpace(sceneForUnloadName))
 				SceneManager.UnloadSceneAsync(sceneForUnloadName);
 
-			Player.Instance.transform.position = Vector3.zero;
+			Player.Instance.transform.position = Vector3.zero;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			FadeTransition.Instance.FadeTransitionEnd();
 
