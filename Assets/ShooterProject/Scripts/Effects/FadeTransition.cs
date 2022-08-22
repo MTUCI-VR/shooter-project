@@ -34,7 +34,7 @@ namespace ShooterProject.Scripts.Effects
 		public float Duration => _fadeBackgroundDuration + _fadeCubeDuration;
 
 		private float _fadeBackgroundDuration => fadeBackgroundStartAnimationClip.length;
-		
+
 		private float _fadeCubeDuration => fadeCubeStartAnimationClip.length;
 
 		#endregion

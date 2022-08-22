@@ -10,7 +10,7 @@ namespace ShooterProject.Scripts.Effects
 		private const string START_TRIGGER = "Start";
 
 		#endregion
-		
+
 		#region Life Cycle
 
 		private void OnEnable()
