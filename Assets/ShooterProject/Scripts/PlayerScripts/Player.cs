@@ -31,5 +31,28 @@ namespace ShooterProject.Scripts.PlayerScripts
 		}
 
 		#endregion
+
+		#region Life Cycle
+
+		private void OnEnable()
+		{
+			SceneLoader.OnSceneSwitched += ResetPlayerPosition;
+		}
+
+		private void OnDisable()
+		{
+			SceneLoader.OnSceneSwitched -= ResetPlayerPosition;
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		private void ResetPlayerPosition()
+		{
+			transform.position = Vector3.zero;
+		}
+
+		#endregion
 	}
 }

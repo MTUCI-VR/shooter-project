@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ShooterProject.Scripts.PlayerScripts;
 using ShooterProject.Scripts.Effects;
 
 namespace ShooterProject.Scripts.GameManager
@@ -30,7 +29,7 @@ namespace ShooterProject.Scripts.GameManager
 				if (!(Math.Abs(_progress - value) < tolerance))
 				{
 					_progress = value;
-					onProgressChanged?.Invoke();
+					OnProgressChanged?.Invoke();
 				}
 			}
 		}
@@ -39,7 +38,9 @@ namespace ShooterProject.Scripts.GameManager
 
 		#region Events
 
-		public static event Action onProgressChanged;
+		public static event Action OnProgressChanged;
+
+		public static event Action OnSceneSwitched;
 
 		#endregion
 
@@ -79,11 +80,11 @@ namespace ShooterProject.Scripts.GameManager
 			if (!string.IsNullOrWhiteSpace(sceneForUnloadName))
 				SceneManager.UnloadSceneAsync(sceneForUnloadName);
 
-			Player.Instance.transform.position = Vector3.zero;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 			FadeTransition.Instance.FadeTransitionEnd();
 
 			_isSceneLoading = false;
+
+			OnSceneSwitched?.Invoke();
 		}
 
 		#endregion
