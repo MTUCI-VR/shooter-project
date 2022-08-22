@@ -3,27 +3,27 @@ using UnityEngine;
 
 namespace ShooterProject.Scripts.Effects
 {
-    public class FadeBackgroundAnimationEvent : MonoBehaviour
-    {
-        #region Events
+	public class FadeBackgroundAnimationEvent : MonoBehaviour
+	{
+		#region Events
 
-        public event Action OnFadeBackgroundEndAnimationFinished;
-        public event Action OnFadeBackgroundStartAnimationFinished;
+		public event Action OnFadeBackgroundEndAnimationFinished;
+		public event Action OnFadeBackgroundStartAnimationFinished;
 
-        #endregion
+		#endregion
 
-        #region Private Methods
+		#region Private Methods
 
-        private void OnEndAnimationFinishedEvent()
-        {
-            OnFadeBackgroundEndAnimationFinished?.Invoke();
-        }
-        
-        private void OnStartAnimationFinishedEvent()
-        {
-            OnFadeBackgroundStartAnimationFinished?.Invoke();
-        }
+		private void OnEndAnimationFinishedEvent()
+		{
+			OnFadeBackgroundEndAnimationFinished?.Invoke();
+		}
 
-        #endregion    
-    }
+		private void OnStartAnimationFinishedEvent()
+		{
+			OnFadeBackgroundStartAnimationFinished?.Invoke();
+		}
+
+		#endregion
+	}
 }

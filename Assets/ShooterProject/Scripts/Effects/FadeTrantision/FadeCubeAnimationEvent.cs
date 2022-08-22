@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace ShooterProject.Scripts.Effects
 {
-    public class FadeCubeAnimationEvent : MonoBehaviour
-    {
-        #region Events
+	public class FadeCubeAnimationEvent : MonoBehaviour
+	{
+		#region Events
 
-        public event Action OnFadeCubeStartAnimationFinished;
+		public event Action OnFadeCubeStartAnimationFinished;
 
-        #endregion
+		#endregion
 
-        #region Private Methods
+		#region Private Methods
 
-        private void OnAnimationEvent()
-        {
-            OnFadeCubeStartAnimationFinished?.Invoke();
-        }
+		private void OnAnimationEvent()
+		{
+			OnFadeCubeStartAnimationFinished?.Invoke();
+		}
 
-        #endregion    
-    }
+		#endregion
+	}
 }

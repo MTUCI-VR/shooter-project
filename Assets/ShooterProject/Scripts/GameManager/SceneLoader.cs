@@ -56,10 +56,10 @@ namespace ShooterProject.Scripts.GameManager
 				yield break;
 
 			_isSceneLoading = true;
-			
+
 			FadeTransition.Instance.FadeTransitionStart();
 
-			while(!FadeTransition.Instance.IsFadeBackroundDarkened)
+			while (!FadeTransition.Instance.IsFadeBackroundDarkened)
 				yield return new WaitForEndOfFrame();
 
 			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName, LoadSceneMode.Additive);
