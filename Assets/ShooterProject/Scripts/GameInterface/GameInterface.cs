@@ -58,6 +58,8 @@ namespace ShooterProject.Scripts.GameInterface
 				WavesProvider.Instance.OnWavePreparationStarted -= Print;
 				WavesProvider.Instance.OnWaveStarted -= Print;
 			}
+
+			Clear();
 		}
 
 		private void Print(Health playerHealth)
@@ -73,6 +75,12 @@ namespace ShooterProject.Scripts.GameInterface
 		{
 			healthText.text = $"{Player.Instance.PlayerHealth.CurrentHealth}";
 			waveText.text = $"Wave {currentWave}";
+		}
+
+		private void Clear()
+		{
+			healthText.text = string.Empty;
+			waveText.text = string.Empty;
 		}
 
 		private IEnumerator WavePreparationTimeIndication(float wavePreparationTime)
