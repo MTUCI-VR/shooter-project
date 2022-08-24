@@ -168,10 +168,10 @@ GameObject:
   - component: {fileID: 1789775334137638681}
   - component: {fileID: 9084796818243454166}
   - component: {fileID: -6988342873158907017}
-  - component: {fileID: -2908408359334701098}
   - component: {fileID: 5484815438277859947}
   - component: {fileID: -3518064614444753292}
   - component: {fileID: 5318706422878837766}
+  - component: {fileID: 5150835662483159785}
   m_Layer: 0
   m_Name: Parasite prefab
   m_TagString: Untagged
@@ -187,7 +187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454613356926464907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.984903, y: 0.98318195, z: -0.5202408}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 971701583570529848}
@@ -277,19 +277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3370c6380e8754544a5c5e49d9068059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &-2908408359334701098
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454613356926464907}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.54, y: 0.26, z: 1}
-  m_Center: {x: 0, y: 0.09, z: 0}
 --- !u!114 &5484815438277859947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +316,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 1.14, z: 0}
+--- !u!65 &5150835662483159785
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454613356926464907}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.61, y: 2.05, z: 0.59}
+  m_Center: {x: 0, y: 1, z: -0.03}
 --- !u!1 &524672881655392474
 GameObject:
   m_ObjectHideFlags: 0
