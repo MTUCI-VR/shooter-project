@@ -31,7 +31,7 @@ namespace ShooterProject.Scripts.Effects
 
 		#region Properties
 
-		public bool IsFadeBackroundDarkened;
+		public bool IsFadeBackroundDarkened { get; private set; }
 
 		#endregion
 
