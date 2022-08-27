@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ShooterProject.Scripts.PlayerScripts;
+using ShooterProject.Scripts.Effects;
 
 namespace ShooterProject.Scripts.GameManager
 {
@@ -11,6 +11,8 @@ namespace ShooterProject.Scripts.GameManager
 		#region Fields
 
 		private static float _progress;
+
+		private static bool _isSceneLoading;
 
 		#endregion
 
@@ -27,7 +29,7 @@ namespace ShooterProject.Scripts.GameManager
 				if (!(Math.Abs(_progress - value) < tolerance))
 				{
 					_progress = value;
-					onProgressChanged?.Invoke();
+					OnProgressChanged?.Invoke();
 				}
 			}
 		}
@@ -36,26 +38,9 @@ namespace ShooterProject.Scripts.GameManager
 
 		#region Events
 
-		public static event Action onProgressChanged;
+		public static event Action OnProgressChanged;
 
-		#endregion
-
-		#region Private Methods
-
-		private static void SwitchPlayerComponents(SceneType sceneType)
-		{
-			var playerComponentsSwither = Player.Instance.GetComponent<PlayerComponents>();
-
-			switch (sceneType)
-			{
-				case SceneType.Menu:
-					playerComponentsSwither.DisableComponents();
-					break;
-				case SceneType.Game:
-					playerComponentsSwither.EnableComponents();
-					break;
-			}
-		}
+		public static event Action OnSceneSwitched;
 
 		#endregion
 
@@ -66,13 +51,17 @@ namespace ShooterProject.Scripts.GameManager
 		/// </summary>
 		/// <param name="sceneForLoadName">Название сцены для перехода</param>
 		/// <param name="sceneForUnloadName">Название текущей сцены для выгрузки</param>
-		/// <param name="sceneType">Тип загружаемой сцены, для определения активности комнонентов игрока</param>
-		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName, SceneType sceneType)
+		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName)
 		{
-			var fadeTransition = Player.Instance.GetComponent<FadeTransition>();
+			if (_isSceneLoading)
+				yield break;
 
-			fadeTransition.FadeTransitionStart();
-			yield return new WaitForSeconds(fadeTransition.FadeTransitionDuration);
+			_isSceneLoading = true;
+
+			FadeTransition.Instance.FadeTransitionStart();
+
+			while (!FadeTransition.Instance.IsFadeBackroundDarkened)
+				yield return new WaitForEndOfFrame();
 
 			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName, LoadSceneMode.Additive);
 
@@ -86,12 +75,16 @@ namespace ShooterProject.Scripts.GameManager
 
 			} while (!sceneAsyncOperation.isDone);
 
+			SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneForLoadName));
+
 			if (!string.IsNullOrWhiteSpace(sceneForUnloadName))
 				SceneManager.UnloadSceneAsync(sceneForUnloadName);
 
-			fadeTransition.FadeTransitionEnd();
+			FadeTransition.Instance.FadeTransitionEnd();
 
-			SwitchPlayerComponents(sceneType);
+			_isSceneLoading = false;
+
+			OnSceneSwitched?.Invoke();
 		}
 
 		#endregion
