@@ -204,7 +204,9 @@ MonoBehaviour:
   hoverModel: {fileID: 501141906004086000}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
-  modelScaleOnHover: 1.2
+  packedMaterial: {fileID: 0}
+  modelScaleOnHover: {x: 0, y: 0, z: 0}
+  StayModelScale: {x: 0, y: 0, z: 0}
 --- !u!114 &2389098966065932845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 2646480233567261498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.15, y: 0, z: 0.25}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4096662699618682442}
   m_Father: {fileID: 2646480234162463706}
@@ -273,7 +275,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.08
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2646480233567261496
 MonoBehaviour:
@@ -341,7 +343,9 @@ MonoBehaviour:
   hoverModel: {fileID: 4096662699618682433}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
-  modelScaleOnHover: 1.2
+  packedMaterial: {fileID: 0}
+  modelScaleOnHover: {x: 0, y: 0, z: 0}
+  StayModelScale: {x: 0, y: 0, z: 0}
 --- !u!114 &4664979007208970363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,7 +567,9 @@ MonoBehaviour:
   hoverModel: {fileID: 6696523886323935471}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
-  modelScaleOnHover: 1.2
+  packedMaterial: {fileID: 0}
+  modelScaleOnHover: {x: 0, y: 0, z: 0}
+  StayModelScale: {x: 0, y: 0, z: 0}
 --- !u!114 &3885132713279271483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,7 +613,7 @@ Transform:
   m_GameObject: {fileID: 2872103561710918104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.35, y: 0, z: 0.25}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4217386885043412867}
   m_Father: {fileID: 2646480234162463706}
@@ -632,7 +638,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.08
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2872103561710918111
 MonoBehaviour:
@@ -700,7 +706,9 @@ MonoBehaviour:
   hoverModel: {fileID: 8144071625263010745}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
-  modelScaleOnHover: 1.2
+  packedMaterial: {fileID: 0}
+  modelScaleOnHover: {x: 0, y: 0, z: 0}
+  StayModelScale: {x: 0, y: 0, z: 0}
 --- !u!114 &1946710360323785680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,7 +760,7 @@ Transform:
   m_GameObject: {fileID: 4096662699618682433}
   m_LocalRotation: {x: 0, y: -0.53729963, z: 0, w: 0.8433914}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2646480233567261497}
   m_RootOrder: 0
@@ -913,8 +921,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8144071625263010745}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2872103561710918105}
   m_RootOrder: 0

@@ -10,9 +10,18 @@ namespace ShooterProject.Scripts.Inventory
 	{
 		#region Fields
 
+		[SerializeField]
+		private int magazineMaxCount;
+
 		private List<AmmoMagazine> _magazines = new List<AmmoMagazine>();
 
 		private XRSocketInteractor _socketInteractor;
+
+		#endregion
+
+		#region Properties
+
+		public bool CanPutInInventory => _magazines.Count < magazineMaxCount;
 
 		#endregion
 
@@ -26,14 +35,12 @@ namespace ShooterProject.Scripts.Inventory
 		private void OnEnable()
 		{
 			_socketInteractor.hoverEntered.AddListener(OnHoverEnter);
-			_socketInteractor.hoverExited.AddListener(OnHoverExit);
 			_socketInteractor.selectEntered.AddListener(OnSelectEntered);
 			_socketInteractor.selectExited.AddListener(OnSelectExit);
 		}
 		private void OnDisable()
 		{
 			_socketInteractor.hoverEntered.RemoveListener(OnHoverEnter);
-			_socketInteractor.hoverExited.RemoveListener(OnHoverExit);
 			_socketInteractor.selectEntered.RemoveListener(OnSelectEntered);
 			_socketInteractor.selectExited.RemoveListener(OnSelectExit);
 		}
@@ -44,17 +51,9 @@ namespace ShooterProject.Scripts.Inventory
 
 		private void OnHoverEnter(HoverEnterEventArgs hoverEnterEventArgs)
 		{
-			if (hoverEnterEventArgs.interactableObject.transform.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine) && !magazine.GetComponent<XRGrabInteractable>().isSelected)
+			if (hoverEnterEventArgs.interactableObject.transform.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine) && _socketInteractor.hasSelection)
 			{
-				PutInInventorySlot(magazine);
-			}
-		}
-
-		private void OnHoverExit(HoverExitEventArgs hoverExitEventArgs)
-		{
-			if (hoverExitEventArgs.interactableObject.transform.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine) && !magazine.GetComponent<XRGrabInteractable>().isSelected)
-			{
-				PutInInventorySlot(magazine);
+				magazine.GetComponent<XRGrabInteractable>().selectExited.AddListener(OnMagazineGrabSelectExit);
 			}
 		}
 
@@ -62,10 +61,7 @@ namespace ShooterProject.Scripts.Inventory
 		{
 			if (selectEnterEventArgs.interactableObject.transform.TryGetComponent<AmmoMagazine>(out AmmoMagazine magazine))
 			{
-				if (!_magazines.Contains(magazine))
-					_magazines.Add(magazine);
-
-				Counting();
+				AddingMagazineInList(magazine);
 			}
 		}
 
@@ -77,22 +73,29 @@ namespace ShooterProject.Scripts.Inventory
 			}
 		}
 
+		private void OnMagazineGrabSelectExit(SelectExitEventArgs selectExitEventArgs)
+		{
+			selectExitEventArgs.interactableObject.selectExited.RemoveListener(OnMagazineGrabSelectExit);
+
+			if (_socketInteractor.IsHovering(selectExitEventArgs.interactableObject.transform.GetComponent<XRGrabInteractable>()))
+				PutInInventorySlot(selectExitEventArgs.interactableObject.transform.GetComponent<AmmoMagazine>());
+		}
+
 		private void PutInInventorySlot(AmmoMagazine magazine)
 		{
+			if (!CanPutInInventory) return;
+
 			if (_socketInteractor.hasSelection)
 			{
 				magazine.gameObject.SetActive(false);
+
+				AddingMagazineInList(magazine);
 			}
-
-			if (!_magazines.Contains(magazine))
-				_magazines.Add(magazine);
-
-			Counting();
 		}
 
 		private void TakeFromInventorySlot(AmmoMagazine magazine)
 		{
-			_magazines.Remove(magazine);
+			RemovingMagazineFromList(magazine);
 
 
 			if (_magazines.Count > 0)
@@ -104,8 +107,24 @@ namespace ShooterProject.Scripts.Inventory
 
 				newMagazine.gameObject.SetActive(true);
 			}
+		}
 
-			Counting();
+		private void AddingMagazineInList(AmmoMagazine magazine)
+		{
+			if (!_magazines.Contains(magazine))
+			{
+				_magazines.Add(magazine);
+				Counting();
+			}
+		}
+
+		private void RemovingMagazineFromList(AmmoMagazine magazine)
+		{
+			if (_magazines.Contains(magazine))
+			{
+				_magazines.Remove(magazine);
+				Counting();
+			}
 		}
 
 		private void Counting()
