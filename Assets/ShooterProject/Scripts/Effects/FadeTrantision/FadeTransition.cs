@@ -37,7 +37,7 @@ namespace ShooterProject.Scripts.Effects
 
 		#region Life Cycle
 
-		private void OnEnable()
+		protected override void OnEnable()
 		{
 			fadeCubeAnimationEvent.OnFadeCubeStartAnimationFinished += FadeBackgroundAnimationStart;
 
@@ -45,7 +45,7 @@ namespace ShooterProject.Scripts.Effects
 			fadeBackgroundAnimationEvent.OnFadeBackgroundStartAnimationFinished += OnFadeBackgroundStartAnimationFinished;
 		}
 
-		private void OnDisable()
+		protected override void OnDisable()
 		{
 			fadeCubeAnimationEvent.OnFadeCubeStartAnimationFinished -= FadeBackgroundAnimationStart;
 

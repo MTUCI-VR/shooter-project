@@ -34,12 +34,12 @@ namespace ShooterProject.Scripts.PlayerScripts
 
 		#region Life Cycle
 
-		private void OnEnable()
+		protected override void OnEnable()
 		{
 			SceneLoader.OnSceneSwitched += ResetPlayerPosition;
 		}
 
-		private void OnDisable()
+		protected override void OnDisable()
 		{
 			SceneLoader.OnSceneSwitched -= ResetPlayerPosition;
 		}
