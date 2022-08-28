@@ -7,7 +7,6 @@ namespace ShooterProject.Scripts.PlayerScripts
 {
 	[RequireComponent(typeof(Health))]
 	[RequireComponent(typeof(CharacterController))]
-	[RequireComponent(typeof(FadeTransition))]
 	public class Player : Singleton<Player>
 	{
 		#region Fields
@@ -29,6 +28,29 @@ namespace ShooterProject.Scripts.PlayerScripts
 
 				return _playerHealth;
 			}
+		}
+
+		#endregion
+
+		#region Life Cycle
+
+		private void OnEnable()
+		{
+			SceneLoader.OnSceneSwitched += ResetPlayerPosition;
+		}
+
+		private void OnDisable()
+		{
+			SceneLoader.OnSceneSwitched -= ResetPlayerPosition;
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		private void ResetPlayerPosition()
+		{
+			transform.position = Vector3.zero;
 		}
 
 		#endregion

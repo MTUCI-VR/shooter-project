@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ShooterProject.Scripts.PlayerScripts;
+using ShooterProject.Scripts.Effects;
 
 namespace ShooterProject.Scripts.GameManager
 {
@@ -12,7 +12,7 @@ namespace ShooterProject.Scripts.GameManager
 
 		private static float _progress;
 
-		private static bool _sceneIsLoading;
+		private static bool _isSceneLoading;
 
 		#endregion
 
@@ -29,7 +29,7 @@ namespace ShooterProject.Scripts.GameManager
 				if (!(Math.Abs(_progress - value) < tolerance))
 				{
 					_progress = value;
-					onProgressChanged?.Invoke();
+					OnProgressChanged?.Invoke();
 				}
 			}
 		}
@@ -38,7 +38,9 @@ namespace ShooterProject.Scripts.GameManager
 
 		#region Events
 
-		public static event Action onProgressChanged;
+		public static event Action OnProgressChanged;
+
+		public static event Action OnSceneSwitched;
 
 		#endregion
 
@@ -49,17 +51,17 @@ namespace ShooterProject.Scripts.GameManager
 		/// </summary>
 		/// <param name="sceneForLoadName">Название сцены для перехода</param>
 		/// <param name="sceneForUnloadName">Название текущей сцены для выгрузки</param>
-		/// <param name="sceneType">Тип загружаемой сцены, для определения активности комнонентов игрока</param>
 		public static IEnumerator LoadScene(string sceneForLoadName, string sceneForUnloadName)
 		{
-			if (_sceneIsLoading) yield break;
+			if (_isSceneLoading)
+				yield break;
 
-			_sceneIsLoading = true;
+			_isSceneLoading = true;
 
-			var fadeTransition = Player.Instance.GetComponent<FadeTransition>();
+			FadeTransition.Instance.FadeTransitionStart();
 
-			fadeTransition.FadeTransitionStart();
-			yield return new WaitForSeconds(fadeTransition.FadeTransitionDuration);
+			while (!FadeTransition.Instance.IsFadeBackroundDarkened)
+				yield return new WaitForEndOfFrame();
 
 			AsyncOperation sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneForLoadName, LoadSceneMode.Additive);
 
@@ -78,11 +80,11 @@ namespace ShooterProject.Scripts.GameManager
 			if (!string.IsNullOrWhiteSpace(sceneForUnloadName))
 				SceneManager.UnloadSceneAsync(sceneForUnloadName);
 
-			Player.Instance.transform.position = Vector3.zero;
+			FadeTransition.Instance.FadeTransitionEnd();
 
-			fadeTransition.FadeTransitionEnd();
-			
-			_sceneIsLoading = false;
+			_isSceneLoading = false;
+
+			OnSceneSwitched?.Invoke();
 		}
 
 		#endregion
