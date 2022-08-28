@@ -5,7 +5,8 @@ namespace ShooterProject.Scripts.Items
 {
 	[RequireComponent(
 	typeof(ShooterProject.Scripts.Spawner.SpawnObjectParams),
-	typeof(ShooterProject.Scripts.InteractableThings.ObjectHighlight))]
+	typeof(ShooterProject.Scripts.InteractableThings.ObjectHighlight),
+	typeof(AttachController))]
 	public class Item : MonoBehaviour
 	{
 		#region Fields

@@ -88,6 +88,14 @@ namespace ShooterProject.Scripts.Actors.Health
 			OnHealed?.Invoke();
 		}
 
+		/// <summary>
+		/// Сбрасывает до изначального значения здоровье объекту
+		/// </summary>
+		public void Reset()
+		{
+			CurrentHealth = MaxHealth;
+		}
+
 		#endregion
 	}
 }

@@ -992,7 +992,6 @@ MonoBehaviour:
   fadeBackgroundAnimator: {fileID: 1783637447}
   fadeCubeAnimationEvent: {fileID: 2142098869}
   fadeBackgroundAnimationEvent: {fileID: 1783637448}
-  IsFadeBackroundDarkened: 0
 --- !u!1 &1691392901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2184,6 +2183,14 @@ PrefabInstance:
     - target: {fileID: 2355463703310930648, guid: 86adf295bbc6d0545869713f4c285cbf, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020682289447962885, guid: 86adf295bbc6d0545869713f4c285cbf, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6301214454973366933, guid: 86adf295bbc6d0545869713f4c285cbf, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7040830701573443084, guid: 86adf295bbc6d0545869713f4c285cbf, type: 3}
       propertyPath: m_RootOrder
@@ -4377,9 +4384,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8358550263621480049}
     m_Modifications:
+    - target: {fileID: 1946710360323785680, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: magazineMaxCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480233567261492, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: packedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 798636328f739b64cb45876944826ee2, type: 2}
+    - target: {fileID: 2646480233567261492, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480233567261492, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480233567261492, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480233567261492, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480233567261492, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480233567261492, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2646480234162463706, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2646480234162463706, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4428,6 +4467,94 @@ PrefabInstance:
     - target: {fileID: 2646480234162463707, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480234718797032, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: packedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 798636328f739b64cb45876944826ee2, type: 2}
+    - target: {fileID: 2646480234718797032, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480234718797032, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480234718797032, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480234718797032, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480234718797032, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646480234718797032, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872103561710918110, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: packedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 798636328f739b64cb45876944826ee2, type: 2}
+    - target: {fileID: 2872103561710918110, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872103561710918110, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872103561710918110, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872103561710918110, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872103561710918110, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872103561710918110, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664979007208970363, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: magazineMaxCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199760538903409716, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: packedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 798636328f739b64cb45876944826ee2, type: 2}
+    - target: {fileID: 8199760538903409716, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199760538903409716, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199760538903409716, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: StayModelScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199760538903409716, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199760538903409716, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199760538903409716, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
+      propertyPath: modelScaleOnHover.z
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}

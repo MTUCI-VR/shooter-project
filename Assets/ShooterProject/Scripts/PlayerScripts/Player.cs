@@ -36,21 +36,23 @@ namespace ShooterProject.Scripts.PlayerScripts
 
 		protected override void OnEnable()
 		{
-			SceneLoader.OnSceneSwitched += ResetPlayerPosition;
+			SceneLoader.OnSceneSwitched += ResetPlayer;
 		}
 
 		protected override void OnDisable()
 		{
-			SceneLoader.OnSceneSwitched -= ResetPlayerPosition;
+			SceneLoader.OnSceneSwitched -= ResetPlayer;
 		}
 
 		#endregion
 
 		#region Private Methods
 
-		private void ResetPlayerPosition()
+		private void ResetPlayer()
 		{
 			transform.position = Vector3.zero;
+
+			PlayerHealth.Reset();
 		}
 
 		#endregion
