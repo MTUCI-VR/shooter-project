@@ -10,21 +10,19 @@ namespace ShooterProject.Scripts.Items
         #region Fields
 
 		[SerializeField]
+		private HandSide initialHandSide;
+
+		[SerializeField]
+		private SnapAxis axis;
+
+		[SerializeField]
 		private Transform attachTransform;
 
 		private Vector3 _initialPosition;
 
+		private Vector3 _mirroredPosition;
+
 		private XRGrabInteractable _grabInteractable;
-
-		#endregion
-
-		#region Properties
-
-		private Vector3 leftHandAttachPosition => new Vector3(_initialPosition.x,
-                                                       _initialPosition.y,
-                                                       -1f * _initialPosition.z);
-
-		private Vector3 rightHandAttachPosition => _initialPosition;		
 
 		#endregion
 
@@ -35,6 +33,8 @@ namespace ShooterProject.Scripts.Items
 			_grabInteractable = GetComponent<XRGrabInteractable>();
 
 			_initialPosition = attachTransform.localPosition;
+
+			_mirroredPosition = CalculateMirroredAttachPosition();
 		}
 
 		private void OnEnable()
@@ -50,20 +50,41 @@ namespace ShooterProject.Scripts.Items
 
 		#region Private Methods
 
+		private Vector3 CalculateMirroredAttachPosition()
+		{
+			var newPosition = new Vector3();
+
+			switch(axis)
+			{
+				case SnapAxis.X:
+					newPosition = new Vector3(_initialPosition.x * -1f,
+                                            _initialPosition.y,
+                                            _initialPosition.z);
+					break;
+				case SnapAxis.Y:
+					newPosition = new Vector3(_initialPosition.x,
+                                            _initialPosition.y * -1f,
+                                            _initialPosition.z);
+					break;
+				case SnapAxis.Z:
+					newPosition = new Vector3(_initialPosition.x,
+                                            _initialPosition.y,
+                                            _initialPosition.z * -1f);
+					break;
+				default:
+					newPosition = _initialPosition;
+					break;
+			}
+
+			return newPosition;
+		}
+
 		private void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
 		{
 			if(!selectEnterEventArgs.interactorObject.transform.TryGetComponent<GameHand>(out var gameHand))
 				return;
 
-            switch(gameHand.Side)
-			{
-				case HandSide.Left:
-					attachTransform.localPosition = leftHandAttachPosition;
-					break;
-				case HandSide.Right:
-					attachTransform.localPosition = rightHandAttachPosition;
-					break;
-			}
+			attachTransform.localPosition = gameHand.Side == initialHandSide ? _initialPosition : _mirroredPosition;
 		}
 
 		#endregion

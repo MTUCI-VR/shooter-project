@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156963648192318841}
-  m_LocalRotation: {x: 0, y: -0.6883546, z: 0, w: 0.72537434}
-  m_LocalPosition: {x: 0.151, y: -0.115, z: -0.0012}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.15, y: -0.12, z: -0.025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2648874200369648818}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: -87, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &552435039527140688
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +354,7 @@ GameObject:
   - component: {fileID: -5609165730863823709}
   - component: {fileID: -5200463879034433435}
   - component: {fileID: 3200132419201369759}
+  - component: {fileID: 1599992685635711079}
   m_Layer: 11
   m_Name: Rifle
   m_TagString: Untagged
@@ -707,6 +708,21 @@ MonoBehaviour:
   objectHighlightLayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &1599992685635711079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2648874200369648827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bacbe34a3448dd647b335761292ba5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialHandSide: 1
+  axis: 4
+  attachTransform: {fileID: 3451919746684895964}
 --- !u!1 &2648874200627294559
 GameObject:
   m_ObjectHideFlags: 0

@@ -127,6 +127,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &990067023170885656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2859111077631527126}
+  m_Layer: 12
+  m_Name: GrabAttachPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2859111077631527126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990067023170885656}
+  m_LocalRotation: {x: -0.18301266, y: -0.6830127, z: -0.18301266, w: 0.6830127}
+  m_LocalPosition: {x: 0.02, y: -0.12, z: -0.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1803380837160694557}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: -30, y: -90, z: 0}
 --- !u!1 &2839200689588924013
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +206,7 @@ GameObject:
   - component: {fileID: 4610615785941353265}
   - component: {fileID: 2669590455437261434}
   - component: {fileID: 1566357717454994965}
+  - component: {fileID: 2693545671549262893}
   m_Layer: 12
   m_Name: RifleAmmoMagazine
   m_TagString: Untagged
@@ -196,6 +227,7 @@ Transform:
   m_Children:
   - {fileID: 5743321490774022745}
   - {fileID: 9088843823220189006}
+  - {fileID: 2859111077631527126}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -357,7 +389,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
+  m_AttachTransform: {fileID: 2859111077631527126}
   m_AttachEaseInTime: 0.15
   m_MovementType: 2
   m_VelocityDamping: 1
@@ -437,6 +469,21 @@ MonoBehaviour:
   _ammoSize: 60
   _ammoCount: 60
   ammoType: 1
+--- !u!114 &2693545671549262893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5945951803646492455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bacbe34a3448dd647b335761292ba5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialHandSide: 1
+  axis: 4
+  attachTransform: {fileID: 2859111077631527126}
 --- !u!1 &6551219190941068729
 GameObject:
   m_ObjectHideFlags: 0

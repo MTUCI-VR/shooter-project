@@ -2520,7 +2520,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6059419906626347222}
   - component: {fileID: 8537504106239228145}
-  - component: {fileID: 8718699107328963884}
   m_Layer: 0
   m_Name: LeftHandController
   m_TagString: Untagged
@@ -2711,19 +2710,6 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 7779212132400271959, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
---- !u!114 &8718699107328963884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059419906626347223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb48afe22445344488d65bfefffec0b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  side: 0
 --- !u!1 &6059419907502149932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2768,7 +2754,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6059419907507394183}
   - component: {fileID: 3586000724902998491}
-  - component: {fileID: 5447254938922216844}
   m_Layer: 0
   m_Name: RightHandController
   m_TagString: Untagged
@@ -2959,19 +2944,6 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 875253871413052681, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
---- !u!114 &5447254938922216844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059419907507394176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb48afe22445344488d65bfefffec0b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  side: 1
 --- !u!1 &6059419908130389896
 GameObject:
   m_ObjectHideFlags: 0
@@ -2993,8 +2965,6 @@ GameObject:
   - component: {fileID: 4827563490860020495}
   - component: {fileID: 101736597727323686}
   - component: {fileID: 8723594191501378657}
-  - component: {fileID: 2875807162346737173}
-  - component: {fileID: 6945565231768162366}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -3250,32 +3220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560a23d0c75469a4a914be1f48c7900c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2875807162346737173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059419908130389896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 856a7f463703ce744826d7ef46e986d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerObjectsForGame: []
---- !u!114 &6945565231768162366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059419908130389896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9800ee258b2ba440a0781c46655b8e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!1 &6059419908445276152
 GameObject:
   m_ObjectHideFlags: 0
@@ -4932,7 +4876,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5900620076557062616, guid: 3a759de3b686dc845b5e6d29d8bd9e48, type: 3}
       propertyPath: m_Name
-      value: DirectInteractor
+      value: LeftDirectInteractor
       objectReference: {fileID: 0}
     - target: {fileID: 5900620076557062616, guid: 3a759de3b686dc845b5e6d29d8bd9e48, type: 3}
       propertyPath: m_Layer
@@ -4984,6 +4928,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7071847666497743124, guid: 3a759de3b686dc845b5e6d29d8bd9e48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8444081846478327452, guid: 3a759de3b686dc845b5e6d29d8bd9e48, type: 3}
+      propertyPath: side
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5050,7 +4998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2646480234162463707, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faaf4b7328368f646a4e0003827fe33d, type: 3}
@@ -5068,7 +5016,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5900620076557062616, guid: 3a759de3b686dc845b5e6d29d8bd9e48, type: 3}
       propertyPath: m_Name
-      value: DirectInteractor
+      value: RightDirectInteractor
       objectReference: {fileID: 0}
     - target: {fileID: 5900620076557062616, guid: 3a759de3b686dc845b5e6d29d8bd9e48, type: 3}
       propertyPath: m_Layer
