@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_InteractionLayers:
     m_Bits: 128
-  m_AttachTransform: {fileID: 0}
+  m_AttachTransform: {fileID: 2573849378188221896}
   m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_HoverEntered:
@@ -204,9 +204,9 @@ MonoBehaviour:
   hoverModel: {fileID: 501141906004086000}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
-  packedMaterial: {fileID: 0}
-  modelScaleOnHover: {x: 0, y: 0, z: 0}
-  StayModelScale: {x: 0, y: 0, z: 0}
+  packedMaterial: {fileID: 2100000, guid: 798636328f739b64cb45876944826ee2, type: 2}
+  modelScaleOnHover: {x: 1.5, y: 1.5, z: 1.5}
+  StayModelScale: {x: 1.2, y: 1.2, z: 1.2}
 --- !u!114 &2389098966065932845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,9 +343,9 @@ MonoBehaviour:
   hoverModel: {fileID: 4096662699618682433}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
-  packedMaterial: {fileID: 0}
-  modelScaleOnHover: {x: 0, y: 0, z: 0}
-  StayModelScale: {x: 0, y: 0, z: 0}
+  packedMaterial: {fileID: 2100000, guid: 798636328f739b64cb45876944826ee2, type: 2}
+  modelScaleOnHover: {x: 1.5, y: 1.5, z: 1.5}
+  StayModelScale: {x: 1.2, y: 1.2, z: 1.2}
 --- !u!114 &4664979007208970363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,7 +396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2646480234162463707}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.15, z: 0}
+  m_LocalPosition: {x: 0, y: -0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2646480233567261497}
@@ -442,7 +442,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -530380113134220495, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  positionOffset: {x: 0, y: -0.15, z: 0}
+  positionOffset: {x: 0, y: 0.55, z: 0}
   rotationLimit: {x: 50, y: 0, z: 0}
   speed: 5
 --- !u!1 &2646480234718797038
@@ -568,9 +568,9 @@ MonoBehaviour:
   hoverModel: {fileID: 6696523886323935471}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
-  packedMaterial: {fileID: 0}
-  modelScaleOnHover: {x: 0, y: 0, z: 0}
-  StayModelScale: {x: 0, y: 0, z: 0}
+  packedMaterial: {fileID: 2100000, guid: 798636328f739b64cb45876944826ee2, type: 2}
+  modelScaleOnHover: {x: 1.5, y: 1.5, z: 1.5}
+  StayModelScale: {x: 1.2, y: 1.2, z: 1.2}
 --- !u!114 &3885132713279271483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,9 +707,9 @@ MonoBehaviour:
   hoverModel: {fileID: 8144071625263010745}
   enterMaterial: {fileID: 2100000, guid: cf11a155e2d4c60449ff29abc7cf9c6a, type: 2}
   exitMaterial: {fileID: 2100000, guid: adfd5afa0ce26f24eb90447a9cd7dbbe, type: 2}
-  packedMaterial: {fileID: 0}
-  modelScaleOnHover: {x: 0, y: 0, z: 0}
-  StayModelScale: {x: 0, y: 0, z: 0}
+  packedMaterial: {fileID: 2100000, guid: 798636328f739b64cb45876944826ee2, type: 2}
+  modelScaleOnHover: {x: 1.5, y: 1.5, z: 1.5}
+  StayModelScale: {x: 1.2, y: 1.2, z: 1.2}
 --- !u!114 &1946710360323785680
 MonoBehaviour:
   m_ObjectHideFlags: 0

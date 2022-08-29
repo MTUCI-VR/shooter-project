@@ -81,8 +81,11 @@ namespace ShooterProject.Scripts.Items
 
 		private void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
 		{
-			if(!selectEnterEventArgs.interactorObject.transform.TryGetComponent<GameHand>(out var gameHand))
+			if (!selectEnterEventArgs.interactorObject.transform.TryGetComponent<GameHand>(out var gameHand))
+			{
+				attachTransform.position = Vector3.zero;
 				return;
+			}
 
 			attachTransform.localPosition = gameHand.Side == initialHandSide ? _initialPosition : _mirroredPosition;
 		}
