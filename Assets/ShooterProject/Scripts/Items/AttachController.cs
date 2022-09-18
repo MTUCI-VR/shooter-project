@@ -20,6 +20,8 @@ namespace ShooterProject.Scripts.Items
 
 		private Vector3 _initialPosition;
 
+		private Quaternion _initialRotation;
+
 		private Vector3 _mirroredPosition;
 
 		private XRGrabInteractable _grabInteractable;
@@ -33,6 +35,10 @@ namespace ShooterProject.Scripts.Items
 			_grabInteractable = GetComponent<XRGrabInteractable>();
 
 			_initialPosition = attachTransform.localPosition;
+
+			_initialRotation = Quaternion.Euler(attachTransform.localRotation.eulerAngles.x,
+												attachTransform.localRotation.eulerAngles.y,
+												attachTransform.localRotation.eulerAngles.z);
 
 			_mirroredPosition = CalculateMirroredAttachPosition();
 		}
@@ -83,11 +89,21 @@ namespace ShooterProject.Scripts.Items
 		{
 			if (!selectEnterEventArgs.interactorObject.transform.TryGetComponent<GameHand>(out var gameHand))
 			{
-				attachTransform.position = Vector3.zero;
+				attachTransform.localPosition = Vector3.zero;
+				attachTransform.localRotation = Quaternion.Euler(0,0,0);
 				return;
 			}
 
-			attachTransform.localPosition = gameHand.Side == initialHandSide ? _initialPosition : _mirroredPosition;
+			if (gameHand.Side == initialHandSide)
+			{
+				attachTransform.localPosition = _initialPosition;
+				attachTransform.localRotation = _initialRotation;
+			}
+			else
+			{
+				attachTransform.localPosition = _mirroredPosition;
+				attachTransform.localRotation = _initialRotation;
+			}
 		}
 
 		#endregion
